@@ -129,11 +129,7 @@ _main::
 	ld	a, (de)
 	add	a, #0x0a
 	ld	(de), a
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:860: SCX_REG+=x, SCY_REG+=y;
-	ldh	a, (_SCX_REG + 0)
-	inc	a
-	ldh	(_SCX_REG + 0), a
-;main.c:31: scroll_bkg(1,0);
+;main.c:30: scroll_sprite(0,10,0);
 ;main.c:33: }
 	jr	00105$
 _car_light:

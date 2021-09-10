@@ -8,8 +8,8 @@ void main(){
     UINT8 currentspriteindex = 0;
 
     //background
-    set_bkg_data(0, 10, map);
-    set_bkg_tiles(0, 0, 40, 18, TileLabel);
+    set_bkg_data(0, 50, map);
+    //set_bkg_tiles(0, 0, 40, 18, TileLabel);
     SHOW_BKG;
     DISPLAY_ON;
 
