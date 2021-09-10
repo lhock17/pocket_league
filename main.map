@@ -909,17 +909,35 @@ _SFR36                 00000000    00000001 =           1. bytes (ABS,CON)
 
 Files Linked                              [ module(s) ]
 
+<<<<<<< HEAD
 ../../gbdk/lib/small/asxxxx/gb/crt0.o     [ Runtime ]
+=======
+C:\Users\campb\Documents\gbdk\lib/small/asxxxx/gb/crt0.o
+                                          [ Runtime ]
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 main.o                                    [ main ]
 
 
 Libraries Linked                          [ object file ]
 
+<<<<<<< HEAD
 ../../gbdk/lib/small/asxxxx/gb/gb.lib     [ set_data.o ]
 ../../gbdk/lib/small/asxxxx/gb/gb.lib     [ pad.o ]
 ../../gbdk/lib/small/asxxxx/gb/gb.lib     [ sfr.o ]
 ../../gbdk/lib/small/asxxxx/gb/gb.lib     [ set_bk_t.o ]
 ../../gbdk/lib/small/asxxxx/gb/gb.lib     [ set_xy_t.o ]
+=======
+C:\Users\campb\Documents\gbdk\lib/small/asxxxx/gb/gb.lib
+                                          [ set_data.o ]
+C:\Users\campb\Documents\gbdk\lib/small/asxxxx/gb/gb.lib
+                                          [ pad.o ]
+C:\Users\campb\Documents\gbdk\lib/small/asxxxx/gb/gb.lib
+                                          [ sfr.o ]
+C:\Users\campb\Documents\gbdk\lib/small/asxxxx/gb/gb.lib
+                                          [ set_bk_t.o ]
+C:\Users\campb\Documents\gbdk\lib/small/asxxxx/gb/gb.lib
+                                          [ set_xy_t.o ]
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 87.
 

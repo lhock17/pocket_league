@@ -1,4 +1,11 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\Users\\campb\\Documents\\pocket_league\\pocket_league",
+            "binaryPath": "c:\\Users\\campb\\Documents\\pocket_league\\pocket_league\\main.gb",
+            "binaryArgs": []
+        }
+    ]
 }
