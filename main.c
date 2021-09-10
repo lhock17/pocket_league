@@ -10,8 +10,6 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144;
 
-struct Car car1;
-struct GameObject ball1;
 struct GameObject car1;
 struct GameObject ball;
 UBYTE spritesize = 8;
@@ -24,15 +22,6 @@ struct GameObject {
     UINT8 width;
     UINT8 height;
 };
-
-struct Car {
-	UINT8 direction;
-    UBYTE spriteids[4];
-    UINT8 x;
-    UINT8 y;
-    UINT8 width;
-    UINT8 height;
-}
 
 // UBYTE check_collisions(Car* one, Car* two) {
 //     return (one->x >= two->x AND one->x <= two-> x + two->width) OR
@@ -76,28 +65,8 @@ void performantdelay(UINT8 numloops){
 }
 
 void setup_ball() {
-<<<<<<< HEAD
     ball.x = 100;
     ball.y = 100;
-=======
-    ball1.x = 30;
-    ball1.y = 30;
-    ball1.width = 16;
-    ball1.height = 16;   
-
-    set_sprite_data(0, 64, ball);
-
-    set_sprite_tile(0, 0);
-    ball1.spriteids[0] = 0;
-    set_sprite_tile(1, 1);
-    ball1.spriteids[1] = 1;
-    set_sprite_tile(2, 2);
-    ball1.spriteids[2] = 2;
-    set_sprite_tile(3, 3);
-    ball1.spriteids[3] = 3;
-    ball.x = 30;
-    ball.y = 0;
->>>>>>> a39dc923215b611b1418cc36b06bc8273dbfb289
     ball.width = 16;
     ball.height = 16;   
 
@@ -122,8 +91,8 @@ void main(){
 
     // load sprites for car
     //background
-    set_bkg_data(0, 3, map);
-    set_bkg_tiles(0, 0, 40, 18, bkg_tiles);
+    set_bkg_data(0, 44, bkg_tiles);
+    set_bkg_tiles(0, 0, 32, 21, map);
     SHOW_BKG;
 
     set_sprite_data(0,4, car_light);
