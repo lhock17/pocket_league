@@ -10,10 +10,6 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144;
 
-struct GameObject car1;
-struct GameObject ball;
-UBYTE spritesize = 8;
-
 struct GameObject {
     UINT8 direction;
     UBYTE spriteids[4];
@@ -22,6 +18,10 @@ struct GameObject {
     UINT8 width;
     UINT8 height;
 }
+
+struct GameObject car1;
+struct GameObject ball;
+UBYTE spritesize = 8;
 
 // UBYTE check_collisions(Car* one, Car* two) {
 //     return (one->x >= two->x AND one->x <= two-> x + two->width) OR
