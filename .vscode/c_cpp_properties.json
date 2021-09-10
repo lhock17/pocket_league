@@ -2,6 +2,18 @@
     "configurations": [
         {
             "name": "Mac",
+            "includePath": [],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Users/joelhockey/chromium/src/build/mac_files/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "C://Users/levi/Documents/gbdk/bin/lcc",
+            "cStandard": "c11",
+            "cppStandard": "c++98",
+            "intelliSenseMode": "macos-clang-x64"
+        },
+        {
+            "name": "gbdk",
             "includePath": [
                 "${workspaceFolder}/**"
             ],
