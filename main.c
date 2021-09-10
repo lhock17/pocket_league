@@ -50,11 +50,11 @@ void load_car_sprite(UINT8 direction) {
     car1.spriteids[3] = 3;
 }
 
-void movegamecharacter(struct Car* car, UINT8 x, UINT8 y){
-    move_sprite(car->spriteids[0], x, y);
-    move_sprite(car->spriteids[1], x + spritesize, y);
-    move_sprite(car->spriteids[2], x, y + spritesize);
-    move_sprite(car->spriteids[3], x + spritesize, y + spritesize);
+void movegamecharacter(struct GameObject* object, UINT8 x, UINT8 y){
+    move_sprite(object->spriteids[0], x, y);
+    move_sprite(object->spriteids[1], x + spritesize, y);
+    move_sprite(object->spriteids[2], x, y + spritesize);
+    move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
 }
 
 void performantdelay(UINT8 numloops){
@@ -69,6 +69,9 @@ void setup_ball() {
     ball.y = 0;
     ball.width = 16;
     ball.height = 16;   
+
+    load_ball_sprite();
+    movegamecharacter(&ball, ball.x, ball.y)
 }
 
 void setupcar_light(){
@@ -94,6 +97,7 @@ void main(){
 
     set_sprite_data(0,4, car_light);
     setupcar_light();
+    set_sprite_data(0, 4, ball_sprite);
     setup_ball();
 
     SHOW_SPRITES;
