@@ -8,8 +8,12 @@
 struct GameCharacter car1;
 UBYTE spritesize = 8;
 
-struct GameCharacter {
-	UBYTE spritids[4]; // all characters use 4 sprites
+struct CarDirection {
+
+}
+
+struct Car {
+	srtuct CarDirection[16]
 	UINT8 x;
 	UINT8 y;
 	UINT8 width;
