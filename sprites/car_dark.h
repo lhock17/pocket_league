@@ -26,6 +26,6 @@
 /* Bank of tiles. */
 #define car_darkBank 0
 /* Start of tile array. */
-extern unsigned char car_dark[];
+const extern unsigned char car_dark[];
 
 /* End of CAR_DARK.H */
