@@ -169,6 +169,7 @@ DEF l__HOME 0x6A
 DEF l__HEADER10 0x83
 DEF l__BASE 0xE9
 DEF s__CODE 0x200
+<<<<<<< HEAD
 DEF l__CODE 0xB9F
 DEF s__HOME 0xD9F
 DEF s__BASE 0xE09
@@ -177,6 +178,16 @@ DEF s__INITIALIZER 0xEF2
 DEF s__LIT 0xEF2
 DEF s__GSINIT 0xEF3
 DEF s__GSFINAL 0xF19
+=======
+DEF l__CODE 0xB82
+DEF s__HOME 0xD82
+DEF s__BASE 0xDEC
+DEF s__CODE_0 0xED5
+DEF s__INITIALIZER 0xED5
+DEF s__LIT 0xED5
+DEF s__GSINIT 0xED6
+DEF s__GSFINAL 0xEFC
+>>>>>>> 8f74840cbe3c4a1bf1f2ebe54ab44e88f61e34fd
 DEF _shadow_OAM 0xC000
 DEF s__DATA 0xC0A0
 DEF s__BSS 0xC0B2
@@ -184,6 +195,7 @@ DEF s__INITIALIZED 0xC0CA
 DEF s__HEAP 0xC0CB
 DEF .STACK 0xE000
 DEF .refresh_OAM 0xFF80
+<<<<<<< HEAD
 DEF _load_car_sprite 0x200
 DEF _car_light 0x238
 DEF _map 0x638
@@ -194,6 +206,19 @@ DEF _performantdelay 0xC60
 DEF _setup_ball 0xC6D
 DEF _setupcar_light 0xCCA
 DEF _main 0xD0E
+=======
+DEF _load_ball_sprite 0x200
+DEF _car_light 0x229
+DEF _map 0x629
+DEF _ball_sprite 0x8C9
+DEF _bkg_tiles 0x909
+DEF _load_car_sprite 0xBC9
+DEF _movegamecharacter 0xC01
+DEF _performantdelay 0xC89
+DEF _setup_ball 0xC96
+DEF _setupcar_light 0xCAD
+DEF _main 0xCF1
+>>>>>>> 8f74840cbe3c4a1bf1f2ebe54ab44e88f61e34fd
 DEF .call_hl 0x20
 DEF .MemsetSmall 0x28
 DEF .MemcpySmall 0x30
@@ -207,6 +232,7 @@ DEF _exit 0x1B4
 DEF _enable_interrupts 0x1B8
 DEF _disable_interrupts 0x1BA
 DEF _set_interrupts 0x1BC
+<<<<<<< HEAD
 DEF .remove_VBL 0xD9F
 DEF .remove_int 0xDA2
 DEF .add_VBL 0xDBF
@@ -234,6 +260,35 @@ DEF .set_xy_tt 0xEB4
 DEF gsinit 0xEF3
 DEF _car1 0xC0A0
 DEF _ball1 0xC0A9
+=======
+DEF .remove_VBL 0xD82
+DEF .remove_int 0xD85
+DEF .add_VBL 0xDA2
+DEF .add_int 0xDA5
+DEF .wait_vbl_done 0xDB0
+DEF _wait_vbl_done 0xDB0
+DEF .display_off 0xDBF
+DEF _display_off 0xDBF
+DEF _remove_VBL 0xDD6
+DEF _add_VBL 0xDE1
+DEF _set_tile_data 0xDEC
+DEF _set_bkg_data 0xDF1
+DEF _set_win_data 0xDF1
+DEF _set_sprite_data 0xDF9
+DEF .padup 0xE29
+DEF _waitpadup 0xE29
+DEF .jpad 0xE39
+DEF _joypad 0xE39
+DEF _waitpad 0xE61
+DEF .wait_pad 0xE64
+DEF _set_bkg_tiles 0xE6B
+DEF .set_xy_wtt 0xE7F
+DEF .set_xy_btt 0xE88
+DEF .set_xy_tt 0xE97
+DEF gsinit 0xED6
+DEF _car1 0xC0A0
+DEF _ball 0xC0A9
+>>>>>>> 8f74840cbe3c4a1bf1f2ebe54ab44e88f61e34fd
 DEF __cpu 0xC0B2
 DEF .mode 0xC0B3
 DEF .sys_time 0xC0B4
