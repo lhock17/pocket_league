@@ -26,6 +26,6 @@
 /* Bank of tiles. */
 #define TileLabelBank 0
 /* Start of tile array. */
-extern unsigned char TileLabel[];
+extern unsigned char ball1[];
 
 /* End of BALL1.H */
