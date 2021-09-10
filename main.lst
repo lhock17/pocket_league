@@ -1,6 +1,10 @@
                                       1 ;--------------------------------------------------------
                                       2 ; File Created by SDCC : free open source ANSI-C Compiler
+<<<<<<< HEAD
+                                      3 ; Version 4.1.6 #12439 (Mac OS X x86_64)
+=======
                                       3 ; Version 4.1.6 #12439 (MINGW32)
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
                                       4 ;--------------------------------------------------------
                                       5 	.module main
                                       6 	.optsdcc -mgbz80
@@ -70,7 +74,11 @@
       000004 87                      70 	add	a, a
       000005 87                      71 	add	a, a
       000006 47                      72 	ld	b, a
+<<<<<<< HEAD
+                                     73 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+=======
                                      73 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       000007 21r02r00                74 	ld	hl, #(_shadow_OAM + 2)
       00000A 70                      75 	ld	(hl), b
                                      76 ;main.c:31: car1.spriteids[0] = 0;
@@ -84,7 +92,11 @@
       000014 41                      84 	ld	b, c
       000015 04                      85 	inc	b
       000016 04                      86 	inc	b
+<<<<<<< HEAD
+                                     87 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+=======
                                      87 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       000017 21r06r00                88 	ld	hl, #(_shadow_OAM + 6)
       00001A 70                      89 	ld	(hl), b
                                      90 ;main.c:33: car1.spriteids[1] = 1;
@@ -93,7 +105,11 @@
                                      93 ;main.c:34: set_sprite_tile(2, 4 * direction + 1);
       000020 41                      94 	ld	b, c
       000021 04                      95 	inc	b
+<<<<<<< HEAD
+                                     96 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+=======
                                      96 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       000022 21r0Ar00                97 	ld	hl, #(_shadow_OAM + 10)
       000025 70                      98 	ld	(hl), b
                                      99 ;main.c:35: car1.spriteids[2] = 2;
@@ -103,7 +119,11 @@
       00002B 0C                     103 	inc	c
       00002C 0C                     104 	inc	c
       00002D 0C                     105 	inc	c
+<<<<<<< HEAD
+                                    106 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+=======
                                     106 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       00002E 21r0Er00               107 	ld	hl, #(_shadow_OAM + 14)
       000031 71                     108 	ld	(hl), c
                                     109 ;main.c:37: car1.spriteids[3] = 3;
@@ -2540,7 +2560,11 @@
                                    2540 ;	spillPairReg hl
                                    2541 ;	spillPairReg hl
       0009AD 23                    2542 	inc	hl
+<<<<<<< HEAD
+                                   2543 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
                                    2543 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       0009AE 6E                    2544 	ld	l, (hl)
                                    2545 ;	spillPairReg hl
                                    2546 ;	spillPairReg hl
@@ -2553,7 +2577,11 @@
       0009B6 09                    2553 	add	hl, bc
       0009B7 4D                    2554 	ld	c, l
       0009B8 44                    2555 	ld	b, h
+<<<<<<< HEAD
+                                   2556 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
                                    2556 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       0009B9 F8 00                 2557 	ldhl	sp,	#0
       0009BB 2A                    2558 	ld	a, (hl+)
       0009BC 02                    2559 	ld	(bc), a
@@ -2576,7 +2604,11 @@
       0009C9 4E                    2576 	ld	c, (hl)
       0009CA F8 02                 2577 	ldhl	sp,	#2
       0009CC 77                    2578 	ld	(hl), a
+<<<<<<< HEAD
+                                   2579 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
                                    2579 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       0009CD 69                    2580 	ld	l, c
                                    2581 ;	spillPairReg hl
                                    2582 ;	spillPairReg hl
@@ -2589,7 +2621,11 @@
       0009D5 09                    2589 	add	hl, bc
       0009D6 4D                    2590 	ld	c, l
       0009D7 44                    2591 	ld	b, h
+<<<<<<< HEAD
+                                   2592 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
                                    2592 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       0009D8 F8 00                 2593 	ldhl	sp,	#0
       0009DA 2A                    2594 	ld	a, (hl+)
       0009DB 23                    2595 	inc	hl
@@ -2613,7 +2649,11 @@
       0009E9 23                    2613 	inc	hl
       0009EA 23                    2614 	inc	hl
       0009EB 23                    2615 	inc	hl
+<<<<<<< HEAD
+                                   2616 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
                                    2616 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       0009EC 6E                    2617 	ld	l, (hl)
                                    2618 ;	spillPairReg hl
                                    2619 ;	spillPairReg hl
@@ -2626,7 +2666,11 @@
       0009F2 11r00r00              2626 	ld	de, #_shadow_OAM
       0009F5 19                    2627 	add	hl, de
       0009F6 D1                    2628 	pop	de
+<<<<<<< HEAD
+                                   2629 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
                                    2629 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       0009F7 79                    2630 	ld	a, c
       0009F8 22                    2631 	ld	(hl+), a
       0009F9 4D                    2632 	ld	c, l
@@ -2648,7 +2692,11 @@
       000A0C 4F                    2648 	ld	c, a
       000A0D 21 04 00              2649 	ld	hl, #0x0004
       000A10 19                    2650 	add	hl, de
+<<<<<<< HEAD
+                                   2651 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
                                    2651 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       000A11 6E                    2652 	ld	l, (hl)
                                    2653 ;	spillPairReg hl
                                    2654 ;	spillPairReg hl
@@ -2659,7 +2707,11 @@
       000A15 29                    2659 	add	hl, hl
       000A16 11r00r00              2660 	ld	de, #_shadow_OAM
       000A19 19                    2661 	add	hl, de
+<<<<<<< HEAD
+                                   2662 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
                                    2662 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
       000A1A 78                    2663 	ld	a, b
       000A1B 22                    2664 	ld	(hl+), a
       000A1C 71                    2665 	ld	(hl), c

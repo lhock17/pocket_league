@@ -1,6 +1,10 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
+<<<<<<< HEAD
+; Version 4.1.6 #12439 (Mac OS X x86_64)
+=======
 ; Version 4.1.6 #12439 (MINGW32)
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mgbz80
@@ -70,7 +74,11 @@ _load_car_sprite::
 	add	a, a
 	add	a, a
 	ld	b, a
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ld	hl, #(_shadow_OAM + 2)
 	ld	(hl), b
 ;main.c:31: car1.spriteids[0] = 0;
@@ -84,7 +92,11 @@ _load_car_sprite::
 	ld	b, c
 	inc	b
 	inc	b
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ld	hl, #(_shadow_OAM + 6)
 	ld	(hl), b
 ;main.c:33: car1.spriteids[1] = 1;
@@ -93,7 +105,11 @@ _load_car_sprite::
 ;main.c:34: set_sprite_tile(2, 4 * direction + 1);
 	ld	b, c
 	inc	b
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ld	hl, #(_shadow_OAM + 10)
 	ld	(hl), b
 ;main.c:35: car1.spriteids[2] = 2;
@@ -103,7 +119,11 @@ _load_car_sprite::
 	inc	c
 	inc	c
 	inc	c
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ld	hl, #(_shadow_OAM + 14)
 	ld	(hl), c
 ;main.c:37: car1.spriteids[3] = 3;
@@ -2540,7 +2560,11 @@ _movegamecharacter::
 ;	spillPairReg hl
 ;	spillPairReg hl
 	inc	hl
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2553,7 +2577,11 @@ _movegamecharacter::
 	add	hl, bc
 	ld	c, l
 	ld	b, h
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ldhl	sp,	#0
 	ld	a, (hl+)
 	ld	(bc), a
@@ -2576,7 +2604,11 @@ _movegamecharacter::
 	ld	c, (hl)
 	ldhl	sp,	#2
 	ld	(hl), a
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ld	l, c
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2589,7 +2621,11 @@ _movegamecharacter::
 	add	hl, bc
 	ld	c, l
 	ld	b, h
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ldhl	sp,	#0
 	ld	a, (hl+)
 	inc	hl
@@ -2613,7 +2649,11 @@ _movegamecharacter::
 	inc	hl
 	inc	hl
 	inc	hl
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2626,7 +2666,11 @@ _movegamecharacter::
 	ld	de, #_shadow_OAM
 	add	hl, de
 	pop	de
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ld	a, c
 	ld	(hl+), a
 	ld	c, l
@@ -2648,7 +2692,11 @@ _movegamecharacter::
 	ld	c, a
 	ld	hl, #0x0004
 	add	hl, de
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2659,7 +2707,11 @@ _movegamecharacter::
 	add	hl, hl
 	ld	de, #_shadow_OAM
 	add	hl, de
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4e8d307b565685424468b96b78d684bd2f9baa2f
 	ld	a, b
 	ld	(hl+), a
 	ld	(hl), c
