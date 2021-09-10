@@ -1,6 +1,6 @@
 /*
 
- CAR_LIGHT.H
+ CAR_DARK.H
 
  Include File.
 
@@ -26,6 +26,6 @@
 /* Bank of tiles. */
 #define TileLabelBank 0
 /* Start of tile array. */
-extern unsigned char TileLabel[];
+extern unsigned char car_dark[];
 
-/* End of CAR_LIGHT.H */
+/* End of CAR_DARK.H */
