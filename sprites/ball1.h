@@ -26,6 +26,6 @@
 /* Bank of tiles. */
 #define TileLabelBank 0
 /* Start of tile array. */
-extern unsigned char TileLabel[];
+const extern unsigned char TileLabel[];
 
 /* End of BALL1.H */

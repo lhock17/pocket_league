@@ -79,8 +79,8 @@ void main(){
 
     // load sprites for car
     //background
-    set_bkg_data(0, 3, map);
-    set_bkg_tiles(0, 0, 40, 18, bkg_tiles);
+    set_bkg_data(0, 44, bkg_tiles);
+    set_bkg_tiles(0, 0, 32, 21, map);
     SHOW_BKG;
 
     set_sprite_data(0,4, car_light);

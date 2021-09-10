@@ -26,6 +26,6 @@
 /* Bank of tiles. */
 #define bkg_tilesBank 0
 /* Start of tile array. */
-extern unsigned char bkg_tiles[];
+const extern unsigned char bkg_tiles[];
 
 /* End of BKG_TILES.H */

@@ -26,6 +26,6 @@
 /* Bank of tiles. */
 #define car_lightBank 0
 /* Start of tile array. */
-extern unsigned char car_light[];
+const extern unsigned char car_light[];
 
 /* End of CAR_LIGHT.H */

@@ -7,7 +7,7 @@
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 26 x 16
+   Map size      : 32 x 21
    Tile set      : stadium.gbr
    Plane count   : 1 plane (8 bits)
    Plane order   : Tiles are continues
@@ -18,10 +18,10 @@
 
 */
 
-#define mapWidth 26
-#define mapHeight 16
+#define mapWidth 32
+#define mapHeight 21
 #define mapBank 0
 
-extern unsigned char map[];
+const extern unsigned char map[];
 
 /* End of MAP.H */
