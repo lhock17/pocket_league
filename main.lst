@@ -1,6 +1,6 @@
                                       1 ;--------------------------------------------------------
                                       2 ; File Created by SDCC : free open source ANSI-C Compiler
-                                      3 ; Version 4.1.6 #12439 (Mac OS X x86_64)
+                                      3 ; Version 4.1.6 #12439 (MINGW32)
                                       4 ;--------------------------------------------------------
                                       5 	.module main
                                       6 	.optsdcc -mgbz80
@@ -57,12 +57,12 @@
       000009 E5                      57 	push	hl
       00000A CDr00r00                58 	call	_set_sprite_data
       00000D E8 04                   59 	add	sp, #4
-                                     60 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+                                     60 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
       00000F 21r02r00                61 	ld	hl, #(_shadow_OAM + 2)
       000012 36 00                   62 	ld	(hl), #0x00
-                                     63 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+                                     63 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
       000014 21r00r00                64 	ld	hl, #_shadow_OAM
-                                     65 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+                                     65 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
       000017 3E 4E                   66 	ld	a, #0x4e
       000019 22                      67 	ld	(hl+), a
       00001A 36 58                   68 	ld	(hl), #0x58
@@ -81,7 +81,7 @@
       000026 28 02                   81 	jr	Z, 00103$
       000028 0E 00                   82 	ld	c, #0x00
       00002A                         83 00103$:
-                                     84 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+                                     84 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
       00002A 21r02r00                85 	ld	hl, #(_shadow_OAM + 2)
       00002D 71                      86 	ld	(hl), c
                                      87 ;main.c:21: delay(1000);
@@ -91,9 +91,9 @@
       000033 CDr00r00                91 	call	_delay
       000036 E1                      92 	pop	hl
       000037 C1                      93 	pop	bc
-                                     94 ;../../gbdk/include/gb/gb.h:1263: OAM_item_t * itm = &shadow_OAM[nb];
+                                     94 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1263: OAM_item_t * itm = &shadow_OAM[nb];
       000038 11r00r00                95 	ld	de, #_shadow_OAM+0
-                                     96 ;../../gbdk/include/gb/gb.h:1264: itm->y+=y, itm->x+=x;
+                                     96 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1264: itm->y+=y, itm->x+=x;
       00003B 1A                      97 	ld	a, (de)
       00003C 12                      98 	ld	(de), a
       00003D 13                      99 	inc	de

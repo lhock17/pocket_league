@@ -875,15 +875,19 @@ _SFR36                 00000000    00000001 =           1. bytes (ABS,CON)
 
 Files Linked                              [ module(s) ]
 
-../../gbdk/lib/small/asxxxx/gb/crt0.o     [ Runtime ]
+C:\Users\campb\Documents\gbdk\lib/small/asxxxx/gb/crt0.o
+                                          [ Runtime ]
 main.o                                    [ main ]
 
 
 Libraries Linked                          [ object file ]
 
-../../gbdk/lib/small/asxxxx/gb/gb.lib     [ set_data.o ]
-../../gbdk/lib/small/asxxxx/gb/gb.lib     [ delay.o ]
-../../gbdk/lib/small/asxxxx/gb/gb.lib     [ sfr.o ]
+C:\Users\campb\Documents\gbdk\lib/small/asxxxx/gb/gb.lib
+                                          [ set_data.o ]
+C:\Users\campb\Documents\gbdk\lib/small/asxxxx/gb/gb.lib
+                                          [ delay.o ]
+C:\Users\campb\Documents\gbdk\lib/small/asxxxx/gb/gb.lib
+                                          [ sfr.o ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 84.
 

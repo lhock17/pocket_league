@@ -1,6 +1,6 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 4.1.6 #12439 (Mac OS X x86_64)
+; Version 4.1.6 #12439 (MINGW32)
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mgbz80
@@ -57,12 +57,12 @@ _main::
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 2)
 	ld	(hl), #0x00
-;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
 	ld	hl, #_shadow_OAM
-;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
 	ld	a, #0x4e
 	ld	(hl+), a
 	ld	(hl), #0x58
@@ -81,7 +81,7 @@ _main::
 	jr	Z, 00103$
 	ld	c, #0x00
 00103$:
-;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 2)
 	ld	(hl), c
 ;main.c:21: delay(1000);
@@ -91,9 +91,9 @@ _main::
 	call	_delay
 	pop	hl
 	pop	bc
-;../../gbdk/include/gb/gb.h:1263: OAM_item_t * itm = &shadow_OAM[nb];
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1263: OAM_item_t * itm = &shadow_OAM[nb];
 	ld	de, #_shadow_OAM+0
-;../../gbdk/include/gb/gb.h:1264: itm->y+=y, itm->x+=x;
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1264: itm->y+=y, itm->x+=x;
 	ld	a, (de)
 	ld	(de), a
 	inc	de
