@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "sprites/car_light.c"
 #include "sprites/map.c"
-#include "sprites/map_sprites.c"
+#include "sprites/bkg_tiles.c"
 
 #define AND &&
 #define OR ||
@@ -21,10 +21,10 @@ struct Car {
 	UINT8 height;
 };
 
-UBYTE check_collisions(Car* one, Car* two) {
-    return (one->x >= two->x AND one->x <= two-> x + two->width) OR
-        (two->y >= one->y AND two->y <= one->y + one->height);
-}
+// UBYTE check_collisions(Car* one, Car* two) {
+//     return (one->x >= two->x AND one->x <= two-> x + two->width) OR
+//         (two->y >= one->y AND two->y <= one->y + one->height);
+// }
 
 void load_car_sprite(UINT8 direction) {
         set_sprite_tile(0, 4 * direction);
@@ -58,7 +58,7 @@ void setupcar_light(){
     car1.width = 16;
     car1.height = 16;
 
-    set_sprite_data(0, 8, car_light);
+    set_sprite_data(0, 64, car_light);
     load_car_sprite(car1.direction);
 
     // // load sprites for car
@@ -80,7 +80,7 @@ void main(){
     // load sprites for car
     //background
     set_bkg_data(0, 3, map);
-    set_bkg_tiles(0, 0, 40, 18, TileLabel);
+    set_bkg_tiles(0, 0, 40, 18, bkg_tiles);
     SHOW_BKG;
 
     set_sprite_data(0,4, car_light);

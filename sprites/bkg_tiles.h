@@ -1,6 +1,6 @@
 /*
 
- MAP_SPRITES.H
+ BKG_TILES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 0
+  Tiles                : 0 to 43
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define TileLabelBank 0
+#define bkg_tilesBank 0
 /* Start of tile array. */
-extern unsigned char TileLabel[];
+extern unsigned char bkg_tiles[];
 
-/* End of MAP_SPRITES.H */
+/* End of BKG_TILES.H */

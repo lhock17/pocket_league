@@ -1,6 +1,6 @@
                                       1 ;--------------------------------------------------------
                                       2 ; File Created by SDCC : free open source ANSI-C Compiler
-                                      3 ; Version 4.1.6 #12439 (MINGW32)
+                                      3 ; Version 4.1.6 #12439 (Mac OS X x86_64)
                                       4 ;--------------------------------------------------------
                                       5 	.module main
                                       6 	.optsdcc -mgbz80
@@ -19,10 +19,10 @@
                                      19 	.globl _wait_vbl_done
                                      20 	.globl _joypad
                                      21 	.globl _spritesize
-                                     22 	.globl _car1
-                                     23 	.globl _TileLabel
-                                     24 	.globl _map
-                                     25 	.globl _car_light
+                                     22 	.globl _bkg_tiles
+                                     23 	.globl _map
+                                     24 	.globl _car_light
+                                     25 	.globl _car1
                                      26 ;--------------------------------------------------------
                                      27 ; special function registers
                                      28 ;--------------------------------------------------------
@@ -36,599 +36,2564 @@
                                      36 ; ram data
                                      37 ;--------------------------------------------------------
                                      38 	.area _INITIALIZED
-      000000                         39 _spritesize::
-      000000                         40 	.ds 1
-                                     41 ;--------------------------------------------------------
-                                     42 ; absolute external ram data
-                                     43 ;--------------------------------------------------------
-                                     44 	.area _DABS (ABS)
-                                     45 ;--------------------------------------------------------
-                                     46 ; global & static initialisations
+      000000                         39 _car_light::
+      000000                         40 	.ds 1024
+      000400                         41 _map::
+      000400                         42 	.ds 416
+      0005A0                         43 _bkg_tiles::
+      0005A0                         44 	.ds 704
+      000860                         45 _spritesize::
+      000860                         46 	.ds 1
                                      47 ;--------------------------------------------------------
-                                     48 	.area _HOME
-                                     49 	.area _GSINIT
-                                     50 	.area _GSFINAL
-                                     51 	.area _GSINIT
-                                     52 ;--------------------------------------------------------
-                                     53 ; Home
-                                     54 ;--------------------------------------------------------
-                                     55 	.area _HOME
-                                     56 	.area _HOME
-                                     57 ;--------------------------------------------------------
-                                     58 ; code
-                                     59 ;--------------------------------------------------------
-                                     60 	.area _CODE
-                                     61 ;main.c:19: void load_car_sprite(UINT8 direction) {
-                                     62 ;	---------------------------------
-                                     63 ; Function load_car_sprite
-                                     64 ; ---------------------------------
-      000000                         65 _load_car_sprite::
-                                     66 ;main.c:20: set_sprite_tile(0, 4 * direction);
-      000000 F8 02                   67 	ldhl	sp,	#2
-      000002 4E                      68 	ld	c, (hl)
-      000003 79                      69 	ld	a, c
-      000004 87                      70 	add	a, a
-      000005 87                      71 	add	a, a
-      000006 47                      72 	ld	b, a
-                                     73 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
-      000007 21r02r00                74 	ld	hl, #(_shadow_OAM + 2)
-      00000A 70                      75 	ld	(hl), b
-                                     76 ;main.c:21: car1.spriteids[0] = 0;
-      00000B 21r01r00                77 	ld	hl, #(_car1 + 1)
-      00000E 36 00                   78 	ld	(hl), #0x00
-                                     79 ;main.c:22: set_sprite_tile(1, 4 * direction + 2);
-      000010 79                      80 	ld	a, c
-      000011 87                      81 	add	a, a
-      000012 87                      82 	add	a, a
-      000013 4F                      83 	ld	c, a
-      000014 41                      84 	ld	b, c
-      000015 04                      85 	inc	b
-      000016 04                      86 	inc	b
-                                     87 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
-      000017 21r06r00                88 	ld	hl, #(_shadow_OAM + 6)
-      00001A 70                      89 	ld	(hl), b
-                                     90 ;main.c:23: car1.spriteids[1] = 1;
-      00001B 21r02r00                91 	ld	hl, #(_car1 + 2)
-      00001E 36 01                   92 	ld	(hl), #0x01
-                                     93 ;main.c:24: set_sprite_tile(2, 4 * direction + 1);
-      000020 41                      94 	ld	b, c
-      000021 04                      95 	inc	b
-                                     96 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
-      000022 21r0Ar00                97 	ld	hl, #(_shadow_OAM + 10)
-      000025 70                      98 	ld	(hl), b
-                                     99 ;main.c:25: car1.spriteids[2] = 2;
-      000026 21r03r00               100 	ld	hl, #(_car1 + 3)
-      000029 36 02                  101 	ld	(hl), #0x02
-                                    102 ;main.c:26: set_sprite_tile(3, 4 * direction + 3);
-      00002B 0C                     103 	inc	c
-      00002C 0C                     104 	inc	c
-      00002D 0C                     105 	inc	c
-                                    106 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
-      00002E 21r0Er00               107 	ld	hl, #(_shadow_OAM + 14)
-      000031 71                     108 	ld	(hl), c
-                                    109 ;main.c:27: car1.spriteids[3] = 3;
-      000032 21r04r00               110 	ld	hl, #(_car1 + 4)
-      000035 36 03                  111 	ld	(hl), #0x03
-                                    112 ;main.c:28: }
-      000037 C9                     113 	ret
-      000038                        114 _car_light:
-      000038 0F                     115 	.db #0x0f	; 15
-      000039 0F                     116 	.db #0x0f	; 15
-      00003A 08                     117 	.db #0x08	; 8
-      00003B 0F                     118 	.db #0x0f	; 15
-      00003C 13                     119 	.db #0x13	; 19
-      00003D 1C                     120 	.db #0x1c	; 28
-      00003E 1B                     121 	.db #0x1b	; 27
-      00003F 14                     122 	.db #0x14	; 20
-      000040 1F                     123 	.db #0x1f	; 31
-      000041 10                     124 	.db #0x10	; 16
-      000042 1D                     125 	.db #0x1d	; 29
-      000043 12                     126 	.db #0x12	; 18
-      000044 14                     127 	.db #0x14	; 20
-      000045 1B                     128 	.db #0x1b	; 27
-      000046 17                     129 	.db #0x17	; 23
-      000047 1F                     130 	.db #0x1f	; 31
-      000048 0F                     131 	.db #0x0f	; 15
-      000049 0F                     132 	.db #0x0f	; 15
-      00004A 0B                     133 	.db #0x0b	; 11
-      00004B 0F                     134 	.db #0x0f	; 15
-      00004C 0F                     135 	.db #0x0f	; 15
-      00004D 08                     136 	.db #0x08	; 8
-      00004E 17                     137 	.db #0x17	; 23
-      00004F 18                     138 	.db #0x18	; 24
-      000050 17                     139 	.db #0x17	; 23
-      000051 18                     140 	.db #0x18	; 24
-      000052 1F                     141 	.db #0x1f	; 31
-      000053 17                     142 	.db #0x17	; 23
-      000054 08                     143 	.db #0x08	; 8
-      000055 0F                     144 	.db #0x0f	; 15
-      000056 0F                     145 	.db #0x0f	; 15
-      000057 0F                     146 	.db #0x0f	; 15
-      000058 F0                     147 	.db #0xf0	; 240
-      000059 F0                     148 	.db #0xf0	; 240
-      00005A 10                     149 	.db #0x10	; 16
-      00005B F0                     150 	.db #0xf0	; 240
-      00005C C8                     151 	.db #0xc8	; 200
-      00005D 38                     152 	.db #0x38	; 56	'8'
-      00005E D8                     153 	.db #0xd8	; 216
-      00005F 28                     154 	.db #0x28	; 40
-      000060 F8                     155 	.db #0xf8	; 248
-      000061 08                     156 	.db #0x08	; 8
-      000062 B8                     157 	.db #0xb8	; 184
-      000063 48                     158 	.db #0x48	; 72	'H'
-      000064 28                     159 	.db #0x28	; 40
-      000065 D8                     160 	.db #0xd8	; 216
-      000066 E8                     161 	.db #0xe8	; 232
-      000067 F8                     162 	.db #0xf8	; 248
-      000068 F0                     163 	.db #0xf0	; 240
-      000069 F0                     164 	.db #0xf0	; 240
-      00006A D0                     165 	.db #0xd0	; 208
-      00006B F0                     166 	.db #0xf0	; 240
-      00006C F0                     167 	.db #0xf0	; 240
-      00006D 10                     168 	.db #0x10	; 16
-      00006E E8                     169 	.db #0xe8	; 232
-      00006F 18                     170 	.db #0x18	; 24
-      000070 E8                     171 	.db #0xe8	; 232
-      000071 18                     172 	.db #0x18	; 24
-      000072 F8                     173 	.db #0xf8	; 248
-      000073 E8                     174 	.db #0xe8	; 232
-      000074 10                     175 	.db #0x10	; 16
-      000075 F0                     176 	.db #0xf0	; 240
-      000076 F0                     177 	.db #0xf0	; 240
-      000077 F0                     178 	.db #0xf0	; 240
-      000078                        179 _map:
-      000078 FF                     180 	.db #0xff	; 255
-      000079 FA                     181 	.db #0xfa	; 250
-      00007A 75                     182 	.db #0x75	; 117	'u'
-      00007B 55                     183 	.db #0x55	; 85	'U'
-      00007C 55                     184 	.db #0x55	; 85	'U'
-      00007D 55                     185 	.db #0x55	; 85	'U'
-      00007E DC                     186 	.db #0xdc	; 220
-      00007F 44                     187 	.db #0x44	; 68	'D'
-      000080 44                     188 	.db #0x44	; 68	'D'
-      000081 44                     189 	.db #0x44	; 68	'D'
-      000082 43                     190 	.db #0x43	; 67	'C'
-      000083 6F                     191 	.db #0x6f	; 111	'o'
-      000084 FF                     192 	.db #0xff	; 255
-      000085 FF                     193 	.db #0xff	; 255
-      000086 A8                     194 	.db #0xa8	; 168
-      000087 11                     195 	.db #0x11	; 17
-      000088 11                     196 	.db #0x11	; 17
-      000089 11                     197 	.db #0x11	; 17
-      00008A 11                     198 	.db #0x11	; 17
-      00008B 98                     199 	.db #0x98	; 152
-      00008C 00                     200 	.db #0x00	; 0
-      00008D 00                     201 	.db #0x00	; 0
-      00008E 00                     202 	.db #0x00	; 0
-      00008F 00                     203 	.db #0x00	; 0
-      000090 46                     204 	.db #0x46	; 70	'F'
-      000091 FF                     205 	.db #0xff	; 255
-      000092 FA                     206 	.db #0xfa	; 250
-      000093 81                     207 	.db #0x81	; 129
-      000094 11                     208 	.db #0x11	; 17
-      000095 11                     209 	.db #0x11	; 17
-      000096 11                     210 	.db #0x11	; 17
-      000097 11                     211 	.db #0x11	; 17
-      000098 98                     212 	.db #0x98	; 152
-      000099 00                     213 	.db #0x00	; 0
-      00009A 00                     214 	.db #0x00	; 0
-      00009B 00                     215 	.db #0x00	; 0
-      00009C 00                     216 	.db #0x00	; 0
-      00009D 04                     217 	.db #0x04	; 4
-      00009E 6F                     218 	.db #0x6f	; 111	'o'
-      00009F F9                     219 	.db #0xf9	; 249
-      0000A0 11                     220 	.db #0x11	; 17
-      0000A1 11                     221 	.db #0x11	; 17
-      0000A2 11                     222 	.db #0x11	; 17
-      0000A3 11                     223 	.db #0x11	; 17
-      0000A4 11                     224 	.db #0x11	; 17
-      0000A5 98                     225 	.db #0x98	; 152
-      0000A6 00                     226 	.db #0x00	; 0
-      0000A7 00                     227 	.db #0x00	; 0
-      0000A8 00                     228 	.db #0x00	; 0
-      0000A9 00                     229 	.db #0x00	; 0
-      0000AA 00                     230 	.db #0x00	; 0
-      0000AB 5F                     231 	.db #0x5f	; 95
-      0000AC FE                     232 	.db #0xfe	; 254
-      0000AD 11                     233 	.db #0x11	; 17
-      0000AE 11                     234 	.db #0x11	; 17
-      0000AF 11                     235 	.db #0x11	; 17
-      0000B0 11                     236 	.db #0x11	; 17
-      0000B1 11                     237 	.db #0x11	; 17
-      0000B2 98                     238 	.db #0x98	; 152
-      0000B3 00                     239 	.db #0x00	; 0
-      0000B4 00                     240 	.db #0x00	; 0
-      0000B5 00                     241 	.db #0x00	; 0
-      0000B6 00                     242 	.db #0x00	; 0
-      0000B7 00                     243 	.db #0x00	; 0
-      0000B8 6F                     244 	.db #0x6f	; 111	'o'
-      0000B9 FE                     245 	.db #0xfe	; 254
-      0000BA 11                     246 	.db #0x11	; 17
-      0000BB 11                     247 	.db #0x11	; 17
-      0000BC 11                     248 	.db #0x11	; 17
-      0000BD 11                     249 	.db #0x11	; 17
-      0000BE 11                     250 	.db #0x11	; 17
-      0000BF 98                     251 	.db #0x98	; 152
-      0000C0 00                     252 	.db #0x00	; 0
-      0000C1 00                     253 	.db #0x00	; 0
-      0000C2 00                     254 	.db #0x00	; 0
-      0000C3 00                     255 	.db #0x00	; 0
-      0000C4 00                     256 	.db #0x00	; 0
-      0000C5 6F                     257 	.db #0x6f	; 111	'o'
-      0000C6 40                     258 	.db #0x40	; 64
-      0000C7 11                     259 	.db #0x11	; 17
-      0000C8 11                     260 	.db #0x11	; 17
-      0000C9 11                     261 	.db #0x11	; 17
-      0000CA 11                     262 	.db #0x11	; 17
-      0000CB 11                     263 	.db #0x11	; 17
-      0000CC 98                     264 	.db #0x98	; 152
-      0000CD 00                     265 	.db #0x00	; 0
-      0000CE 00                     266 	.db #0x00	; 0
-      0000CF 00                     267 	.db #0x00	; 0
-      0000D0 00                     268 	.db #0x00	; 0
-      0000D1 00                     269 	.db #0x00	; 0
-      0000D2 6A                     270 	.db #0x6a	; 106	'j'
-      0000D3 31                     271 	.db #0x31	; 49	'1'
-      0000D4 11                     272 	.db #0x11	; 17
-      0000D5 11                     273 	.db #0x11	; 17
-      0000D6 11                     274 	.db #0x11	; 17
-      0000D7 11                     275 	.db #0x11	; 17
-      0000D8 11                     276 	.db #0x11	; 17
-      0000D9 98                     277 	.db #0x98	; 152
-      0000DA 00                     278 	.db #0x00	; 0
-      0000DB 00                     279 	.db #0x00	; 0
-      0000DC 00                     280 	.db #0x00	; 0
-      0000DD 00                     281 	.db #0x00	; 0
-      0000DE 00                     282 	.db #0x00	; 0
-      0000DF 79                     283 	.db #0x79	; 121	'y'
-      0000E0 31                     284 	.db #0x31	; 49	'1'
-      0000E1                        285 _TileLabel:
-      0000E1 AA                     286 	.db #0xaa	; 170
-      0000E2 00                     287 	.db #0x00	; 0
-      0000E3 55                     288 	.db #0x55	; 85	'U'
-      0000E4 00                     289 	.db #0x00	; 0
-      0000E5 AA                     290 	.db #0xaa	; 170
-      0000E6 00                     291 	.db #0x00	; 0
-      0000E7 55                     292 	.db #0x55	; 85	'U'
-      0000E8 00                     293 	.db #0x00	; 0
-      0000E9 AA                     294 	.db #0xaa	; 170
-      0000EA 00                     295 	.db #0x00	; 0
-      0000EB 55                     296 	.db #0x55	; 85	'U'
-      0000EC 00                     297 	.db #0x00	; 0
-      0000ED AA                     298 	.db #0xaa	; 170
-      0000EE 00                     299 	.db #0x00	; 0
-      0000EF 55                     300 	.db #0x55	; 85	'U'
-      0000F0 00                     301 	.db #0x00	; 0
-                                    302 ;main.c:30: void movegamecharacter(struct Car* car, UINT8 x, UINT8 y){
-                                    303 ;	---------------------------------
-                                    304 ; Function movegamecharacter
-                                    305 ; ---------------------------------
-      0000F1                        306 _movegamecharacter::
-      0000F1 E8 FD                  307 	add	sp, #-3
-                                    308 ;main.c:31: move_sprite(car->spriteids[0], x, y);
-      0000F3 F8 08                  309 	ldhl	sp,	#8
-      0000F5 7E                     310 	ld	a, (hl)
-      0000F6 F8 00                  311 	ldhl	sp,	#0
-      0000F8 77                     312 	ld	(hl), a
-      0000F9 F8 07                  313 	ldhl	sp,	#7
-      0000FB 7E                     314 	ld	a, (hl)
-      0000FC F8 01                  315 	ldhl	sp,	#1
-      0000FE 77                     316 	ld	(hl), a
-      0000FF F8 05                  317 	ldhl	sp,	#5
-      000101 2A                     318 	ld	a, (hl+)
-      000102 5F                     319 	ld	e, a
-      000103 56                     320 	ld	d, (hl)
-      000104 6B                     321 	ld	l, e
-                                    322 ;	spillPairReg hl
-                                    323 ;	spillPairReg hl
-      000105 62                     324 	ld	h, d
-                                    325 ;	spillPairReg hl
-                                    326 ;	spillPairReg hl
-      000106 23                     327 	inc	hl
-                                    328 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-      000107 6E                     329 	ld	l, (hl)
-                                    330 ;	spillPairReg hl
-                                    331 ;	spillPairReg hl
-      000108 26 00                  332 	ld	h, #0x00
-                                    333 ;	spillPairReg hl
-                                    334 ;	spillPairReg hl
-      00010A 29                     335 	add	hl, hl
-      00010B 29                     336 	add	hl, hl
-      00010C 01r00r00               337 	ld	bc, #_shadow_OAM
-      00010F 09                     338 	add	hl, bc
-      000110 4D                     339 	ld	c, l
-      000111 44                     340 	ld	b, h
-                                    341 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-      000112 F8 00                  342 	ldhl	sp,	#0
-      000114 2A                     343 	ld	a, (hl+)
-      000115 02                     344 	ld	(bc), a
-      000116 03                     345 	inc	bc
-      000117 7E                     346 	ld	a, (hl)
-      000118 02                     347 	ld	(bc), a
-                                    348 ;main.c:32: move_sprite(car->spriteids[1], x + spritesize, y);
-      000119 7E                     349 	ld	a, (hl)
-                                    350 ;setupPair	HL
-      00011A 21r00r00               351 	ld	hl, #_spritesize
-      00011D 86                     352 	add	a, (hl)
-      00011E 6B                     353 	ld	l, e
-                                    354 ;	spillPairReg hl
-                                    355 ;	spillPairReg hl
-      00011F 62                     356 	ld	h, d
-                                    357 ;	spillPairReg hl
-                                    358 ;	spillPairReg hl
-      000120 23                     359 	inc	hl
-      000121 23                     360 	inc	hl
-      000122 4E                     361 	ld	c, (hl)
-      000123 F8 02                  362 	ldhl	sp,	#2
-      000125 77                     363 	ld	(hl), a
-                                    364 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-      000126 69                     365 	ld	l, c
-                                    366 ;	spillPairReg hl
-                                    367 ;	spillPairReg hl
-      000127 26 00                  368 	ld	h, #0x00
-                                    369 ;	spillPairReg hl
-                                    370 ;	spillPairReg hl
-      000129 29                     371 	add	hl, hl
-      00012A 29                     372 	add	hl, hl
-      00012B 01r00r00               373 	ld	bc, #_shadow_OAM
-      00012E 09                     374 	add	hl, bc
-      00012F 4D                     375 	ld	c, l
-      000130 44                     376 	ld	b, h
-                                    377 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-      000131 F8 00                  378 	ldhl	sp,	#0
-      000133 2A                     379 	ld	a, (hl+)
-      000134 23                     380 	inc	hl
-      000135 02                     381 	ld	(bc), a
-      000136 03                     382 	inc	bc
-                                    383 ;main.c:33: move_sprite(car->spriteids[2], x, y + spritesize);
-      000137 3A                     384 	ld	a, (hl-)
-      000138 2B                     385 	dec	hl
-      000139 02                     386 	ld	(bc), a
-      00013A 7E                     387 	ld	a, (hl)
-                                    388 ;setupPair	HL
-      00013B 21r00r00               389 	ld	hl, #_spritesize
-      00013E 86                     390 	add	a, (hl)
-      00013F 4F                     391 	ld	c, a
-      000140 6B                     392 	ld	l, e
-                                    393 ;	spillPairReg hl
-                                    394 ;	spillPairReg hl
-      000141 62                     395 	ld	h, d
-                                    396 ;	spillPairReg hl
-                                    397 ;	spillPairReg hl
-      000142 23                     398 	inc	hl
-      000143 23                     399 	inc	hl
-      000144 23                     400 	inc	hl
-                                    401 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-      000145 6E                     402 	ld	l, (hl)
-                                    403 ;	spillPairReg hl
-                                    404 ;	spillPairReg hl
-      000146 26 00                  405 	ld	h, #0x00
-                                    406 ;	spillPairReg hl
-                                    407 ;	spillPairReg hl
-      000148 29                     408 	add	hl, hl
-      000149 29                     409 	add	hl, hl
-      00014A D5                     410 	push	de
-      00014B 11r00r00               411 	ld	de, #_shadow_OAM
-      00014E 19                     412 	add	hl, de
-      00014F D1                     413 	pop	de
-                                    414 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-      000150 79                     415 	ld	a, c
-      000151 22                     416 	ld	(hl+), a
-      000152 4D                     417 	ld	c, l
-      000153 44                     418 	ld	b, h
-      000154 F8 01                  419 	ldhl	sp,	#1
-                                    420 ;main.c:34: move_sprite(car->spriteids[3], x + spritesize, y + spritesize);
-      000156 3A                     421 	ld	a, (hl-)
-      000157 02                     422 	ld	(bc), a
-      000158 7E                     423 	ld	a, (hl)
-                                    424 ;setupPair	HL
-      000159 21r00r00               425 	ld	hl, #_spritesize
-      00015C 86                     426 	add	a, (hl)
-      00015D 47                     427 	ld	b, a
-      00015E F8 01                  428 	ldhl	sp,	#1
-      000160 7E                     429 	ld	a, (hl)
-                                    430 ;setupPair	HL
-      000161 21r00r00               431 	ld	hl, #_spritesize
-      000164 86                     432 	add	a, (hl)
-      000165 4F                     433 	ld	c, a
-      000166 21 04 00               434 	ld	hl, #0x0004
-      000169 19                     435 	add	hl, de
-                                    436 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-      00016A 6E                     437 	ld	l, (hl)
-                                    438 ;	spillPairReg hl
-                                    439 ;	spillPairReg hl
-      00016B 26 00                  440 	ld	h, #0x00
-                                    441 ;	spillPairReg hl
-                                    442 ;	spillPairReg hl
-      00016D 29                     443 	add	hl, hl
-      00016E 29                     444 	add	hl, hl
-      00016F 11r00r00               445 	ld	de, #_shadow_OAM
-      000172 19                     446 	add	hl, de
-                                    447 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-      000173 78                     448 	ld	a, b
-      000174 22                     449 	ld	(hl+), a
-      000175 71                     450 	ld	(hl), c
-                                    451 ;main.c:34: move_sprite(car->spriteids[3], x + spritesize, y + spritesize);
-                                    452 ;main.c:35: }
-      000176 E8 03                  453 	add	sp, #3
-      000178 C9                     454 	ret
-                                    455 ;main.c:37: void performantdelay(UINT8 numloops){
-                                    456 ;	---------------------------------
-                                    457 ; Function performantdelay
-                                    458 ; ---------------------------------
-      000179                        459 _performantdelay::
-                                    460 ;main.c:39: for(i = 0; i < numloops; i++){
-      000179 0E 00                  461 	ld	c, #0x00
-      00017B                        462 00103$:
-      00017B 79                     463 	ld	a, c
-      00017C F8 02                  464 	ldhl	sp,	#2
-      00017E 96                     465 	sub	a, (hl)
-      00017F D0                     466 	ret	NC
-                                    467 ;main.c:40: wait_vbl_done();
-      000180 CDr00r00               468 	call	_wait_vbl_done
-                                    469 ;main.c:39: for(i = 0; i < numloops; i++){
-      000183 0C                     470 	inc	c
-                                    471 ;main.c:42: }
-      000184 18 F5                  472 	jr	00103$
-                                    473 ;main.c:44: void setupcar_light(){
-                                    474 ;	---------------------------------
-                                    475 ; Function setupcar_light
-                                    476 ; ---------------------------------
-      000186                        477 _setupcar_light::
-                                    478 ;main.c:45: car1.direction = 0;
-      000186 21r00r00               479 	ld	hl, #_car1
-      000189 36 00                  480 	ld	(hl), #0x00
-                                    481 ;main.c:46: car1.x = 80;
-      00018B 21r05r00               482 	ld	hl, #(_car1 + 5)
-      00018E 36 50                  483 	ld	(hl), #0x50
-                                    484 ;main.c:47: car1.y = 130;
-      000190 21r06r00               485 	ld	hl, #(_car1 + 6)
-      000193 36 82                  486 	ld	(hl), #0x82
-                                    487 ;main.c:48: car1.width = 16;
-      000195 21r07r00               488 	ld	hl, #(_car1 + 7)
-      000198 36 10                  489 	ld	(hl), #0x10
-                                    490 ;main.c:49: car1.height = 16;
-      00019A 21r08r00               491 	ld	hl, #(_car1 + 8)
-      00019D 36 10                  492 	ld	(hl), #0x10
-                                    493 ;main.c:51: set_sprite_data(0, 8, car_light);
-      00019F 11r38r00               494 	ld	de, #_car_light
-      0001A2 D5                     495 	push	de
-      0001A3 21 00 08               496 	ld	hl, #0x800
-      0001A6 E5                     497 	push	hl
-      0001A7 CDr00r00               498 	call	_set_sprite_data
-      0001AA E8 04                  499 	add	sp, #4
-                                    500 ;main.c:52: load_car_sprite(car1.direction);
-      0001AC FAr00r00               501 	ld	a, (#_car1 + 0)
-      0001AF F5                     502 	push	af
-      0001B0 33                     503 	inc	sp
-      0001B1 CDr00r00               504 	call	_load_car_sprite
-      0001B4 33                     505 	inc	sp
-                                    506 ;main.c:65: movegamecharacter(&car1, car1.x, car1.y);
-      0001B5 21r06r00               507 	ld	hl, #(_car1 + 6)
-      0001B8 46                     508 	ld	b, (hl)
-      0001B9 FAr05r00               509 	ld	a, (#(_car1 + 5) + 0)
-      0001BC C5                     510 	push	bc
-      0001BD 33                     511 	inc	sp
-      0001BE F5                     512 	push	af
-      0001BF 33                     513 	inc	sp
-      0001C0 11r00r00               514 	ld	de, #_car1
-      0001C3 D5                     515 	push	de
-      0001C4 CDrF1r00               516 	call	_movegamecharacter
-      0001C7 E8 04                  517 	add	sp, #4
-                                    518 ;main.c:66: }
-      0001C9 C9                     519 	ret
-                                    520 ;main.c:68: void main(){
-                                    521 ;	---------------------------------
-                                    522 ; Function main
-                                    523 ; ---------------------------------
-      0001CA                        524 _main::
-                                    525 ;main.c:72: set_bkg_data(0, 3, map);
-      0001CA 11r78r00               526 	ld	de, #_map
-      0001CD D5                     527 	push	de
-      0001CE 21 00 03               528 	ld	hl, #0x300
-      0001D1 E5                     529 	push	hl
-      0001D2 CDr00r00               530 	call	_set_bkg_data
-      0001D5 E8 04                  531 	add	sp, #4
-                                    532 ;main.c:73: set_bkg_tiles(0, 0, 40, 18, TileLabel);
-      0001D7 11rE1r00               533 	ld	de, #_TileLabel
-      0001DA D5                     534 	push	de
-      0001DB 21 28 12               535 	ld	hl, #0x1228
-      0001DE E5                     536 	push	hl
-      0001DF AF                     537 	xor	a, a
-      0001E0 0F                     538 	rrca
-      0001E1 F5                     539 	push	af
-      0001E2 CDr00r00               540 	call	_set_bkg_tiles
-      0001E5 E8 06                  541 	add	sp, #6
-                                    542 ;main.c:74: SHOW_BKG;
-      0001E7 F0r00                  543 	ldh	a, (_LCDC_REG + 0)
-      0001E9 F6 01                  544 	or	a, #0x01
-      0001EB E0r00                  545 	ldh	(_LCDC_REG + 0), a
-                                    546 ;main.c:76: set_sprite_data(0,4, car_light);
-      0001ED 11r38r00               547 	ld	de, #_car_light
-      0001F0 D5                     548 	push	de
-      0001F1 21 00 04               549 	ld	hl, #0x400
-      0001F4 E5                     550 	push	hl
-      0001F5 CDr00r00               551 	call	_set_sprite_data
-      0001F8 E8 04                  552 	add	sp, #4
-                                    553 ;main.c:77: setupcar_light();
-      0001FA CDr86r01               554 	call	_setupcar_light
-                                    555 ;main.c:78: SHOW_SPRITES;
-      0001FD F0r00                  556 	ldh	a, (_LCDC_REG + 0)
-      0001FF F6 02                  557 	or	a, #0x02
-      000201 E0r00                  558 	ldh	(_LCDC_REG + 0), a
-                                    559 ;main.c:79: DISPLAY_ON;
-      000203 F0r00                  560 	ldh	a, (_LCDC_REG + 0)
-      000205 F6 80                  561 	or	a, #0x80
-      000207 E0r00                  562 	ldh	(_LCDC_REG + 0), a
-                                    563 ;main.c:81: while(1){
-      000209                        564 00112$:
-                                    565 ;main.c:82: if(joypad() & J_LEFT){
-      000209 CDr00r00               566 	call	_joypad
-      00020C CB 4B                  567 	bit	1, e
-      00020E 28 15                  568 	jr	Z, 00105$
-                                    569 ;main.c:83: if (car1.direction == 0) {
-      000210 01r00r00               570 	ld	bc, #_car1+0
-      000213 0A                     571 	ld	a, (bc)
-      000214 B7                     572 	or	a, a
-      000215 20 05                  573 	jr	NZ, 00102$
-                                    574 ;main.c:84: car1.direction = 15;
-      000217 3E 0F                  575 	ld	a, #0x0f
-      000219 02                     576 	ld	(bc), a
-      00021A 18 02                  577 	jr	00103$
-      00021C                        578 00102$:
-                                    579 ;main.c:86: car1.direction -= 1;
-      00021C 3D                     580 	dec	a
-      00021D 02                     581 	ld	(bc), a
-      00021E                        582 00103$:
-                                    583 ;main.c:88: load_car_sprite(car1.direction);
-      00021E 0A                     584 	ld	a, (bc)
-      00021F F5                     585 	push	af
-      000220 33                     586 	inc	sp
-      000221 CDr00r00               587 	call	_load_car_sprite
-      000224 33                     588 	inc	sp
-      000225                        589 00105$:
-                                    590 ;main.c:90: if(joypad() & J_RIGHT){
-      000225 CDr00r00               591 	call	_joypad
-      000228 7B                     592 	ld	a, e
-      000229 0F                     593 	rrca
-      00022A 30 15                  594 	jr	NC, 00110$
-                                    595 ;main.c:91: if (car1.direction == 15) {
-      00022C 01r00r00               596 	ld	bc, #_car1+0
-      00022F 0A                     597 	ld	a, (bc)
-      000230 FE 0F                  598 	cp	a, #0x0f
-      000232 20 04                  599 	jr	NZ, 00107$
-                                    600 ;main.c:92: car1.direction = 0;
-      000234 AF                     601 	xor	a, a
-      000235 02                     602 	ld	(bc), a
-      000236 18 02                  603 	jr	00108$
-      000238                        604 00107$:
-                                    605 ;main.c:94: car1.direction += 1;
-      000238 3C                     606 	inc	a
-      000239 02                     607 	ld	(bc), a
-      00023A                        608 00108$:
-                                    609 ;main.c:96: load_car_sprite(car1.direction);
-      00023A 0A                     610 	ld	a, (bc)
-      00023B F5                     611 	push	af
-      00023C 33                     612 	inc	sp
-      00023D CDr00r00               613 	call	_load_car_sprite
-      000240 33                     614 	inc	sp
-      000241                        615 00110$:
-                                    616 ;main.c:98: performantdelay(5);    
-      000241 3E 05                  617 	ld	a, #0x05
-      000243 F5                     618 	push	af
-      000244 33                     619 	inc	sp
-      000245 CDr79r01               620 	call	_performantdelay
-      000248 33                     621 	inc	sp
-                                    622 ;main.c:99: performantdelay(15);
-      000249 3E 0F                  623 	ld	a, #0x0f
-      00024B F5                     624 	push	af
-      00024C 33                     625 	inc	sp
-      00024D CDr79r01               626 	call	_performantdelay
-      000250 33                     627 	inc	sp
-                                    628 ;main.c:101: }
-      000251 18 B6                  629 	jr	00112$
-                                    630 	.area _CODE
-                                    631 	.area _INITIALIZER
-      000000                        632 __xinit__spritesize:
-      000000 08                     633 	.db #0x08	; 8
-                                    634 	.area _CABS (ABS)
+                                     48 ; absolute external ram data
+                                     49 ;--------------------------------------------------------
+                                     50 	.area _DABS (ABS)
+                                     51 ;--------------------------------------------------------
+                                     52 ; global & static initialisations
+                                     53 ;--------------------------------------------------------
+                                     54 	.area _HOME
+                                     55 	.area _GSINIT
+                                     56 	.area _GSFINAL
+                                     57 	.area _GSINIT
+                                     58 ;--------------------------------------------------------
+                                     59 ; Home
+                                     60 ;--------------------------------------------------------
+                                     61 	.area _HOME
+                                     62 	.area _HOME
+                                     63 ;--------------------------------------------------------
+                                     64 ; code
+                                     65 ;--------------------------------------------------------
+                                     66 	.area _CODE
+                                     67 ;main.c:29: void load_car_sprite(UINT8 direction) {
+                                     68 ;	---------------------------------
+                                     69 ; Function load_car_sprite
+                                     70 ; ---------------------------------
+      000000                         71 _load_car_sprite::
+                                     72 ;main.c:30: set_sprite_tile(0, 4 * direction);
+      000000 F8 02                   73 	ldhl	sp,	#2
+      000002 4E                      74 	ld	c, (hl)
+      000003 79                      75 	ld	a, c
+      000004 87                      76 	add	a, a
+      000005 87                      77 	add	a, a
+      000006 47                      78 	ld	b, a
+                                     79 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      000007 21r02r00                80 	ld	hl, #(_shadow_OAM + 2)
+      00000A 70                      81 	ld	(hl), b
+                                     82 ;main.c:31: car1.spriteids[0] = 0;
+      00000B 21r01r00                83 	ld	hl, #(_car1 + 1)
+      00000E 36 00                   84 	ld	(hl), #0x00
+                                     85 ;main.c:32: set_sprite_tile(1, 4 * direction + 2);
+      000010 79                      86 	ld	a, c
+      000011 87                      87 	add	a, a
+      000012 87                      88 	add	a, a
+      000013 4F                      89 	ld	c, a
+      000014 41                      90 	ld	b, c
+      000015 04                      91 	inc	b
+      000016 04                      92 	inc	b
+                                     93 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      000017 21r06r00                94 	ld	hl, #(_shadow_OAM + 6)
+      00001A 70                      95 	ld	(hl), b
+                                     96 ;main.c:33: car1.spriteids[1] = 1;
+      00001B 21r02r00                97 	ld	hl, #(_car1 + 2)
+      00001E 36 01                   98 	ld	(hl), #0x01
+                                     99 ;main.c:34: set_sprite_tile(2, 4 * direction + 1);
+      000020 41                     100 	ld	b, c
+      000021 04                     101 	inc	b
+                                    102 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      000022 21r0Ar00               103 	ld	hl, #(_shadow_OAM + 10)
+      000025 70                     104 	ld	(hl), b
+                                    105 ;main.c:35: car1.spriteids[2] = 2;
+      000026 21r03r00               106 	ld	hl, #(_car1 + 3)
+      000029 36 02                  107 	ld	(hl), #0x02
+                                    108 ;main.c:36: set_sprite_tile(3, 4 * direction + 3);
+      00002B 0C                     109 	inc	c
+      00002C 0C                     110 	inc	c
+      00002D 0C                     111 	inc	c
+                                    112 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      00002E 21r0Er00               113 	ld	hl, #(_shadow_OAM + 14)
+      000031 71                     114 	ld	(hl), c
+                                    115 ;main.c:37: car1.spriteids[3] = 3;
+      000032 21r04r00               116 	ld	hl, #(_car1 + 4)
+      000035 36 03                  117 	ld	(hl), #0x03
+                                    118 ;main.c:38: }
+      000037 C9                     119 	ret
+                                    120 ;main.c:40: void movegamecharacter(struct Car* car, UINT8 x, UINT8 y){
+                                    121 ;	---------------------------------
+                                    122 ; Function movegamecharacter
+                                    123 ; ---------------------------------
+      000038                        124 _movegamecharacter::
+      000038 E8 FD                  125 	add	sp, #-3
+                                    126 ;main.c:41: move_sprite(car->spriteids[0], x, y);
+      00003A F8 08                  127 	ldhl	sp,	#8
+      00003C 7E                     128 	ld	a, (hl)
+      00003D F8 00                  129 	ldhl	sp,	#0
+      00003F 77                     130 	ld	(hl), a
+      000040 F8 07                  131 	ldhl	sp,	#7
+      000042 7E                     132 	ld	a, (hl)
+      000043 F8 01                  133 	ldhl	sp,	#1
+      000045 77                     134 	ld	(hl), a
+      000046 F8 05                  135 	ldhl	sp,	#5
+      000048 2A                     136 	ld	a, (hl+)
+      000049 5F                     137 	ld	e, a
+      00004A 56                     138 	ld	d, (hl)
+      00004B 6B                     139 	ld	l, e
+                                    140 ;	spillPairReg hl
+                                    141 ;	spillPairReg hl
+      00004C 62                     142 	ld	h, d
+                                    143 ;	spillPairReg hl
+                                    144 ;	spillPairReg hl
+      00004D 23                     145 	inc	hl
+                                    146 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+      00004E 6E                     147 	ld	l, (hl)
+                                    148 ;	spillPairReg hl
+                                    149 ;	spillPairReg hl
+      00004F 26 00                  150 	ld	h, #0x00
+                                    151 ;	spillPairReg hl
+                                    152 ;	spillPairReg hl
+      000051 29                     153 	add	hl, hl
+      000052 29                     154 	add	hl, hl
+      000053 01r00r00               155 	ld	bc, #_shadow_OAM
+      000056 09                     156 	add	hl, bc
+      000057 4D                     157 	ld	c, l
+      000058 44                     158 	ld	b, h
+                                    159 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+      000059 F8 00                  160 	ldhl	sp,	#0
+      00005B 2A                     161 	ld	a, (hl+)
+      00005C 02                     162 	ld	(bc), a
+      00005D 03                     163 	inc	bc
+      00005E 7E                     164 	ld	a, (hl)
+      00005F 02                     165 	ld	(bc), a
+                                    166 ;main.c:42: move_sprite(car->spriteids[1], x + spritesize, y);
+      000060 7E                     167 	ld	a, (hl)
+                                    168 ;setupPair	HL
+      000061 21r60r08               169 	ld	hl, #_spritesize
+      000064 86                     170 	add	a, (hl)
+      000065 6B                     171 	ld	l, e
+                                    172 ;	spillPairReg hl
+                                    173 ;	spillPairReg hl
+      000066 62                     174 	ld	h, d
+                                    175 ;	spillPairReg hl
+                                    176 ;	spillPairReg hl
+      000067 23                     177 	inc	hl
+      000068 23                     178 	inc	hl
+      000069 4E                     179 	ld	c, (hl)
+      00006A F8 02                  180 	ldhl	sp,	#2
+      00006C 77                     181 	ld	(hl), a
+                                    182 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+      00006D 69                     183 	ld	l, c
+                                    184 ;	spillPairReg hl
+                                    185 ;	spillPairReg hl
+      00006E 26 00                  186 	ld	h, #0x00
+                                    187 ;	spillPairReg hl
+                                    188 ;	spillPairReg hl
+      000070 29                     189 	add	hl, hl
+      000071 29                     190 	add	hl, hl
+      000072 01r00r00               191 	ld	bc, #_shadow_OAM
+      000075 09                     192 	add	hl, bc
+      000076 4D                     193 	ld	c, l
+      000077 44                     194 	ld	b, h
+                                    195 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+      000078 F8 00                  196 	ldhl	sp,	#0
+      00007A 2A                     197 	ld	a, (hl+)
+      00007B 23                     198 	inc	hl
+      00007C 02                     199 	ld	(bc), a
+      00007D 03                     200 	inc	bc
+                                    201 ;main.c:43: move_sprite(car->spriteids[2], x, y + spritesize);
+      00007E 3A                     202 	ld	a, (hl-)
+      00007F 2B                     203 	dec	hl
+      000080 02                     204 	ld	(bc), a
+      000081 7E                     205 	ld	a, (hl)
+                                    206 ;setupPair	HL
+      000082 21r60r08               207 	ld	hl, #_spritesize
+      000085 86                     208 	add	a, (hl)
+      000086 4F                     209 	ld	c, a
+      000087 6B                     210 	ld	l, e
+                                    211 ;	spillPairReg hl
+                                    212 ;	spillPairReg hl
+      000088 62                     213 	ld	h, d
+                                    214 ;	spillPairReg hl
+                                    215 ;	spillPairReg hl
+      000089 23                     216 	inc	hl
+      00008A 23                     217 	inc	hl
+      00008B 23                     218 	inc	hl
+                                    219 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+      00008C 6E                     220 	ld	l, (hl)
+                                    221 ;	spillPairReg hl
+                                    222 ;	spillPairReg hl
+      00008D 26 00                  223 	ld	h, #0x00
+                                    224 ;	spillPairReg hl
+                                    225 ;	spillPairReg hl
+      00008F 29                     226 	add	hl, hl
+      000090 29                     227 	add	hl, hl
+      000091 D5                     228 	push	de
+      000092 11r00r00               229 	ld	de, #_shadow_OAM
+      000095 19                     230 	add	hl, de
+      000096 D1                     231 	pop	de
+                                    232 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+      000097 79                     233 	ld	a, c
+      000098 22                     234 	ld	(hl+), a
+      000099 4D                     235 	ld	c, l
+      00009A 44                     236 	ld	b, h
+      00009B F8 01                  237 	ldhl	sp,	#1
+                                    238 ;main.c:44: move_sprite(car->spriteids[3], x + spritesize, y + spritesize);
+      00009D 3A                     239 	ld	a, (hl-)
+      00009E 02                     240 	ld	(bc), a
+      00009F 7E                     241 	ld	a, (hl)
+                                    242 ;setupPair	HL
+      0000A0 21r60r08               243 	ld	hl, #_spritesize
+      0000A3 86                     244 	add	a, (hl)
+      0000A4 47                     245 	ld	b, a
+      0000A5 F8 01                  246 	ldhl	sp,	#1
+      0000A7 7E                     247 	ld	a, (hl)
+                                    248 ;setupPair	HL
+      0000A8 21r60r08               249 	ld	hl, #_spritesize
+      0000AB 86                     250 	add	a, (hl)
+      0000AC 4F                     251 	ld	c, a
+      0000AD 21 04 00               252 	ld	hl, #0x0004
+      0000B0 19                     253 	add	hl, de
+                                    254 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+      0000B1 6E                     255 	ld	l, (hl)
+                                    256 ;	spillPairReg hl
+                                    257 ;	spillPairReg hl
+      0000B2 26 00                  258 	ld	h, #0x00
+                                    259 ;	spillPairReg hl
+                                    260 ;	spillPairReg hl
+      0000B4 29                     261 	add	hl, hl
+      0000B5 29                     262 	add	hl, hl
+      0000B6 11r00r00               263 	ld	de, #_shadow_OAM
+      0000B9 19                     264 	add	hl, de
+                                    265 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+      0000BA 78                     266 	ld	a, b
+      0000BB 22                     267 	ld	(hl+), a
+      0000BC 71                     268 	ld	(hl), c
+                                    269 ;main.c:44: move_sprite(car->spriteids[3], x + spritesize, y + spritesize);
+                                    270 ;main.c:45: }
+      0000BD E8 03                  271 	add	sp, #3
+      0000BF C9                     272 	ret
+                                    273 ;main.c:47: void performantdelay(UINT8 numloops){
+                                    274 ;	---------------------------------
+                                    275 ; Function performantdelay
+                                    276 ; ---------------------------------
+      0000C0                        277 _performantdelay::
+                                    278 ;main.c:49: for(i = 0; i < numloops; i++){
+      0000C0 0E 00                  279 	ld	c, #0x00
+      0000C2                        280 00103$:
+      0000C2 79                     281 	ld	a, c
+      0000C3 F8 02                  282 	ldhl	sp,	#2
+      0000C5 96                     283 	sub	a, (hl)
+      0000C6 D0                     284 	ret	NC
+                                    285 ;main.c:50: wait_vbl_done();
+      0000C7 CDr00r00               286 	call	_wait_vbl_done
+                                    287 ;main.c:49: for(i = 0; i < numloops; i++){
+      0000CA 0C                     288 	inc	c
+                                    289 ;main.c:52: }
+      0000CB 18 F5                  290 	jr	00103$
+                                    291 ;main.c:54: void setupcar_light(){
+                                    292 ;	---------------------------------
+                                    293 ; Function setupcar_light
+                                    294 ; ---------------------------------
+      0000CD                        295 _setupcar_light::
+                                    296 ;main.c:55: car1.direction = 0;
+      0000CD 21r00r00               297 	ld	hl, #_car1
+      0000D0 36 00                  298 	ld	(hl), #0x00
+                                    299 ;main.c:56: car1.x = 80;
+      0000D2 21r05r00               300 	ld	hl, #(_car1 + 5)
+      0000D5 36 50                  301 	ld	(hl), #0x50
+                                    302 ;main.c:57: car1.y = 130;
+      0000D7 21r06r00               303 	ld	hl, #(_car1 + 6)
+      0000DA 36 82                  304 	ld	(hl), #0x82
+                                    305 ;main.c:58: car1.width = 16;
+      0000DC 21r07r00               306 	ld	hl, #(_car1 + 7)
+      0000DF 36 10                  307 	ld	(hl), #0x10
+                                    308 ;main.c:59: car1.height = 16;
+      0000E1 21r08r00               309 	ld	hl, #(_car1 + 8)
+      0000E4 36 10                  310 	ld	(hl), #0x10
+                                    311 ;main.c:61: set_sprite_data(0, 64, car_light);
+      0000E6 11r00r00               312 	ld	de, #_car_light
+      0000E9 D5                     313 	push	de
+      0000EA 21 00 40               314 	ld	hl, #0x4000
+      0000ED E5                     315 	push	hl
+      0000EE CDr00r00               316 	call	_set_sprite_data
+      0000F1 E8 04                  317 	add	sp, #4
+                                    318 ;main.c:62: load_car_sprite(car1.direction);
+      0000F3 FAr00r00               319 	ld	a, (#_car1 + 0)
+      0000F6 F5                     320 	push	af
+      0000F7 33                     321 	inc	sp
+      0000F8 CDr00r00               322 	call	_load_car_sprite
+      0000FB 33                     323 	inc	sp
+                                    324 ;main.c:75: movegamecharacter(&car1, car1.x, car1.y);
+      0000FC 21r06r00               325 	ld	hl, #(_car1 + 6)
+      0000FF 46                     326 	ld	b, (hl)
+      000100 FAr05r00               327 	ld	a, (#(_car1 + 5) + 0)
+      000103 C5                     328 	push	bc
+      000104 33                     329 	inc	sp
+      000105 F5                     330 	push	af
+      000106 33                     331 	inc	sp
+      000107 11r00r00               332 	ld	de, #_car1
+      00010A D5                     333 	push	de
+      00010B CDr38r00               334 	call	_movegamecharacter
+      00010E E8 04                  335 	add	sp, #4
+                                    336 ;main.c:76: }
+      000110 C9                     337 	ret
+                                    338 ;main.c:78: void main(){
+                                    339 ;	---------------------------------
+                                    340 ; Function main
+                                    341 ; ---------------------------------
+      000111                        342 _main::
+                                    343 ;main.c:82: set_bkg_data(0, 3, map);
+      000111 11r00r04               344 	ld	de, #_map
+      000114 D5                     345 	push	de
+      000115 21 00 03               346 	ld	hl, #0x300
+      000118 E5                     347 	push	hl
+      000119 CDr00r00               348 	call	_set_bkg_data
+      00011C E8 04                  349 	add	sp, #4
+                                    350 ;main.c:83: set_bkg_tiles(0, 0, 40, 18, bkg_tiles);
+      00011E 11rA0r05               351 	ld	de, #_bkg_tiles
+      000121 D5                     352 	push	de
+      000122 21 28 12               353 	ld	hl, #0x1228
+      000125 E5                     354 	push	hl
+      000126 AF                     355 	xor	a, a
+      000127 0F                     356 	rrca
+      000128 F5                     357 	push	af
+      000129 CDr00r00               358 	call	_set_bkg_tiles
+      00012C E8 06                  359 	add	sp, #6
+                                    360 ;main.c:84: SHOW_BKG;
+      00012E F0r00                  361 	ldh	a, (_LCDC_REG + 0)
+      000130 F6 01                  362 	or	a, #0x01
+      000132 E0r00                  363 	ldh	(_LCDC_REG + 0), a
+                                    364 ;main.c:86: set_sprite_data(0,4, car_light);
+      000134 11r00r00               365 	ld	de, #_car_light
+      000137 D5                     366 	push	de
+      000138 21 00 04               367 	ld	hl, #0x400
+      00013B E5                     368 	push	hl
+      00013C CDr00r00               369 	call	_set_sprite_data
+      00013F E8 04                  370 	add	sp, #4
+                                    371 ;main.c:87: setupcar_light();
+      000141 CDrCDr00               372 	call	_setupcar_light
+                                    373 ;main.c:88: SHOW_SPRITES;
+      000144 F0r00                  374 	ldh	a, (_LCDC_REG + 0)
+      000146 F6 02                  375 	or	a, #0x02
+      000148 E0r00                  376 	ldh	(_LCDC_REG + 0), a
+                                    377 ;main.c:89: DISPLAY_ON;
+      00014A F0r00                  378 	ldh	a, (_LCDC_REG + 0)
+      00014C F6 80                  379 	or	a, #0x80
+      00014E E0r00                  380 	ldh	(_LCDC_REG + 0), a
+                                    381 ;main.c:91: while(1){
+      000150                        382 00112$:
+                                    383 ;main.c:92: if(joypad() & J_LEFT){
+      000150 CDr00r00               384 	call	_joypad
+      000153 CB 4B                  385 	bit	1, e
+      000155 28 15                  386 	jr	Z, 00105$
+                                    387 ;main.c:93: if (car1.direction == 0) {
+      000157 01r00r00               388 	ld	bc, #_car1+0
+      00015A 0A                     389 	ld	a, (bc)
+      00015B B7                     390 	or	a, a
+      00015C 20 05                  391 	jr	NZ, 00102$
+                                    392 ;main.c:94: car1.direction = 15;
+      00015E 3E 0F                  393 	ld	a, #0x0f
+      000160 02                     394 	ld	(bc), a
+      000161 18 02                  395 	jr	00103$
+      000163                        396 00102$:
+                                    397 ;main.c:96: car1.direction -= 1;
+      000163 3D                     398 	dec	a
+      000164 02                     399 	ld	(bc), a
+      000165                        400 00103$:
+                                    401 ;main.c:98: load_car_sprite(car1.direction);
+      000165 0A                     402 	ld	a, (bc)
+      000166 F5                     403 	push	af
+      000167 33                     404 	inc	sp
+      000168 CDr00r00               405 	call	_load_car_sprite
+      00016B 33                     406 	inc	sp
+      00016C                        407 00105$:
+                                    408 ;main.c:100: if(joypad() & J_RIGHT){
+      00016C CDr00r00               409 	call	_joypad
+      00016F 7B                     410 	ld	a, e
+      000170 0F                     411 	rrca
+      000171 30 15                  412 	jr	NC, 00110$
+                                    413 ;main.c:101: if (car1.direction == 15) {
+      000173 01r00r00               414 	ld	bc, #_car1+0
+      000176 0A                     415 	ld	a, (bc)
+      000177 FE 0F                  416 	cp	a, #0x0f
+      000179 20 04                  417 	jr	NZ, 00107$
+                                    418 ;main.c:102: car1.direction = 0;
+      00017B AF                     419 	xor	a, a
+      00017C 02                     420 	ld	(bc), a
+      00017D 18 02                  421 	jr	00108$
+      00017F                        422 00107$:
+                                    423 ;main.c:104: car1.direction += 1;
+      00017F 3C                     424 	inc	a
+      000180 02                     425 	ld	(bc), a
+      000181                        426 00108$:
+                                    427 ;main.c:106: load_car_sprite(car1.direction);
+      000181 0A                     428 	ld	a, (bc)
+      000182 F5                     429 	push	af
+      000183 33                     430 	inc	sp
+      000184 CDr00r00               431 	call	_load_car_sprite
+      000187 33                     432 	inc	sp
+      000188                        433 00110$:
+                                    434 ;main.c:108: performantdelay(5);    
+      000188 3E 05                  435 	ld	a, #0x05
+      00018A F5                     436 	push	af
+      00018B 33                     437 	inc	sp
+      00018C CDrC0r00               438 	call	_performantdelay
+      00018F 33                     439 	inc	sp
+                                    440 ;main.c:109: performantdelay(15);
+      000190 3E 0F                  441 	ld	a, #0x0f
+      000192 F5                     442 	push	af
+      000193 33                     443 	inc	sp
+      000194 CDrC0r00               444 	call	_performantdelay
+      000197 33                     445 	inc	sp
+                                    446 ;main.c:111: }
+      000198 18 B6                  447 	jr	00112$
+                                    448 	.area _CODE
+                                    449 	.area _INITIALIZER
+      000000                        450 __xinit__car_light:
+      000000 0F                     451 	.db #0x0f	; 15
+      000001 0F                     452 	.db #0x0f	; 15
+      000002 08                     453 	.db #0x08	; 8
+      000003 0F                     454 	.db #0x0f	; 15
+      000004 13                     455 	.db #0x13	; 19
+      000005 1C                     456 	.db #0x1c	; 28
+      000006 1B                     457 	.db #0x1b	; 27
+      000007 14                     458 	.db #0x14	; 20
+      000008 1F                     459 	.db #0x1f	; 31
+      000009 10                     460 	.db #0x10	; 16
+      00000A 1D                     461 	.db #0x1d	; 29
+      00000B 12                     462 	.db #0x12	; 18
+      00000C 14                     463 	.db #0x14	; 20
+      00000D 1B                     464 	.db #0x1b	; 27
+      00000E 17                     465 	.db #0x17	; 23
+      00000F 1F                     466 	.db #0x1f	; 31
+      000010 0F                     467 	.db #0x0f	; 15
+      000011 0F                     468 	.db #0x0f	; 15
+      000012 0B                     469 	.db #0x0b	; 11
+      000013 0F                     470 	.db #0x0f	; 15
+      000014 0F                     471 	.db #0x0f	; 15
+      000015 08                     472 	.db #0x08	; 8
+      000016 17                     473 	.db #0x17	; 23
+      000017 18                     474 	.db #0x18	; 24
+      000018 17                     475 	.db #0x17	; 23
+      000019 18                     476 	.db #0x18	; 24
+      00001A 1F                     477 	.db #0x1f	; 31
+      00001B 17                     478 	.db #0x17	; 23
+      00001C 08                     479 	.db #0x08	; 8
+      00001D 0F                     480 	.db #0x0f	; 15
+      00001E 0F                     481 	.db #0x0f	; 15
+      00001F 0F                     482 	.db #0x0f	; 15
+      000020 F0                     483 	.db #0xf0	; 240
+      000021 F0                     484 	.db #0xf0	; 240
+      000022 10                     485 	.db #0x10	; 16
+      000023 F0                     486 	.db #0xf0	; 240
+      000024 C8                     487 	.db #0xc8	; 200
+      000025 38                     488 	.db #0x38	; 56	'8'
+      000026 D8                     489 	.db #0xd8	; 216
+      000027 28                     490 	.db #0x28	; 40
+      000028 F8                     491 	.db #0xf8	; 248
+      000029 08                     492 	.db #0x08	; 8
+      00002A B8                     493 	.db #0xb8	; 184
+      00002B 48                     494 	.db #0x48	; 72	'H'
+      00002C 28                     495 	.db #0x28	; 40
+      00002D D8                     496 	.db #0xd8	; 216
+      00002E E8                     497 	.db #0xe8	; 232
+      00002F F8                     498 	.db #0xf8	; 248
+      000030 F0                     499 	.db #0xf0	; 240
+      000031 F0                     500 	.db #0xf0	; 240
+      000032 D0                     501 	.db #0xd0	; 208
+      000033 F0                     502 	.db #0xf0	; 240
+      000034 F0                     503 	.db #0xf0	; 240
+      000035 10                     504 	.db #0x10	; 16
+      000036 E8                     505 	.db #0xe8	; 232
+      000037 18                     506 	.db #0x18	; 24
+      000038 E8                     507 	.db #0xe8	; 232
+      000039 18                     508 	.db #0x18	; 24
+      00003A F8                     509 	.db #0xf8	; 248
+      00003B E8                     510 	.db #0xe8	; 232
+      00003C 10                     511 	.db #0x10	; 16
+      00003D F0                     512 	.db #0xf0	; 240
+      00003E F0                     513 	.db #0xf0	; 240
+      00003F F0                     514 	.db #0xf0	; 240
+      000040 01                     515 	.db #0x01	; 1
+      000041 01                     516 	.db #0x01	; 1
+      000042 02                     517 	.db #0x02	; 2
+      000043 03                     518 	.db #0x03	; 3
+      000044 06                     519 	.db #0x06	; 6
+      000045 05                     520 	.db #0x05	; 5
+      000046 07                     521 	.db #0x07	; 7
+      000047 04                     522 	.db #0x04	; 4
+      000048 0A                     523 	.db #0x0a	; 10
+      000049 0D                     524 	.db #0x0d	; 13
+      00004A 0A                     525 	.db #0x0a	; 10
+      00004B 0F                     526 	.db #0x0f	; 15
+      00004C 0F                     527 	.db #0x0f	; 15
+      00004D 0F                     528 	.db #0x0f	; 15
+      00004E 17                     529 	.db #0x17	; 23
+      00004F 1F                     530 	.db #0x1f	; 31
+      000050 17                     531 	.db #0x17	; 23
+      000051 19                     532 	.db #0x19	; 25
+      000052 2F                     533 	.db #0x2f	; 47
+      000053 30                     534 	.db #0x30	; 48	'0'
+      000054 4F                     535 	.db #0x4f	; 79	'O'
+      000055 70                     536 	.db #0x70	; 112	'p'
+      000056 7F                     537 	.db #0x7f	; 127
+      000057 5C                     538 	.db #0x5c	; 92
+      000058 67                     539 	.db #0x67	; 103	'g'
+      000059 7F                     540 	.db #0x7f	; 127
+      00005A 19                     541 	.db #0x19	; 25
+      00005B 1F                     542 	.db #0x1f	; 31
+      00005C 06                     543 	.db #0x06	; 6
+      00005D 07                     544 	.db #0x07	; 7
+      00005E 01                     545 	.db #0x01	; 1
+      00005F 01                     546 	.db #0x01	; 1
+      000060 C0                     547 	.db #0xc0	; 192
+      000061 C0                     548 	.db #0xc0	; 192
+      000062 30                     549 	.db #0x30	; 48	'0'
+      000063 F0                     550 	.db #0xf0	; 240
+      000064 CC                     551 	.db #0xcc	; 204
+      000065 3C                     552 	.db #0x3c	; 60
+      000066 F2                     553 	.db #0xf2	; 242
+      000067 0E                     554 	.db #0x0e	; 14
+      000068 F2                     555 	.db #0xf2	; 242
+      000069 0E                     556 	.db #0x0e	; 14
+      00006A 6C                     557 	.db #0x6c	; 108	'l'
+      00006B 94                     558 	.db #0x94	; 148
+      00006C 9C                     559 	.db #0x9c	; 156
+      00006D E4                     560 	.db #0xe4	; 228
+      00006E F4                     561 	.db #0xf4	; 244
+      00006F EC                     562 	.db #0xec	; 236
+      000070 F8                     563 	.db #0xf8	; 248
+      000071 F8                     564 	.db #0xf8	; 248
+      000072 F0                     565 	.db #0xf0	; 240
+      000073 70                     566 	.db #0x70	; 112	'p'
+      000074 D0                     567 	.db #0xd0	; 208
+      000075 30                     568 	.db #0x30	; 48	'0'
+      000076 A0                     569 	.db #0xa0	; 160
+      000077 60                     570 	.db #0x60	; 96
+      000078 A0                     571 	.db #0xa0	; 160
+      000079 60                     572 	.db #0x60	; 96
+      00007A A0                     573 	.db #0xa0	; 160
+      00007B E0                     574 	.db #0xe0	; 224
+      00007C C0                     575 	.db #0xc0	; 192
+      00007D 40                     576 	.db #0x40	; 64
+      00007E 80                     577 	.db #0x80	; 128
+      00007F 80                     578 	.db #0x80	; 128
+      000080 00                     579 	.db #0x00	; 0
+      000081 00                     580 	.db #0x00	; 0
+      000082 00                     581 	.db #0x00	; 0
+      000083 00                     582 	.db #0x00	; 0
+      000084 01                     583 	.db #0x01	; 1
+      000085 01                     584 	.db #0x01	; 1
+      000086 02                     585 	.db #0x02	; 2
+      000087 03                     586 	.db #0x03	; 3
+      000088 05                     587 	.db #0x05	; 5
+      000089 06                     588 	.db #0x06	; 6
+      00008A 06                     589 	.db #0x06	; 6
+      00008B 07                     590 	.db #0x07	; 7
+      00008C 0B                     591 	.db #0x0b	; 11
+      00008D 0F                     592 	.db #0x0f	; 15
+      00008E 17                     593 	.db #0x17	; 23
+      00008F 1B                     594 	.db #0x1b	; 27
+      000090 6F                     595 	.db #0x6f	; 111	'o'
+      000091 71                     596 	.db #0x71	; 113	'q'
+      000092 9F                     597 	.db #0x9f	; 159
+      000093 E0                     598 	.db #0xe0	; 224
+      000094 FF                     599 	.db #0xff	; 255
+      000095 B0                     600 	.db #0xb0	; 176
+      000096 9F                     601 	.db #0x9f	; 159
+      000097 F8                     602 	.db #0xf8	; 248
+      000098 4E                     603 	.db #0x4e	; 78	'N'
+      000099 7D                     604 	.db #0x7d	; 125
+      00009A 25                     605 	.db #0x25	; 37
+      00009B 3F                     606 	.db #0x3f	; 63
+      00009C 15                     607 	.db #0x15	; 21
+      00009D 1B                     608 	.db #0x1b	; 27
+      00009E 0E                     609 	.db #0x0e	; 14
+      00009F 0E                     610 	.db #0x0e	; 14
+      0000A0 20                     611 	.db #0x20	; 32
+      0000A1 20                     612 	.db #0x20	; 32
+      0000A2 D0                     613 	.db #0xd0	; 208
+      0000A3 F0                     614 	.db #0xf0	; 240
+      0000A4 28                     615 	.db #0x28	; 40
+      0000A5 D8                     616 	.db #0xd8	; 216
+      0000A6 B4                     617 	.db #0xb4	; 180
+      0000A7 4C                     618 	.db #0x4c	; 76	'L'
+      0000A8 FA                     619 	.db #0xfa	; 250
+      0000A9 06                     620 	.db #0x06	; 6
+      0000AA 7D                     621 	.db #0x7d	; 125
+      0000AB 83                     622 	.db #0x83	; 131
+      0000AC 72                     623 	.db #0x72	; 114	'r'
+      0000AD 8E                     624 	.db #0x8e	; 142
+      0000AE 9A                     625 	.db #0x9a	; 154
+      0000AF E6                     626 	.db #0xe6	; 230
+      0000B0 D4                     627 	.db #0xd4	; 212
+      0000B1 EC                     628 	.db #0xec	; 236
+      0000B2 E8                     629 	.db #0xe8	; 232
+      0000B3 F8                     630 	.db #0xf8	; 248
+      0000B4 B0                     631 	.db #0xb0	; 176
+      0000B5 70                     632 	.db #0x70	; 112	'p'
+      0000B6 40                     633 	.db #0x40	; 64
+      0000B7 C0                     634 	.db #0xc0	; 192
+      0000B8 80                     635 	.db #0x80	; 128
+      0000B9 80                     636 	.db #0x80	; 128
+      0000BA 00                     637 	.db #0x00	; 0
+      0000BB 00                     638 	.db #0x00	; 0
+      0000BC 00                     639 	.db #0x00	; 0
+      0000BD 00                     640 	.db #0x00	; 0
+      0000BE 00                     641 	.db #0x00	; 0
+      0000BF 00                     642 	.db #0x00	; 0
+      0000C0 00                     643 	.db #0x00	; 0
+      0000C1 00                     644 	.db #0x00	; 0
+      0000C2 00                     645 	.db #0x00	; 0
+      0000C3 00                     646 	.db #0x00	; 0
+      0000C4 00                     647 	.db #0x00	; 0
+      0000C5 00                     648 	.db #0x00	; 0
+      0000C6 01                     649 	.db #0x01	; 1
+      0000C7 01                     650 	.db #0x01	; 1
+      0000C8 07                     651 	.db #0x07	; 7
+      0000C9 07                     652 	.db #0x07	; 7
+      0000CA 3B                     653 	.db #0x3b	; 59
+      0000CB 3F                     654 	.db #0x3f	; 63
+      0000CC 47                     655 	.db #0x47	; 71	'G'
+      0000CD 7B                     656 	.db #0x7b	; 123
+      0000CE FF                     657 	.db #0xff	; 255
+      0000CF A1                     658 	.db #0xa1	; 161
+      0000D0 BF                     659 	.db #0xbf	; 191
+      0000D1 F1                     660 	.db #0xf1	; 241
+      0000D2 5F                     661 	.db #0x5f	; 95
+      0000D3 70                     662 	.db #0x70	; 112	'p'
+      0000D4 5F                     663 	.db #0x5f	; 95
+      0000D5 78                     664 	.db #0x78	; 120	'x'
+      0000D6 2E                     665 	.db #0x2e	; 46
+      0000D7 39                     666 	.db #0x39	; 57	'9'
+      0000D8 29                     667 	.db #0x29	; 41
+      0000D9 3F                     668 	.db #0x3f	; 63
+      0000DA 1A                     669 	.db #0x1a	; 26
+      0000DB 16                     670 	.db #0x16	; 22
+      0000DC 1C                     671 	.db #0x1c	; 28
+      0000DD 1C                     672 	.db #0x1c	; 28
+      0000DE 00                     673 	.db #0x00	; 0
+      0000DF 00                     674 	.db #0x00	; 0
+      0000E0 00                     675 	.db #0x00	; 0
+      0000E1 00                     676 	.db #0x00	; 0
+      0000E2 18                     677 	.db #0x18	; 24
+      0000E3 18                     678 	.db #0x18	; 24
+      0000E4 E4                     679 	.db #0xe4	; 228
+      0000E5 FC                     680 	.db #0xfc	; 252
+      0000E6 64                     681 	.db #0x64	; 100	'd'
+      0000E7 9C                     682 	.db #0x9c	; 156
+      0000E8 DA                     683 	.db #0xda	; 218
+      0000E9 26                     684 	.db #0x26	; 38
+      0000EA BA                     685 	.db #0xba	; 186
+      0000EB C6                     686 	.db #0xc6	; 198
+      0000EC BD                     687 	.db #0xbd	; 189
+      0000ED C3                     688 	.db #0xc3	; 195
+      0000EE DD                     689 	.db #0xdd	; 221
+      0000EF E3                     690 	.db #0xe3	; 227
+      0000F0 C9                     691 	.db #0xc9	; 201
+      0000F1 F7                     692 	.db #0xf7	; 247
+      0000F2 FE                     693 	.db #0xfe	; 254
+      0000F3 E2                     694 	.db #0xe2	; 226
+      0000F4 CC                     695 	.db #0xcc	; 204
+      0000F5 FC                     696 	.db #0xfc	; 252
+      0000F6 70                     697 	.db #0x70	; 112	'p'
+      0000F7 F0                     698 	.db #0xf0	; 240
+      0000F8 80                     699 	.db #0x80	; 128
+      0000F9 80                     700 	.db #0x80	; 128
+      0000FA 00                     701 	.db #0x00	; 0
+      0000FB 00                     702 	.db #0x00	; 0
+      0000FC 00                     703 	.db #0x00	; 0
+      0000FD 00                     704 	.db #0x00	; 0
+      0000FE 00                     705 	.db #0x00	; 0
+      0000FF 00                     706 	.db #0x00	; 0
+      000100 00                     707 	.db #0x00	; 0
+      000101 00                     708 	.db #0x00	; 0
+      000102 00                     709 	.db #0x00	; 0
+      000103 00                     710 	.db #0x00	; 0
+      000104 00                     711 	.db #0x00	; 0
+      000105 00                     712 	.db #0x00	; 0
+      000106 38                     713 	.db #0x38	; 56	'8'
+      000107 38                     714 	.db #0x38	; 56	'8'
+      000108 E7                     715 	.db #0xe7	; 231
+      000109 DF                     716 	.db #0xdf	; 223
+      00010A BD                     717 	.db #0xbd	; 189
+      00010B E3                     718 	.db #0xe3	; 227
+      00010C BF                     719 	.db #0xbf	; 191
+      00010D E3                     720 	.db #0xe3	; 227
+      00010E BF                     721 	.db #0xbf	; 191
+      00010F E3                     722 	.db #0xe3	; 227
+      000110 BF                     723 	.db #0xbf	; 191
+      000111 E3                     724 	.db #0xe3	; 227
+      000112 BF                     725 	.db #0xbf	; 191
+      000113 E3                     726 	.db #0xe3	; 227
+      000114 BD                     727 	.db #0xbd	; 189
+      000115 E3                     728 	.db #0xe3	; 227
+      000116 E7                     729 	.db #0xe7	; 231
+      000117 DF                     730 	.db #0xdf	; 223
+      000118 38                     731 	.db #0x38	; 56	'8'
+      000119 38                     732 	.db #0x38	; 56	'8'
+      00011A 00                     733 	.db #0x00	; 0
+      00011B 00                     734 	.db #0x00	; 0
+      00011C 00                     735 	.db #0x00	; 0
+      00011D 00                     736 	.db #0x00	; 0
+      00011E 00                     737 	.db #0x00	; 0
+      00011F 00                     738 	.db #0x00	; 0
+      000120 00                     739 	.db #0x00	; 0
+      000121 00                     740 	.db #0x00	; 0
+      000122 00                     741 	.db #0x00	; 0
+      000123 00                     742 	.db #0x00	; 0
+      000124 00                     743 	.db #0x00	; 0
+      000125 00                     744 	.db #0x00	; 0
+      000126 FC                     745 	.db #0xfc	; 252
+      000127 FC                     746 	.db #0xfc	; 252
+      000128 3B                     747 	.db #0x3b	; 59
+      000129 C7                     748 	.db #0xc7	; 199
+      00012A F1                     749 	.db #0xf1	; 241
+      00012B 8F                     750 	.db #0x8f	; 143
+      00012C 9D                     751 	.db #0x9d	; 157
+      00012D E3                     752 	.db #0xe3	; 227
+      00012E BD                     753 	.db #0xbd	; 189
+      00012F C3                     754 	.db #0xc3	; 195
+      000130 BD                     755 	.db #0xbd	; 189
+      000131 C3                     756 	.db #0xc3	; 195
+      000132 9D                     757 	.db #0x9d	; 157
+      000133 E3                     758 	.db #0xe3	; 227
+      000134 F1                     759 	.db #0xf1	; 241
+      000135 8F                     760 	.db #0x8f	; 143
+      000136 3B                     761 	.db #0x3b	; 59
+      000137 C7                     762 	.db #0xc7	; 199
+      000138 FC                     763 	.db #0xfc	; 252
+      000139 FC                     764 	.db #0xfc	; 252
+      00013A 00                     765 	.db #0x00	; 0
+      00013B 00                     766 	.db #0x00	; 0
+      00013C 00                     767 	.db #0x00	; 0
+      00013D 00                     768 	.db #0x00	; 0
+      00013E 00                     769 	.db #0x00	; 0
+      00013F 00                     770 	.db #0x00	; 0
+      000140 00                     771 	.db #0x00	; 0
+      000141 00                     772 	.db #0x00	; 0
+      000142 1C                     773 	.db #0x1c	; 28
+      000143 1C                     774 	.db #0x1c	; 28
+      000144 1A                     775 	.db #0x1a	; 26
+      000145 16                     776 	.db #0x16	; 22
+      000146 29                     777 	.db #0x29	; 41
+      000147 3F                     778 	.db #0x3f	; 63
+      000148 2E                     779 	.db #0x2e	; 46
+      000149 39                     780 	.db #0x39	; 57	'9'
+      00014A 5F                     781 	.db #0x5f	; 95
+      00014B 78                     782 	.db #0x78	; 120	'x'
+      00014C 5F                     783 	.db #0x5f	; 95
+      00014D 70                     784 	.db #0x70	; 112	'p'
+      00014E BF                     785 	.db #0xbf	; 191
+      00014F F1                     786 	.db #0xf1	; 241
+      000150 FF                     787 	.db #0xff	; 255
+      000151 A1                     788 	.db #0xa1	; 161
+      000152 47                     789 	.db #0x47	; 71	'G'
+      000153 7B                     790 	.db #0x7b	; 123
+      000154 3B                     791 	.db #0x3b	; 59
+      000155 3F                     792 	.db #0x3f	; 63
+      000156 07                     793 	.db #0x07	; 7
+      000157 07                     794 	.db #0x07	; 7
+      000158 01                     795 	.db #0x01	; 1
+      000159 01                     796 	.db #0x01	; 1
+      00015A 00                     797 	.db #0x00	; 0
+      00015B 00                     798 	.db #0x00	; 0
+      00015C 00                     799 	.db #0x00	; 0
+      00015D 00                     800 	.db #0x00	; 0
+      00015E 00                     801 	.db #0x00	; 0
+      00015F 00                     802 	.db #0x00	; 0
+      000160 00                     803 	.db #0x00	; 0
+      000161 00                     804 	.db #0x00	; 0
+      000162 00                     805 	.db #0x00	; 0
+      000163 00                     806 	.db #0x00	; 0
+      000164 00                     807 	.db #0x00	; 0
+      000165 00                     808 	.db #0x00	; 0
+      000166 80                     809 	.db #0x80	; 128
+      000167 80                     810 	.db #0x80	; 128
+      000168 70                     811 	.db #0x70	; 112	'p'
+      000169 F0                     812 	.db #0xf0	; 240
+      00016A CC                     813 	.db #0xcc	; 204
+      00016B FC                     814 	.db #0xfc	; 252
+      00016C FE                     815 	.db #0xfe	; 254
+      00016D E2                     816 	.db #0xe2	; 226
+      00016E C9                     817 	.db #0xc9	; 201
+      00016F F7                     818 	.db #0xf7	; 247
+      000170 DD                     819 	.db #0xdd	; 221
+      000171 E3                     820 	.db #0xe3	; 227
+      000172 BD                     821 	.db #0xbd	; 189
+      000173 C3                     822 	.db #0xc3	; 195
+      000174 BA                     823 	.db #0xba	; 186
+      000175 C6                     824 	.db #0xc6	; 198
+      000176 DA                     825 	.db #0xda	; 218
+      000177 26                     826 	.db #0x26	; 38
+      000178 64                     827 	.db #0x64	; 100	'd'
+      000179 9C                     828 	.db #0x9c	; 156
+      00017A E4                     829 	.db #0xe4	; 228
+      00017B FC                     830 	.db #0xfc	; 252
+      00017C 18                     831 	.db #0x18	; 24
+      00017D 18                     832 	.db #0x18	; 24
+      00017E 00                     833 	.db #0x00	; 0
+      00017F 00                     834 	.db #0x00	; 0
+      000180 0E                     835 	.db #0x0e	; 14
+      000181 0E                     836 	.db #0x0e	; 14
+      000182 15                     837 	.db #0x15	; 21
+      000183 1B                     838 	.db #0x1b	; 27
+      000184 25                     839 	.db #0x25	; 37
+      000185 3F                     840 	.db #0x3f	; 63
+      000186 4E                     841 	.db #0x4e	; 78	'N'
+      000187 7D                     842 	.db #0x7d	; 125
+      000188 9F                     843 	.db #0x9f	; 159
+      000189 F8                     844 	.db #0xf8	; 248
+      00018A FF                     845 	.db #0xff	; 255
+      00018B B0                     846 	.db #0xb0	; 176
+      00018C 9F                     847 	.db #0x9f	; 159
+      00018D E0                     848 	.db #0xe0	; 224
+      00018E 6F                     849 	.db #0x6f	; 111	'o'
+      00018F 71                     850 	.db #0x71	; 113	'q'
+      000190 17                     851 	.db #0x17	; 23
+      000191 1B                     852 	.db #0x1b	; 27
+      000192 0B                     853 	.db #0x0b	; 11
+      000193 0F                     854 	.db #0x0f	; 15
+      000194 06                     855 	.db #0x06	; 6
+      000195 07                     856 	.db #0x07	; 7
+      000196 05                     857 	.db #0x05	; 5
+      000197 06                     858 	.db #0x06	; 6
+      000198 02                     859 	.db #0x02	; 2
+      000199 03                     860 	.db #0x03	; 3
+      00019A 01                     861 	.db #0x01	; 1
+      00019B 01                     862 	.db #0x01	; 1
+      00019C 00                     863 	.db #0x00	; 0
+      00019D 00                     864 	.db #0x00	; 0
+      00019E 00                     865 	.db #0x00	; 0
+      00019F 00                     866 	.db #0x00	; 0
+      0001A0 00                     867 	.db #0x00	; 0
+      0001A1 00                     868 	.db #0x00	; 0
+      0001A2 00                     869 	.db #0x00	; 0
+      0001A3 00                     870 	.db #0x00	; 0
+      0001A4 00                     871 	.db #0x00	; 0
+      0001A5 00                     872 	.db #0x00	; 0
+      0001A6 80                     873 	.db #0x80	; 128
+      0001A7 80                     874 	.db #0x80	; 128
+      0001A8 40                     875 	.db #0x40	; 64
+      0001A9 C0                     876 	.db #0xc0	; 192
+      0001AA B0                     877 	.db #0xb0	; 176
+      0001AB 70                     878 	.db #0x70	; 112	'p'
+      0001AC E8                     879 	.db #0xe8	; 232
+      0001AD F8                     880 	.db #0xf8	; 248
+      0001AE D4                     881 	.db #0xd4	; 212
+      0001AF EC                     882 	.db #0xec	; 236
+      0001B0 9A                     883 	.db #0x9a	; 154
+      0001B1 E6                     884 	.db #0xe6	; 230
+      0001B2 72                     885 	.db #0x72	; 114	'r'
+      0001B3 8E                     886 	.db #0x8e	; 142
+      0001B4 7D                     887 	.db #0x7d	; 125
+      0001B5 83                     888 	.db #0x83	; 131
+      0001B6 FA                     889 	.db #0xfa	; 250
+      0001B7 06                     890 	.db #0x06	; 6
+      0001B8 B4                     891 	.db #0xb4	; 180
+      0001B9 4C                     892 	.db #0x4c	; 76	'L'
+      0001BA 28                     893 	.db #0x28	; 40
+      0001BB D8                     894 	.db #0xd8	; 216
+      0001BC D0                     895 	.db #0xd0	; 208
+      0001BD F0                     896 	.db #0xf0	; 240
+      0001BE 20                     897 	.db #0x20	; 32
+      0001BF 20                     898 	.db #0x20	; 32
+      0001C0 01                     899 	.db #0x01	; 1
+      0001C1 01                     900 	.db #0x01	; 1
+      0001C2 06                     901 	.db #0x06	; 6
+      0001C3 07                     902 	.db #0x07	; 7
+      0001C4 19                     903 	.db #0x19	; 25
+      0001C5 1F                     904 	.db #0x1f	; 31
+      0001C6 67                     905 	.db #0x67	; 103	'g'
+      0001C7 7F                     906 	.db #0x7f	; 127
+      0001C8 7F                     907 	.db #0x7f	; 127
+      0001C9 5C                     908 	.db #0x5c	; 92
+      0001CA 4F                     909 	.db #0x4f	; 79	'O'
+      0001CB 70                     910 	.db #0x70	; 112	'p'
+      0001CC 2F                     911 	.db #0x2f	; 47
+      0001CD 30                     912 	.db #0x30	; 48	'0'
+      0001CE 17                     913 	.db #0x17	; 23
+      0001CF 19                     914 	.db #0x19	; 25
+      0001D0 17                     915 	.db #0x17	; 23
+      0001D1 1F                     916 	.db #0x1f	; 31
+      0001D2 0F                     917 	.db #0x0f	; 15
+      0001D3 0F                     918 	.db #0x0f	; 15
+      0001D4 0A                     919 	.db #0x0a	; 10
+      0001D5 0F                     920 	.db #0x0f	; 15
+      0001D6 0A                     921 	.db #0x0a	; 10
+      0001D7 0D                     922 	.db #0x0d	; 13
+      0001D8 07                     923 	.db #0x07	; 7
+      0001D9 04                     924 	.db #0x04	; 4
+      0001DA 06                     925 	.db #0x06	; 6
+      0001DB 05                     926 	.db #0x05	; 5
+      0001DC 02                     927 	.db #0x02	; 2
+      0001DD 03                     928 	.db #0x03	; 3
+      0001DE 01                     929 	.db #0x01	; 1
+      0001DF 01                     930 	.db #0x01	; 1
+      0001E0 80                     931 	.db #0x80	; 128
+      0001E1 80                     932 	.db #0x80	; 128
+      0001E2 C0                     933 	.db #0xc0	; 192
+      0001E3 40                     934 	.db #0x40	; 64
+      0001E4 A0                     935 	.db #0xa0	; 160
+      0001E5 E0                     936 	.db #0xe0	; 224
+      0001E6 A0                     937 	.db #0xa0	; 160
+      0001E7 60                     938 	.db #0x60	; 96
+      0001E8 A0                     939 	.db #0xa0	; 160
+      0001E9 60                     940 	.db #0x60	; 96
+      0001EA D0                     941 	.db #0xd0	; 208
+      0001EB 30                     942 	.db #0x30	; 48	'0'
+      0001EC F0                     943 	.db #0xf0	; 240
+      0001ED 70                     944 	.db #0x70	; 112	'p'
+      0001EE F8                     945 	.db #0xf8	; 248
+      0001EF F8                     946 	.db #0xf8	; 248
+      0001F0 F4                     947 	.db #0xf4	; 244
+      0001F1 EC                     948 	.db #0xec	; 236
+      0001F2 9C                     949 	.db #0x9c	; 156
+      0001F3 E4                     950 	.db #0xe4	; 228
+      0001F4 6C                     951 	.db #0x6c	; 108	'l'
+      0001F5 94                     952 	.db #0x94	; 148
+      0001F6 F2                     953 	.db #0xf2	; 242
+      0001F7 0E                     954 	.db #0x0e	; 14
+      0001F8 F2                     955 	.db #0xf2	; 242
+      0001F9 0E                     956 	.db #0x0e	; 14
+      0001FA CC                     957 	.db #0xcc	; 204
+      0001FB 3C                     958 	.db #0x3c	; 60
+      0001FC 30                     959 	.db #0x30	; 48	'0'
+      0001FD F0                     960 	.db #0xf0	; 240
+      0001FE C0                     961 	.db #0xc0	; 192
+      0001FF C0                     962 	.db #0xc0	; 192
+      000200 0F                     963 	.db #0x0f	; 15
+      000201 0F                     964 	.db #0x0f	; 15
+      000202 08                     965 	.db #0x08	; 8
+      000203 0F                     966 	.db #0x0f	; 15
+      000204 1F                     967 	.db #0x1f	; 31
+      000205 17                     968 	.db #0x17	; 23
+      000206 17                     969 	.db #0x17	; 23
+      000207 18                     970 	.db #0x18	; 24
+      000208 17                     971 	.db #0x17	; 23
+      000209 18                     972 	.db #0x18	; 24
+      00020A 0F                     973 	.db #0x0f	; 15
+      00020B 08                     974 	.db #0x08	; 8
+      00020C 0B                     975 	.db #0x0b	; 11
+      00020D 0F                     976 	.db #0x0f	; 15
+      00020E 0F                     977 	.db #0x0f	; 15
+      00020F 0F                     978 	.db #0x0f	; 15
+      000210 17                     979 	.db #0x17	; 23
+      000211 1F                     980 	.db #0x1f	; 31
+      000212 14                     981 	.db #0x14	; 20
+      000213 1B                     982 	.db #0x1b	; 27
+      000214 1D                     983 	.db #0x1d	; 29
+      000215 12                     984 	.db #0x12	; 18
+      000216 1F                     985 	.db #0x1f	; 31
+      000217 10                     986 	.db #0x10	; 16
+      000218 1B                     987 	.db #0x1b	; 27
+      000219 14                     988 	.db #0x14	; 20
+      00021A 13                     989 	.db #0x13	; 19
+      00021B 1C                     990 	.db #0x1c	; 28
+      00021C 08                     991 	.db #0x08	; 8
+      00021D 0F                     992 	.db #0x0f	; 15
+      00021E 0F                     993 	.db #0x0f	; 15
+      00021F 0F                     994 	.db #0x0f	; 15
+      000220 F0                     995 	.db #0xf0	; 240
+      000221 F0                     996 	.db #0xf0	; 240
+      000222 10                     997 	.db #0x10	; 16
+      000223 F0                     998 	.db #0xf0	; 240
+      000224 F8                     999 	.db #0xf8	; 248
+      000225 E8                    1000 	.db #0xe8	; 232
+      000226 E8                    1001 	.db #0xe8	; 232
+      000227 18                    1002 	.db #0x18	; 24
+      000228 E8                    1003 	.db #0xe8	; 232
+      000229 18                    1004 	.db #0x18	; 24
+      00022A F0                    1005 	.db #0xf0	; 240
+      00022B 10                    1006 	.db #0x10	; 16
+      00022C D0                    1007 	.db #0xd0	; 208
+      00022D F0                    1008 	.db #0xf0	; 240
+      00022E F0                    1009 	.db #0xf0	; 240
+      00022F F0                    1010 	.db #0xf0	; 240
+      000230 E8                    1011 	.db #0xe8	; 232
+      000231 F8                    1012 	.db #0xf8	; 248
+      000232 28                    1013 	.db #0x28	; 40
+      000233 D8                    1014 	.db #0xd8	; 216
+      000234 B8                    1015 	.db #0xb8	; 184
+      000235 48                    1016 	.db #0x48	; 72	'H'
+      000236 F8                    1017 	.db #0xf8	; 248
+      000237 08                    1018 	.db #0x08	; 8
+      000238 D8                    1019 	.db #0xd8	; 216
+      000239 28                    1020 	.db #0x28	; 40
+      00023A C8                    1021 	.db #0xc8	; 200
+      00023B 38                    1022 	.db #0x38	; 56	'8'
+      00023C 10                    1023 	.db #0x10	; 16
+      00023D F0                    1024 	.db #0xf0	; 240
+      00023E F0                    1025 	.db #0xf0	; 240
+      00023F F0                    1026 	.db #0xf0	; 240
+      000240 01                    1027 	.db #0x01	; 1
+      000241 01                    1028 	.db #0x01	; 1
+      000242 03                    1029 	.db #0x03	; 3
+      000243 02                    1030 	.db #0x02	; 2
+      000244 05                    1031 	.db #0x05	; 5
+      000245 07                    1032 	.db #0x07	; 7
+      000246 05                    1033 	.db #0x05	; 5
+      000247 06                    1034 	.db #0x06	; 6
+      000248 05                    1035 	.db #0x05	; 5
+      000249 06                    1036 	.db #0x06	; 6
+      00024A 0B                    1037 	.db #0x0b	; 11
+      00024B 0C                    1038 	.db #0x0c	; 12
+      00024C 0F                    1039 	.db #0x0f	; 15
+      00024D 0E                    1040 	.db #0x0e	; 14
+      00024E 1F                    1041 	.db #0x1f	; 31
+      00024F 1F                    1042 	.db #0x1f	; 31
+      000250 2F                    1043 	.db #0x2f	; 47
+      000251 37                    1044 	.db #0x37	; 55	'7'
+      000252 39                    1045 	.db #0x39	; 57	'9'
+      000253 27                    1046 	.db #0x27	; 39
+      000254 36                    1047 	.db #0x36	; 54	'6'
+      000255 29                    1048 	.db #0x29	; 41
+      000256 4F                    1049 	.db #0x4f	; 79	'O'
+      000257 70                    1050 	.db #0x70	; 112	'p'
+      000258 4F                    1051 	.db #0x4f	; 79	'O'
+      000259 70                    1052 	.db #0x70	; 112	'p'
+      00025A 33                    1053 	.db #0x33	; 51	'3'
+      00025B 3C                    1054 	.db #0x3c	; 60
+      00025C 0C                    1055 	.db #0x0c	; 12
+      00025D 0F                    1056 	.db #0x0f	; 15
+      00025E 03                    1057 	.db #0x03	; 3
+      00025F 03                    1058 	.db #0x03	; 3
+      000260 80                    1059 	.db #0x80	; 128
+      000261 80                    1060 	.db #0x80	; 128
+      000262 60                    1061 	.db #0x60	; 96
+      000263 E0                    1062 	.db #0xe0	; 224
+      000264 98                    1063 	.db #0x98	; 152
+      000265 F8                    1064 	.db #0xf8	; 248
+      000266 E6                    1065 	.db #0xe6	; 230
+      000267 FE                    1066 	.db #0xfe	; 254
+      000268 FE                    1067 	.db #0xfe	; 254
+      000269 3A                    1068 	.db #0x3a	; 58
+      00026A F2                    1069 	.db #0xf2	; 242
+      00026B 0E                    1070 	.db #0x0e	; 14
+      00026C F4                    1071 	.db #0xf4	; 244
+      00026D 0C                    1072 	.db #0x0c	; 12
+      00026E E8                    1073 	.db #0xe8	; 232
+      00026F 98                    1074 	.db #0x98	; 152
+      000270 E8                    1075 	.db #0xe8	; 232
+      000271 F8                    1076 	.db #0xf8	; 248
+      000272 F0                    1077 	.db #0xf0	; 240
+      000273 F0                    1078 	.db #0xf0	; 240
+      000274 50                    1079 	.db #0x50	; 80	'P'
+      000275 F0                    1080 	.db #0xf0	; 240
+      000276 50                    1081 	.db #0x50	; 80	'P'
+      000277 B0                    1082 	.db #0xb0	; 176
+      000278 E0                    1083 	.db #0xe0	; 224
+      000279 20                    1084 	.db #0x20	; 32
+      00027A 60                    1085 	.db #0x60	; 96
+      00027B A0                    1086 	.db #0xa0	; 160
+      00027C 40                    1087 	.db #0x40	; 64
+      00027D C0                    1088 	.db #0xc0	; 192
+      00027E 80                    1089 	.db #0x80	; 128
+      00027F 80                    1090 	.db #0x80	; 128
+      000280 00                    1091 	.db #0x00	; 0
+      000281 00                    1092 	.db #0x00	; 0
+      000282 00                    1093 	.db #0x00	; 0
+      000283 00                    1094 	.db #0x00	; 0
+      000284 00                    1095 	.db #0x00	; 0
+      000285 00                    1096 	.db #0x00	; 0
+      000286 01                    1097 	.db #0x01	; 1
+      000287 01                    1098 	.db #0x01	; 1
+      000288 02                    1099 	.db #0x02	; 2
+      000289 03                    1100 	.db #0x03	; 3
+      00028A 0D                    1101 	.db #0x0d	; 13
+      00028B 0E                    1102 	.db #0x0e	; 14
+      00028C 17                    1103 	.db #0x17	; 23
+      00028D 1F                    1104 	.db #0x1f	; 31
+      00028E 2B                    1105 	.db #0x2b	; 43
+      00028F 37                    1106 	.db #0x37	; 55	'7'
+      000290 59                    1107 	.db #0x59	; 89	'Y'
+      000291 67                    1108 	.db #0x67	; 103	'g'
+      000292 4E                    1109 	.db #0x4e	; 78	'N'
+      000293 71                    1110 	.db #0x71	; 113	'q'
+      000294 BE                    1111 	.db #0xbe	; 190
+      000295 C1                    1112 	.db #0xc1	; 193
+      000296 5F                    1113 	.db #0x5f	; 95
+      000297 60                    1114 	.db #0x60	; 96
+      000298 2D                    1115 	.db #0x2d	; 45
+      000299 32                    1116 	.db #0x32	; 50	'2'
+      00029A 14                    1117 	.db #0x14	; 20
+      00029B 1B                    1118 	.db #0x1b	; 27
+      00029C 0B                    1119 	.db #0x0b	; 11
+      00029D 0F                    1120 	.db #0x0f	; 15
+      00029E 04                    1121 	.db #0x04	; 4
+      00029F 04                    1122 	.db #0x04	; 4
+      0002A0 70                    1123 	.db #0x70	; 112	'p'
+      0002A1 70                    1124 	.db #0x70	; 112	'p'
+      0002A2 A8                    1125 	.db #0xa8	; 168
+      0002A3 D8                    1126 	.db #0xd8	; 216
+      0002A4 A4                    1127 	.db #0xa4	; 164
+      0002A5 FC                    1128 	.db #0xfc	; 252
+      0002A6 72                    1129 	.db #0x72	; 114	'r'
+      0002A7 BE                    1130 	.db #0xbe	; 190
+      0002A8 F9                    1131 	.db #0xf9	; 249
+      0002A9 1F                    1132 	.db #0x1f	; 31
+      0002AA FF                    1133 	.db #0xff	; 255
+      0002AB 0D                    1134 	.db #0x0d	; 13
+      0002AC F9                    1135 	.db #0xf9	; 249
+      0002AD 07                    1136 	.db #0x07	; 7
+      0002AE F6                    1137 	.db #0xf6	; 246
+      0002AF 8E                    1138 	.db #0x8e	; 142
+      0002B0 E8                    1139 	.db #0xe8	; 232
+      0002B1 D8                    1140 	.db #0xd8	; 216
+      0002B2 D0                    1141 	.db #0xd0	; 208
+      0002B3 F0                    1142 	.db #0xf0	; 240
+      0002B4 60                    1143 	.db #0x60	; 96
+      0002B5 E0                    1144 	.db #0xe0	; 224
+      0002B6 A0                    1145 	.db #0xa0	; 160
+      0002B7 60                    1146 	.db #0x60	; 96
+      0002B8 40                    1147 	.db #0x40	; 64
+      0002B9 C0                    1148 	.db #0xc0	; 192
+      0002BA 80                    1149 	.db #0x80	; 128
+      0002BB 80                    1150 	.db #0x80	; 128
+      0002BC 00                    1151 	.db #0x00	; 0
+      0002BD 00                    1152 	.db #0x00	; 0
+      0002BE 00                    1153 	.db #0x00	; 0
+      0002BF 00                    1154 	.db #0x00	; 0
+      0002C0 00                    1155 	.db #0x00	; 0
+      0002C1 00                    1156 	.db #0x00	; 0
+      0002C2 00                    1157 	.db #0x00	; 0
+      0002C3 00                    1158 	.db #0x00	; 0
+      0002C4 00                    1159 	.db #0x00	; 0
+      0002C5 00                    1160 	.db #0x00	; 0
+      0002C6 01                    1161 	.db #0x01	; 1
+      0002C7 01                    1162 	.db #0x01	; 1
+      0002C8 0E                    1163 	.db #0x0e	; 14
+      0002C9 0F                    1164 	.db #0x0f	; 15
+      0002CA 33                    1165 	.db #0x33	; 51	'3'
+      0002CB 3F                    1166 	.db #0x3f	; 63
+      0002CC 7F                    1167 	.db #0x7f	; 127
+      0002CD 47                    1168 	.db #0x47	; 71	'G'
+      0002CE 93                    1169 	.db #0x93	; 147
+      0002CF EF                    1170 	.db #0xef	; 239
+      0002D0 BB                    1171 	.db #0xbb	; 187
+      0002D1 C7                    1172 	.db #0xc7	; 199
+      0002D2 BD                    1173 	.db #0xbd	; 189
+      0002D3 C3                    1174 	.db #0xc3	; 195
+      0002D4 5D                    1175 	.db #0x5d	; 93
+      0002D5 63                    1176 	.db #0x63	; 99	'c'
+      0002D6 5B                    1177 	.db #0x5b	; 91
+      0002D7 64                    1178 	.db #0x64	; 100	'd'
+      0002D8 26                    1179 	.db #0x26	; 38
+      0002D9 39                    1180 	.db #0x39	; 57	'9'
+      0002DA 27                    1181 	.db #0x27	; 39
+      0002DB 3F                    1182 	.db #0x3f	; 63
+      0002DC 18                    1183 	.db #0x18	; 24
+      0002DD 18                    1184 	.db #0x18	; 24
+      0002DE 00                    1185 	.db #0x00	; 0
+      0002DF 00                    1186 	.db #0x00	; 0
+      0002E0 00                    1187 	.db #0x00	; 0
+      0002E1 00                    1188 	.db #0x00	; 0
+      0002E2 38                    1189 	.db #0x38	; 56	'8'
+      0002E3 38                    1190 	.db #0x38	; 56	'8'
+      0002E4 58                    1191 	.db #0x58	; 88	'X'
+      0002E5 68                    1192 	.db #0x68	; 104	'h'
+      0002E6 94                    1193 	.db #0x94	; 148
+      0002E7 FC                    1194 	.db #0xfc	; 252
+      0002E8 74                    1195 	.db #0x74	; 116	't'
+      0002E9 9C                    1196 	.db #0x9c	; 156
+      0002EA FA                    1197 	.db #0xfa	; 250
+      0002EB 1E                    1198 	.db #0x1e	; 30
+      0002EC FA                    1199 	.db #0xfa	; 250
+      0002ED 0E                    1200 	.db #0x0e	; 14
+      0002EE FD                    1201 	.db #0xfd	; 253
+      0002EF 8F                    1202 	.db #0x8f	; 143
+      0002F0 FF                    1203 	.db #0xff	; 255
+      0002F1 85                    1204 	.db #0x85	; 133
+      0002F2 E2                    1205 	.db #0xe2	; 226
+      0002F3 DE                    1206 	.db #0xde	; 222
+      0002F4 DC                    1207 	.db #0xdc	; 220
+      0002F5 FC                    1208 	.db #0xfc	; 252
+      0002F6 E0                    1209 	.db #0xe0	; 224
+      0002F7 E0                    1210 	.db #0xe0	; 224
+      0002F8 80                    1211 	.db #0x80	; 128
+      0002F9 80                    1212 	.db #0x80	; 128
+      0002FA 00                    1213 	.db #0x00	; 0
+      0002FB 00                    1214 	.db #0x00	; 0
+      0002FC 00                    1215 	.db #0x00	; 0
+      0002FD 00                    1216 	.db #0x00	; 0
+      0002FE 00                    1217 	.db #0x00	; 0
+      0002FF 00                    1218 	.db #0x00	; 0
+      000300 00                    1219 	.db #0x00	; 0
+      000301 00                    1220 	.db #0x00	; 0
+      000302 00                    1221 	.db #0x00	; 0
+      000303 00                    1222 	.db #0x00	; 0
+      000304 00                    1223 	.db #0x00	; 0
+      000305 00                    1224 	.db #0x00	; 0
+      000306 3F                    1225 	.db #0x3f	; 63
+      000307 3F                    1226 	.db #0x3f	; 63
+      000308 DC                    1227 	.db #0xdc	; 220
+      000309 E3                    1228 	.db #0xe3	; 227
+      00030A 8F                    1229 	.db #0x8f	; 143
+      00030B F1                    1230 	.db #0xf1	; 241
+      00030C B9                    1231 	.db #0xb9	; 185
+      00030D C7                    1232 	.db #0xc7	; 199
+      00030E BD                    1233 	.db #0xbd	; 189
+      00030F C3                    1234 	.db #0xc3	; 195
+      000310 BD                    1235 	.db #0xbd	; 189
+      000311 C3                    1236 	.db #0xc3	; 195
+      000312 B9                    1237 	.db #0xb9	; 185
+      000313 C7                    1238 	.db #0xc7	; 199
+      000314 8F                    1239 	.db #0x8f	; 143
+      000315 F1                    1240 	.db #0xf1	; 241
+      000316 DC                    1241 	.db #0xdc	; 220
+      000317 E3                    1242 	.db #0xe3	; 227
+      000318 3F                    1243 	.db #0x3f	; 63
+      000319 3F                    1244 	.db #0x3f	; 63
+      00031A 00                    1245 	.db #0x00	; 0
+      00031B 00                    1246 	.db #0x00	; 0
+      00031C 00                    1247 	.db #0x00	; 0
+      00031D 00                    1248 	.db #0x00	; 0
+      00031E 00                    1249 	.db #0x00	; 0
+      00031F 00                    1250 	.db #0x00	; 0
+      000320 00                    1251 	.db #0x00	; 0
+      000321 00                    1252 	.db #0x00	; 0
+      000322 00                    1253 	.db #0x00	; 0
+      000323 00                    1254 	.db #0x00	; 0
+      000324 00                    1255 	.db #0x00	; 0
+      000325 00                    1256 	.db #0x00	; 0
+      000326 1C                    1257 	.db #0x1c	; 28
+      000327 1C                    1258 	.db #0x1c	; 28
+      000328 E7                    1259 	.db #0xe7	; 231
+      000329 FB                    1260 	.db #0xfb	; 251
+      00032A BD                    1261 	.db #0xbd	; 189
+      00032B C7                    1262 	.db #0xc7	; 199
+      00032C FD                    1263 	.db #0xfd	; 253
+      00032D C7                    1264 	.db #0xc7	; 199
+      00032E FD                    1265 	.db #0xfd	; 253
+      00032F C7                    1266 	.db #0xc7	; 199
+      000330 FD                    1267 	.db #0xfd	; 253
+      000331 C7                    1268 	.db #0xc7	; 199
+      000332 FD                    1269 	.db #0xfd	; 253
+      000333 C7                    1270 	.db #0xc7	; 199
+      000334 BD                    1271 	.db #0xbd	; 189
+      000335 C7                    1272 	.db #0xc7	; 199
+      000336 E7                    1273 	.db #0xe7	; 231
+      000337 FB                    1274 	.db #0xfb	; 251
+      000338 1C                    1275 	.db #0x1c	; 28
+      000339 1C                    1276 	.db #0x1c	; 28
+      00033A 00                    1277 	.db #0x00	; 0
+      00033B 00                    1278 	.db #0x00	; 0
+      00033C 00                    1279 	.db #0x00	; 0
+      00033D 00                    1280 	.db #0x00	; 0
+      00033E 00                    1281 	.db #0x00	; 0
+      00033F 00                    1282 	.db #0x00	; 0
+      000340 00                    1283 	.db #0x00	; 0
+      000341 00                    1284 	.db #0x00	; 0
+      000342 18                    1285 	.db #0x18	; 24
+      000343 18                    1286 	.db #0x18	; 24
+      000344 27                    1287 	.db #0x27	; 39
+      000345 3F                    1288 	.db #0x3f	; 63
+      000346 26                    1289 	.db #0x26	; 38
+      000347 39                    1290 	.db #0x39	; 57	'9'
+      000348 5B                    1291 	.db #0x5b	; 91
+      000349 64                    1292 	.db #0x64	; 100	'd'
+      00034A 5D                    1293 	.db #0x5d	; 93
+      00034B 63                    1294 	.db #0x63	; 99	'c'
+      00034C BD                    1295 	.db #0xbd	; 189
+      00034D C3                    1296 	.db #0xc3	; 195
+      00034E BB                    1297 	.db #0xbb	; 187
+      00034F C7                    1298 	.db #0xc7	; 199
+      000350 93                    1299 	.db #0x93	; 147
+      000351 EF                    1300 	.db #0xef	; 239
+      000352 7F                    1301 	.db #0x7f	; 127
+      000353 47                    1302 	.db #0x47	; 71	'G'
+      000354 33                    1303 	.db #0x33	; 51	'3'
+      000355 3F                    1304 	.db #0x3f	; 63
+      000356 0E                    1305 	.db #0x0e	; 14
+      000357 0F                    1306 	.db #0x0f	; 15
+      000358 01                    1307 	.db #0x01	; 1
+      000359 01                    1308 	.db #0x01	; 1
+      00035A 00                    1309 	.db #0x00	; 0
+      00035B 00                    1310 	.db #0x00	; 0
+      00035C 00                    1311 	.db #0x00	; 0
+      00035D 00                    1312 	.db #0x00	; 0
+      00035E 00                    1313 	.db #0x00	; 0
+      00035F 00                    1314 	.db #0x00	; 0
+      000360 00                    1315 	.db #0x00	; 0
+      000361 00                    1316 	.db #0x00	; 0
+      000362 00                    1317 	.db #0x00	; 0
+      000363 00                    1318 	.db #0x00	; 0
+      000364 00                    1319 	.db #0x00	; 0
+      000365 00                    1320 	.db #0x00	; 0
+      000366 80                    1321 	.db #0x80	; 128
+      000367 80                    1322 	.db #0x80	; 128
+      000368 E0                    1323 	.db #0xe0	; 224
+      000369 E0                    1324 	.db #0xe0	; 224
+      00036A DC                    1325 	.db #0xdc	; 220
+      00036B FC                    1326 	.db #0xfc	; 252
+      00036C E2                    1327 	.db #0xe2	; 226
+      00036D DE                    1328 	.db #0xde	; 222
+      00036E FF                    1329 	.db #0xff	; 255
+      00036F 85                    1330 	.db #0x85	; 133
+      000370 FD                    1331 	.db #0xfd	; 253
+      000371 8F                    1332 	.db #0x8f	; 143
+      000372 FA                    1333 	.db #0xfa	; 250
+      000373 0E                    1334 	.db #0x0e	; 14
+      000374 FA                    1335 	.db #0xfa	; 250
+      000375 1E                    1336 	.db #0x1e	; 30
+      000376 74                    1337 	.db #0x74	; 116	't'
+      000377 9C                    1338 	.db #0x9c	; 156
+      000378 94                    1339 	.db #0x94	; 148
+      000379 FC                    1340 	.db #0xfc	; 252
+      00037A 58                    1341 	.db #0x58	; 88	'X'
+      00037B 68                    1342 	.db #0x68	; 104	'h'
+      00037C 38                    1343 	.db #0x38	; 56	'8'
+      00037D 38                    1344 	.db #0x38	; 56	'8'
+      00037E 00                    1345 	.db #0x00	; 0
+      00037F 00                    1346 	.db #0x00	; 0
+      000380 04                    1347 	.db #0x04	; 4
+      000381 04                    1348 	.db #0x04	; 4
+      000382 0B                    1349 	.db #0x0b	; 11
+      000383 0F                    1350 	.db #0x0f	; 15
+      000384 14                    1351 	.db #0x14	; 20
+      000385 1B                    1352 	.db #0x1b	; 27
+      000386 2D                    1353 	.db #0x2d	; 45
+      000387 32                    1354 	.db #0x32	; 50	'2'
+      000388 5F                    1355 	.db #0x5f	; 95
+      000389 60                    1356 	.db #0x60	; 96
+      00038A BE                    1357 	.db #0xbe	; 190
+      00038B C1                    1358 	.db #0xc1	; 193
+      00038C 4E                    1359 	.db #0x4e	; 78	'N'
+      00038D 71                    1360 	.db #0x71	; 113	'q'
+      00038E 59                    1361 	.db #0x59	; 89	'Y'
+      00038F 67                    1362 	.db #0x67	; 103	'g'
+      000390 2B                    1363 	.db #0x2b	; 43
+      000391 37                    1364 	.db #0x37	; 55	'7'
+      000392 17                    1365 	.db #0x17	; 23
+      000393 1F                    1366 	.db #0x1f	; 31
+      000394 0D                    1367 	.db #0x0d	; 13
+      000395 0E                    1368 	.db #0x0e	; 14
+      000396 02                    1369 	.db #0x02	; 2
+      000397 03                    1370 	.db #0x03	; 3
+      000398 01                    1371 	.db #0x01	; 1
+      000399 01                    1372 	.db #0x01	; 1
+      00039A 00                    1373 	.db #0x00	; 0
+      00039B 00                    1374 	.db #0x00	; 0
+      00039C 00                    1375 	.db #0x00	; 0
+      00039D 00                    1376 	.db #0x00	; 0
+      00039E 00                    1377 	.db #0x00	; 0
+      00039F 00                    1378 	.db #0x00	; 0
+      0003A0 00                    1379 	.db #0x00	; 0
+      0003A1 00                    1380 	.db #0x00	; 0
+      0003A2 00                    1381 	.db #0x00	; 0
+      0003A3 00                    1382 	.db #0x00	; 0
+      0003A4 80                    1383 	.db #0x80	; 128
+      0003A5 80                    1384 	.db #0x80	; 128
+      0003A6 40                    1385 	.db #0x40	; 64
+      0003A7 C0                    1386 	.db #0xc0	; 192
+      0003A8 A0                    1387 	.db #0xa0	; 160
+      0003A9 60                    1388 	.db #0x60	; 96
+      0003AA 60                    1389 	.db #0x60	; 96
+      0003AB E0                    1390 	.db #0xe0	; 224
+      0003AC D0                    1391 	.db #0xd0	; 208
+      0003AD F0                    1392 	.db #0xf0	; 240
+      0003AE E8                    1393 	.db #0xe8	; 232
+      0003AF D8                    1394 	.db #0xd8	; 216
+      0003B0 F6                    1395 	.db #0xf6	; 246
+      0003B1 8E                    1396 	.db #0x8e	; 142
+      0003B2 F9                    1397 	.db #0xf9	; 249
+      0003B3 07                    1398 	.db #0x07	; 7
+      0003B4 FF                    1399 	.db #0xff	; 255
+      0003B5 0D                    1400 	.db #0x0d	; 13
+      0003B6 F9                    1401 	.db #0xf9	; 249
+      0003B7 1F                    1402 	.db #0x1f	; 31
+      0003B8 72                    1403 	.db #0x72	; 114	'r'
+      0003B9 BE                    1404 	.db #0xbe	; 190
+      0003BA A4                    1405 	.db #0xa4	; 164
+      0003BB FC                    1406 	.db #0xfc	; 252
+      0003BC A8                    1407 	.db #0xa8	; 168
+      0003BD D8                    1408 	.db #0xd8	; 216
+      0003BE 70                    1409 	.db #0x70	; 112	'p'
+      0003BF 70                    1410 	.db #0x70	; 112	'p'
+      0003C0 03                    1411 	.db #0x03	; 3
+      0003C1 03                    1412 	.db #0x03	; 3
+      0003C2 0C                    1413 	.db #0x0c	; 12
+      0003C3 0F                    1414 	.db #0x0f	; 15
+      0003C4 33                    1415 	.db #0x33	; 51	'3'
+      0003C5 3C                    1416 	.db #0x3c	; 60
+      0003C6 4F                    1417 	.db #0x4f	; 79	'O'
+      0003C7 70                    1418 	.db #0x70	; 112	'p'
+      0003C8 4F                    1419 	.db #0x4f	; 79	'O'
+      0003C9 70                    1420 	.db #0x70	; 112	'p'
+      0003CA 36                    1421 	.db #0x36	; 54	'6'
+      0003CB 29                    1422 	.db #0x29	; 41
+      0003CC 39                    1423 	.db #0x39	; 57	'9'
+      0003CD 27                    1424 	.db #0x27	; 39
+      0003CE 2F                    1425 	.db #0x2f	; 47
+      0003CF 37                    1426 	.db #0x37	; 55	'7'
+      0003D0 1F                    1427 	.db #0x1f	; 31
+      0003D1 1F                    1428 	.db #0x1f	; 31
+      0003D2 0F                    1429 	.db #0x0f	; 15
+      0003D3 0E                    1430 	.db #0x0e	; 14
+      0003D4 0B                    1431 	.db #0x0b	; 11
+      0003D5 0C                    1432 	.db #0x0c	; 12
+      0003D6 05                    1433 	.db #0x05	; 5
+      0003D7 06                    1434 	.db #0x06	; 6
+      0003D8 05                    1435 	.db #0x05	; 5
+      0003D9 06                    1436 	.db #0x06	; 6
+      0003DA 05                    1437 	.db #0x05	; 5
+      0003DB 07                    1438 	.db #0x07	; 7
+      0003DC 03                    1439 	.db #0x03	; 3
+      0003DD 02                    1440 	.db #0x02	; 2
+      0003DE 01                    1441 	.db #0x01	; 1
+      0003DF 01                    1442 	.db #0x01	; 1
+      0003E0 80                    1443 	.db #0x80	; 128
+      0003E1 80                    1444 	.db #0x80	; 128
+      0003E2 40                    1445 	.db #0x40	; 64
+      0003E3 C0                    1446 	.db #0xc0	; 192
+      0003E4 60                    1447 	.db #0x60	; 96
+      0003E5 A0                    1448 	.db #0xa0	; 160
+      0003E6 E0                    1449 	.db #0xe0	; 224
+      0003E7 20                    1450 	.db #0x20	; 32
+      0003E8 50                    1451 	.db #0x50	; 80	'P'
+      0003E9 B0                    1452 	.db #0xb0	; 176
+      0003EA 50                    1453 	.db #0x50	; 80	'P'
+      0003EB F0                    1454 	.db #0xf0	; 240
+      0003EC F0                    1455 	.db #0xf0	; 240
+      0003ED F0                    1456 	.db #0xf0	; 240
+      0003EE E8                    1457 	.db #0xe8	; 232
+      0003EF F8                    1458 	.db #0xf8	; 248
+      0003F0 E8                    1459 	.db #0xe8	; 232
+      0003F1 98                    1460 	.db #0x98	; 152
+      0003F2 F4                    1461 	.db #0xf4	; 244
+      0003F3 0C                    1462 	.db #0x0c	; 12
+      0003F4 F2                    1463 	.db #0xf2	; 242
+      0003F5 0E                    1464 	.db #0x0e	; 14
+      0003F6 FE                    1465 	.db #0xfe	; 254
+      0003F7 3A                    1466 	.db #0x3a	; 58
+      0003F8 E6                    1467 	.db #0xe6	; 230
+      0003F9 FE                    1468 	.db #0xfe	; 254
+      0003FA 98                    1469 	.db #0x98	; 152
+      0003FB F8                    1470 	.db #0xf8	; 248
+      0003FC 60                    1471 	.db #0x60	; 96
+      0003FD E0                    1472 	.db #0xe0	; 224
+      0003FE 80                    1473 	.db #0x80	; 128
+      0003FF 80                    1474 	.db #0x80	; 128
+      000400                       1475 __xinit__map:
+      000400 2B                    1476 	.db #0x2b	; 43
+      000401 2B                    1477 	.db #0x2b	; 43
+      000402 2B                    1478 	.db #0x2b	; 43
+      000403 1A                    1479 	.db #0x1a	; 26
+      000404 17                    1480 	.db #0x17	; 23
+      000405 05                    1481 	.db #0x05	; 5
+      000406 05                    1482 	.db #0x05	; 5
+      000407 05                    1483 	.db #0x05	; 5
+      000408 05                    1484 	.db #0x05	; 5
+      000409 05                    1485 	.db #0x05	; 5
+      00040A 05                    1486 	.db #0x05	; 5
+      00040B 05                    1487 	.db #0x05	; 5
+      00040C 0D                    1488 	.db #0x0d	; 13
+      00040D 0C                    1489 	.db #0x0c	; 12
+      00040E 04                    1490 	.db #0x04	; 4
+      00040F 04                    1491 	.db #0x04	; 4
+      000410 04                    1492 	.db #0x04	; 4
+      000411 04                    1493 	.db #0x04	; 4
+      000412 04                    1494 	.db #0x04	; 4
+      000413 04                    1495 	.db #0x04	; 4
+      000414 04                    1496 	.db #0x04	; 4
+      000415 13                    1497 	.db #0x13	; 19
+      000416 16                    1498 	.db #0x16	; 22
+      000417 2B                    1499 	.db #0x2b	; 43
+      000418 2B                    1500 	.db #0x2b	; 43
+      000419 2B                    1501 	.db #0x2b	; 43
+      00041A 2B                    1502 	.db #0x2b	; 43
+      00041B 2B                    1503 	.db #0x2b	; 43
+      00041C 1A                    1504 	.db #0x1a	; 26
+      00041D 18                    1505 	.db #0x18	; 24
+      00041E 01                    1506 	.db #0x01	; 1
+      00041F 01                    1507 	.db #0x01	; 1
+      000420 01                    1508 	.db #0x01	; 1
+      000421 01                    1509 	.db #0x01	; 1
+      000422 01                    1510 	.db #0x01	; 1
+      000423 01                    1511 	.db #0x01	; 1
+      000424 01                    1512 	.db #0x01	; 1
+      000425 01                    1513 	.db #0x01	; 1
+      000426 09                    1514 	.db #0x09	; 9
+      000427 08                    1515 	.db #0x08	; 8
+      000428 00                    1516 	.db #0x00	; 0
+      000429 00                    1517 	.db #0x00	; 0
+      00042A 00                    1518 	.db #0x00	; 0
+      00042B 00                    1519 	.db #0x00	; 0
+      00042C 00                    1520 	.db #0x00	; 0
+      00042D 00                    1521 	.db #0x00	; 0
+      00042E 00                    1522 	.db #0x00	; 0
+      00042F 00                    1523 	.db #0x00	; 0
+      000430 14                    1524 	.db #0x14	; 20
+      000431 16                    1525 	.db #0x16	; 22
+      000432 2B                    1526 	.db #0x2b	; 43
+      000433 2B                    1527 	.db #0x2b	; 43
+      000434 2B                    1528 	.db #0x2b	; 43
+      000435 1A                    1529 	.db #0x1a	; 26
+      000436 18                    1530 	.db #0x18	; 24
+      000437 01                    1531 	.db #0x01	; 1
+      000438 01                    1532 	.db #0x01	; 1
+      000439 01                    1533 	.db #0x01	; 1
+      00043A 01                    1534 	.db #0x01	; 1
+      00043B 01                    1535 	.db #0x01	; 1
+      00043C 01                    1536 	.db #0x01	; 1
+      00043D 01                    1537 	.db #0x01	; 1
+      00043E 01                    1538 	.db #0x01	; 1
+      00043F 01                    1539 	.db #0x01	; 1
+      000440 09                    1540 	.db #0x09	; 9
+      000441 08                    1541 	.db #0x08	; 8
+      000442 00                    1542 	.db #0x00	; 0
+      000443 00                    1543 	.db #0x00	; 0
+      000444 00                    1544 	.db #0x00	; 0
+      000445 00                    1545 	.db #0x00	; 0
+      000446 00                    1546 	.db #0x00	; 0
+      000447 00                    1547 	.db #0x00	; 0
+      000448 00                    1548 	.db #0x00	; 0
+      000449 00                    1549 	.db #0x00	; 0
+      00044A 00                    1550 	.db #0x00	; 0
+      00044B 14                    1551 	.db #0x14	; 20
+      00044C 16                    1552 	.db #0x16	; 22
+      00044D 2B                    1553 	.db #0x2b	; 43
+      00044E 2B                    1554 	.db #0x2b	; 43
+      00044F 19                    1555 	.db #0x19	; 25
+      000450 01                    1556 	.db #0x01	; 1
+      000451 01                    1557 	.db #0x01	; 1
+      000452 01                    1558 	.db #0x01	; 1
+      000453 01                    1559 	.db #0x01	; 1
+      000454 01                    1560 	.db #0x01	; 1
+      000455 01                    1561 	.db #0x01	; 1
+      000456 01                    1562 	.db #0x01	; 1
+      000457 01                    1563 	.db #0x01	; 1
+      000458 01                    1564 	.db #0x01	; 1
+      000459 01                    1565 	.db #0x01	; 1
+      00045A 09                    1566 	.db #0x09	; 9
+      00045B 08                    1567 	.db #0x08	; 8
+      00045C 00                    1568 	.db #0x00	; 0
+      00045D 00                    1569 	.db #0x00	; 0
+      00045E 00                    1570 	.db #0x00	; 0
+      00045F 00                    1571 	.db #0x00	; 0
+      000460 00                    1572 	.db #0x00	; 0
+      000461 00                    1573 	.db #0x00	; 0
+      000462 00                    1574 	.db #0x00	; 0
+      000463 00                    1575 	.db #0x00	; 0
+      000464 00                    1576 	.db #0x00	; 0
+      000465 00                    1577 	.db #0x00	; 0
+      000466 15                    1578 	.db #0x15	; 21
+      000467 2B                    1579 	.db #0x2b	; 43
+      000468 2B                    1580 	.db #0x2b	; 43
+      000469 0E                    1581 	.db #0x0e	; 14
+      00046A 01                    1582 	.db #0x01	; 1
+      00046B 01                    1583 	.db #0x01	; 1
+      00046C 01                    1584 	.db #0x01	; 1
+      00046D 01                    1585 	.db #0x01	; 1
+      00046E 01                    1586 	.db #0x01	; 1
+      00046F 01                    1587 	.db #0x01	; 1
+      000470 01                    1588 	.db #0x01	; 1
+      000471 01                    1589 	.db #0x01	; 1
+      000472 01                    1590 	.db #0x01	; 1
+      000473 01                    1591 	.db #0x01	; 1
+      000474 09                    1592 	.db #0x09	; 9
+      000475 08                    1593 	.db #0x08	; 8
+      000476 00                    1594 	.db #0x00	; 0
+      000477 00                    1595 	.db #0x00	; 0
+      000478 00                    1596 	.db #0x00	; 0
+      000479 00                    1597 	.db #0x00	; 0
+      00047A 00                    1598 	.db #0x00	; 0
+      00047B 00                    1599 	.db #0x00	; 0
+      00047C 00                    1600 	.db #0x00	; 0
+      00047D 00                    1601 	.db #0x00	; 0
+      00047E 00                    1602 	.db #0x00	; 0
+      00047F 00                    1603 	.db #0x00	; 0
+      000480 06                    1604 	.db #0x06	; 6
+      000481 2B                    1605 	.db #0x2b	; 43
+      000482 2B                    1606 	.db #0x2b	; 43
+      000483 0E                    1607 	.db #0x0e	; 14
+      000484 01                    1608 	.db #0x01	; 1
+      000485 01                    1609 	.db #0x01	; 1
+      000486 01                    1610 	.db #0x01	; 1
+      000487 01                    1611 	.db #0x01	; 1
+      000488 01                    1612 	.db #0x01	; 1
+      000489 01                    1613 	.db #0x01	; 1
+      00048A 01                    1614 	.db #0x01	; 1
+      00048B 01                    1615 	.db #0x01	; 1
+      00048C 01                    1616 	.db #0x01	; 1
+      00048D 01                    1617 	.db #0x01	; 1
+      00048E 09                    1618 	.db #0x09	; 9
+      00048F 08                    1619 	.db #0x08	; 8
+      000490 00                    1620 	.db #0x00	; 0
+      000491 00                    1621 	.db #0x00	; 0
+      000492 00                    1622 	.db #0x00	; 0
+      000493 00                    1623 	.db #0x00	; 0
+      000494 00                    1624 	.db #0x00	; 0
+      000495 00                    1625 	.db #0x00	; 0
+      000496 00                    1626 	.db #0x00	; 0
+      000497 00                    1627 	.db #0x00	; 0
+      000498 00                    1628 	.db #0x00	; 0
+      000499 00                    1629 	.db #0x00	; 0
+      00049A 06                    1630 	.db #0x06	; 6
+      00049B 2B                    1631 	.db #0x2b	; 43
+      00049C 24                    1632 	.db #0x24	; 36
+      00049D 20                    1633 	.db #0x20	; 32
+      00049E 01                    1634 	.db #0x01	; 1
+      00049F 01                    1635 	.db #0x01	; 1
+      0004A0 01                    1636 	.db #0x01	; 1
+      0004A1 01                    1637 	.db #0x01	; 1
+      0004A2 01                    1638 	.db #0x01	; 1
+      0004A3 01                    1639 	.db #0x01	; 1
+      0004A4 01                    1640 	.db #0x01	; 1
+      0004A5 01                    1641 	.db #0x01	; 1
+      0004A6 01                    1642 	.db #0x01	; 1
+      0004A7 01                    1643 	.db #0x01	; 1
+      0004A8 09                    1644 	.db #0x09	; 9
+      0004A9 08                    1645 	.db #0x08	; 8
+      0004AA 00                    1646 	.db #0x00	; 0
+      0004AB 00                    1647 	.db #0x00	; 0
+      0004AC 00                    1648 	.db #0x00	; 0
+      0004AD 00                    1649 	.db #0x00	; 0
+      0004AE 00                    1650 	.db #0x00	; 0
+      0004AF 00                    1651 	.db #0x00	; 0
+      0004B0 00                    1652 	.db #0x00	; 0
+      0004B1 00                    1653 	.db #0x00	; 0
+      0004B2 00                    1654 	.db #0x00	; 0
+      0004B3 00                    1655 	.db #0x00	; 0
+      0004B4 26                    1656 	.db #0x26	; 38
+      0004B5 2A                    1657 	.db #0x2a	; 42
+      0004B6 23                    1658 	.db #0x23	; 35
+      0004B7 21                    1659 	.db #0x21	; 33
+      0004B8 01                    1660 	.db #0x01	; 1
+      0004B9 01                    1661 	.db #0x01	; 1
+      0004BA 01                    1662 	.db #0x01	; 1
+      0004BB 01                    1663 	.db #0x01	; 1
+      0004BC 01                    1664 	.db #0x01	; 1
+      0004BD 01                    1665 	.db #0x01	; 1
+      0004BE 01                    1666 	.db #0x01	; 1
+      0004BF 01                    1667 	.db #0x01	; 1
+      0004C0 01                    1668 	.db #0x01	; 1
+      0004C1 01                    1669 	.db #0x01	; 1
+      0004C2 09                    1670 	.db #0x09	; 9
+      0004C3 08                    1671 	.db #0x08	; 8
+      0004C4 00                    1672 	.db #0x00	; 0
+      0004C5 00                    1673 	.db #0x00	; 0
+      0004C6 00                    1674 	.db #0x00	; 0
+      0004C7 00                    1675 	.db #0x00	; 0
+      0004C8 00                    1676 	.db #0x00	; 0
+      0004C9 00                    1677 	.db #0x00	; 0
+      0004CA 00                    1678 	.db #0x00	; 0
+      0004CB 00                    1679 	.db #0x00	; 0
+      0004CC 00                    1680 	.db #0x00	; 0
+      0004CD 00                    1681 	.db #0x00	; 0
+      0004CE 27                    1682 	.db #0x27	; 39
+      0004CF 29                    1683 	.db #0x29	; 41
+      0004D0 23                    1684 	.db #0x23	; 35
+      0004D1 21                    1685 	.db #0x21	; 33
+      0004D2 01                    1686 	.db #0x01	; 1
+      0004D3 01                    1687 	.db #0x01	; 1
+      0004D4 01                    1688 	.db #0x01	; 1
+      0004D5 01                    1689 	.db #0x01	; 1
+      0004D6 01                    1690 	.db #0x01	; 1
+      0004D7 01                    1691 	.db #0x01	; 1
+      0004D8 01                    1692 	.db #0x01	; 1
+      0004D9 01                    1693 	.db #0x01	; 1
+      0004DA 01                    1694 	.db #0x01	; 1
+      0004DB 01                    1695 	.db #0x01	; 1
+      0004DC 09                    1696 	.db #0x09	; 9
+      0004DD 08                    1697 	.db #0x08	; 8
+      0004DE 00                    1698 	.db #0x00	; 0
+      0004DF 00                    1699 	.db #0x00	; 0
+      0004E0 00                    1700 	.db #0x00	; 0
+      0004E1 00                    1701 	.db #0x00	; 0
+      0004E2 00                    1702 	.db #0x00	; 0
+      0004E3 00                    1703 	.db #0x00	; 0
+      0004E4 00                    1704 	.db #0x00	; 0
+      0004E5 00                    1705 	.db #0x00	; 0
+      0004E6 00                    1706 	.db #0x00	; 0
+      0004E7 00                    1707 	.db #0x00	; 0
+      0004E8 27                    1708 	.db #0x27	; 39
+      0004E9 29                    1709 	.db #0x29	; 41
+      0004EA 22                    1710 	.db #0x22	; 34
+      0004EB 1F                    1711 	.db #0x1f	; 31
+      0004EC 01                    1712 	.db #0x01	; 1
+      0004ED 01                    1713 	.db #0x01	; 1
+      0004EE 01                    1714 	.db #0x01	; 1
+      0004EF 01                    1715 	.db #0x01	; 1
+      0004F0 01                    1716 	.db #0x01	; 1
+      0004F1 01                    1717 	.db #0x01	; 1
+      0004F2 01                    1718 	.db #0x01	; 1
+      0004F3 01                    1719 	.db #0x01	; 1
+      0004F4 01                    1720 	.db #0x01	; 1
+      0004F5 01                    1721 	.db #0x01	; 1
+      0004F6 09                    1722 	.db #0x09	; 9
+      0004F7 08                    1723 	.db #0x08	; 8
+      0004F8 00                    1724 	.db #0x00	; 0
+      0004F9 00                    1725 	.db #0x00	; 0
+      0004FA 00                    1726 	.db #0x00	; 0
+      0004FB 00                    1727 	.db #0x00	; 0
+      0004FC 00                    1728 	.db #0x00	; 0
+      0004FD 00                    1729 	.db #0x00	; 0
+      0004FE 00                    1730 	.db #0x00	; 0
+      0004FF 00                    1731 	.db #0x00	; 0
+      000500 00                    1732 	.db #0x00	; 0
+      000501 00                    1733 	.db #0x00	; 0
+      000502 25                    1734 	.db #0x25	; 37
+      000503 28                    1735 	.db #0x28	; 40
+      000504 2B                    1736 	.db #0x2b	; 43
+      000505 0E                    1737 	.db #0x0e	; 14
+      000506 01                    1738 	.db #0x01	; 1
+      000507 01                    1739 	.db #0x01	; 1
+      000508 01                    1740 	.db #0x01	; 1
+      000509 01                    1741 	.db #0x01	; 1
+      00050A 01                    1742 	.db #0x01	; 1
+      00050B 01                    1743 	.db #0x01	; 1
+      00050C 01                    1744 	.db #0x01	; 1
+      00050D 01                    1745 	.db #0x01	; 1
+      00050E 01                    1746 	.db #0x01	; 1
+      00050F 01                    1747 	.db #0x01	; 1
+      000510 09                    1748 	.db #0x09	; 9
+      000511 08                    1749 	.db #0x08	; 8
+      000512 00                    1750 	.db #0x00	; 0
+      000513 00                    1751 	.db #0x00	; 0
+      000514 00                    1752 	.db #0x00	; 0
+      000515 00                    1753 	.db #0x00	; 0
+      000516 00                    1754 	.db #0x00	; 0
+      000517 00                    1755 	.db #0x00	; 0
+      000518 00                    1756 	.db #0x00	; 0
+      000519 00                    1757 	.db #0x00	; 0
+      00051A 00                    1758 	.db #0x00	; 0
+      00051B 00                    1759 	.db #0x00	; 0
+      00051C 06                    1760 	.db #0x06	; 6
+      00051D 2B                    1761 	.db #0x2b	; 43
+      00051E 2B                    1762 	.db #0x2b	; 43
+      00051F 0E                    1763 	.db #0x0e	; 14
+      000520 01                    1764 	.db #0x01	; 1
+      000521 01                    1765 	.db #0x01	; 1
+      000522 01                    1766 	.db #0x01	; 1
+      000523 01                    1767 	.db #0x01	; 1
+      000524 01                    1768 	.db #0x01	; 1
+      000525 01                    1769 	.db #0x01	; 1
+      000526 01                    1770 	.db #0x01	; 1
+      000527 01                    1771 	.db #0x01	; 1
+      000528 01                    1772 	.db #0x01	; 1
+      000529 01                    1773 	.db #0x01	; 1
+      00052A 09                    1774 	.db #0x09	; 9
+      00052B 08                    1775 	.db #0x08	; 8
+      00052C 00                    1776 	.db #0x00	; 0
+      00052D 00                    1777 	.db #0x00	; 0
+      00052E 00                    1778 	.db #0x00	; 0
+      00052F 00                    1779 	.db #0x00	; 0
+      000530 00                    1780 	.db #0x00	; 0
+      000531 00                    1781 	.db #0x00	; 0
+      000532 00                    1782 	.db #0x00	; 0
+      000533 00                    1783 	.db #0x00	; 0
+      000534 00                    1784 	.db #0x00	; 0
+      000535 00                    1785 	.db #0x00	; 0
+      000536 06                    1786 	.db #0x06	; 6
+      000537 2B                    1787 	.db #0x2b	; 43
+      000538 2B                    1788 	.db #0x2b	; 43
+      000539 1D                    1789 	.db #0x1d	; 29
+      00053A 01                    1790 	.db #0x01	; 1
+      00053B 01                    1791 	.db #0x01	; 1
+      00053C 01                    1792 	.db #0x01	; 1
+      00053D 01                    1793 	.db #0x01	; 1
+      00053E 01                    1794 	.db #0x01	; 1
+      00053F 01                    1795 	.db #0x01	; 1
+      000540 01                    1796 	.db #0x01	; 1
+      000541 01                    1797 	.db #0x01	; 1
+      000542 01                    1798 	.db #0x01	; 1
+      000543 01                    1799 	.db #0x01	; 1
+      000544 09                    1800 	.db #0x09	; 9
+      000545 08                    1801 	.db #0x08	; 8
+      000546 00                    1802 	.db #0x00	; 0
+      000547 00                    1803 	.db #0x00	; 0
+      000548 00                    1804 	.db #0x00	; 0
+      000549 00                    1805 	.db #0x00	; 0
+      00054A 00                    1806 	.db #0x00	; 0
+      00054B 00                    1807 	.db #0x00	; 0
+      00054C 00                    1808 	.db #0x00	; 0
+      00054D 00                    1809 	.db #0x00	; 0
+      00054E 00                    1810 	.db #0x00	; 0
+      00054F 00                    1811 	.db #0x00	; 0
+      000550 11                    1812 	.db #0x11	; 17
+      000551 2B                    1813 	.db #0x2b	; 43
+      000552 2B                    1814 	.db #0x2b	; 43
+      000553 1E                    1815 	.db #0x1e	; 30
+      000554 1C                    1816 	.db #0x1c	; 28
+      000555 01                    1817 	.db #0x01	; 1
+      000556 01                    1818 	.db #0x01	; 1
+      000557 01                    1819 	.db #0x01	; 1
+      000558 01                    1820 	.db #0x01	; 1
+      000559 01                    1821 	.db #0x01	; 1
+      00055A 01                    1822 	.db #0x01	; 1
+      00055B 01                    1823 	.db #0x01	; 1
+      00055C 01                    1824 	.db #0x01	; 1
+      00055D 01                    1825 	.db #0x01	; 1
+      00055E 09                    1826 	.db #0x09	; 9
+      00055F 08                    1827 	.db #0x08	; 8
+      000560 00                    1828 	.db #0x00	; 0
+      000561 00                    1829 	.db #0x00	; 0
+      000562 00                    1830 	.db #0x00	; 0
+      000563 00                    1831 	.db #0x00	; 0
+      000564 00                    1832 	.db #0x00	; 0
+      000565 00                    1833 	.db #0x00	; 0
+      000566 00                    1834 	.db #0x00	; 0
+      000567 00                    1835 	.db #0x00	; 0
+      000568 00                    1836 	.db #0x00	; 0
+      000569 10                    1837 	.db #0x10	; 16
+      00056A 12                    1838 	.db #0x12	; 18
+      00056B 2B                    1839 	.db #0x2b	; 43
+      00056C 2B                    1840 	.db #0x2b	; 43
+      00056D 2B                    1841 	.db #0x2b	; 43
+      00056E 1E                    1842 	.db #0x1e	; 30
+      00056F 1C                    1843 	.db #0x1c	; 28
+      000570 01                    1844 	.db #0x01	; 1
+      000571 01                    1845 	.db #0x01	; 1
+      000572 01                    1846 	.db #0x01	; 1
+      000573 01                    1847 	.db #0x01	; 1
+      000574 01                    1848 	.db #0x01	; 1
+      000575 01                    1849 	.db #0x01	; 1
+      000576 01                    1850 	.db #0x01	; 1
+      000577 01                    1851 	.db #0x01	; 1
+      000578 09                    1852 	.db #0x09	; 9
+      000579 08                    1853 	.db #0x08	; 8
+      00057A 00                    1854 	.db #0x00	; 0
+      00057B 00                    1855 	.db #0x00	; 0
+      00057C 00                    1856 	.db #0x00	; 0
+      00057D 00                    1857 	.db #0x00	; 0
+      00057E 00                    1858 	.db #0x00	; 0
+      00057F 00                    1859 	.db #0x00	; 0
+      000580 00                    1860 	.db #0x00	; 0
+      000581 00                    1861 	.db #0x00	; 0
+      000582 10                    1862 	.db #0x10	; 16
+      000583 12                    1863 	.db #0x12	; 18
+      000584 2B                    1864 	.db #0x2b	; 43
+      000585 2B                    1865 	.db #0x2b	; 43
+      000586 2B                    1866 	.db #0x2b	; 43
+      000587 2B                    1867 	.db #0x2b	; 43
+      000588 2B                    1868 	.db #0x2b	; 43
+      000589 1E                    1869 	.db #0x1e	; 30
+      00058A 1B                    1870 	.db #0x1b	; 27
+      00058B 03                    1871 	.db #0x03	; 3
+      00058C 03                    1872 	.db #0x03	; 3
+      00058D 03                    1873 	.db #0x03	; 3
+      00058E 03                    1874 	.db #0x03	; 3
+      00058F 03                    1875 	.db #0x03	; 3
+      000590 03                    1876 	.db #0x03	; 3
+      000591 03                    1877 	.db #0x03	; 3
+      000592 0B                    1878 	.db #0x0b	; 11
+      000593 0A                    1879 	.db #0x0a	; 10
+      000594 02                    1880 	.db #0x02	; 2
+      000595 02                    1881 	.db #0x02	; 2
+      000596 02                    1882 	.db #0x02	; 2
+      000597 02                    1883 	.db #0x02	; 2
+      000598 02                    1884 	.db #0x02	; 2
+      000599 02                    1885 	.db #0x02	; 2
+      00059A 02                    1886 	.db #0x02	; 2
+      00059B 0F                    1887 	.db #0x0f	; 15
+      00059C 12                    1888 	.db #0x12	; 18
+      00059D 2B                    1889 	.db #0x2b	; 43
+      00059E 2B                    1890 	.db #0x2b	; 43
+      00059F 2B                    1891 	.db #0x2b	; 43
+      0005A0                       1892 __xinit__bkg_tiles:
+      0005A0 AA                    1893 	.db #0xaa	; 170
+      0005A1 00                    1894 	.db #0x00	; 0
+      0005A2 55                    1895 	.db #0x55	; 85	'U'
+      0005A3 00                    1896 	.db #0x00	; 0
+      0005A4 AA                    1897 	.db #0xaa	; 170
+      0005A5 00                    1898 	.db #0x00	; 0
+      0005A6 55                    1899 	.db #0x55	; 85	'U'
+      0005A7 00                    1900 	.db #0x00	; 0
+      0005A8 AA                    1901 	.db #0xaa	; 170
+      0005A9 00                    1902 	.db #0x00	; 0
+      0005AA 55                    1903 	.db #0x55	; 85	'U'
+      0005AB 00                    1904 	.db #0x00	; 0
+      0005AC AA                    1905 	.db #0xaa	; 170
+      0005AD 00                    1906 	.db #0x00	; 0
+      0005AE 55                    1907 	.db #0x55	; 85	'U'
+      0005AF 00                    1908 	.db #0x00	; 0
+      0005B0 00                    1909 	.db #0x00	; 0
+      0005B1 AA                    1910 	.db #0xaa	; 170
+      0005B2 00                    1911 	.db #0x00	; 0
+      0005B3 55                    1912 	.db #0x55	; 85	'U'
+      0005B4 00                    1913 	.db #0x00	; 0
+      0005B5 AA                    1914 	.db #0xaa	; 170
+      0005B6 00                    1915 	.db #0x00	; 0
+      0005B7 55                    1916 	.db #0x55	; 85	'U'
+      0005B8 00                    1917 	.db #0x00	; 0
+      0005B9 AA                    1918 	.db #0xaa	; 170
+      0005BA 00                    1919 	.db #0x00	; 0
+      0005BB 55                    1920 	.db #0x55	; 85	'U'
+      0005BC 00                    1921 	.db #0x00	; 0
+      0005BD AA                    1922 	.db #0xaa	; 170
+      0005BE 00                    1923 	.db #0x00	; 0
+      0005BF 55                    1924 	.db #0x55	; 85	'U'
+      0005C0 AA                    1925 	.db #0xaa	; 170
+      0005C1 00                    1926 	.db #0x00	; 0
+      0005C2 55                    1927 	.db #0x55	; 85	'U'
+      0005C3 00                    1928 	.db #0x00	; 0
+      0005C4 FF                    1929 	.db #0xff	; 255
+      0005C5 FF                    1930 	.db #0xff	; 255
+      0005C6 FF                    1931 	.db #0xff	; 255
+      0005C7 FF                    1932 	.db #0xff	; 255
+      0005C8 FF                    1933 	.db #0xff	; 255
+      0005C9 FF                    1934 	.db #0xff	; 255
+      0005CA FF                    1935 	.db #0xff	; 255
+      0005CB FF                    1936 	.db #0xff	; 255
+      0005CC FF                    1937 	.db #0xff	; 255
+      0005CD FF                    1938 	.db #0xff	; 255
+      0005CE FF                    1939 	.db #0xff	; 255
+      0005CF FF                    1940 	.db #0xff	; 255
+      0005D0 00                    1941 	.db #0x00	; 0
+      0005D1 AA                    1942 	.db #0xaa	; 170
+      0005D2 00                    1943 	.db #0x00	; 0
+      0005D3 55                    1944 	.db #0x55	; 85	'U'
+      0005D4 FF                    1945 	.db #0xff	; 255
+      0005D5 FF                    1946 	.db #0xff	; 255
+      0005D6 FF                    1947 	.db #0xff	; 255
+      0005D7 FF                    1948 	.db #0xff	; 255
+      0005D8 FF                    1949 	.db #0xff	; 255
+      0005D9 FF                    1950 	.db #0xff	; 255
+      0005DA FF                    1951 	.db #0xff	; 255
+      0005DB FF                    1952 	.db #0xff	; 255
+      0005DC FF                    1953 	.db #0xff	; 255
+      0005DD FF                    1954 	.db #0xff	; 255
+      0005DE FF                    1955 	.db #0xff	; 255
+      0005DF FF                    1956 	.db #0xff	; 255
+      0005E0 FF                    1957 	.db #0xff	; 255
+      0005E1 FF                    1958 	.db #0xff	; 255
+      0005E2 FF                    1959 	.db #0xff	; 255
+      0005E3 FF                    1960 	.db #0xff	; 255
+      0005E4 FF                    1961 	.db #0xff	; 255
+      0005E5 FF                    1962 	.db #0xff	; 255
+      0005E6 FF                    1963 	.db #0xff	; 255
+      0005E7 FF                    1964 	.db #0xff	; 255
+      0005E8 FF                    1965 	.db #0xff	; 255
+      0005E9 FF                    1966 	.db #0xff	; 255
+      0005EA FF                    1967 	.db #0xff	; 255
+      0005EB FF                    1968 	.db #0xff	; 255
+      0005EC AA                    1969 	.db #0xaa	; 170
+      0005ED 00                    1970 	.db #0x00	; 0
+      0005EE 55                    1971 	.db #0x55	; 85	'U'
+      0005EF 00                    1972 	.db #0x00	; 0
+      0005F0 FF                    1973 	.db #0xff	; 255
+      0005F1 FF                    1974 	.db #0xff	; 255
+      0005F2 FF                    1975 	.db #0xff	; 255
+      0005F3 FF                    1976 	.db #0xff	; 255
+      0005F4 FF                    1977 	.db #0xff	; 255
+      0005F5 FF                    1978 	.db #0xff	; 255
+      0005F6 FF                    1979 	.db #0xff	; 255
+      0005F7 FF                    1980 	.db #0xff	; 255
+      0005F8 FF                    1981 	.db #0xff	; 255
+      0005F9 FF                    1982 	.db #0xff	; 255
+      0005FA FF                    1983 	.db #0xff	; 255
+      0005FB FF                    1984 	.db #0xff	; 255
+      0005FC 00                    1985 	.db #0x00	; 0
+      0005FD AA                    1986 	.db #0xaa	; 170
+      0005FE 00                    1987 	.db #0x00	; 0
+      0005FF 55                    1988 	.db #0x55	; 85	'U'
+      000600 BF                    1989 	.db #0xbf	; 191
+      000601 3F                    1990 	.db #0x3f	; 63
+      000602 7F                    1991 	.db #0x7f	; 127
+      000603 3F                    1992 	.db #0x3f	; 63
+      000604 BF                    1993 	.db #0xbf	; 191
+      000605 3F                    1994 	.db #0x3f	; 63
+      000606 7F                    1995 	.db #0x7f	; 127
+      000607 3F                    1996 	.db #0x3f	; 63
+      000608 BF                    1997 	.db #0xbf	; 191
+      000609 3F                    1998 	.db #0x3f	; 63
+      00060A 7F                    1999 	.db #0x7f	; 127
+      00060B 3F                    2000 	.db #0x3f	; 63
+      00060C BF                    2001 	.db #0xbf	; 191
+      00060D 3F                    2002 	.db #0x3f	; 63
+      00060E 7F                    2003 	.db #0x7f	; 127
+      00060F 3F                    2004 	.db #0x3f	; 63
+      000610 3F                    2005 	.db #0x3f	; 63
+      000611 BF                    2006 	.db #0xbf	; 191
+      000612 3F                    2007 	.db #0x3f	; 63
+      000613 7F                    2008 	.db #0x7f	; 127
+      000614 3F                    2009 	.db #0x3f	; 63
+      000615 BF                    2010 	.db #0xbf	; 191
+      000616 3F                    2011 	.db #0x3f	; 63
+      000617 7F                    2012 	.db #0x7f	; 127
+      000618 3F                    2013 	.db #0x3f	; 63
+      000619 BF                    2014 	.db #0xbf	; 191
+      00061A 3F                    2015 	.db #0x3f	; 63
+      00061B 7F                    2016 	.db #0x7f	; 127
+      00061C 3F                    2017 	.db #0x3f	; 63
+      00061D BF                    2018 	.db #0xbf	; 191
+      00061E 3F                    2019 	.db #0x3f	; 63
+      00061F 7F                    2020 	.db #0x7f	; 127
+      000620 EA                    2021 	.db #0xea	; 234
+      000621 C0                    2022 	.db #0xc0	; 192
+      000622 D5                    2023 	.db #0xd5	; 213
+      000623 C0                    2024 	.db #0xc0	; 192
+      000624 EA                    2025 	.db #0xea	; 234
+      000625 C0                    2026 	.db #0xc0	; 192
+      000626 D5                    2027 	.db #0xd5	; 213
+      000627 C0                    2028 	.db #0xc0	; 192
+      000628 EA                    2029 	.db #0xea	; 234
+      000629 C0                    2030 	.db #0xc0	; 192
+      00062A D5                    2031 	.db #0xd5	; 213
+      00062B C0                    2032 	.db #0xc0	; 192
+      00062C EA                    2033 	.db #0xea	; 234
+      00062D C0                    2034 	.db #0xc0	; 192
+      00062E D5                    2035 	.db #0xd5	; 213
+      00062F C0                    2036 	.db #0xc0	; 192
+      000630 03                    2037 	.db #0x03	; 3
+      000631 AB                    2038 	.db #0xab	; 171
+      000632 03                    2039 	.db #0x03	; 3
+      000633 57                    2040 	.db #0x57	; 87	'W'
+      000634 03                    2041 	.db #0x03	; 3
+      000635 AB                    2042 	.db #0xab	; 171
+      000636 03                    2043 	.db #0x03	; 3
+      000637 57                    2044 	.db #0x57	; 87	'W'
+      000638 03                    2045 	.db #0x03	; 3
+      000639 AB                    2046 	.db #0xab	; 171
+      00063A 03                    2047 	.db #0x03	; 3
+      00063B 57                    2048 	.db #0x57	; 87	'W'
+      00063C 03                    2049 	.db #0x03	; 3
+      00063D AB                    2050 	.db #0xab	; 171
+      00063E 03                    2051 	.db #0x03	; 3
+      00063F 57                    2052 	.db #0x57	; 87	'W'
+      000640 EA                    2053 	.db #0xea	; 234
+      000641 C0                    2054 	.db #0xc0	; 192
+      000642 D5                    2055 	.db #0xd5	; 213
+      000643 C0                    2056 	.db #0xc0	; 192
+      000644 FF                    2057 	.db #0xff	; 255
+      000645 FF                    2058 	.db #0xff	; 255
+      000646 FF                    2059 	.db #0xff	; 255
+      000647 FF                    2060 	.db #0xff	; 255
+      000648 FF                    2061 	.db #0xff	; 255
+      000649 FF                    2062 	.db #0xff	; 255
+      00064A FF                    2063 	.db #0xff	; 255
+      00064B FF                    2064 	.db #0xff	; 255
+      00064C FF                    2065 	.db #0xff	; 255
+      00064D FF                    2066 	.db #0xff	; 255
+      00064E FF                    2067 	.db #0xff	; 255
+      00064F FF                    2068 	.db #0xff	; 255
+      000650 03                    2069 	.db #0x03	; 3
+      000651 AB                    2070 	.db #0xab	; 171
+      000652 03                    2071 	.db #0x03	; 3
+      000653 57                    2072 	.db #0x57	; 87	'W'
+      000654 FF                    2073 	.db #0xff	; 255
+      000655 FF                    2074 	.db #0xff	; 255
+      000656 FF                    2075 	.db #0xff	; 255
+      000657 FF                    2076 	.db #0xff	; 255
+      000658 FF                    2077 	.db #0xff	; 255
+      000659 FF                    2078 	.db #0xff	; 255
+      00065A FF                    2079 	.db #0xff	; 255
+      00065B FF                    2080 	.db #0xff	; 255
+      00065C FF                    2081 	.db #0xff	; 255
+      00065D FF                    2082 	.db #0xff	; 255
+      00065E FF                    2083 	.db #0xff	; 255
+      00065F FF                    2084 	.db #0xff	; 255
+      000660 FF                    2085 	.db #0xff	; 255
+      000661 FF                    2086 	.db #0xff	; 255
+      000662 FF                    2087 	.db #0xff	; 255
+      000663 FF                    2088 	.db #0xff	; 255
+      000664 FF                    2089 	.db #0xff	; 255
+      000665 FF                    2090 	.db #0xff	; 255
+      000666 FF                    2091 	.db #0xff	; 255
+      000667 FF                    2092 	.db #0xff	; 255
+      000668 FF                    2093 	.db #0xff	; 255
+      000669 FF                    2094 	.db #0xff	; 255
+      00066A FF                    2095 	.db #0xff	; 255
+      00066B FF                    2096 	.db #0xff	; 255
+      00066C EA                    2097 	.db #0xea	; 234
+      00066D C0                    2098 	.db #0xc0	; 192
+      00066E D5                    2099 	.db #0xd5	; 213
+      00066F C0                    2100 	.db #0xc0	; 192
+      000670 FF                    2101 	.db #0xff	; 255
+      000671 FF                    2102 	.db #0xff	; 255
+      000672 FF                    2103 	.db #0xff	; 255
+      000673 FF                    2104 	.db #0xff	; 255
+      000674 FF                    2105 	.db #0xff	; 255
+      000675 FF                    2106 	.db #0xff	; 255
+      000676 FF                    2107 	.db #0xff	; 255
+      000677 FF                    2108 	.db #0xff	; 255
+      000678 FF                    2109 	.db #0xff	; 255
+      000679 FF                    2110 	.db #0xff	; 255
+      00067A FF                    2111 	.db #0xff	; 255
+      00067B FF                    2112 	.db #0xff	; 255
+      00067C 03                    2113 	.db #0x03	; 3
+      00067D AB                    2114 	.db #0xab	; 171
+      00067E 03                    2115 	.db #0x03	; 3
+      00067F 57                    2116 	.db #0x57	; 87	'W'
+      000680 FC                    2117 	.db #0xfc	; 252
+      000681 FE                    2118 	.db #0xfe	; 254
+      000682 FC                    2119 	.db #0xfc	; 252
+      000683 FD                    2120 	.db #0xfd	; 253
+      000684 FC                    2121 	.db #0xfc	; 252
+      000685 FE                    2122 	.db #0xfe	; 254
+      000686 FC                    2123 	.db #0xfc	; 252
+      000687 FD                    2124 	.db #0xfd	; 253
+      000688 FC                    2125 	.db #0xfc	; 252
+      000689 FE                    2126 	.db #0xfe	; 254
+      00068A FC                    2127 	.db #0xfc	; 252
+      00068B FD                    2128 	.db #0xfd	; 253
+      00068C FC                    2129 	.db #0xfc	; 252
+      00068D FE                    2130 	.db #0xfe	; 254
+      00068E FC                    2131 	.db #0xfc	; 252
+      00068F FD                    2132 	.db #0xfd	; 253
+      000690 AB                    2133 	.db #0xab	; 171
+      000691 01                    2134 	.db #0x01	; 1
+      000692 57                    2135 	.db #0x57	; 87	'W'
+      000693 03                    2136 	.db #0x03	; 3
+      000694 FF                    2137 	.db #0xff	; 255
+      000695 FF                    2138 	.db #0xff	; 255
+      000696 FF                    2139 	.db #0xff	; 255
+      000697 FF                    2140 	.db #0xff	; 255
+      000698 FF                    2141 	.db #0xff	; 255
+      000699 FF                    2142 	.db #0xff	; 255
+      00069A FF                    2143 	.db #0xff	; 255
+      00069B FF                    2144 	.db #0xff	; 255
+      00069C FF                    2145 	.db #0xff	; 255
+      00069D FF                    2146 	.db #0xff	; 255
+      00069E FF                    2147 	.db #0xff	; 255
+      00069F FF                    2148 	.db #0xff	; 255
+      0006A0 AB                    2149 	.db #0xab	; 171
+      0006A1 01                    2150 	.db #0x01	; 1
+      0006A2 57                    2151 	.db #0x57	; 87	'W'
+      0006A3 03                    2152 	.db #0x03	; 3
+      0006A4 AF                    2153 	.db #0xaf	; 175
+      0006A5 07                    2154 	.db #0x07	; 7
+      0006A6 5F                    2155 	.db #0x5f	; 95
+      0006A7 0F                    2156 	.db #0x0f	; 15
+      0006A8 BF                    2157 	.db #0xbf	; 191
+      0006A9 1F                    2158 	.db #0x1f	; 31
+      0006AA 7F                    2159 	.db #0x7f	; 127
+      0006AB 3F                    2160 	.db #0x3f	; 63
+      0006AC FF                    2161 	.db #0xff	; 255
+      0006AD 7F                    2162 	.db #0x7f	; 127
+      0006AE FF                    2163 	.db #0xff	; 255
+      0006AF FF                    2164 	.db #0xff	; 255
+      0006B0 BF                    2165 	.db #0xbf	; 191
+      0006B1 3F                    2166 	.db #0x3f	; 63
+      0006B2 7F                    2167 	.db #0x7f	; 127
+      0006B3 3F                    2168 	.db #0x3f	; 63
+      0006B4 BF                    2169 	.db #0xbf	; 191
+      0006B5 3F                    2170 	.db #0x3f	; 63
+      0006B6 7F                    2171 	.db #0x7f	; 127
+      0006B7 3F                    2172 	.db #0x3f	; 63
+      0006B8 BF                    2173 	.db #0xbf	; 191
+      0006B9 3F                    2174 	.db #0x3f	; 63
+      0006BA 7F                    2175 	.db #0x7f	; 127
+      0006BB 3F                    2176 	.db #0x3f	; 63
+      0006BC FF                    2177 	.db #0xff	; 255
+      0006BD 7F                    2178 	.db #0x7f	; 127
+      0006BE FF                    2179 	.db #0xff	; 255
+      0006BF FF                    2180 	.db #0xff	; 255
+      0006C0 FE                    2181 	.db #0xfe	; 254
+      0006C1 FE                    2182 	.db #0xfe	; 254
+      0006C2 FC                    2183 	.db #0xfc	; 252
+      0006C3 FC                    2184 	.db #0xfc	; 252
+      0006C4 F8                    2185 	.db #0xf8	; 248
+      0006C5 F8                    2186 	.db #0xf8	; 248
+      0006C6 F0                    2187 	.db #0xf0	; 240
+      0006C7 F0                    2188 	.db #0xf0	; 240
+      0006C8 E0                    2189 	.db #0xe0	; 224
+      0006C9 E0                    2190 	.db #0xe0	; 224
+      0006CA C0                    2191 	.db #0xc0	; 192
+      0006CB C0                    2192 	.db #0xc0	; 192
+      0006CC 80                    2193 	.db #0x80	; 128
+      0006CD 80                    2194 	.db #0x80	; 128
+      0006CE 00                    2195 	.db #0x00	; 0
+      0006CF 00                    2196 	.db #0x00	; 0
+      0006D0 FF                    2197 	.db #0xff	; 255
+      0006D1 FF                    2198 	.db #0xff	; 255
+      0006D2 FF                    2199 	.db #0xff	; 255
+      0006D3 FF                    2200 	.db #0xff	; 255
+      0006D4 FF                    2201 	.db #0xff	; 255
+      0006D5 FF                    2202 	.db #0xff	; 255
+      0006D6 FF                    2203 	.db #0xff	; 255
+      0006D7 FF                    2204 	.db #0xff	; 255
+      0006D8 FF                    2205 	.db #0xff	; 255
+      0006D9 FF                    2206 	.db #0xff	; 255
+      0006DA FF                    2207 	.db #0xff	; 255
+      0006DB FF                    2208 	.db #0xff	; 255
+      0006DC 57                    2209 	.db #0x57	; 87	'W'
+      0006DD 03                    2210 	.db #0x03	; 3
+      0006DE AB                    2211 	.db #0xab	; 171
+      0006DF 01                    2212 	.db #0x01	; 1
+      0006E0 FF                    2213 	.db #0xff	; 255
+      0006E1 FF                    2214 	.db #0xff	; 255
+      0006E2 7F                    2215 	.db #0x7f	; 127
+      0006E3 7F                    2216 	.db #0x7f	; 127
+      0006E4 BF                    2217 	.db #0xbf	; 191
+      0006E5 3F                    2218 	.db #0x3f	; 63
+      0006E6 5F                    2219 	.db #0x5f	; 95
+      0006E7 1F                    2220 	.db #0x1f	; 31
+      0006E8 AF                    2221 	.db #0xaf	; 175
+      0006E9 0F                    2222 	.db #0x0f	; 15
+      0006EA 57                    2223 	.db #0x57	; 87	'W'
+      0006EB 07                    2224 	.db #0x07	; 7
+      0006EC AB                    2225 	.db #0xab	; 171
+      0006ED 03                    2226 	.db #0x03	; 3
+      0006EE 55                    2227 	.db #0x55	; 85	'U'
+      0006EF 01                    2228 	.db #0x01	; 1
+      0006F0 FF                    2229 	.db #0xff	; 255
+      0006F1 FF                    2230 	.db #0xff	; 255
+      0006F2 7F                    2231 	.db #0x7f	; 127
+      0006F3 7F                    2232 	.db #0x7f	; 127
+      0006F4 BF                    2233 	.db #0xbf	; 191
+      0006F5 3F                    2234 	.db #0x3f	; 63
+      0006F6 7F                    2235 	.db #0x7f	; 127
+      0006F7 3F                    2236 	.db #0x3f	; 63
+      0006F8 BF                    2237 	.db #0xbf	; 191
+      0006F9 3F                    2238 	.db #0x3f	; 63
+      0006FA 7F                    2239 	.db #0x7f	; 127
+      0006FB 3F                    2240 	.db #0x3f	; 63
+      0006FC BF                    2241 	.db #0xbf	; 191
+      0006FD 3F                    2242 	.db #0x3f	; 63
+      0006FE 7F                    2243 	.db #0x7f	; 127
+      0006FF 3F                    2244 	.db #0x3f	; 63
+      000700 00                    2245 	.db #0x00	; 0
+      000701 00                    2246 	.db #0x00	; 0
+      000702 80                    2247 	.db #0x80	; 128
+      000703 80                    2248 	.db #0x80	; 128
+      000704 C0                    2249 	.db #0xc0	; 192
+      000705 C0                    2250 	.db #0xc0	; 192
+      000706 E0                    2251 	.db #0xe0	; 224
+      000707 E0                    2252 	.db #0xe0	; 224
+      000708 F0                    2253 	.db #0xf0	; 240
+      000709 F0                    2254 	.db #0xf0	; 240
+      00070A F8                    2255 	.db #0xf8	; 248
+      00070B F8                    2256 	.db #0xf8	; 248
+      00070C FC                    2257 	.db #0xfc	; 252
+      00070D FC                    2258 	.db #0xfc	; 252
+      00070E FE                    2259 	.db #0xfe	; 254
+      00070F FE                    2260 	.db #0xfe	; 254
+      000710 FF                    2261 	.db #0xff	; 255
+      000711 FF                    2262 	.db #0xff	; 255
+      000712 FF                    2263 	.db #0xff	; 255
+      000713 FF                    2264 	.db #0xff	; 255
+      000714 FF                    2265 	.db #0xff	; 255
+      000715 FF                    2266 	.db #0xff	; 255
+      000716 FF                    2267 	.db #0xff	; 255
+      000717 FF                    2268 	.db #0xff	; 255
+      000718 FF                    2269 	.db #0xff	; 255
+      000719 FF                    2270 	.db #0xff	; 255
+      00071A FF                    2271 	.db #0xff	; 255
+      00071B FF                    2272 	.db #0xff	; 255
+      00071C C0                    2273 	.db #0xc0	; 192
+      00071D EA                    2274 	.db #0xea	; 234
+      00071E 80                    2275 	.db #0x80	; 128
+      00071F D5                    2276 	.db #0xd5	; 213
+      000720 FF                    2277 	.db #0xff	; 255
+      000721 FF                    2278 	.db #0xff	; 255
+      000722 FE                    2279 	.db #0xfe	; 254
+      000723 FF                    2280 	.db #0xff	; 255
+      000724 FC                    2281 	.db #0xfc	; 252
+      000725 FE                    2282 	.db #0xfe	; 254
+      000726 F8                    2283 	.db #0xf8	; 248
+      000727 FD                    2284 	.db #0xfd	; 253
+      000728 F0                    2285 	.db #0xf0	; 240
+      000729 FA                    2286 	.db #0xfa	; 250
+      00072A E0                    2287 	.db #0xe0	; 224
+      00072B F5                    2288 	.db #0xf5	; 245
+      00072C C0                    2289 	.db #0xc0	; 192
+      00072D EA                    2290 	.db #0xea	; 234
+      00072E 80                    2291 	.db #0x80	; 128
+      00072F D5                    2292 	.db #0xd5	; 213
+      000730 FF                    2293 	.db #0xff	; 255
+      000731 FF                    2294 	.db #0xff	; 255
+      000732 FE                    2295 	.db #0xfe	; 254
+      000733 FF                    2296 	.db #0xff	; 255
+      000734 FC                    2297 	.db #0xfc	; 252
+      000735 FE                    2298 	.db #0xfe	; 254
+      000736 FC                    2299 	.db #0xfc	; 252
+      000737 FD                    2300 	.db #0xfd	; 253
+      000738 FC                    2301 	.db #0xfc	; 252
+      000739 FE                    2302 	.db #0xfe	; 254
+      00073A FC                    2303 	.db #0xfc	; 252
+      00073B FD                    2304 	.db #0xfd	; 253
+      00073C FC                    2305 	.db #0xfc	; 252
+      00073D FE                    2306 	.db #0xfe	; 254
+      00073E FC                    2307 	.db #0xfc	; 252
+      00073F FD                    2308 	.db #0xfd	; 253
+      000740 00                    2309 	.db #0x00	; 0
+      000741 00                    2310 	.db #0x00	; 0
+      000742 01                    2311 	.db #0x01	; 1
+      000743 01                    2312 	.db #0x01	; 1
+      000744 03                    2313 	.db #0x03	; 3
+      000745 03                    2314 	.db #0x03	; 3
+      000746 07                    2315 	.db #0x07	; 7
+      000747 07                    2316 	.db #0x07	; 7
+      000748 0F                    2317 	.db #0x0f	; 15
+      000749 0F                    2318 	.db #0x0f	; 15
+      00074A 1F                    2319 	.db #0x1f	; 31
+      00074B 1F                    2320 	.db #0x1f	; 31
+      00074C 3F                    2321 	.db #0x3f	; 63
+      00074D 3F                    2322 	.db #0x3f	; 63
+      00074E 7F                    2323 	.db #0x7f	; 127
+      00074F 7F                    2324 	.db #0x7f	; 127
+      000750 80                    2325 	.db #0x80	; 128
+      000751 AA                    2326 	.db #0xaa	; 170
+      000752 C0                    2327 	.db #0xc0	; 192
+      000753 D5                    2328 	.db #0xd5	; 213
+      000754 FF                    2329 	.db #0xff	; 255
+      000755 FF                    2330 	.db #0xff	; 255
+      000756 FF                    2331 	.db #0xff	; 255
+      000757 FF                    2332 	.db #0xff	; 255
+      000758 FF                    2333 	.db #0xff	; 255
+      000759 FF                    2334 	.db #0xff	; 255
+      00075A FF                    2335 	.db #0xff	; 255
+      00075B FF                    2336 	.db #0xff	; 255
+      00075C FF                    2337 	.db #0xff	; 255
+      00075D FF                    2338 	.db #0xff	; 255
+      00075E FF                    2339 	.db #0xff	; 255
+      00075F FF                    2340 	.db #0xff	; 255
+      000760 80                    2341 	.db #0x80	; 128
+      000761 AA                    2342 	.db #0xaa	; 170
+      000762 C0                    2343 	.db #0xc0	; 192
+      000763 D5                    2344 	.db #0xd5	; 213
+      000764 E0                    2345 	.db #0xe0	; 224
+      000765 EA                    2346 	.db #0xea	; 234
+      000766 F0                    2347 	.db #0xf0	; 240
+      000767 F5                    2348 	.db #0xf5	; 245
+      000768 F8                    2349 	.db #0xf8	; 248
+      000769 FA                    2350 	.db #0xfa	; 250
+      00076A FC                    2351 	.db #0xfc	; 252
+      00076B FD                    2352 	.db #0xfd	; 253
+      00076C FE                    2353 	.db #0xfe	; 254
+      00076D FE                    2354 	.db #0xfe	; 254
+      00076E FF                    2355 	.db #0xff	; 255
+      00076F FF                    2356 	.db #0xff	; 255
+      000770 FC                    2357 	.db #0xfc	; 252
+      000771 FE                    2358 	.db #0xfe	; 254
+      000772 FC                    2359 	.db #0xfc	; 252
+      000773 FD                    2360 	.db #0xfd	; 253
+      000774 FC                    2361 	.db #0xfc	; 252
+      000775 FE                    2362 	.db #0xfe	; 254
+      000776 FC                    2363 	.db #0xfc	; 252
+      000777 FD                    2364 	.db #0xfd	; 253
+      000778 FC                    2365 	.db #0xfc	; 252
+      000779 FE                    2366 	.db #0xfe	; 254
+      00077A FC                    2367 	.db #0xfc	; 252
+      00077B FD                    2368 	.db #0xfd	; 253
+      00077C FE                    2369 	.db #0xfe	; 254
+      00077D FE                    2370 	.db #0xfe	; 254
+      00077E FF                    2371 	.db #0xff	; 255
+      00077F FF                    2372 	.db #0xff	; 255
+      000780 7F                    2373 	.db #0x7f	; 127
+      000781 7F                    2374 	.db #0x7f	; 127
+      000782 3F                    2375 	.db #0x3f	; 63
+      000783 3F                    2376 	.db #0x3f	; 63
+      000784 1F                    2377 	.db #0x1f	; 31
+      000785 1F                    2378 	.db #0x1f	; 31
+      000786 0F                    2379 	.db #0x0f	; 15
+      000787 0F                    2380 	.db #0x0f	; 15
+      000788 07                    2381 	.db #0x07	; 7
+      000789 07                    2382 	.db #0x07	; 7
+      00078A 03                    2383 	.db #0x03	; 3
+      00078B 03                    2384 	.db #0x03	; 3
+      00078C 01                    2385 	.db #0x01	; 1
+      00078D 01                    2386 	.db #0x01	; 1
+      00078E 00                    2387 	.db #0x00	; 0
+      00078F 00                    2388 	.db #0x00	; 0
+      000790 0C                    2389 	.db #0x0c	; 12
+      000791 AE                    2390 	.db #0xae	; 174
+      000792 0C                    2391 	.db #0x0c	; 12
+      000793 5D                    2392 	.db #0x5d	; 93
+      000794 0C                    2393 	.db #0x0c	; 12
+      000795 AE                    2394 	.db #0xae	; 174
+      000796 0C                    2395 	.db #0x0c	; 12
+      000797 5D                    2396 	.db #0x5d	; 93
+      000798 FC                    2397 	.db #0xfc	; 252
+      000799 FE                    2398 	.db #0xfe	; 254
+      00079A FC                    2399 	.db #0xfc	; 252
+      00079B FD                    2400 	.db #0xfd	; 253
+      00079C FC                    2401 	.db #0xfc	; 252
+      00079D FE                    2402 	.db #0xfe	; 254
+      00079E FC                    2403 	.db #0xfc	; 252
+      00079F FD                    2404 	.db #0xfd	; 253
+      0007A0 FC                    2405 	.db #0xfc	; 252
+      0007A1 FE                    2406 	.db #0xfe	; 254
+      0007A2 FC                    2407 	.db #0xfc	; 252
+      0007A3 FD                    2408 	.db #0xfd	; 253
+      0007A4 FC                    2409 	.db #0xfc	; 252
+      0007A5 FE                    2410 	.db #0xfe	; 254
+      0007A6 FC                    2411 	.db #0xfc	; 252
+      0007A7 FD                    2412 	.db #0xfd	; 253
+      0007A8 0C                    2413 	.db #0x0c	; 12
+      0007A9 AE                    2414 	.db #0xae	; 174
+      0007AA 0C                    2415 	.db #0x0c	; 12
+      0007AB 5D                    2416 	.db #0x5d	; 93
+      0007AC 0C                    2417 	.db #0x0c	; 12
+      0007AD AE                    2418 	.db #0xae	; 174
+      0007AE 0C                    2419 	.db #0x0c	; 12
+      0007AF 5D                    2420 	.db #0x5d	; 93
+      0007B0 0C                    2421 	.db #0x0c	; 12
+      0007B1 AE                    2422 	.db #0xae	; 174
+      0007B2 0C                    2423 	.db #0x0c	; 12
+      0007B3 5D                    2424 	.db #0x5d	; 93
+      0007B4 0C                    2425 	.db #0x0c	; 12
+      0007B5 AE                    2426 	.db #0xae	; 174
+      0007B6 0C                    2427 	.db #0x0c	; 12
+      0007B7 5D                    2428 	.db #0x5d	; 93
+      0007B8 0C                    2429 	.db #0x0c	; 12
+      0007B9 AE                    2430 	.db #0xae	; 174
+      0007BA 0C                    2431 	.db #0x0c	; 12
+      0007BB 5D                    2432 	.db #0x5d	; 93
+      0007BC 0C                    2433 	.db #0x0c	; 12
+      0007BD AE                    2434 	.db #0xae	; 174
+      0007BE 0C                    2435 	.db #0x0c	; 12
+      0007BF 5D                    2436 	.db #0x5d	; 93
+      0007C0 F0                    2437 	.db #0xf0	; 240
+      0007C1 FA                    2438 	.db #0xfa	; 250
+      0007C2 F0                    2439 	.db #0xf0	; 240
+      0007C3 F5                    2440 	.db #0xf5	; 245
+      0007C4 F0                    2441 	.db #0xf0	; 240
+      0007C5 FA                    2442 	.db #0xfa	; 250
+      0007C6 F0                    2443 	.db #0xf0	; 240
+      0007C7 F5                    2444 	.db #0xf5	; 245
+      0007C8 FF                    2445 	.db #0xff	; 255
+      0007C9 FF                    2446 	.db #0xff	; 255
+      0007CA FF                    2447 	.db #0xff	; 255
+      0007CB FF                    2448 	.db #0xff	; 255
+      0007CC 7F                    2449 	.db #0x7f	; 127
+      0007CD 7F                    2450 	.db #0x7f	; 127
+      0007CE 3F                    2451 	.db #0x3f	; 63
+      0007CF 3F                    2452 	.db #0x3f	; 63
+      0007D0 F0                    2453 	.db #0xf0	; 240
+      0007D1 FA                    2454 	.db #0xfa	; 250
+      0007D2 F0                    2455 	.db #0xf0	; 240
+      0007D3 F5                    2456 	.db #0xf5	; 245
+      0007D4 F0                    2457 	.db #0xf0	; 240
+      0007D5 FA                    2458 	.db #0xfa	; 250
+      0007D6 F0                    2459 	.db #0xf0	; 240
+      0007D7 F5                    2460 	.db #0xf5	; 245
+      0007D8 F0                    2461 	.db #0xf0	; 240
+      0007D9 FA                    2462 	.db #0xfa	; 250
+      0007DA F0                    2463 	.db #0xf0	; 240
+      0007DB F5                    2464 	.db #0xf5	; 245
+      0007DC F0                    2465 	.db #0xf0	; 240
+      0007DD FA                    2466 	.db #0xfa	; 250
+      0007DE F0                    2467 	.db #0xf0	; 240
+      0007DF F5                    2468 	.db #0xf5	; 245
+      0007E0 3F                    2469 	.db #0x3f	; 63
+      0007E1 3F                    2470 	.db #0x3f	; 63
+      0007E2 7F                    2471 	.db #0x7f	; 127
+      0007E3 7F                    2472 	.db #0x7f	; 127
+      0007E4 FF                    2473 	.db #0xff	; 255
+      0007E5 FF                    2474 	.db #0xff	; 255
+      0007E6 FF                    2475 	.db #0xff	; 255
+      0007E7 FF                    2476 	.db #0xff	; 255
+      0007E8 F0                    2477 	.db #0xf0	; 240
+      0007E9 FA                    2478 	.db #0xfa	; 250
+      0007EA F0                    2479 	.db #0xf0	; 240
+      0007EB F5                    2480 	.db #0xf5	; 245
+      0007EC F0                    2481 	.db #0xf0	; 240
+      0007ED FA                    2482 	.db #0xfa	; 250
+      0007EE F0                    2483 	.db #0xf0	; 240
+      0007EF F5                    2484 	.db #0xf5	; 245
+      0007F0 BA                    2485 	.db #0xba	; 186
+      0007F1 30                    2486 	.db #0x30	; 48	'0'
+      0007F2 75                    2487 	.db #0x75	; 117	'u'
+      0007F3 30                    2488 	.db #0x30	; 48	'0'
+      0007F4 BA                    2489 	.db #0xba	; 186
+      0007F5 30                    2490 	.db #0x30	; 48	'0'
+      0007F6 75                    2491 	.db #0x75	; 117	'u'
+      0007F7 30                    2492 	.db #0x30	; 48	'0'
+      0007F8 BF                    2493 	.db #0xbf	; 191
+      0007F9 3F                    2494 	.db #0x3f	; 63
+      0007FA 7F                    2495 	.db #0x7f	; 127
+      0007FB 3F                    2496 	.db #0x3f	; 63
+      0007FC BF                    2497 	.db #0xbf	; 191
+      0007FD 3F                    2498 	.db #0x3f	; 63
+      0007FE 7F                    2499 	.db #0x7f	; 127
+      0007FF 3F                    2500 	.db #0x3f	; 63
+      000800 BF                    2501 	.db #0xbf	; 191
+      000801 3F                    2502 	.db #0x3f	; 63
+      000802 7F                    2503 	.db #0x7f	; 127
+      000803 3F                    2504 	.db #0x3f	; 63
+      000804 BF                    2505 	.db #0xbf	; 191
+      000805 3F                    2506 	.db #0x3f	; 63
+      000806 7F                    2507 	.db #0x7f	; 127
+      000807 3F                    2508 	.db #0x3f	; 63
+      000808 BA                    2509 	.db #0xba	; 186
+      000809 30                    2510 	.db #0x30	; 48	'0'
+      00080A 75                    2511 	.db #0x75	; 117	'u'
+      00080B 30                    2512 	.db #0x30	; 48	'0'
+      00080C BA                    2513 	.db #0xba	; 186
+      00080D 30                    2514 	.db #0x30	; 48	'0'
+      00080E 75                    2515 	.db #0x75	; 117	'u'
+      00080F 30                    2516 	.db #0x30	; 48	'0'
+      000810 BA                    2517 	.db #0xba	; 186
+      000811 30                    2518 	.db #0x30	; 48	'0'
+      000812 75                    2519 	.db #0x75	; 117	'u'
+      000813 30                    2520 	.db #0x30	; 48	'0'
+      000814 BA                    2521 	.db #0xba	; 186
+      000815 30                    2522 	.db #0x30	; 48	'0'
+      000816 75                    2523 	.db #0x75	; 117	'u'
+      000817 30                    2524 	.db #0x30	; 48	'0'
+      000818 BA                    2525 	.db #0xba	; 186
+      000819 30                    2526 	.db #0x30	; 48	'0'
+      00081A 75                    2527 	.db #0x75	; 117	'u'
+      00081B 30                    2528 	.db #0x30	; 48	'0'
+      00081C BA                    2529 	.db #0xba	; 186
+      00081D 30                    2530 	.db #0x30	; 48	'0'
+      00081E 75                    2531 	.db #0x75	; 117	'u'
+      00081F 30                    2532 	.db #0x30	; 48	'0'
+      000820 AF                    2533 	.db #0xaf	; 175
+      000821 0F                    2534 	.db #0x0f	; 15
+      000822 5F                    2535 	.db #0x5f	; 95
+      000823 0F                    2536 	.db #0x0f	; 15
+      000824 AF                    2537 	.db #0xaf	; 175
+      000825 0F                    2538 	.db #0x0f	; 15
+      000826 5F                    2539 	.db #0x5f	; 95
+      000827 0F                    2540 	.db #0x0f	; 15
+      000828 FF                    2541 	.db #0xff	; 255
+      000829 FF                    2542 	.db #0xff	; 255
+      00082A FF                    2543 	.db #0xff	; 255
+      00082B FF                    2544 	.db #0xff	; 255
+      00082C FE                    2545 	.db #0xfe	; 254
+      00082D FE                    2546 	.db #0xfe	; 254
+      00082E FC                    2547 	.db #0xfc	; 252
+      00082F FC                    2548 	.db #0xfc	; 252
+      000830 AF                    2549 	.db #0xaf	; 175
+      000831 0F                    2550 	.db #0x0f	; 15
+      000832 5F                    2551 	.db #0x5f	; 95
+      000833 0F                    2552 	.db #0x0f	; 15
+      000834 AF                    2553 	.db #0xaf	; 175
+      000835 0F                    2554 	.db #0x0f	; 15
+      000836 5F                    2555 	.db #0x5f	; 95
+      000837 0F                    2556 	.db #0x0f	; 15
+      000838 AF                    2557 	.db #0xaf	; 175
+      000839 0F                    2558 	.db #0x0f	; 15
+      00083A 5F                    2559 	.db #0x5f	; 95
+      00083B 0F                    2560 	.db #0x0f	; 15
+      00083C AF                    2561 	.db #0xaf	; 175
+      00083D 0F                    2562 	.db #0x0f	; 15
+      00083E 5F                    2563 	.db #0x5f	; 95
+      00083F 0F                    2564 	.db #0x0f	; 15
+      000840 FC                    2565 	.db #0xfc	; 252
+      000841 FC                    2566 	.db #0xfc	; 252
+      000842 FE                    2567 	.db #0xfe	; 254
+      000843 FE                    2568 	.db #0xfe	; 254
+      000844 FF                    2569 	.db #0xff	; 255
+      000845 FF                    2570 	.db #0xff	; 255
+      000846 FF                    2571 	.db #0xff	; 255
+      000847 FF                    2572 	.db #0xff	; 255
+      000848 AF                    2573 	.db #0xaf	; 175
+      000849 0F                    2574 	.db #0x0f	; 15
+      00084A 5F                    2575 	.db #0x5f	; 95
+      00084B 0F                    2576 	.db #0x0f	; 15
+      00084C AF                    2577 	.db #0xaf	; 175
+      00084D 0F                    2578 	.db #0x0f	; 15
+      00084E 5F                    2579 	.db #0x5f	; 95
+      00084F 0F                    2580 	.db #0x0f	; 15
+      000850 00                    2581 	.db #0x00	; 0
+      000851 00                    2582 	.db #0x00	; 0
+      000852 00                    2583 	.db #0x00	; 0
+      000853 00                    2584 	.db #0x00	; 0
+      000854 00                    2585 	.db #0x00	; 0
+      000855 00                    2586 	.db #0x00	; 0
+      000856 00                    2587 	.db #0x00	; 0
+      000857 00                    2588 	.db #0x00	; 0
+      000858 00                    2589 	.db #0x00	; 0
+      000859 00                    2590 	.db #0x00	; 0
+      00085A 00                    2591 	.db #0x00	; 0
+      00085B 00                    2592 	.db #0x00	; 0
+      00085C 00                    2593 	.db #0x00	; 0
+      00085D 00                    2594 	.db #0x00	; 0
+      00085E 00                    2595 	.db #0x00	; 0
+      00085F 00                    2596 	.db #0x00	; 0
+      000860                       2597 __xinit__spritesize:
+      000860 08                    2598 	.db #0x08	; 8
+                                   2599 	.area _CABS (ABS)

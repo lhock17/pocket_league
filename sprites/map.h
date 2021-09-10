@@ -9,7 +9,7 @@
    Bank          : 0
    Map size      : 26 x 16
    Tile set      : stadium.gbr
-   Plane count   : 0.5 plane (4 bits)
+   Plane count   : 1 plane (8 bits)
    Plane order   : Tiles are continues
    Tile offset   : 0
    Split data    : No
