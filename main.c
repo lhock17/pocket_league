@@ -4,9 +4,6 @@
 #include "sprites/car_light.c"
 #include "sprites/map.c"
 #include "sprites/map_sprites.c"
-#include "car_light.c"
-#include "map.c"
-#include "map_sprites.c"
 
 struct GameCharacter car1;
 UBYTE spritesize = 8;
@@ -66,6 +63,13 @@ void setupcar_light(){
 }
 
 void main(){
+
+    // load sprites for car
+    //background
+    set_bkg_data(0, 10, map);
+    set_bkg_tiles(0, 0, 40, 18, TileLabel);
+    SHOW_BKG;
+
     set_sprite_data(0,4, car_light);
     setupcar_light();
     SHOW_SPRITES;
@@ -81,16 +85,5 @@ void main(){
            movegamecharacter(&car1, car1.x, car1.y);
        }
        performantdelay(5);    
-    }  
-        if(currentspriteindex==0){
-            currentspriteindex = 1;
-        }
-        else{
-            currentspriteindex = 0;
-        }
-        set_sprite_tile(0, currentspriteindex);
-        delay(1000);
-        scroll_sprite(0,10,0);
-        //scroll_bkg(1,0);
     }
 }
