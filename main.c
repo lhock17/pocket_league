@@ -4,6 +4,11 @@
 #include "sprites/map.c"
 #include "sprites/map_sprites.c"
 
+#define AND &&
+#define OR ||
+#define SCREEN_WIDTH 160
+#define SCREEN_HEIGHT 144;
+
 struct Car car1;
 UBYTE spritesize = 8;
 
@@ -15,6 +20,11 @@ struct Car {
 	UINT8 width;
 	UINT8 height;
 };
+
+UBYTE check_collisions(Car* one, Car* two) {
+    return (one->x >= two->x AND one->x <= two-> x + two->width) OR
+        (two->y >= one->y AND two->y <= one->y + one->height);
+}
 
 void load_car_sprite(UINT8 direction) {
         set_sprite_tile(0, 4 * direction);
@@ -69,7 +79,7 @@ void main(){
 
     // load sprites for car
     //background
-    set_bkg_data(0, 10, map);
+    set_bkg_data(0, 3, map);
     set_bkg_tiles(0, 0, 40, 18, TileLabel);
     SHOW_BKG;
 
