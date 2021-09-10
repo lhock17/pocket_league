@@ -10,6 +10,10 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144;
 
+struct GameObject car1;
+struct GameObject ball;
+UBYTE spritesize = 8;
+
 struct GameObject {
     UINT8 direction;
     UBYTE spriteids[4];
@@ -17,11 +21,7 @@ struct GameObject {
     UINT8 y;
     UINT8 width;
     UINT8 height;
-}
-
-struct GameObject car1;
-struct GameObject ball;
-UBYTE spritesize = 8;
+};
 
 // UBYTE check_collisions(Car* one, Car* two) {
 //     return (one->x >= two->x AND one->x <= two-> x + two->width) OR
@@ -29,13 +29,13 @@ UBYTE spritesize = 8;
 // }
 
 void load_ball_sprite() {
-    set_sprite_tile(0, 0);
+    set_sprite_tile(4, 64);
     ball.spriteids[0] = 0;
-    set_sprite_tile(1, 1);
+    set_sprite_tile(5, 65);
     ball.spriteids[1] = 1;
-    set_sprite_tile(2, 2);
+    set_sprite_tile(6, 66);
     ball.spriteids[2] = 2;
-    set_sprite_tile(3, 3);
+    set_sprite_tile(7, 67);
     ball.spriteids[3] = 3;
 }
 
@@ -65,13 +65,13 @@ void performantdelay(UINT8 numloops){
 }
 
 void setup_ball() {
-    ball.x = 30;
-    ball.y = 0;
+    ball.x = 100;
+    ball.y = 100;
     ball.width = 16;
     ball.height = 16;   
 
     load_ball_sprite();
-    movegamecharacter(&ball, ball.x, ball.y)
+    //movegamecharacter(&ball, ball.x, ball.y);
 }
 
 void setupcar_light(){
@@ -97,7 +97,7 @@ void main(){
 
     set_sprite_data(0,4, car_light);
     setupcar_light();
-    set_sprite_data(0, 4, ball_sprite);
+    set_sprite_data(64, 4, ball_sprite);
     setup_ball();
 
     SHOW_SPRITES;
