@@ -4,6 +4,9 @@
 #include "sprites/car_light.c"
 #include "sprites/map.c"
 #include "sprites/map_sprites.c"
+#include "car_light.c"
+#include "map.c"
+#include "map_sprites.c"
 
 struct GameCharacter car1;
 UBYTE spritesize = 8;
@@ -37,6 +40,12 @@ void setupcar_light(){
     car1.height = 16;
 
     // load sprites for car
+    //background
+    set_bkg_data(0, 10, map);
+    set_bkg_tiles(0, 0, 40, 18, TileLabel);
+    SHOW_BKG;
+    DISPLAY_ON;
+
     //background
     set_bkg_data(0, 10, map);
     set_bkg_tiles(0, 0, 40, 18, TileLabel);
