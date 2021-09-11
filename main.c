@@ -29,6 +29,8 @@ unsigned char windowmap[] =
 struct GameObject car1;
 struct GameObject car2;
 struct GameObject ball;
+
+INT8 max_vel = 4;
 UBYTE spritesize = 8;
 
 struct GameObject {
@@ -45,6 +47,8 @@ struct GameObject {
     INT8 id;
 };
 
+void movegamecharacter(struct GameObject*, INT8, INT8);
+
 void load_ball_sprite() {
     set_sprite_tile(4, 64);
     ball.spriteids[0] = 4;
@@ -57,12 +61,7 @@ void load_ball_sprite() {
 }
 
 UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
-    if (two->id == 1) {
-        return (one->x >= two->index_x && one->x <= two->index_x + two->width) && 
-    (one->y >= two->index_y && one->y <= two->index_y + two->height)
-    || (two->index_x >= one->x && two->index_x <= one->x + one->width) 
-    && (two->index_y >= one->y && two->index_y <= one->y + one->height);
-    }
+
     return (one->x >= two->x && one->x <= two->x + two->width) && 
     (one->y >= two->y && one->y <= two->y + two->height)
     || (two->x >= one->x && two->x <= one->x + one->width) 
@@ -73,18 +72,32 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     UINT16 indexTLx, indexTLy, tileindexTL;
     //UBYTE result;
 
-    indexTLx = (newplayerx - 16) / 8;
-    indexTLy = (newplayery - 16) / 8;
+    indexTLx = (car1.x - 16) / 8;
+    indexTLy = (car1.y - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
-    for (int i = 0; i < goal_size; i++) {
-        if (tileindexTL == player_goal_square[i]) {
-            player_goals++;
-            return 1;
-        } else if (tileindexTL == enemy_goal_square[i]) {
-            enemy_goals++;
-            return 1;
-        }
+    if(joypad() & J_A) {
+        printf("Tileindex: %d\n", indexTLx);
+    }
+    //
+    if (indexTLx == 8179 AND indexTLy <= 11 AND indexTLy >= 7)  {
+        ball.x = 100;
+        ball.y = 100;
+        ball.index_x = 100;
+        ball.index_y = 100;
+        ball.vel = 0;
+        movegamecharacter(&ball, ball.x, ball.y);
+        return 1;
+    } 
+    //tileindexTL <= 280 AND tileindexTL >= 184
+    if (tileindexTL % 32 == 21) {
+        ball.x = 100;
+        ball.y = 100;
+        ball.index_x = 100;
+        ball.index_y = 100;
+        ball.vel = 0;
+        movegamecharacter(&ball, ball.x, ball.y);
+        return 1;
     }
     return 0;
 }
@@ -97,10 +110,10 @@ UBYTE is_barrier(UINT8 newplayerx, UINT8 newplayery) {
     tileindexTL = 32 * indexTLy + indexTLx;
 
     if (joypad() & J_A) {
-       printf("block %d\n", tileindexTL);
+       //printf("block %d\n", tileindexTL);
     }
 
-    INT8 barriers[20] = {378, 444, 477, 509, 947, -43, 22, 407, 406, 437, 469, 468, 378, 444, 509, 8671, 346, 90, 119, 311};
+    INT16 barriers[20] = {378, 444, 477, 509, 947, -43, 22, 407, 406, 437, 469, 468, 378, 444, 509, 8671, 346, 90, 119, 311};
 
     if (tileindexTL >= 896 AND tileindexTL <= 914) {
         return 1;
@@ -169,8 +182,8 @@ void setup_ball() {
 
 void setupcar_light(){
     car1.direction = 0;
-    car1.x = 40;
-    car1.y = 40;
+    car1.x = 80;
+    car1.y = 80;
     car1.width = 16;
     car1.height = 16;
     car1.acc = 0;
@@ -204,13 +217,10 @@ void move_car(struct GameObject* car) {
     if (car->acc == 0 AND car->vel < 0) {
         car->vel += 1;
     }
-    if (car->vel > 5 OR car->vel < -5) {
+    if (car->vel > max_vel OR car->vel < -max_vel) {
         car->acc = 0;   
     }
     car->vel += car->acc;
-    INT8 dx = car->x;
-    INT8 dy = car->y;
-
     INT8 dx = car->x;
     INT8 dy = car->y;
 
@@ -295,63 +305,91 @@ void move_ball() {
     switch (ball.direction) {
         case 0:
             ball.index_y -= ball.vel;
+            ball.y -= ball.vel;
             break;
         case 1:
             ball.index_x += 45*ball.vel/100;
             ball.index_y -= 45*ball.vel/50;
+            ball.x += 45*ball.vel/100;
+            ball.y -= 45*ball.vel/50;
             break;
         case 2:
             ball.index_x += 71*ball.vel/100;
             ball.index_y -= 71*ball.vel/100;
+            ball.x += 71*ball.vel/100;
+            ball.y -= 71*ball.vel/100;
             break;
         case 3:
             ball.index_x += 45*ball.vel/50;
             ball.index_y -= 45*ball.vel/100;
+            ball.x += 45*ball.vel/50;
+            ball.y -= 45*ball.vel/100;
             break;
         case 4:
             ball.index_x += ball.vel;
+            ball.x += ball.vel;
             break;
         case 5:
             ball.index_x += 45*ball.vel/50;
             ball.index_y += 45*ball.vel/100;
+            ball.x += 45*ball.vel/50;
+            ball.y += 45*ball.vel/100;
             break;
         case 6:
             ball.index_x += 71*ball.vel/100;
             ball.index_y += 71*ball.vel/100;
+            ball.x += 71*ball.vel/100;
+            ball.y += 71*ball.vel/100;
             break;
         case 7:
             ball.index_x += 45*ball.vel/100;
             ball.index_y += 45*ball.vel/50;
+            ball.x += 45*ball.vel/100;
+            ball.y += 45*ball.vel/50;
             break;
         case 8:
             ball.index_y += ball.vel;
+            ball.y += ball.vel;
             break;
         case 9:
             ball.index_x -= 45*ball.vel/100;
             ball.index_y += 45*ball.vel/50;
+            ball.x -= 45*ball.vel/100;
+            ball.y += 45*ball.vel/50;
             break;
         case 10:
             ball.index_x -= 71*ball.vel/100;
             ball.index_y += 71*ball.vel/100;
+            ball.x -= 71*ball.vel/100;
+            ball.y += 71*ball.vel/100;
             break;
         case 11:
             ball.index_x -= 45*ball.vel/50;
             ball.index_y += 45*ball.vel/100;
+            ball.x -= 45*ball.vel/50;
+            ball.y += 45*ball.vel/100;
             break;
         case 12:
             ball.index_x -= ball.vel;
+            ball.x -= ball.vel;
             break;
         case 13:
             ball.index_x -= 45*ball.vel/50;
             ball.index_y -= 45*ball.vel/100;
+            ball.x -= 45*ball.vel/50;
+            ball.y -= 45*ball.vel/100;
             break;
         case 14:
             ball.index_x -= 71*ball.vel/100;
             ball.index_y -= 71*ball.vel/100;
+            ball.x -= 71*ball.vel/100;
+            ball.y -= 71*ball.vel/100;
             break;
         case 15:
             ball.index_x -= 45*ball.vel/100;
             ball.index_y -= 45*ball.vel/50;
+            ball.x -= 45*ball.vel/100;
+            ball.y -= 45*ball.vel/50;
             break;
     }
     movegamecharacter(&ball, ball.index_x, ball.index_y);
@@ -377,7 +415,6 @@ void main(){
     set_bkg_data(0, 44, bkg_tiles);
     set_bkg_tiles(0, 0, 32, 21, map);
     SHOW_BKG;
-    UBYTE translate = 0;
 
     set_sprite_data(0,4, car_light);
     setupcar_light();
@@ -401,21 +438,17 @@ void main(){
         }
 
         if (is_barrier(car1.x, car1.y + 16)) {
-            reset_car();
-        }
-
-        if (translate) {
-            translate_ball();
+            //reset_car();
         }
         
         //move_ball(&ball);
         //ball.x += 1;
         //movegamecharacter(&ball, ball.x, ball.y);
 
-        //if (is_goal(car1.x, car1.y)) {
-             //printf("This is a goal\n");
-             //reset_car();
-        //}
+        if (is_goal(ball.x, ball.y)) {
+             printf("This is a goal\n");
+             reset_car();
+        }
         turn_count--;
         // move_ball(&ball);
 
