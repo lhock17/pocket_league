@@ -21,16 +21,10 @@ UINT8 goal_size = 3;
 UINT8 player_goals = 0;
 UINT8 enemy_goals = 0;
 
-<<<<<<< HEAD
-int barriers[2] = {0x00, 0x00};
-int player_goal_square[3] = {53, 21, 21};
-int enemy_goal_square[3] = {19, 18, 4};
-=======
 
 UINT8 barriers[2] = {0x00, 0x00};
 UINT8 player_goal_square[3] = {87, 119, 55};
 UINT8 enemy_goal_square[3] = {118, 21, 84};
->>>>>>> 755f5f8de59b597ece101e05ec11f00a5de57f2d
 
 unsigned char windowmap[] =
 {
@@ -88,13 +82,6 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
-<<<<<<< HEAD
-    if(joypad() & J_A) {
-        printf("Tileindex: %d\n", tileindexTL);
-    }
-=======
->>>>>>> 755f5f8de59b597ece101e05ec11f00a5de57f2d
-    //
     for (int i = 0; i < goal_size; i++) {
         if (tileindexTL == enemy_goal_square[i])  {
             player_goals++;
@@ -397,7 +384,6 @@ void move_ball() {
     movegamecharacter(&ball, ball.index_x, ball.index_y);
 }
 
-<<<<<<< HEAD
 void reset1() {
     car1.x = 80;
     car1.y = 80;
@@ -406,7 +392,8 @@ void reset1() {
     ball.x = 50;
     ball.y = 20;
     ball.vel = 0;
-=======
+}
+
 void reflectx() {
     if (ball.direction < 9) {
         ball.direction = 8 - ball.direction;
@@ -424,7 +411,6 @@ void reflecty() {
 void reset_car() {
     car1.x = 64;
     car1.y = 64;
->>>>>>> 755f5f8de59b597ece101e05ec11f00a5de57f2d
     movegamecharacter(&car1, car1.x, car1.y);
     movegamecharacter(&ball, ball.index_x, ball.index_y);
     move_bkg(car1.x, car1.y);
@@ -446,14 +432,12 @@ void hit_ball() {
 }
 
 void main(){
-<<<<<<< HEAD
 
     //font_t min_font;
 
     //font_init();
     //min_font = font_load(font_min);
     //font_set(min_font);
-=======
     set_bkg_data(0, 163, pocket_league_data);
     set_bkg_tiles(0,0,20,18, pocket_league_map);
     SHOW_BKG;
@@ -474,7 +458,6 @@ void main(){
     NR12_REG = 0x73;  
     NR13_REG = 0x00;   
     NR14_REG = 0xC3;
->>>>>>> 755f5f8de59b597ece101e05ec11f00a5de57f2d
 
     // load sprites for car
     //background
@@ -516,11 +499,8 @@ void main(){
 
         if (is_goal(ball.x, ball.y)) {
              //printf("This is a goal\n");
-<<<<<<< HEAD
              reset1();
-=======
-             reset_car();
->>>>>>> 755f5f8de59b597ece101e05ec11f00a5de57f2d
+             //reset_car();
         }
         turn_count--;
         // move_ball(&ball);
