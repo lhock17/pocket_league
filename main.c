@@ -103,6 +103,7 @@ void accelerate (struct GameObject* car) {
     switch (car->direction) {
         case 0:
             car->acc_y = 100;
+            break;
         case 1:
             car->acc_x = 25;
             car->acc_y = 75;
@@ -210,6 +211,18 @@ void move_car(struct GameObject* car) {
     movegamecharacter(car, car->x, car->y);
 }
 
+void move_ball(struct GameObject* ball) {
+    if (ball->vel_x > 0) {
+        ball->vel_x -= ball->acc_x/100;
+        ball->x += ball->vel_x/100;
+    }
+    if (ball->vel_y > 0) {
+        ball->vel_y -= ball->acc_y/100;
+        ball->y += ball->vel_y/100;
+    }
+    movegamecharacter(ball, ball->x, ball->y);
+}
+
 void main(){
     // load sprites for car
     //background
@@ -228,7 +241,7 @@ void main(){
 
     while(1){
 
-        //move_ball(&ball);
+        move_ball(&ball);
 
         //player contact with ball
         if (check_collision(&car1, &ball)) {
@@ -238,7 +251,7 @@ void main(){
         }
 
         //controls
-        printf("direction:%d\n", car1.direction);
+        printf("direction:%s\n", car1.direction);
         if(joypad() & J_A){
             accelerate(&car1);
         } else if (joypad() & J_B){
