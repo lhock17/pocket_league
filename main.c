@@ -11,6 +11,8 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 
+const char goal_square[1] = {0xFF};
+
 struct GameObject car1;
 struct GameObject ball;
 UBYTE spritesize = 8;
@@ -43,6 +45,18 @@ void load_ball_sprite() {
  UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
      return (one->x >= two->x AND one->x <= two->x + two->width) OR
          (two->y >= one->y AND two->y <= one->y + one->height);
+}
+
+UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
+    UINT16 indexTLx, indexTLy, tileindexTL;
+    UBYTE result;
+
+    indexTLx = (newplayerx - 16) / 8;
+    indexTLy = (newplayery - 16) / 8;
+    tileindexTL = 32 * indexTLy + indexTLx;
+
+    result = bkg_tiles[tileindexTL] == goal_square[0];
+    return result;
 }
 
 void load_car_sprite(UINT8 direction) {
@@ -162,6 +176,18 @@ void move_car(struct GameObject* car) {
     move_bkg(car->x, car->y);
 }
 
+void move_ball(struct GameObject* ball) {
+    if (ball->vel_x > 0) {
+        ball->vel_x -= ball->acc_x/100;
+        ball->x += ball->vel_x/100;
+    }
+    if (ball->vel_y > 0) {
+        ball->vel_y -= ball->acc_y/100;
+        ball->y += ball->vel_y/100;
+    }
+    movegamecharacter(ball, ball->x, ball->y);
+}
+
 void main(){
     // load sprites for car
     //background
@@ -180,8 +206,12 @@ void main(){
 
     while(1){
 
-        //move_ball(&ball);
+        move_ball(&ball);
 
+        if (is_goal(ball.x, ball.y)) {
+            printf("This is a goal\n");
+        }
+        
         //player contact with ball
         // if (check_collision(&car1, &ball)) {
         //     //printf("Collision detected");
