@@ -22,6 +22,6 @@
 #define mapHeight 21
 #define mapBank 0
 
-const extern unsigned char map[];
+const xtern unsigned char map[];
 
 /* End of MAP.H */

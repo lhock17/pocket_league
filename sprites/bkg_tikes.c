@@ -1,6 +1,6 @@
 /*
 
- BKG_TILES.C
+ MAP_SPRITES.C
 
  Tile Source File.
 
@@ -115,4 +115,4 @@ const unsigned char bkg_tiles[] =
   0xAA,0x00,0x55,0x00,0xAA,0x00,0x55,0x00
 };
 
-/* End of BKG_TILES.C */
+/* End of MAP_SPRITES.C */
