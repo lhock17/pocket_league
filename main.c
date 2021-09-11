@@ -11,7 +11,12 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 
-const char goal_square[2] = {256, 253};
+int goal_size = 3;
+int player_goals = 0;
+int enemy_goals = 0;
+
+int player_goal_square[3] = {87, 119, 55};
+int enemy_goal_square[3] = {118, 21, 84};
 
 struct GameObject car1;
 struct GameObject ball;
@@ -20,8 +25,8 @@ UBYTE spritesize = 8;
 struct GameObject {
     UINT8 direction;
     UBYTE spriteids[4];
-    UINT8 x;
-    UINT8 y;
+    INT8 x;
+    INT8 y;
     INT8 vel;
     INT8 acc;
     INT8 width;
@@ -54,10 +59,22 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     indexTLx = (newplayerx - 16) / 8;
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
-    printf("titleIndexTL: %d\n", tileindexTL);
+    
+    //debug tool
+    if (joypad() & J_A) {
+        //printf("titleIndexTL: %d\n", tileindexTL);
+    }
 
-    result = tileindexTL == goal_square[0];
-    return result;
+    for (int i = 0; i < goal_size; i++) {
+        if (tileindexTL == player_goal_square[i]) {
+            player_goals++;
+            return 1;
+        } else if (tileindexTL == enemy_goal_square[i]) {
+            enemy_goals++;
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void load_car_sprite(UINT8 direction) {
@@ -71,7 +88,7 @@ void load_car_sprite(UINT8 direction) {
     car1.spriteids[3] = 3;
 }
 
-void movegamecharacter(struct GameObject* object, UINT8 x, UINT8 y){
+void movegamecharacter(struct GameObject* object, INT8 x, INT8 y){
     move_sprite(object->spriteids[0], x, y);
     move_sprite(object->spriteids[1], x + spritesize, y);
     move_sprite(object->spriteids[2], x, y + spritesize);
@@ -110,8 +127,11 @@ void setupcar_light(){
     movegamecharacter(&car1, car1.x, car1.y);
 }
 
-void move_car(struct GameObject* car) {
+void move_car(struct GameObject* car, struct GameObject* ball) {
     car->vel += car->acc;
+    INT8 dx = car->x;
+    INT8 dy = car->y;
+
     switch (car->direction) {
         case 0:
             car->y -= car->vel;
@@ -174,19 +194,18 @@ void move_car(struct GameObject* car) {
             car->y -= 45*car->vel/50;
             break;
     }
+
     move_bkg(car->x, car->y);
+    ball->x -= car->x - dx;
+    ball->y -= car->y - dy;
+    movegamecharacter(ball, ball->x, ball->y);
 }
 
-void move_ball(struct GameObject* ball) {
-    if (ball->vel_x > 0) {
-        ball->vel_x -= ball->acc_x/100;
-        ball->x += ball->vel_x/100;
-    }
-    if (ball->vel_y > 0) {
-        ball->vel_y -= ball->acc_y/100;
-        ball->y += ball->vel_y/100;
-    }
-    movegamecharacter(ball, ball->x, ball->y);
+void reset_car() {
+    car1.x = 64;
+    car1.y = 64;
+    movegamecharacter(&car1, car1.x, car1.y);
+    move_bkg(car1.x, car1.y);
 }
 
 void main(){
@@ -206,27 +225,23 @@ void main(){
     DISPLAY_ON;
 
     while(1){
-
-        move_ball(&ball);
+        
+        //move_ball(&ball);
+        //ball.x += 1;
+        //movegamecharacter(&ball, ball.x, ball.y);
 
         if (is_goal(car1.x, car1.y)) {
-            printf("This is a goal\n");
+            //printf("This is a goal\n");
+            reset_car();
         }
         
         //player contact with ball
-<<<<<<< HEAD
-        if (check_collision(&car1, &ball)) {
-            //printf("Collision detected");
-            ball.vel_x = car1.vel_x;
-            ball.vel_y = car1.vel_y;
-        }
-=======
-        // if (check_collision(&car1, &ball)) {
-        //     //printf("Collision detected");
-        //     ball.vel_x = car1.vel_x;
-        //     ball.vel_y = car1.vel_y;
-        // }
->>>>>>> fa1e8e473184aa1f242f5e36ef3f5e6d0b8511d2
+         if (check_collision(&car1, &ball)) {
+             printf("%d:%d\n", car1.x, car1.y);
+             printf("%d:%d\n", ball.x, ball.y);
+             //ball.ve = car1.vel_x;
+             //ball.vel_y = car1.vel_y;
+         }
 
         //controls
         if(joypad() & J_A){
@@ -252,7 +267,8 @@ void main(){
             }
             load_car_sprite(car1.direction);
         }
-        move_car(&car1);
+        move_car(&car1, &ball);
+        //move_ball(&car1, &ball);
         performantdelay(10);    
     }
 }
