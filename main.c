@@ -1,6 +1,7 @@
 #include <gb/gb.h>
 #include <stdio.h>
 #include "sprites/car_light.c"
+#include "sprites/car_dark.c"
 #include "sprites/map.c"
 #include "sprites/ball1.c"
 #include "sprites/bkg_tiles.c"
@@ -19,6 +20,7 @@ int player_goal_square[3] = {87, 119, 55};
 int enemy_goal_square[3] = {118, 21, 84};
 
 struct GameObject car1;
+struct GameObject car2;
 struct GameObject ball;
 UBYTE spritesize = 8;
 
@@ -32,9 +34,6 @@ struct GameObject {
     INT8 width;
     INT8 height;
 };
-
-struct GameObject ball;
-struct GameObject car1;
 
 void load_ball_sprite() {
     set_sprite_tile(4, 64);
@@ -90,6 +89,17 @@ void load_car_sprite(UINT8 direction) {
     car1.spriteids[3] = 3;
 }
 
+void load_ai_sprite(UINT8 direction) {
+    set_sprite_tile(8, 4 * direction);
+    car2.spriteids[0] = 0;
+    set_sprite_tile(9, 4 * direction + 2);
+    car2.spriteids[1] = 1;
+    set_sprite_tile(10, 4 * direction + 1);
+    car2.spriteids[2] = 2;
+    set_sprite_tile(11, 4 * direction + 3);
+    car2.spriteids[3] = 3;
+}
+
 void movegamecharacter(struct GameObject* object, INT8 x, INT8 y){
     move_sprite(object->spriteids[0], x, y);
     move_sprite(object->spriteids[1], x + spritesize, y);
@@ -129,7 +139,31 @@ void setupcar_light(){
     movegamecharacter(&car1, car1.x, car1.y);
 }
 
+void setupcar_dark(){
+    car2.direction = 0;
+    car2.x = 64;
+    car2.y = 64;
+    car2.width = 16;
+    car2.height = 16;
+    car2.acc = 0;
+    car2.vel = 0;
+
+    set_sprite_data(68, 64, car_dark);
+    load_car_sprite(car2.direction);
+    
+    movegamecharacter(&car2, car2.x, car2.y);
+}
+
 void move_car(struct GameObject* car, struct GameObject* ball) {
+    if (car->acc == 0 AND car->vel > 0) {
+        car->vel -= 1;
+    }
+    if (car->acc == 0 AND car->vel < 0) {
+        car->vel += 1;
+    }
+    if (car->vel > 5 OR car->vel < -5) {
+        car->acc = 0;   
+    }
     car->vel += car->acc;
     INT8 dx = car->x;
     INT8 dy = car->y;
@@ -222,6 +256,8 @@ void main(){
 
     set_sprite_data(0,4, car_light);
     setupcar_light();
+    set_sprite_data(68,4, car_dark);
+    setupcar_dark();
     set_sprite_data(64, 4, ball_sprite);
     setup_ball();
     movegamecharacter(&ball, ball.x, ball.y);
@@ -229,34 +265,48 @@ void main(){
     SHOW_SPRITES;
     DISPLAY_ON;
 
+    UINT8 turn_count = 0;
+    UINT8 move_count = 0;
+
     while(1){
+        if (car1.vel == 0) {
+            turn_count = 2;
+        } else if (turn_count == 0) {
+            turn_count = 22/abs(car1.vel);
+        }
         
         //move_ball(&ball);
         //ball.x += 1;
         //movegamecharacter(&ball, ball.x, ball.y);
 
-        if (is_goal(car1.x, car1.y)) {
-            //printf("This is a goal\n");
-            reset_car();
-        }
+        // if (is_goal(car1.x, car1.y)) {
+        //     //printf("This is a goal\n");
+        //     reset_car();
+        // }
+        turn_count--;
+        // move_ball(&ball);
+
+        // if (is_goal(ball.x, ball.y)) {
+        //     printf("This is a goal\n");
+        // }
         
-        //player contact with ball
-         //if (check_collision(&ball, &car1)) {
-             //printf("%d:%d\n", car1.x, car1.y);
-             //printf("%d:%d\n", ball.x, ball.y);
-             //ball.ve = car1.vel_x;
-             //ball.vel_y = car1.vel_y;
-         //}
+        // //player contact with ball
+        //  if (!move_count AND check_collision(&car1, &ball)) {
+        //      printf("%d:%d\n", car1.x, car1.y);
+        //      printf("%d:%d\n", ball.x, ball.y);
+        //      //ball.ve = car1.vel_x;
+        //      //ball.vel_y = car1.vel_y;
+        //  }
 
         //controls
-        if(joypad() & J_A){
-            car1.acc = 1;
-        } else if (joypad() & J_B){
+        if(joypad() & J_B){
             car1.acc = -1;
+        } else if (joypad() & J_A){
+            car1.acc = 1;
         } else {
             car1.acc = 0;
         }
-        if(joypad() & J_LEFT){
+        if((joypad() & J_LEFT) AND turn_count == 0){
             if (car1.direction == 0) {
                 car1.direction = 15;
             } else {
@@ -264,7 +314,7 @@ void main(){
             }
             load_car_sprite(car1.direction);
         }
-        if(joypad() & J_RIGHT){
+        if((joypad() & J_RIGHT) AND turn_count == 0){
             if (car1.direction == 15) {
                 car1.direction = 0;
             } else {
@@ -272,8 +322,11 @@ void main(){
             }
             load_car_sprite(car1.direction);
         }
-        move_car(&car1, &ball);
-        //move_ball(&car1, &ball);
-        performantdelay(10);    
+        if (move_count == 0) {
+            move_car(&car1, &ball);
+            move_count = 2;
+        }
+        move_count--;
+        performantdelay(1); 
     }
 }
