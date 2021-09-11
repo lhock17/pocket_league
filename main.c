@@ -39,8 +39,6 @@ struct GameObject {
     INT8 acc;
     INT8 width;
     INT8 height;
-    INT8 index_x;
-    INT8 index_y;
 };
 
 void load_ball_sprite() {
@@ -56,9 +54,9 @@ void load_ball_sprite() {
 
  UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
      return (one->x >= two->x && one->x <= two->x + two->width) && 
-     (one->y >= two->y && one->y <= two->y + two->height) || 
-     (two->x >= one->x && two->x <= one->x + one->width) && 
-     (two->y >= one->y && two->y <= one->y + one->height);
+     (one->y >= two->y && one->y <= two->y + two->height)
+      || (two->x >= one->x && two->x <= one->x + one->width) 
+      && (two->y >= one->y && two->y <= one->y + one->height);
 }
 
 UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
@@ -135,8 +133,6 @@ void setup_ball() {
     ball.y = 100;
     ball.width = 16;
     ball.height = 16;   
-    ball.index_x = 100;
-    ball.index_y = 100;
 
     load_ball_sprite();
     movegamecharacter(&ball, ball.x, ball.y);
@@ -276,6 +272,8 @@ void main(){
 
     set_sprite_data(0,4, car_light);
     setupcar_light();
+    set_sprite_data(68,4, car_dark);
+    setupcar_dark();
     set_sprite_data(64, 4, ball_sprite);
     setup_ball();
     movegamecharacter(&ball, ball.x, ball.y);
@@ -326,8 +324,6 @@ void main(){
             car1.acc = -1;
         } else if (joypad() & J_A){
             car1.acc = 1;
-            printf("car: %d:%d\n", car1.x, car1.y);
-            printf("ball: %d:%d\n", ball.x, ball.y);
         } else {
             car1.acc = 0;
         }
@@ -348,7 +344,7 @@ void main(){
             load_car_sprite(car1.direction);
         }
         if (move_count == 0) {
-            move_car(&car1, &ball);
+            move_car(&car1);
             move_count = 2;
         }
         move_count--;
