@@ -163,12 +163,14 @@ DEF l__HEADER3 0x8
 DEF l__BSS 0x18
 DEF l__DATA 0x1A
 DEF l__GSINIT 0x26
+DEF l__DATA 0x27
 DEF l__HEADER4 0x2C
 DEF l__HEADER6 0x30
 DEF l__HOME 0x6A
 DEF l__HEADER10 0x83
 DEF l__BASE 0xE9
 DEF s__CODE 0x200
+<<<<<<< HEAD
 DEF l__CODE 0xF0F
 DEF s__HOME 0x110F
 DEF s__BASE 0x1179
@@ -182,6 +184,21 @@ DEF s__DATA 0xC0A0
 DEF s__BSS 0xC0BA
 DEF s__INITIALIZED 0xC0D2
 DEF s__HEAP 0xC0D3
+=======
+DEF l__CODE 0xCF2
+DEF s__HOME 0xEF2
+DEF s__BASE 0xF5C
+DEF s__CODE_0 0x1045
+DEF s__INITIALIZER 0x1045
+DEF s__LIT 0x1045
+DEF s__GSINIT 0x1046
+DEF s__GSFINAL 0x106C
+DEF _shadow_OAM 0xC000
+DEF s__DATA 0xC0A0
+DEF s__BSS 0xC0C7
+DEF s__INITIALIZED 0xC0DF
+DEF s__HEAP 0xC0E0
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 DEF .STACK 0xE000
 DEF .refresh_OAM 0xFF80
 DEF _load_ball_sprite 0x200
@@ -189,6 +206,7 @@ DEF _car_light 0x229
 DEF _map 0x629
 DEF _ball_sprite 0x8C9
 DEF _bkg_tiles 0x909
+<<<<<<< HEAD
 DEF _load_car_sprite 0xBC9
 DEF _movegamecharacter 0xC01
 DEF _performantdelay 0xC89
@@ -218,6 +236,16 @@ DEF .divu8 0x10CB
 DEF .modu8 0x10CB
 DEF .divu16 0x10CE
 DEF .modu16 0x10CE
+=======
+DEF _check_collision 0xBC9
+DEF _load_car_sprite 0xCBC
+DEF _movegamecharacter 0xCF4
+DEF _performantdelay 0xD7C
+DEF _setup_ball 0xD89
+DEF _setupcar_light 0xDB5
+DEF _hit_ball 0xDF9
+DEF _main 0xE2B
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 DEF .call_hl 0x20
 DEF .MemsetSmall 0x28
 DEF .MemcpySmall 0x30
@@ -231,6 +259,7 @@ DEF _exit 0x1B4
 DEF _enable_interrupts 0x1B8
 DEF _disable_interrupts 0x1BA
 DEF _set_interrupts 0x1BC
+<<<<<<< HEAD
 DEF .remove_VBL 0x110F
 DEF .remove_int 0x1112
 DEF .add_VBL 0x112F
@@ -264,6 +293,42 @@ DEF .sys_time 0xC0BC
 DEF _sys_time 0xC0BC
 DEF .int_0x40 0xC0BE
 DEF _spritesize 0xC0D2
+=======
+DEF .remove_VBL 0xEF2
+DEF .remove_int 0xEF5
+DEF .add_VBL 0xF12
+DEF .add_int 0xF15
+DEF .wait_vbl_done 0xF20
+DEF _wait_vbl_done 0xF20
+DEF .display_off 0xF2F
+DEF _display_off 0xF2F
+DEF _remove_VBL 0xF46
+DEF _add_VBL 0xF51
+DEF _set_tile_data 0xF5C
+DEF _set_bkg_data 0xF61
+DEF _set_win_data 0xF61
+DEF _set_sprite_data 0xF69
+DEF .padup 0xF99
+DEF _waitpadup 0xF99
+DEF .jpad 0xFA9
+DEF _joypad 0xFA9
+DEF _waitpad 0xFD1
+DEF .wait_pad 0xFD4
+DEF _set_bkg_tiles 0xFDB
+DEF .set_xy_wtt 0xFEF
+DEF .set_xy_btt 0xFF8
+DEF .set_xy_tt 0x1007
+DEF gsinit 0x1046
+DEF _GameObject 0xC0A0
+DEF _ball 0xC0AD
+DEF _car1 0xC0BA
+DEF __cpu 0xC0C7
+DEF .mode 0xC0C8
+DEF .sys_time 0xC0C9
+DEF _sys_time 0xC0C9
+DEF .int_0x40 0xC0CB
+DEF _spritesize 0xC0DF
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 DEF __current_bank 0xFF90
 DEF __shadow_OAM_base 0xFF92
 DEF _P1_REG 0xFF00

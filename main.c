@@ -20,6 +20,7 @@ struct GameObject {
     UBYTE spriteids[4];
     UINT8 x;
     UINT8 y;
+<<<<<<< HEAD
     INT8 vel_x;
     INT8 vel_y;
     INT8 acc_x;
@@ -27,14 +28,18 @@ struct GameObject {
     INT8 width;
     INT8 height;
 };
+=======
+    UINT8 vel_x;
+    UINT8 vel_y;
+    UINT8 acc_x;
+    UINT8 acc_y;
+    UINT8 width;
+    UINT8 height;
+} GameObject;
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 
 struct GameObject ball;
 struct GameObject car1;
-
-// UBYTE check_collisions(Car* one, Car* two) {
-//     return (one->x >= two->x AND one->x <= two-> x + two->width) OR
-//         (two->y >= one->y AND two->y <= one->y + one->height);
-// }
 
 void load_ball_sprite() {
     set_sprite_tile(4, 64);
@@ -45,6 +50,11 @@ void load_ball_sprite() {
     ball.spriteids[2] = 5;
     set_sprite_tile(7, 67);
     ball.spriteids[3] = 7;
+}
+
+ UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
+     return (one->x >= two->x AND one->x <= two->x + two->width) OR
+         (two->y >= one->y AND two->y <= one->y + one->height);
 }
 
 void load_car_sprite(UINT8 direction) {
@@ -95,6 +105,7 @@ void setupcar_light(){
     movegamecharacter(&car1, car1.x, car1.y);
 }
 
+<<<<<<< HEAD
 void accelerate (struct GameObject* car) {
     switch (car->direction) {
         case 0:
@@ -206,7 +217,15 @@ void move_car(struct GameObject* car) {
 }
 
 void main(){
+=======
+void hit_ball(struct GameObject* car1, struct GameObject* ball) {
+    ball->vel_x = car1->vel_x;
+    ball->vel_y = car1->vel_y;
+    //movegamecharacter(&ball, ball.x + ball.vel_x, ball.y + ball.vel_y);
+}
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 
+void main(){
     // load sprites for car
     //background
     set_bkg_data(0, 44, bkg_tiles);
@@ -223,6 +242,13 @@ void main(){
     DISPLAY_ON;
 
     while(1){
+
+        //contact with ball
+        if (check_collision(&car1, &ball)) {
+            hit_ball(&car1, &ball);
+        }
+
+        //controls
         if(joypad() & J_A){
             accelerate(&car1);
         }

@@ -1,6 +1,10 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
+<<<<<<< HEAD
 ; Version 4.1.6 #12439 (Mac OS X x86_64)
+=======
+; Version 4.1.6 #12439 (MINGW32)
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mgbz80
@@ -9,14 +13,19 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _main
+<<<<<<< HEAD
 	.globl _move_car
 	.globl _deccelerate
 	.globl _accelerate
+=======
+	.globl _hit_ball
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	.globl _setupcar_light
 	.globl _setup_ball
 	.globl _performantdelay
 	.globl _movegamecharacter
 	.globl _load_car_sprite
+	.globl _check_collision
 	.globl _load_ball_sprite
 	.globl _set_sprite_data
 	.globl _set_bkg_tiles
@@ -26,6 +35,10 @@
 	.globl _spritesize
 	.globl _car1
 	.globl _ball
+<<<<<<< HEAD
+=======
+	.globl _GameObject
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	.globl _bkg_tiles
 	.globl _ball_sprite
 	.globl _map
@@ -37,6 +50,11 @@
 ; ram data
 ;--------------------------------------------------------
 	.area _DATA
+<<<<<<< HEAD
+=======
+_GameObject::
+	.ds 13
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 _ball::
 	.ds 13
 _car1::
@@ -67,7 +85,11 @@ _spritesize::
 ; code
 ;--------------------------------------------------------
 	.area _CODE
+<<<<<<< HEAD
 ;main.c:39: void load_ball_sprite() {
+=======
+;main.c:34: void load_ball_sprite() {
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 ;	---------------------------------
 ; Function load_ball_sprite
 ; ---------------------------------
@@ -75,6 +97,7 @@ _load_ball_sprite::
 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 18)
 	ld	(hl), #0x40
+<<<<<<< HEAD
 ;main.c:41: ball.spriteids[0] = 4;
 	ld	hl, #(_ball + 1)
 	ld	(hl), #0x04
@@ -97,6 +120,30 @@ _load_ball_sprite::
 	ld	hl, #(_ball + 4)
 	ld	(hl), #0x07
 ;main.c:48: }
+=======
+;main.c:36: ball.spriteids[0] = 4;
+	ld	hl, #(_ball + 1)
+	ld	(hl), #0x04
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+	ld	hl, #(_shadow_OAM + 22)
+	ld	(hl), #0x41
+;main.c:38: ball.spriteids[1] = 6;
+	ld	hl, #(_ball + 2)
+	ld	(hl), #0x06
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+	ld	hl, #(_shadow_OAM + 26)
+	ld	(hl), #0x42
+;main.c:40: ball.spriteids[2] = 5;
+	ld	hl, #(_ball + 3)
+	ld	(hl), #0x05
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+	ld	hl, #(_shadow_OAM + 30)
+	ld	(hl), #0x43
+;main.c:42: ball.spriteids[3] = 7;
+	ld	hl, #(_ball + 4)
+	ld	(hl), #0x07
+;main.c:43: }
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ret
 _car_light:
 	.db #0x0f	; 15
@@ -2566,6 +2613,207 @@ _bkg_tiles:
 	.db #0x00	; 0
 	.db #0x55	; 85	'U'
 	.db #0x00	; 0
+<<<<<<< HEAD
+=======
+;main.c:45: UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
+;	---------------------------------
+; Function check_collision
+; ---------------------------------
+_check_collision::
+	add	sp, #-7
+;main.c:46: return (one->x >= two->x AND one->x <= two->x + two->width) OR
+	ldhl	sp,	#9
+	ld	a, (hl)
+	ldhl	sp,	#3
+	ld	(hl), a
+	ldhl	sp,	#10
+	ld	a, (hl)
+	ldhl	sp,	#4
+	ld	(hl-), a
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	hl, #0x0005
+	add	hl, de
+	ld	c, l
+	ld	b, h
+	ld	a, (bc)
+	ldhl	sp,	#6
+	ld	(hl), a
+	ldhl	sp,	#11
+	ld	a, (hl)
+	ldhl	sp,	#1
+	ld	(hl), a
+	ldhl	sp,	#12
+	ld	a, (hl)
+	ldhl	sp,	#2
+	ld	(hl-), a
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	hl, #0x0005
+	add	hl, de
+	ld	c, l
+	ld	b, h
+	ld	a, (bc)
+	ldhl	sp,	#5
+	ld	(hl+), a
+	ld	a, (hl-)
+	sub	a, (hl)
+	jr	C, 00108$
+	ld	c, (hl)
+	ld	b, #0x00
+	ldhl	sp,#1
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	hl, #0x000b
+	add	hl, de
+	ld	e, l
+	ld	d, h
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	h, #0x00
+;	spillPairReg hl
+;	spillPairReg hl
+	add	hl, bc
+	ld	c, l
+	ld	b, h
+	ldhl	sp,	#6
+	ld	a, (hl-)
+	ld	(hl+), a
+	xor	a, a
+	ld	(hl-), a
+	ld	a, c
+	sub	a, (hl)
+	inc	hl
+	ld	a, b
+	sbc	a, (hl)
+	ld	a, b
+	ld	d, a
+	bit	7, (hl)
+	jr	Z, 00122$
+	bit	7, d
+	jr	NZ, 00123$
+	cp	a, a
+	jr	00123$
+00122$:
+	bit	7, d
+	jr	Z, 00123$
+	scf
+00123$:
+	jp	NC, 00104$
+00108$:
+;main.c:47: (two->y >= one->y AND two->y <= one->y + one->height);
+	ldhl	sp,#1
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	hl, #0x0006
+	add	hl, de
+	ld	c, l
+	ld	b, h
+	ld	a, (bc)
+	ldhl	sp,	#0
+	ld	(hl), a
+	ldhl	sp,#3
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	hl, #0x0006
+	add	hl, de
+	ld	c, l
+	ld	b, h
+	ld	a, (bc)
+	ld	c, a
+	ldhl	sp,	#0
+	ld	a, (hl)
+	sub	a, c
+	jr	C, 00103$
+	inc	hl
+	ld	a, c
+	ld	(hl+), a
+	xor	a, a
+	ld	(hl+), a
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	hl, #0x000c
+	add	hl, de
+	push	hl
+	ld	a, l
+	ldhl	sp,	#7
+	ld	(hl), a
+	pop	hl
+	ld	a, h
+	ldhl	sp,	#6
+	ld	(hl-), a
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	(hl), a
+	ldhl	sp,	#3
+	ld	(hl+), a
+	xor	a, a
+	ld	(hl-), a
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ldhl	sp,	#1
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	add	hl, de
+	push	hl
+	ld	a, l
+	ldhl	sp,	#7
+	ld	(hl), a
+	pop	hl
+	ld	a, h
+	ldhl	sp,	#6
+	ld	(hl), a
+	ldhl	sp,	#0
+	ld	a, (hl)
+	ldhl	sp,	#3
+	ld	(hl+), a
+	ld	(hl), #0x00
+	ldhl	sp,	#5
+	ld	e, l
+	ld	d, h
+	ldhl	sp,	#3
+	ld	a, (de)
+	inc	de
+	sub	a, (hl)
+	inc	hl
+	ld	a, (de)
+	sbc	a, (hl)
+	ld	a, (de)
+	ld	d, a
+	bit	7, (hl)
+	jr	Z, 00124$
+	bit	7, d
+	jr	NZ, 00125$
+	cp	a, a
+	jr	00125$
+00124$:
+	bit	7, d
+	jr	Z, 00125$
+	scf
+00125$:
+	jr	NC, 00104$
+00103$:
+	ld	e, #0x00
+	jr	00105$
+00104$:
+	ld	e, #0x01
+00105$:
+;main.c:48: }
+	add	sp, #7
+	ret
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 ;main.c:50: void load_car_sprite(UINT8 direction) {
 ;	---------------------------------
 ; Function load_car_sprite
@@ -2645,7 +2893,11 @@ _movegamecharacter::
 ;	spillPairReg hl
 ;	spillPairReg hl
 	inc	hl
+<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2658,7 +2910,11 @@ _movegamecharacter::
 	add	hl, bc
 	ld	c, l
 	ld	b, h
+<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ldhl	sp,	#0
 	ld	a, (hl+)
 	ld	(bc), a
@@ -2681,7 +2937,11 @@ _movegamecharacter::
 	ld	c, (hl)
 	ldhl	sp,	#2
 	ld	(hl), a
+<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	l, c
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2694,7 +2954,11 @@ _movegamecharacter::
 	add	hl, bc
 	ld	c, l
 	ld	b, h
+<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ldhl	sp,	#0
 	ld	a, (hl+)
 	inc	hl
@@ -2718,7 +2982,11 @@ _movegamecharacter::
 	inc	hl
 	inc	hl
 	inc	hl
+<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2731,7 +2999,11 @@ _movegamecharacter::
 	ld	de, #_shadow_OAM
 	add	hl, de
 	pop	de
+<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	a, c
 	ld	(hl+), a
 	ld	c, l
@@ -2753,7 +3025,11 @@ _movegamecharacter::
 	ld	c, a
 	ld	hl, #0x0004
 	add	hl, de
+<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2764,7 +3040,11 @@ _movegamecharacter::
 	add	hl, hl
 	ld	de, #_shadow_OAM
 	add	hl, de
+<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
+;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	a, b
 	ld	(hl+), a
 	ld	(hl), c
@@ -2870,6 +3150,7 @@ _setupcar_light::
 	add	sp, #4
 ;main.c:96: }
 	ret
+<<<<<<< HEAD
 ;main.c:98: void accelerate (struct GameObject* car) {
 ;	---------------------------------
 ; Function accelerate
@@ -3407,18 +3688,74 @@ _move_car::
 	add	sp, #9
 	ret
 ;main.c:208: void main(){
+=======
+;main.c:98: void hit_ball(struct GameObject* car1, struct GameObject* ball) {
+;	---------------------------------
+; Function hit_ball
+; ---------------------------------
+_hit_ball::
+	dec	sp
+	dec	sp
+;main.c:99: ball->vel_x = car1->vel_x;
+	ldhl	sp,	#6
+	ld	a, (hl)
+	ldhl	sp,	#0
+	ld	(hl), a
+	ldhl	sp,	#7
+	ld	a, (hl)
+	ldhl	sp,	#1
+	ld	(hl), a
+	pop	de
+	push	de
+	ld	hl, #0x0007
+	add	hl, de
+	ld	e, l
+	ld	d, h
+	ldhl	sp,	#4
+	ld	a, (hl+)
+	ld	c, a
+	ld	b, (hl)
+	ld	hl, #0x0007
+	add	hl, bc
+	ld	a, (hl)
+	ld	(de), a
+;main.c:100: ball->vel_y = car1->vel_y;
+	pop	de
+	push	de
+	ld	hl, #0x0008
+	add	hl, de
+	ld	e, l
+	ld	d, h
+	ld	hl, #0x0008
+	add	hl, bc
+	ld	a, (hl)
+	ld	(de), a
+;main.c:102: }
+	inc	sp
+	inc	sp
+	ret
+;main.c:104: void main(){
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
+<<<<<<< HEAD
 ;main.c:212: set_bkg_data(0, 44, bkg_tiles);
+=======
+;main.c:107: set_bkg_data(0, 44, bkg_tiles);
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	de, #_bkg_tiles
 	push	de
 	ld	hl, #0x2c00
 	push	hl
 	call	_set_bkg_data
 	add	sp, #4
+<<<<<<< HEAD
 ;main.c:213: set_bkg_tiles(0, 0, 32, 21, map);
+=======
+;main.c:108: set_bkg_tiles(0, 0, 32, 21, map);
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	de, #_map
 	push	de
 	ld	hl, #0x1520
@@ -3428,29 +3765,49 @@ _main::
 	push	af
 	call	_set_bkg_tiles
 	add	sp, #6
+<<<<<<< HEAD
 ;main.c:214: SHOW_BKG;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x01
 	ldh	(_LCDC_REG + 0), a
 ;main.c:216: set_sprite_data(0,4, car_light);
+=======
+;main.c:109: SHOW_BKG;
+	ldh	a, (_LCDC_REG + 0)
+	or	a, #0x01
+	ldh	(_LCDC_REG + 0), a
+;main.c:111: set_sprite_data(0,4, car_light);
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	de, #_car_light
 	push	de
 	ld	hl, #0x400
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
+<<<<<<< HEAD
 ;main.c:217: setupcar_light();
 	call	_setupcar_light
 ;main.c:218: set_sprite_data(64, 4, ball_sprite);
+=======
+;main.c:112: setupcar_light();
+	call	_setupcar_light
+;main.c:113: set_sprite_data(64, 4, ball_sprite);
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	de, #_ball_sprite
 	push	de
 	ld	hl, #0x440
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
+<<<<<<< HEAD
 ;main.c:219: setup_ball();
 	call	_setup_ball
 ;main.c:220: movegamecharacter(&ball, ball.x, ball.y);
+=======
+;main.c:114: setup_ball();
+	call	_setup_ball
+;main.c:115: movegamecharacter(&ball, ball.x, ball.y);
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	hl, #_ball + 6
 	ld	b, (hl)
 	ld	a, (#(_ball + 5) + 0)
@@ -3462,6 +3819,7 @@ _main::
 	push	de
 	call	_movegamecharacter
 	add	sp, #4
+<<<<<<< HEAD
 ;main.c:222: SHOW_SPRITES;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x02
@@ -3502,59 +3860,146 @@ _main::
 	or	a, a
 	jr	NZ, 00106$
 ;main.c:234: car1.direction = 15;
+=======
+;main.c:117: SHOW_SPRITES;
+	ldh	a, (_LCDC_REG + 0)
+	or	a, #0x02
+	ldh	(_LCDC_REG + 0), a
+;main.c:118: DISPLAY_ON;
+	ldh	a, (_LCDC_REG + 0)
+	or	a, #0x80
+	ldh	(_LCDC_REG + 0), a
+;main.c:120: while(1){
+00116$:
+;main.c:123: if (check_collision(&car1, &ball)) {
+	ld	bc, #_car1+0
+	ld	e, c
+	ld	d, b
+	push	bc
+	ld	hl, #_ball
+	push	hl
+	push	de
+	call	_check_collision
+	add	sp, #4
+	ld	a, e
+	pop	bc
+	or	a, a
+	jr	Z, 00102$
+;main.c:124: hit_ball(&car1, &ball);
+	ld	e, c
+	ld	d, b
+	push	bc
+	ld	hl, #_ball
+	push	hl
+	push	de
+	call	_hit_ball
+	add	sp, #4
+	pop	bc
+00102$:
+;main.c:128: if(joypad() & J_A){
+	call	_joypad
+;main.c:132: if(joypad() & J_LEFT){
+	call	_joypad
+	bit	1, e
+	jr	Z, 00109$
+;main.c:133: if (car1.direction == 0) {
+	ld	a, (bc)
+	or	a, a
+	jr	NZ, 00106$
+;main.c:134: car1.direction = 15;
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	a, #0x0f
 	ld	(bc), a
 	jr	00107$
 00106$:
+<<<<<<< HEAD
 ;main.c:236: car1.direction -= 1;
 	dec	a
 	ld	(bc), a
 00107$:
 ;main.c:238: load_car_sprite(car1.direction);
+=======
+;main.c:136: car1.direction -= 1;
+	dec	a
+	ld	(bc), a
+00107$:
+;main.c:138: load_car_sprite(car1.direction);
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	a, (bc)
+	push	bc
 	push	af
 	inc	sp
 	call	_load_car_sprite
 	inc	sp
+<<<<<<< HEAD
 00109$:
 ;main.c:240: if(joypad() & J_RIGHT){
+=======
+	pop	bc
+00109$:
+;main.c:140: if(joypad() & J_RIGHT){
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	call	_joypad
 	ld	a, e
 	rrca
 	jr	NC, 00114$
+<<<<<<< HEAD
 ;main.c:241: if (car1.direction == 15) {
 	ld	bc, #_car1+0
 	ld	a, (bc)
 	cp	a, #0x0f
 	jr	NZ, 00111$
 ;main.c:242: car1.direction = 0;
+=======
+;main.c:141: if (car1.direction == 15) {
+	ld	a, (bc)
+	cp	a, #0x0f
+	jr	NZ, 00111$
+;main.c:142: car1.direction = 0;
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	xor	a, a
 	ld	(bc), a
 	jr	00112$
 00111$:
+<<<<<<< HEAD
 ;main.c:244: car1.direction += 1;
 	inc	a
 	ld	(bc), a
 00112$:
 ;main.c:246: load_car_sprite(car1.direction);
+=======
+;main.c:144: car1.direction += 1;
+	inc	a
+	ld	(bc), a
+00112$:
+;main.c:146: load_car_sprite(car1.direction);
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	a, (bc)
 	push	af
 	inc	sp
 	call	_load_car_sprite
 	inc	sp
 00114$:
+<<<<<<< HEAD
 ;main.c:248: move_car(&car1);
 	ld	de, #_car1
 	push	de
 	call	_move_car
 	pop	hl
 ;main.c:249: performantdelay(5);    
+=======
+;main.c:148: performantdelay(5);    
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	ld	a, #0x05
 	push	af
 	inc	sp
 	call	_performantdelay
 	inc	sp
+<<<<<<< HEAD
 ;main.c:251: }
+=======
+;main.c:150: }
+>>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 	jr	00116$
 	.area _CODE
 	.area _INITIALIZER
