@@ -12,7 +12,12 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 
-//const char goal_square[1] = {0xFF};
+int goal_size = 3;
+int player_goals = 0;
+int enemy_goals = 0;
+
+int player_goal_square[3] = {87, 119, 55};
+int enemy_goal_square[3] = {118, 21, 84};
 
 struct GameObject car1;
 struct GameObject car2;
@@ -22,8 +27,8 @@ UBYTE spritesize = 8;
 struct GameObject {
     UINT8 direction;
     UBYTE spriteids[4];
-    UINT8 x;
-    UINT8 y;
+    INT8 x;
+    INT8 y;
     INT8 vel;
     INT8 acc;
     INT8 width;
@@ -63,7 +68,7 @@ void load_ai_sprite(UINT8 direction) {
     car2.spriteids[3] = 3;
 }
 
-void movegamecharacter(struct GameObject* object, UINT8 x, UINT8 y){
+void movegamecharacter(struct GameObject* object, INT8 x, INT8 y){
     move_sprite(object->spriteids[0], x, y);
     move_sprite(object->spriteids[1], x + spritesize, y);
     move_sprite(object->spriteids[2], x, y + spritesize);
@@ -127,7 +132,11 @@ void move_car(struct GameObject* car) {
     if (car->vel > 5 OR car->vel < -5) {
         car->acc = 0;   
     }
+void move_car(struct GameObject* car, struct GameObject* ball) {
     car->vel += car->acc;
+    INT8 dx = car->x;
+    INT8 dy = car->y;
+
     switch (car->direction) {
         case 0:
             car->y -= car->vel;
@@ -190,20 +199,19 @@ void move_car(struct GameObject* car) {
             car->y -= 45*car->vel/50;
             break;
     }
+
     move_bkg(car->x, car->y);
+    ball->x -= car->x - dx;
+    ball->y -= car->y - dy;
+    movegamecharacter(ball, ball->x, ball->y);
 }
 
-// void move_ball(struct GameObject* ball) {
-//     if (ball->vel_x > 0) {
-//         ball->vel_x -= ball->acc_x/100;
-//         ball->x += ball->vel_x/100;
-//     }
-//     if (ball->vel_y > 0) {
-//         ball->vel_y -= ball->acc_y/100;
-//         ball->y += ball->vel_y/100;
-//     }
-//     movegamecharacter(ball, ball->x, ball->y);
-// }
+void reset_car() {
+    car1.x = 64;
+    car1.y = 64;
+    movegamecharacter(&car1, car1.x, car1.y);
+    move_bkg(car1.x, car1.y);
+}
 
 void main(){
     // load sprites for car
@@ -231,6 +239,15 @@ void main(){
             turn_count = 2;
         } else if (turn_count == 0) {
             turn_count = 22/abs(car1.vel);
+    while(1){
+        
+        //move_ball(&ball);
+        //ball.x += 1;
+        //movegamecharacter(&ball, ball.x, ball.y);
+
+        if (is_goal(car1.x, car1.y)) {
+            //printf("This is a goal\n");
+            reset_car();
         }
         turn_count--;
         // move_ball(&ball);
@@ -240,11 +257,12 @@ void main(){
         // }
         
         //player contact with ball
-        // if (check_collision(&car1, &ball)) {
-        //     //printf("Collision detected");
-        //     ball.vel_x = car1.vel_x;
-        //     ball.vel_y = car1.vel_y;
-        // }
+         if (check_collision(&car1, &ball)) {
+             printf("%d:%d\n", car1.x, car1.y);
+             printf("%d:%d\n", ball.x, ball.y);
+             //ball.ve = car1.vel_x;
+             //ball.vel_y = car1.vel_y;
+         }
 
         //controls
         if(joypad() & J_B){
