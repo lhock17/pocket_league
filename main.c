@@ -48,8 +48,10 @@ void load_ball_sprite() {
 }
 
  UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
-     return (one->x >= two->x AND one->x <= two->x + two->width) OR
-         (two->y >= one->y AND two->y <= one->y + one->height);
+     return (one->x >= two->x && one->x <= two->x + two->width) && 
+     (one->y >= two->y && one->y <= two->y + two->height)
+      || (two->x >= one->x && two->x <= one->x + one->width) 
+      && (two->y >= one->y && two->y <= one->y + one->height);
 }
 
 UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
@@ -198,6 +200,9 @@ void move_car(struct GameObject* car, struct GameObject* ball) {
     move_bkg(car->x, car->y);
     ball->x -= car->x - dx;
     ball->y -= car->y - dy;
+    if ((ball->x - car->x < 0.5) AND (ball->y - car->y < 0.5)) {
+        printf("yes\n");   
+    }
     movegamecharacter(ball, ball->x, ball->y);
 }
 
@@ -236,12 +241,12 @@ void main(){
         }
         
         //player contact with ball
-         if (check_collision(&car1, &ball)) {
-             printf("%d:%d\n", car1.x, car1.y);
-             printf("%d:%d\n", ball.x, ball.y);
+         //if (check_collision(&ball, &car1)) {
+             //printf("%d:%d\n", car1.x, car1.y);
+             //printf("%d:%d\n", ball.x, ball.y);
              //ball.ve = car1.vel_x;
              //ball.vel_y = car1.vel_y;
-         }
+         //}
 
         //controls
         if(joypad() & J_A){

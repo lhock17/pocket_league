@@ -19,7 +19,7 @@
 	.globl _is_goal
 	.globl _check_collision
 	.globl _load_ball_sprite
-	.globl _printf
+	.globl _puts
 	.globl _set_sprite_data
 	.globl _set_bkg_tiles
 	.globl _set_bkg_data
@@ -2588,15 +2588,15 @@ _bkg_tiles:
 ; Function check_collision
 ; ---------------------------------
 _check_collision::
-	add	sp, #-7
-;main.c:51: return (one->x >= two->x AND one->x <= two->x + two->width) OR
-	ldhl	sp,	#9
+	add	sp, #-16
+;main.c:51: return (one->x >= two->x && one->x <= two->x + two->width) && 
+	ldhl	sp,	#18
+	ld	a, (hl)
+	ldhl	sp,	#2
+	ld	(hl), a
+	ldhl	sp,	#19
 	ld	a, (hl)
 	ldhl	sp,	#3
-	ld	(hl), a
-	ldhl	sp,	#10
-	ld	a, (hl)
-	ldhl	sp,	#4
 	ld	(hl-), a
 	ld	a, (hl+)
 	ld	e, a
@@ -2606,19 +2606,18 @@ _check_collision::
 	ld	c, l
 	ld	b, h
 	ld	a, (bc)
-	ldhl	sp,	#6
+	ldhl	sp,	#4
 	ld	(hl), a
-	ldhl	sp,	#11
+	ldhl	sp,	#20
+	ld	a, (hl)
+	ldhl	sp,	#0
+	ld	(hl), a
+	ldhl	sp,	#21
 	ld	a, (hl)
 	ldhl	sp,	#1
 	ld	(hl), a
-	ldhl	sp,	#12
-	ld	a, (hl)
-	ldhl	sp,	#2
-	ld	(hl-), a
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
+	pop	de
+	push	de
 	ld	hl, #0x0005
 	add	hl, de
 	ld	c, l
@@ -2627,33 +2626,141 @@ _check_collision::
 	ldhl	sp,	#5
 	ld	(hl), a
 	ld	a, (hl+)
+	ld	(hl+), a
+	rlca
+	sbc	a, a
+	ld	(hl), a
+	ldhl	sp,	#4
+	ld	a, (hl)
+	ldhl	sp,	#8
+	ld	(hl+), a
+	rlca
+	sbc	a, a
+	ld	(hl), a
+;main.c:52: (one->y >= two->y && one->y <= two->y + two->height)
+	ldhl	sp,#2
+	ld	a, (hl+)
 	ld	e, a
 	ld	d, (hl)
+	ld	hl, #0x0006
+	add	hl, de
+	push	hl
+	ld	a, l
+	ldhl	sp,	#12
+	ld	(hl), a
+	pop	hl
+	ld	a, h
+	ldhl	sp,	#11
+	ld	(hl), a
+	pop	de
+	push	de
+	ld	hl, #0x0006
+	add	hl, de
+	push	hl
+	ld	a, l
+	ldhl	sp,	#14
+	ld	(hl), a
+	pop	hl
+	ld	a, h
+	ldhl	sp,	#13
+	ld	(hl), a
+;main.c:51: return (one->x >= two->x && one->x <= two->x + two->width) && 
+	ldhl	sp,	#5
 	ld	a, (hl-)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (hl+)
 	sub	a, (hl)
 	bit	7, e
-	jr	Z, 00122$
+	jr	Z, 00152$
 	bit	7, d
-	jr	NZ, 00123$
+	jr	NZ, 00153$
 	cp	a, a
-	jr	00123$
-00122$:
+	jr	00153$
+00152$:
 	bit	7, d
-	jr	Z, 00123$
+	jr	Z, 00153$
 	scf
-00123$:
-	jr	C, 00108$
-	ldhl	sp,	#5
-	ld	a, (hl)
+00153$:
+	jp	C, 00108$
+	pop	de
+	push	de
+	ld	hl, #0x0009
+	add	hl, de
+	ld	c, l
+	ld	b, h
+	ld	a, (bc)
 	ld	c, a
 	rlca
 	sbc	a, a
 	ld	b, a
-	ldhl	sp,#1
+	ldhl	sp,	#6
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	add	hl, bc
+	ld	c, l
+	ld	b, h
+	ldhl	sp,	#8
+	ld	a, c
+	sub	a, (hl)
+	inc	hl
+	ld	a, b
+	sbc	a, (hl)
+	ld	a, b
+	ld	d, a
+	bit	7, (hl)
+	jr	Z, 00154$
+	bit	7, d
+	jr	NZ, 00155$
+	cp	a, a
+	jr	00155$
+00154$:
+	bit	7, d
+	jr	Z, 00155$
+	scf
+00155$:
+	jr	C, 00108$
+;main.c:52: (one->y >= two->y && one->y <= two->y + two->height)
+	ldhl	sp,#10
 	ld	a, (hl+)
 	ld	e, a
 	ld	d, (hl)
-	ld	hl, #0x0009
+	ld	a, (de)
+	ldhl	sp,	#15
+	ld	(hl-), a
+	dec	hl
+	dec	hl
+	ld	a, (hl+)
+	ld	e, a
+	ld	a, (hl+)
+	inc	hl
+	ld	d, a
+	ld	a, (de)
+	ld	c, a
+	ld	e, c
+	ld	a,(hl)
+	ld	d,a
+	sub	a, c
+	bit	7, e
+	jr	Z, 00156$
+	bit	7, d
+	jr	NZ, 00157$
+	cp	a, a
+	jr	00157$
+00156$:
+	bit	7, d
+	jr	Z, 00157$
+	scf
+00157$:
+	jr	C, 00108$
+	ld	a, c
+	rlca
+	sbc	a, a
+	ld	b, a
+	pop	de
+	push	de
+	ld	hl, #0x000a
 	add	hl, de
 	ld	e, l
 	ld	d, h
@@ -2669,7 +2776,7 @@ _check_collision::
 	add	hl, bc
 	ld	c, l
 	ld	b, h
-	ldhl	sp,	#6
+	ldhl	sp,	#15
 	ld	a, (hl-)
 	ld	(hl+), a
 	rlca
@@ -2683,63 +2790,116 @@ _check_collision::
 	ld	a, b
 	ld	d, a
 	bit	7, (hl)
-	jr	Z, 00124$
+	jr	Z, 00158$
 	bit	7, d
-	jr	NZ, 00125$
+	jr	NZ, 00159$
 	cp	a, a
-	jr	00125$
-00124$:
+	jr	00159$
+00158$:
 	bit	7, d
-	jr	Z, 00125$
+	jr	Z, 00159$
 	scf
-00125$:
+00159$:
 	jp	NC, 00104$
 00108$:
-;main.c:52: (two->y >= one->y AND two->y <= one->y + one->height);
-	ldhl	sp,#1
+;main.c:53: || (two->x >= one->x && two->x <= one->x + one->width) 
+	ldhl	sp,	#4
 	ld	a, (hl+)
 	ld	e, a
 	ld	d, (hl)
-	ld	hl, #0x0006
-	add	hl, de
-	ld	c, l
-	ld	b, h
-	ld	a, (bc)
-	ldhl	sp,	#0
-	ld	(hl), a
-	ldhl	sp,#3
+	ld	a, (hl-)
+	sub	a, (hl)
+	bit	7, e
+	jr	Z, 00160$
+	bit	7, d
+	jr	NZ, 00161$
+	cp	a, a
+	jr	00161$
+00160$:
+	bit	7, d
+	jr	Z, 00161$
+	scf
+00161$:
+	jp	C, 00103$
+	ldhl	sp,#2
 	ld	a, (hl+)
 	ld	e, a
 	ld	d, (hl)
-	ld	hl, #0x0006
+	ld	hl, #0x0009
 	add	hl, de
 	ld	c, l
 	ld	b, h
 	ld	a, (bc)
 	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	add	hl, bc
+	ld	c, l
+	ld	b, h
+	ldhl	sp,	#6
+	ld	a, c
+	sub	a, (hl)
+	inc	hl
+	ld	a, b
+	sbc	a, (hl)
+	ld	a, b
+	ld	d, a
+	bit	7, (hl)
+	jr	Z, 00162$
+	bit	7, d
+	jr	NZ, 00163$
+	cp	a, a
+	jr	00163$
+00162$:
+	bit	7, d
+	jr	Z, 00163$
+	scf
+00163$:
+	jp	C, 00103$
+;main.c:54: && (two->y >= one->y && two->y <= one->y + one->height);
+	ldhl	sp,#12
+	ld	a, (hl+)
+	ld	e, a
+	ld	a, (hl+)
+	inc	hl
+	ld	d, a
+	ld	a, (de)
+	ld	(hl), a
+	ldhl	sp,#10
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
 	ld	e, c
-	ldhl	sp,	#0
+	ldhl	sp,	#15
 	ld	a,(hl)
 	ld	d,a
 	sub	a, c
 	bit	7, e
-	jr	Z, 00126$
+	jr	Z, 00164$
 	bit	7, d
-	jr	NZ, 00127$
+	jr	NZ, 00165$
 	cp	a, a
-	jr	00127$
-00126$:
+	jr	00165$
+00164$:
 	bit	7, d
-	jr	Z, 00127$
+	jr	Z, 00165$
 	scf
-00127$:
+00165$:
 	jr	C, 00103$
 	ld	a, c
-	ldhl	sp,	#1
+	ldhl	sp,	#11
 	ld	(hl+), a
 	rlca
 	sbc	a, a
-	ld	(hl+), a
+	ld	(hl), a
+	ldhl	sp,#2
 	ld	a, (hl+)
 	ld	e, a
 	ld	d, (hl)
@@ -2747,18 +2907,18 @@ _check_collision::
 	add	hl, de
 	push	hl
 	ld	a, l
-	ldhl	sp,	#7
+	ldhl	sp,	#15
 	ld	(hl), a
 	pop	hl
 	ld	a, h
-	ldhl	sp,	#6
+	ldhl	sp,	#14
 	ld	(hl-), a
 	ld	a, (hl+)
 	ld	e, a
 	ld	d, (hl)
 	ld	a, (de)
 	ld	(hl), a
-	ldhl	sp,	#3
+	ld	a, (hl-)
 	ld	(hl+), a
 	rlca
 	sbc	a, a
@@ -2766,30 +2926,29 @@ _check_collision::
 	ld	a, (hl+)
 	ld	e, a
 	ld	d, (hl)
-	ldhl	sp,	#1
+	ldhl	sp,	#11
 	ld	a,	(hl+)
 	ld	h, (hl)
 	ld	l, a
 	add	hl, de
 	push	hl
 	ld	a, l
-	ldhl	sp,	#7
+	ldhl	sp,	#11
 	ld	(hl), a
 	pop	hl
 	ld	a, h
-	ldhl	sp,	#6
+	ldhl	sp,	#10
 	ld	(hl), a
-	ldhl	sp,	#0
-	ld	a, (hl)
-	ldhl	sp,	#3
+	ldhl	sp,	#15
+	ld	a, (hl-)
 	ld	(hl+), a
 	rlca
 	sbc	a, a
 	ld	(hl), a
-	ldhl	sp,	#5
+	ldhl	sp,	#9
 	ld	e, l
 	ld	d, h
-	ldhl	sp,	#3
+	ldhl	sp,	#14
 	ld	a, (de)
 	inc	de
 	sub	a, (hl)
@@ -2799,33 +2958,37 @@ _check_collision::
 	ld	a, (de)
 	ld	d, a
 	bit	7, (hl)
-	jr	Z, 00128$
+	jr	Z, 00166$
 	bit	7, d
-	jr	NZ, 00129$
+	jr	NZ, 00167$
 	cp	a, a
-	jr	00129$
-00128$:
+	jr	00167$
+00166$:
 	bit	7, d
-	jr	Z, 00129$
+	jr	Z, 00167$
 	scf
-00129$:
+00167$:
 	jr	NC, 00104$
 00103$:
-	ld	e, #0x00
+	ldhl	sp,	#15
+	ld	(hl), #0x00
 	jr	00105$
 00104$:
-	ld	e, #0x01
+	ldhl	sp,	#15
+	ld	(hl), #0x01
 00105$:
-;main.c:53: }
-	add	sp, #7
+	ldhl	sp,	#15
+	ld	e, (hl)
+;main.c:55: }
+	add	sp, #16
 	ret
-;main.c:55: UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
+;main.c:57: UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
 ;	---------------------------------
 ; Function is_goal
 ; ---------------------------------
 _is_goal::
 	add	sp, #-6
-;main.c:59: indexTLx = (newplayerx - 16) / 8;
+;main.c:61: indexTLx = (newplayerx - 16) / 8;
 	ldhl	sp,	#8
 	ld	a, (hl)
 	ldhl	sp,	#2
@@ -2866,7 +3029,7 @@ _is_goal::
 	rr	c
 	srl	b
 	rr	c
-;main.c:60: indexTLy = (newplayery - 16) / 8;
+;main.c:62: indexTLy = (newplayery - 16) / 8;
 	ldhl	sp,	#9
 	ld	a, (hl)
 	ldhl	sp,	#0
@@ -2915,7 +3078,7 @@ _is_goal::
 	rr	e
 	srl	d
 	rr	e
-;main.c:61: tileindexTL = 32 * indexTLy + indexTLx;
+;main.c:63: tileindexTL = 32 * indexTLy + indexTLx;
 	ld	l, e
 	ld	h, d
 	add	hl, hl
@@ -2930,9 +3093,9 @@ _is_goal::
 	ld	(hl), c
 	inc	hl
 	ld	(hl), a
-;main.c:64: if (joypad() & J_A) {
+;main.c:66: if (joypad() & J_A) {
 	call	_joypad
-;main.c:68: for (int i = 0; i < goal_size; i++) {
+;main.c:70: for (int i = 0; i < goal_size; i++) {
 	xor	a, a
 	ldhl	sp,	#4
 	ld	(hl+), a
@@ -2962,7 +3125,7 @@ _is_goal::
 	scf
 00147$:
 	jr	NC, 00108$
-;main.c:69: if (tileindexTL == player_goal_square[i]) {
+;main.c:71: if (tileindexTL == player_goal_square[i]) {
 	ldhl	sp,#4
 	ld	a, (hl+)
 	ld	c, a
@@ -2984,7 +3147,7 @@ _is_goal::
 	ld	a, (hl)
 	sub	a, d
 	jr	NZ, 00106$
-;main.c:70: player_goals++;
+;main.c:72: player_goals++;
 ;setupPair	HL
 	ld	hl, #_player_goals
 	inc	(hl)
@@ -2993,11 +3156,11 @@ _is_goal::
 	inc	hl
 	inc	(hl)
 00151$:
-;main.c:71: return 1;
+;main.c:73: return 1;
 	ld	e, #0x01
 	jr	00112$
 00106$:
-;main.c:72: } else if (tileindexTL == enemy_goal_square[i]) {
+;main.c:74: } else if (tileindexTL == enemy_goal_square[i]) {
 	ld	hl, #_enemy_goal_square
 	add	hl, bc
 	ld	a, (hl+)
@@ -3011,7 +3174,7 @@ _is_goal::
 	ld	a, (hl)
 	sub	a, b
 	jr	NZ, 00111$
-;main.c:73: enemy_goals++;
+;main.c:75: enemy_goals++;
 ;setupPair	HL
 	ld	hl, #_enemy_goals
 	inc	(hl)
@@ -3020,11 +3183,11 @@ _is_goal::
 	inc	hl
 	inc	(hl)
 00154$:
-;main.c:74: return 1;
+;main.c:76: return 1;
 	ld	e, #0x01
 	jr	00112$
 00111$:
-;main.c:68: for (int i = 0; i < goal_size; i++) {
+;main.c:70: for (int i = 0; i < goal_size; i++) {
 	ldhl	sp,	#4
 	inc	(hl)
 	jr	NZ, 00110$
@@ -3032,18 +3195,18 @@ _is_goal::
 	inc	(hl)
 	jr	00110$
 00108$:
-;main.c:77: return 0;
+;main.c:79: return 0;
 	ld	e, #0x00
 00112$:
-;main.c:78: }
+;main.c:80: }
 	add	sp, #6
 	ret
-;main.c:80: void load_car_sprite(UINT8 direction) {
+;main.c:82: void load_car_sprite(UINT8 direction) {
 ;	---------------------------------
 ; Function load_car_sprite
 ; ---------------------------------
 _load_car_sprite::
-;main.c:81: set_sprite_tile(0, 4 * direction);
+;main.c:83: set_sprite_tile(0, 4 * direction);
 	ldhl	sp,	#2
 	ld	c, (hl)
 	ld	a, c
@@ -3053,10 +3216,10 @@ _load_car_sprite::
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 2)
 	ld	(hl), b
-;main.c:82: car1.spriteids[0] = 0;
+;main.c:84: car1.spriteids[0] = 0;
 	ld	hl, #(_car1 + 1)
 	ld	(hl), #0x00
-;main.c:83: set_sprite_tile(1, 4 * direction + 2);
+;main.c:85: set_sprite_tile(1, 4 * direction + 2);
 	ld	a, c
 	add	a, a
 	add	a, a
@@ -3067,37 +3230,37 @@ _load_car_sprite::
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 6)
 	ld	(hl), b
-;main.c:84: car1.spriteids[1] = 1;
+;main.c:86: car1.spriteids[1] = 1;
 	ld	hl, #(_car1 + 2)
 	ld	(hl), #0x01
-;main.c:85: set_sprite_tile(2, 4 * direction + 1);
+;main.c:87: set_sprite_tile(2, 4 * direction + 1);
 	ld	b, c
 	inc	b
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 10)
 	ld	(hl), b
-;main.c:86: car1.spriteids[2] = 2;
+;main.c:88: car1.spriteids[2] = 2;
 	ld	hl, #(_car1 + 3)
 	ld	(hl), #0x02
-;main.c:87: set_sprite_tile(3, 4 * direction + 3);
+;main.c:89: set_sprite_tile(3, 4 * direction + 3);
 	inc	c
 	inc	c
 	inc	c
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 14)
 	ld	(hl), c
-;main.c:88: car1.spriteids[3] = 3;
+;main.c:90: car1.spriteids[3] = 3;
 	ld	hl, #(_car1 + 4)
 	ld	(hl), #0x03
-;main.c:89: }
+;main.c:91: }
 	ret
-;main.c:91: void movegamecharacter(struct GameObject* object, INT8 x, INT8 y){
+;main.c:93: void movegamecharacter(struct GameObject* object, INT8 x, INT8 y){
 ;	---------------------------------
 ; Function movegamecharacter
 ; ---------------------------------
 _movegamecharacter::
 	add	sp, #-3
-;main.c:92: move_sprite(object->spriteids[0], x, y);
+;main.c:94: move_sprite(object->spriteids[0], x, y);
 	ldhl	sp,	#8
 	ld	a, (hl)
 	ldhl	sp,	#0
@@ -3137,7 +3300,7 @@ _movegamecharacter::
 	inc	bc
 	ld	a, (hl)
 	ld	(bc), a
-;main.c:93: move_sprite(object->spriteids[1], x + spritesize, y);
+;main.c:95: move_sprite(object->spriteids[1], x + spritesize, y);
 ;setupPair	HL
 	ld	a, (#_spritesize)
 	ldhl	sp,	#1
@@ -3174,7 +3337,7 @@ _movegamecharacter::
 	inc	bc
 	ld	a, (hl)
 	ld	(bc), a
-;main.c:94: move_sprite(object->spriteids[2], x, y + spritesize);
+;main.c:96: move_sprite(object->spriteids[2], x, y + spritesize);
 ;setupPair	HL
 	ld	a, (#_spritesize)
 	ldhl	sp,	#0
@@ -3210,7 +3373,7 @@ _movegamecharacter::
 	ldhl	sp,	#1
 	ld	a, (hl)
 	ld	(bc), a
-;main.c:95: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
+;main.c:97: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
 ;setupPair	HL
 	ld	hl, #_spritesize
 	ld	c, (hl)
@@ -3238,48 +3401,48 @@ _movegamecharacter::
 	ld	a, b
 	ld	(hl+), a
 	ld	(hl), c
-;main.c:95: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
-;main.c:96: }
+;main.c:97: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
+;main.c:98: }
 	add	sp, #3
 	ret
-;main.c:98: void performantdelay(UINT8 numloops){
+;main.c:100: void performantdelay(UINT8 numloops){
 ;	---------------------------------
 ; Function performantdelay
 ; ---------------------------------
 _performantdelay::
-;main.c:100: for(i = 0; i < numloops; i++){
+;main.c:102: for(i = 0; i < numloops; i++){
 	ld	c, #0x00
 00103$:
 	ld	a, c
 	ldhl	sp,	#2
 	sub	a, (hl)
 	ret	NC
-;main.c:101: wait_vbl_done();
+;main.c:103: wait_vbl_done();
 	call	_wait_vbl_done
-;main.c:100: for(i = 0; i < numloops; i++){
+;main.c:102: for(i = 0; i < numloops; i++){
 	inc	c
-;main.c:103: }
+;main.c:105: }
 	jr	00103$
-;main.c:105: void setup_ball() {
+;main.c:107: void setup_ball() {
 ;	---------------------------------
 ; Function setup_ball
 ; ---------------------------------
 _setup_ball::
-;main.c:106: ball.x = 100;
+;main.c:108: ball.x = 100;
 	ld	hl, #(_ball + 5)
 	ld	(hl), #0x64
-;main.c:107: ball.y = 100;
+;main.c:109: ball.y = 100;
 	ld	hl, #(_ball + 6)
 	ld	(hl), #0x64
-;main.c:108: ball.width = 16;
+;main.c:110: ball.width = 16;
 	ld	hl, #(_ball + 9)
 	ld	(hl), #0x10
-;main.c:109: ball.height = 16;   
+;main.c:111: ball.height = 16;   
 	ld	hl, #(_ball + 10)
 	ld	(hl), #0x10
-;main.c:111: load_ball_sprite();
+;main.c:113: load_ball_sprite();
 	call	_load_ball_sprite
-;main.c:112: movegamecharacter(&ball, ball.x, ball.y);
+;main.c:114: movegamecharacter(&ball, ball.x, ball.y);
 	ld	hl, #(_ball + 6)
 	ld	b, (hl)
 	ld	a, (#(_ball + 5) + 0)
@@ -3291,48 +3454,48 @@ _setup_ball::
 	push	de
 	call	_movegamecharacter
 	add	sp, #4
-;main.c:113: }
+;main.c:115: }
 	ret
-;main.c:115: void setupcar_light(){
+;main.c:117: void setupcar_light(){
 ;	---------------------------------
 ; Function setupcar_light
 ; ---------------------------------
 _setupcar_light::
-;main.c:116: car1.direction = 0;
+;main.c:118: car1.direction = 0;
 	ld	hl, #_car1
 	ld	(hl), #0x00
-;main.c:117: car1.x = 64;
+;main.c:119: car1.x = 64;
 	ld	hl, #(_car1 + 5)
 	ld	(hl), #0x40
-;main.c:118: car1.y = 64;
+;main.c:120: car1.y = 64;
 	ld	hl, #(_car1 + 6)
 	ld	(hl), #0x40
-;main.c:119: car1.width = 16;
+;main.c:121: car1.width = 16;
 	ld	hl, #(_car1 + 9)
 	ld	(hl), #0x10
-;main.c:120: car1.height = 16;
+;main.c:122: car1.height = 16;
 	ld	hl, #(_car1 + 10)
 	ld	(hl), #0x10
-;main.c:121: car1.acc = 0;
+;main.c:123: car1.acc = 0;
 	ld	hl, #(_car1 + 8)
 	ld	(hl), #0x00
-;main.c:122: car1.vel = 0;
+;main.c:124: car1.vel = 0;
 	ld	hl, #(_car1 + 7)
 	ld	(hl), #0x00
-;main.c:124: set_sprite_data(0, 64, car_light);
+;main.c:126: set_sprite_data(0, 64, car_light);
 	ld	de, #_car_light
 	push	de
 	ld	hl, #0x4000
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-;main.c:125: load_car_sprite(car1.direction);
+;main.c:127: load_car_sprite(car1.direction);
 	ld	a, (#_car1 + 0)
 	push	af
 	inc	sp
 	call	_load_car_sprite
 	inc	sp
-;main.c:127: movegamecharacter(&car1, car1.x, car1.y);
+;main.c:129: movegamecharacter(&car1, car1.x, car1.y);
 	ld	hl, #(_car1 + 6)
 	ld	b, (hl)
 	ld	a, (#(_car1 + 5) + 0)
@@ -3344,26 +3507,32 @@ _setupcar_light::
 	push	de
 	call	_movegamecharacter
 	add	sp, #4
-;main.c:128: }
+;main.c:130: }
 	ret
-;main.c:130: void move_car(struct GameObject* car, struct GameObject* ball) {
+;main.c:132: void move_car(struct GameObject* car, struct GameObject* ball) {
 ;	---------------------------------
 ; Function move_car
 ; ---------------------------------
 _move_car::
-	add	sp, #-10
-;main.c:131: car->vel += car->acc;
-	ldhl	sp,	#12
+	add	sp, #-12
+;main.c:133: car->vel += car->acc;
+	ldhl	sp,	#14
 	ld	a, (hl+)
 	ld	c, a
 	ld	b, (hl)
 	ld	hl, #0x0007
 	add	hl, bc
-	inc	sp
-	inc	sp
-	ld	e, l
-	ld	d, h
-	push	de
+	push	hl
+	ld	a, l
+	ldhl	sp,	#4
+	ld	(hl), a
+	pop	hl
+	ld	a, h
+	ldhl	sp,	#3
+	ld	(hl-), a
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
 	ld	a, (de)
 	ld	l, a
 ;	spillPairReg hl
@@ -3376,19 +3545,23 @@ _move_car::
 	ld	d, a
 	ld	a, (de)
 	add	a, l
-	pop	hl
-	push	hl
+	ldhl	sp,	#2
+	push	af
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	pop	af
 	ld	(hl), a
-;main.c:132: INT8 dx = car->x;
+;main.c:134: INT8 dx = car->x;
 	ld	hl, #0x0005
 	add	hl, bc
 	push	hl
 	ld	a, l
-	ldhl	sp,	#4
+	ldhl	sp,	#6
 	ld	(hl), a
 	pop	hl
 	ld	a, h
-	ldhl	sp,	#3
+	ldhl	sp,	#5
 	ld	(hl-), a
 	ld	a, (hl+)
 	ld	e, a
@@ -3398,16 +3571,16 @@ _move_car::
 	ld	(hl), a
 	ld	a, (hl+)
 	ld	(hl), a
-;main.c:133: INT8 dy = car->y;
+;main.c:135: INT8 dy = car->y;
 	ld	hl, #0x0006
 	add	hl, bc
 	push	hl
 	ld	a, l
-	ldhl	sp,	#8
+	ldhl	sp,	#10
 	ld	(hl), a
 	pop	hl
 	ld	a, h
-	ldhl	sp,	#7
+	ldhl	sp,	#9
 	ld	(hl-), a
 	ld	a, (hl+)
 	ld	e, a
@@ -3417,19 +3590,19 @@ _move_car::
 	ld	(hl), a
 	ld	a, (hl+)
 	ld	(hl), a
-;main.c:135: switch (car->direction) {
+;main.c:137: switch (car->direction) {
 	ld	a, (bc)
 	ld	c, a
 	ld	a, #0x0f
 	sub	a, c
 	jp	C, 00117$
 	ld	b, #0x00
-	ld	hl, #00126$
+	ld	hl, #00139$
 	add	hl, bc
 	add	hl, bc
 	add	hl, bc
 	jp	(hl)
-00126$:
+00139$:
 	jp	00101$
 	jp	00102$
 	jp	00103$
@@ -3446,1029 +3619,1085 @@ _move_car::
 	jp	00114$
 	jp	00115$
 	jp	00116$
-;main.c:136: case 0:
+;main.c:138: case 0:
 00101$:
-;main.c:137: car->y -= car->vel;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	ldhl	sp,	#8
-	ld	a, (hl-)
-	sub	a, c
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:138: break;
-	jp	00117$
-;main.c:139: case 1:
-00102$:
-;main.c:140: car->x += 45*car->vel/100;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ld	a, e
-	ldhl	sp,	#4
-	add	a, (hl)
-	dec	hl
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:141: car->y -= 45*car->vel/50;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0032
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, c
-	sub	a, e
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:142: break;
-	jp	00117$
-;main.c:143: case 2:
-00103$:
-;main.c:144: car->x += 71*car->vel/100;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ld	a, e
-	ldhl	sp,	#4
-	add	a, (hl)
-	dec	hl
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:145: car->y -= 71*car->vel/100;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, c
-	sub	a, e
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:146: break;
-	jp	00117$
-;main.c:147: case 3:
-00104$:
-;main.c:148: car->x += 45*car->vel/50;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0032
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ld	a, e
-	ldhl	sp,	#4
-	add	a, (hl)
-	dec	hl
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:149: car->y -= 45*car->vel/100;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, c
-	sub	a, e
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:150: break;
-	jp	00117$
-;main.c:151: case 4:
-00105$:
-;main.c:152: car->x += car->vel;
-	pop	de
-	push	de
-	ld	a, (de)
-	ldhl	sp,	#4
-	add	a, (hl)
-	dec	hl
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:153: break;
-	jp	00117$
-;main.c:154: case 5:
-00106$:
-;main.c:155: car->x += 45*car->vel/50;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0032
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ld	a, e
-	ldhl	sp,	#4
-	add	a, (hl)
-	dec	hl
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:156: car->y += 45*car->vel/100;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, e
-	add	a, c
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:157: break;
-	jp	00117$
-;main.c:158: case 6:
-00107$:
-;main.c:159: car->x += 71*car->vel/100;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ld	a, e
-	ldhl	sp,	#4
-	add	a, (hl)
-	dec	hl
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:160: car->y += 71*car->vel/100;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, e
-	add	a, c
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:161: break;
-	jp	00117$
-;main.c:162: case 7:
-00108$:
-;main.c:163: car->x += 45*car->vel/100;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ld	a, e
-	ldhl	sp,	#4
-	add	a, (hl)
-	dec	hl
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:164: car->y += 45*car->vel/50;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0032
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, e
-	add	a, c
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:165: break;
-	jp	00117$
-;main.c:166: case 8:
-00109$:
-;main.c:167: car->y += car->vel;
-	pop	de
-	push	de
-	ld	a, (de)
-	ldhl	sp,	#8
-	add	a, (hl)
-	dec	hl
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:168: break;
-	jp	00117$
-;main.c:169: case 9:
-00110$:
-;main.c:170: car->x -= 45*car->vel/100;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ldhl	sp,	#4
-	ld	a, (hl-)
-	sub	a, e
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:171: car->y += 45*car->vel/50;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0032
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, e
-	add	a, c
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:172: break;
-	jp	00117$
-;main.c:173: case 10:
-00111$:
-;main.c:174: car->x -= 71*car->vel/100;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ldhl	sp,	#4
-	ld	a, (hl-)
-	sub	a, e
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:175: car->y += 71*car->vel/100;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, e
-	add	a, c
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:176: break;
-	jp	00117$
-;main.c:177: case 11:
-00112$:
-;main.c:178: car->x -= 45*car->vel/50;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0032
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ldhl	sp,	#4
-	ld	a, (hl-)
-	sub	a, e
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:179: car->y += 45*car->vel/100;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, e
-	add	a, c
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:180: break;
-	jp	00117$
-;main.c:181: case 12:
-00113$:
-;main.c:182: car->x -= car->vel;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	ldhl	sp,	#4
-	ld	a, (hl-)
-	sub	a, c
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:183: break;
-	jp	00117$
-;main.c:184: case 13:
-00114$:
-;main.c:185: car->x -= 45*car->vel/50;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0032
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ldhl	sp,	#4
-	ld	a, (hl-)
-	sub	a, e
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:186: car->y -= 45*car->vel/100;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, c
-	sub	a, e
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:187: break;
-	jp	00117$
-;main.c:188: case 14:
-00115$:
-;main.c:189: car->x -= 71*car->vel/100;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ldhl	sp,	#4
-	ld	a, (hl-)
-	sub	a, e
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:190: car->y -= 71*car->vel/100;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, c
-	sub	a, e
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:191: break;
-	jr	00117$
-;main.c:192: case 15:
-00116$:
-;main.c:193: car->x -= 45*car->vel/100;
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	add	hl, bc
-	ld	de, #0x0064
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	ldhl	sp,	#4
-	ld	a, (hl-)
-	sub	a, e
-	ld	c, a
-	ld	a, (hl-)
-	ld	l, (hl)
-	ld	h, a
-	ld	(hl), c
-;main.c:194: car->y -= 45*car->vel/50;
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	ld	c, a
-	pop	de
-	push	de
-	ld	a, (de)
-	ld	l, a
-;	spillPairReg hl
-;	spillPairReg hl
-	rlca
-	sbc	a, a
-	ld	h, a
-;	spillPairReg hl
-;	spillPairReg hl
-	ld	e, l
-	ld	d, h
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, de
-	add	hl, hl
-	add	hl, hl
-	add	hl, de
-	push	bc
-	ld	de, #0x0032
-	push	de
-	push	hl
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, c
-	sub	a, e
-	ld	c, a
-	ldhl	sp,	#6
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-;main.c:196: }
-00117$:
-;main.c:198: move_bkg(car->x, car->y);
-	ldhl	sp,#6
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
+;main.c:139: car->y -= car->vel;
 	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,	#10
+	ld	a, (hl-)
+	sub	a, c
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:140: break;
+	jp	00117$
+;main.c:141: case 1:
+00102$:
+;main.c:142: car->x += 45*car->vel/100;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ld	a, e
+	ldhl	sp,	#6
+	add	a, (hl)
+	dec	hl
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:143: car->y -= 45*car->vel/50;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0032
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, c
+	sub	a, e
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:144: break;
+	jp	00117$
+;main.c:145: case 2:
+00103$:
+;main.c:146: car->x += 71*car->vel/100;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ld	a, e
+	ldhl	sp,	#6
+	add	a, (hl)
+	dec	hl
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:147: car->y -= 71*car->vel/100;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, c
+	sub	a, e
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:148: break;
+	jp	00117$
+;main.c:149: case 3:
+00104$:
+;main.c:150: car->x += 45*car->vel/50;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0032
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ld	a, e
+	ldhl	sp,	#6
+	add	a, (hl)
+	dec	hl
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:151: car->y -= 45*car->vel/100;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, c
+	sub	a, e
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:152: break;
+	jp	00117$
+;main.c:153: case 4:
+00105$:
+;main.c:154: car->x += car->vel;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ldhl	sp,	#6
+	add	a, (hl)
+	dec	hl
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:155: break;
+	jp	00117$
+;main.c:156: case 5:
+00106$:
+;main.c:157: car->x += 45*car->vel/50;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0032
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ld	a, e
+	ldhl	sp,	#6
+	add	a, (hl)
+	dec	hl
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:158: car->y += 45*car->vel/100;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, e
+	add	a, c
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:159: break;
+	jp	00117$
+;main.c:160: case 6:
+00107$:
+;main.c:161: car->x += 71*car->vel/100;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ld	a, e
+	ldhl	sp,	#6
+	add	a, (hl)
+	dec	hl
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:162: car->y += 71*car->vel/100;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, e
+	add	a, c
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:163: break;
+	jp	00117$
+;main.c:164: case 7:
+00108$:
+;main.c:165: car->x += 45*car->vel/100;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ld	a, e
+	ldhl	sp,	#6
+	add	a, (hl)
+	dec	hl
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:166: car->y += 45*car->vel/50;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0032
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, e
+	add	a, c
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:167: break;
+	jp	00117$
+;main.c:168: case 8:
+00109$:
+;main.c:169: car->y += car->vel;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ldhl	sp,	#10
+	add	a, (hl)
+	dec	hl
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:170: break;
+	jp	00117$
+;main.c:171: case 9:
+00110$:
+;main.c:172: car->x -= 45*car->vel/100;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ldhl	sp,	#6
+	ld	a, (hl-)
+	sub	a, e
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:173: car->y += 45*car->vel/50;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0032
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, e
+	add	a, c
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:174: break;
+	jp	00117$
+;main.c:175: case 10:
+00111$:
+;main.c:176: car->x -= 71*car->vel/100;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ldhl	sp,	#6
+	ld	a, (hl-)
+	sub	a, e
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:177: car->y += 71*car->vel/100;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, e
+	add	a, c
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:178: break;
+	jp	00117$
+;main.c:179: case 11:
+00112$:
+;main.c:180: car->x -= 45*car->vel/50;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0032
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ldhl	sp,	#6
+	ld	a, (hl-)
+	sub	a, e
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:181: car->y += 45*car->vel/100;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, e
+	add	a, c
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:182: break;
+	jp	00117$
+;main.c:183: case 12:
+00113$:
+;main.c:184: car->x -= car->vel;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,	#6
+	ld	a, (hl-)
+	sub	a, c
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:185: break;
+	jp	00117$
+;main.c:186: case 13:
+00114$:
+;main.c:187: car->x -= 45*car->vel/50;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0032
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ldhl	sp,	#6
+	ld	a, (hl-)
+	sub	a, e
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:188: car->y -= 45*car->vel/100;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, c
+	sub	a, e
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:189: break;
+	jp	00117$
+;main.c:190: case 14:
+00115$:
+;main.c:191: car->x -= 71*car->vel/100;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ldhl	sp,	#6
+	ld	a, (hl-)
+	sub	a, e
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:192: car->y -= 71*car->vel/100;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, c
+	sub	a, e
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:193: break;
+	jr	00117$
+;main.c:194: case 15:
+00116$:
+;main.c:195: car->x -= 45*car->vel/100;
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	ld	de, #0x0064
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	ldhl	sp,	#6
+	ld	a, (hl-)
+	sub	a, e
+	ld	c, a
+	ld	a, (hl-)
+	ld	l, (hl)
+	ld	h, a
+	ld	(hl), c
+;main.c:196: car->y -= 45*car->vel/50;
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	c, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	l, a
+;	spillPairReg hl
+;	spillPairReg hl
+	rlca
+	sbc	a, a
+	ld	h, a
+;	spillPairReg hl
+;	spillPairReg hl
+	ld	e, l
+	ld	d, h
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	push	bc
+	ld	de, #0x0032
+	push	de
+	push	hl
+	call	__divsint
+	add	sp, #4
+	pop	bc
+	ld	a, c
+	sub	a, e
+	ld	c, a
+	ldhl	sp,	#8
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:198: }
+00117$:
+;main.c:200: move_bkg(car->x, car->y);
+	ldhl	sp,#8
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ldhl	sp,#4
 	ld	e, (hl)
 	inc	hl
 	ld	d, (hl)
@@ -4478,12 +4707,12 @@ _move_car::
 	pop	af
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:846: SCX_REG=x, SCY_REG=y;
 	ldh	(_SCY_REG + 0), a
-;main.c:199: ball->x -= car->x - dx;
-	ldhl	sp,	#14
+;main.c:201: ball->x -= car->x - dx;
+	ldhl	sp,	#16
 	ld	a, (hl)
 	ldhl	sp,	#0
 	ld	(hl), a
-	ldhl	sp,	#15
+	ldhl	sp,	#17
 	ld	a, (hl)
 	ldhl	sp,	#1
 	ld	(hl), a
@@ -4491,12 +4720,20 @@ _move_car::
 	push	de
 	ld	hl, #0x0005
 	add	hl, de
-	ld	c, l
-	ld	b, h
-	ld	a, (bc)
-	ldhl	sp,	#8
+	push	hl
+	ld	a, l
+	ldhl	sp,	#4
 	ld	(hl), a
-	ldhl	sp,#2
+	pop	hl
+	ld	a, h
+	ldhl	sp,	#3
+	ld	(hl-), a
+	ld	a, (hl+)
+	ld	e, a
+	ld	a, (hl+)
+	ld	d, a
+	ld	a, (de)
+	ld	c, a
 	ld	a, (hl+)
 	ld	e, a
 	ld	a, (hl+)
@@ -4504,23 +4741,34 @@ _move_car::
 	ld	d, a
 	ld	a, (de)
 	sub	a, (hl)
-	ld	e, a
-	ldhl	sp,	#8
-	ld	a, (hl)
-	sub	a, e
-	ld	(hl), a
-	ld	a, (hl)
-	ld	(bc), a
-;main.c:200: ball->y -= car->y - dy;
+	ld	b, a
+	ld	a, c
+	sub	a, b
+	ld	c, a
+	ldhl	sp,	#2
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), c
+;main.c:202: ball->y -= car->y - dy;
 	pop	de
 	push	de
 	ld	hl, #0x0006
 	add	hl, de
-	ld	c, l
-	ld	b, h
-	ld	a, (bc)
-	ldhl	sp,	#5
-	ld	(hl+), a
+	push	hl
+	ld	a, l
+	ldhl	sp,	#8
+	ld	(hl), a
+	pop	hl
+	ld	a, h
+	ldhl	sp,	#7
+	ld	(hl-), a
+	ld	a, (hl+)
+	ld	e, a
+	ld	a, (hl+)
+	ld	d, a
+	ld	a, (de)
+	ld	b, a
 	ld	a, (hl+)
 	ld	e, a
 	ld	a, (hl+)
@@ -4529,15 +4777,80 @@ _move_car::
 	ld	a, (de)
 	sub	a, (hl)
 	ld	e, a
-	ldhl	sp,	#5
-	ld	a, (hl)
+	ld	a, b
 	sub	a, e
-	ld	(bc), a
-;main.c:201: movegamecharacter(ball, ball->x, ball->y);
-	push	af
+	ld	b, a
+	ldhl	sp,	#6
+	ld	a,	(hl+)
+	ld	h, (hl)
+	ld	l, a
+	ld	(hl), b
+;main.c:203: if ((ball->x - car->x < 0.5) AND (ball->y - car->y < 0.5)) {
+	ld	a, c
+	rlca
+	sbc	a, a
+	ld	b, a
+	ldhl	sp,#4
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	e, a
+	rlca
+	sbc	a, a
+	ld	d, a
+	ld	a, c
+	sub	a, e
+	ld	c, a
+	ld	a, b
+	sbc	a, d
+	bit	7,a
+	jr	Z, 00119$
+	inc	hl
+	ld	a, (hl+)
+	ld	e, a
+	ld	a, (hl+)
+	ld	d, a
+	ld	a, (de)
+	ld	c, a
+	rlca
+	sbc	a, a
+	ld	b, a
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	e, a
+	rlca
+	sbc	a, a
+	ld	d, a
+	ld	a, c
+	sub	a, e
+	ld	c, a
+	ld	a, b
+	sbc	a, d
+	bit	7,a
+	jr	Z, 00119$
+;main.c:204: printf("yes\n");   
+	ld	de, #___str_1
+	push	de
+	call	_puts
+	pop	hl
+00119$:
+;main.c:206: movegamecharacter(ball, ball->x, ball->y);
+	ldhl	sp,#6
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	ld	b, a
+	ldhl	sp,#2
+	ld	a, (hl+)
+	ld	e, a
+	ld	d, (hl)
+	ld	a, (de)
+	push	bc
 	inc	sp
-	ldhl	sp,	#9
-	ld	a, (hl)
 	push	af
 	inc	sp
 	ldhl	sp,	#2
@@ -4546,22 +4859,25 @@ _move_car::
 	ld	d, (hl)
 	push	de
 	call	_movegamecharacter
-;main.c:202: }
-	add	sp, #14
+;main.c:207: }
+	add	sp, #16
 	ret
-;main.c:204: void reset_car() {
+___str_1:
+	.ascii "yes"
+	.db 0x00
+;main.c:209: void reset_car() {
 ;	---------------------------------
 ; Function reset_car
 ; ---------------------------------
 _reset_car::
-;main.c:205: car1.x = 64;
+;main.c:210: car1.x = 64;
 	ld	hl, #(_car1 + 5)
 	ld	(hl), #0x40
-;main.c:206: car1.y = 64;
+;main.c:211: car1.y = 64;
 	ld	bc, #_car1 + 6
 	ld	a, #0x40
 	ld	(bc), a
-;main.c:207: movegamecharacter(&car1, car1.x, car1.y);
+;main.c:212: movegamecharacter(&car1, car1.x, car1.y);
 	ld	a, (bc)
 	ld	hl, #(_car1 + 5)
 	ld	l, (hl)
@@ -4577,29 +4893,29 @@ _reset_car::
 	call	_movegamecharacter
 	add	sp, #4
 	pop	bc
-;main.c:208: move_bkg(car1.x, car1.y);
+;main.c:213: move_bkg(car1.x, car1.y);
 	ld	a, (bc)
 	ld	a, (#(_car1 + 5) + 0)
 	ldh	(_SCX_REG + 0), a
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:846: SCX_REG=x, SCY_REG=y;
 	ldh	(_SCY_REG + 0), a
-;main.c:208: move_bkg(car1.x, car1.y);
-;main.c:209: }
+;main.c:213: move_bkg(car1.x, car1.y);
+;main.c:214: }
 	ret
-;main.c:211: void main(){
+;main.c:216: void main(){
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
 	dec	sp
-;main.c:214: set_bkg_data(0, 44, bkg_tiles);
+;main.c:219: set_bkg_data(0, 44, bkg_tiles);
 	ld	de, #_bkg_tiles
 	push	de
 	ld	hl, #0x2c00
 	push	hl
 	call	_set_bkg_data
 	add	sp, #4
-;main.c:215: set_bkg_tiles(0, 0, 32, 21, map);
+;main.c:220: set_bkg_tiles(0, 0, 32, 21, map);
 	ld	de, #_map
 	push	de
 	ld	hl, #0x1520
@@ -4609,30 +4925,30 @@ _main::
 	push	af
 	call	_set_bkg_tiles
 	add	sp, #6
-;main.c:216: SHOW_BKG;
+;main.c:221: SHOW_BKG;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x01
 	ldh	(_LCDC_REG + 0), a
-;main.c:218: set_sprite_data(0,4, car_light);
+;main.c:223: set_sprite_data(0,4, car_light);
 	ld	de, #_car_light
 	push	de
 	ld	hl, #0x400
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-;main.c:219: setupcar_light();
+;main.c:224: setupcar_light();
 	call	_setupcar_light
-;main.c:220: set_sprite_data(64, 4, ball_sprite);
+;main.c:225: set_sprite_data(64, 4, ball_sprite);
 	ld	de, #_ball_sprite
 	push	de
 	ld	hl, #0x440
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-;main.c:221: setup_ball();
+;main.c:226: setup_ball();
 	call	_setup_ball
-;main.c:222: movegamecharacter(&ball, ball.x, ball.y);
-	ld	hl, #(_ball + 6)
+;main.c:227: movegamecharacter(&ball, ball.x, ball.y);
+	ld	hl, #_ball + 6
 	ld	b, (hl)
 	ld	a, (#(_ball + 5) + 0)
 	push	bc
@@ -4643,18 +4959,18 @@ _main::
 	push	de
 	call	_movegamecharacter
 	add	sp, #4
-;main.c:224: SHOW_SPRITES;
+;main.c:229: SHOW_SPRITES;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x02
 	ldh	(_LCDC_REG + 0), a
-;main.c:225: DISPLAY_ON;
+;main.c:230: DISPLAY_ON;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x80
 	ldh	(_LCDC_REG + 0), a
-;main.c:227: while(1){
-00122$:
-;main.c:233: if (is_goal(car1.x, car1.y)) {
-	ld	hl, #(_car1 + 6)
+;main.c:232: while(1){
+00120$:
+;main.c:238: if (is_goal(car1.x, car1.y)) {
+	ld	hl, #_car1 + 6
 	ld	b, (hl)
 	ld	a, (#(_car1 + 5) + 0)
 	push	bc
@@ -4666,158 +4982,105 @@ _main::
 	ld	a, e
 	or	a, a
 	jr	Z, 00102$
-;main.c:235: reset_car();
+;main.c:240: reset_car();
 	call	_reset_car
 00102$:
-;main.c:239: if (check_collision(&car1, &ball)) {
-	ld	de, #_ball
-	push	de
-	ld	de, #_car1
-	push	de
-	call	_check_collision
-	add	sp, #4
-	ld	a, e
-	or	a, a
-	jr	Z, 00104$
-;main.c:240: printf("%d:%d\n", car1.x, car1.y);
-	ld	a, (#(_car1 + 6) + 0)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	a, (#(_car1 + 5) + 0)
-	ld	e, a
-	rlca
-	sbc	a, a
-	ld	d, a
-	push	bc
-	push	de
-	ld	de, #___str_0
-	push	de
-	call	_printf
-	add	sp, #6
-;main.c:241: printf("%d:%d\n", ball.x, ball.y);
-	ld	a, (#(_ball + 6) + 0)
-	ld	c, a
-	rlca
-	sbc	a, a
-	ld	b, a
-	ld	a, (#(_ball + 5) + 0)
-	ld	e, a
-	rlca
-	sbc	a, a
-	ld	d, a
-	push	bc
-	push	de
-	ld	de, #___str_0
-	push	de
-	call	_printf
-	add	sp, #6
-00104$:
-;main.c:247: if(joypad() & J_A){
+;main.c:252: if(joypad() & J_A){
 	call	_joypad
-;main.c:248: car1.acc = 1;
-;main.c:247: if(joypad() & J_A){
+;main.c:253: car1.acc = 1;
+	ld	bc, #_car1 + 8
+;main.c:252: if(joypad() & J_A){
 	bit	4, e
-	jr	Z, 00109$
-;main.c:248: car1.acc = 1;
-	ld	hl, #(_car1 + 8)
-	ld	(hl), #0x01
-	jr	00110$
-00109$:
-;main.c:249: } else if (joypad() & J_B){
+	jr	Z, 00107$
+;main.c:253: car1.acc = 1;
+	ld	a, #0x01
+	ld	(bc), a
+	jr	00108$
+00107$:
+;main.c:254: } else if (joypad() & J_B){
 	call	_joypad
 	bit	5, e
-	jr	Z, 00106$
-;main.c:250: car1.acc = -1;
-	ld	hl, #(_car1 + 8)
-	ld	(hl), #0xff
-	jr	00110$
-00106$:
-;main.c:252: car1.acc = 0;
-	ld	hl, #(_car1 + 8)
-	ld	(hl), #0x00
-00110$:
-;main.c:254: if(joypad() & J_LEFT){
+	jr	Z, 00104$
+;main.c:255: car1.acc = -1;
+	ld	a, #0xff
+	ld	(bc), a
+	jr	00108$
+00104$:
+;main.c:257: car1.acc = 0;
+	xor	a, a
+	ld	(bc), a
+00108$:
+;main.c:259: if(joypad() & J_LEFT){
 	call	_joypad
 	bit	1, e
-	jr	Z, 00115$
-;main.c:255: if (car1.direction == 0) {
+	jr	Z, 00113$
+;main.c:260: if (car1.direction == 0) {
 	ld	a, (#_car1 + 0)
-	ldhl	sp,#0
-	ld	(hl), a
-	ld	a, (hl)
 	or	a, a
-	jr	NZ, 00112$
-;main.c:256: car1.direction = 15;
+	jr	NZ, 00110$
+;main.c:261: car1.direction = 15;
 	ld	hl, #_car1
 	ld	(hl), #0x0f
-	jr	00113$
-00112$:
-;main.c:258: car1.direction -= 1;
-	ldhl	sp,	#0
-	ld	a, (hl)
+	jr	00111$
+00110$:
+;main.c:263: car1.direction -= 1;
 	dec	a
 	ld	(#_car1),a
-00113$:
-;main.c:260: load_car_sprite(car1.direction);
+00111$:
+;main.c:265: load_car_sprite(car1.direction);
 	ld	a, (#_car1 + 0)
 	push	af
 	inc	sp
 	call	_load_car_sprite
 	inc	sp
-00115$:
-;main.c:262: if(joypad() & J_RIGHT){
+00113$:
+;main.c:267: if(joypad() & J_RIGHT){
 	call	_joypad
 	ld	a, e
 	rrca
-	jr	NC, 00120$
-;main.c:263: if (car1.direction == 15) {
+	jr	NC, 00118$
+;main.c:268: if (car1.direction == 15) {
 	ld	a, (#_car1 + 0)
 	ldhl	sp,#0
 	ld	(hl), a
 	ld	a, (hl)
 	sub	a, #0x0f
-	jr	NZ, 00117$
-;main.c:264: car1.direction = 0;
+	jr	NZ, 00115$
+;main.c:269: car1.direction = 0;
 	ld	hl, #_car1
 	ld	(hl), #0x00
-	jr	00118$
-00117$:
-;main.c:266: car1.direction += 1;
+	jr	00116$
+00115$:
+;main.c:271: car1.direction += 1;
 	ldhl	sp,	#0
 	ld	a, (hl)
 	inc	a
 	ld	(#_car1),a
-00118$:
-;main.c:268: load_car_sprite(car1.direction);
+00116$:
+;main.c:273: load_car_sprite(car1.direction);
 	ld	a, (#_car1 + 0)
 	push	af
 	inc	sp
 	call	_load_car_sprite
 	inc	sp
-00120$:
-;main.c:270: move_car(&car1, &ball);
+00118$:
+;main.c:275: move_car(&car1, &ball);
 	ld	de, #_ball
 	push	de
 	ld	de, #_car1
 	push	de
 	call	_move_car
 	add	sp, #4
-;main.c:272: performantdelay(10);    
+;main.c:277: performantdelay(10);    
 	ld	a, #0x0a
 	push	af
 	inc	sp
 	call	_performantdelay
 	inc	sp
-	jp	00122$
-;main.c:274: }
+	jp	00120$
+;main.c:279: }
 	inc	sp
 	ret
-___str_0:
-	.ascii "%d:%d"
-	.db 0x0a
-	.db 0x00
 	.area _CODE
 	.area _INITIALIZER
 __xinit__goal_size:
