@@ -96,11 +96,7 @@ UBYTE is_barrier(UINT8 newplayerx, UINT8 newplayery) {
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
-    if (joypad() & J_A) {
-       printf("block %d\n", tileindexTL);
-    }
-
-    INT8 barriers[20] = {378, 444, 477, 509, 947, -43, 22, 407, 406, 437, 469, 468, 378, 444, 509, 8671, 346, 90, 119, 311};
+    INT16 barriers[20] = {378, 444, 477, 509, 947, -43, 22, 407, 406, 437, 469, 468, 378, 444, 509, 8671, 346, 90, 119, 311};
 
     if (tileindexTL >= 896 AND tileindexTL <= 914) {
         return 1;
@@ -169,8 +165,8 @@ void setup_ball() {
 
 void setupcar_light(){
     car1.direction = 0;
-    car1.x = 40;
-    car1.y = 40;
+    car1.x = 72;
+    car1.y = 72;
     car1.width = 16;
     car1.height = 16;
     car1.acc = 0;
@@ -208,9 +204,6 @@ void move_car(struct GameObject* car) {
         car->acc = 0;   
     }
     car->vel += car->acc;
-    INT8 dx = car->x;
-    INT8 dy = car->y;
-
     INT8 dx = car->x;
     INT8 dy = car->y;
 
@@ -282,7 +275,7 @@ void move_car(struct GameObject* car) {
     move_bkg(car->x, car->y);
     ball.index_x = ball.index_x + dx;
     ball.index_y = ball.index_y + dy;
-    movegamecharacter(&ball, ball.index_x + dx, ball.index_y + dy);
+    //movegamecharacter(&ball, ball.index_x + dx, ball.index_y + dy);
 }
 
 void move_ball() {
@@ -401,11 +394,7 @@ void main(){
         }
 
         if (is_barrier(car1.x, car1.y + 16)) {
-            reset_car();
-        }
-
-        if (translate) {
-            translate_ball();
+            //reset_car();
         }
         
         //move_ball(&ball);

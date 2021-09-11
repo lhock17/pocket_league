@@ -10,22 +10,6 @@ Symbol Table
     _LCDC_REG                                                      ****** GX
     _SCX_REG                                                       ****** GX
     _SCY_REG                                                       ****** GX
-<<<<<<< HEAD
-  0 ___str_1                                                       00205C R
-    __divsint                                                      ****** GX
-  7 __xinit__barriers                                              000006 R
-  7 __xinit__enemy_goal_square                                     00000E R
-  7 __xinit__enemy_goals                                           000004 R
-  7 __xinit__goal_size                                             000000 R
-  7 __xinit__player_goal_square                                    000008 R
-  7 __xinit__player_goals                                          000002 R
-  7 __xinit__spritesize                                            000019 R
-  7 __xinit__windowmap                                             000014 R
-    _abs                                                           ****** GX
-  1 _ball                                                          00001C GR
-=======
-  0 ___str_0                                                       001264 R
-  0 ___str_1                                                       001BA7 R
     __divsint                                                      ****** GX
   7 __xinit__barrier_size                                          000000 R
   7 __xinit__barriers                                              000008 R
@@ -37,114 +21,63 @@ Symbol Table
   7 __xinit__spritesize                                            00001D R
   7 __xinit__windowmap                                             000018 R
     _abs                                                           ****** GX
-  1 _ball                                                          00001A GR
->>>>>>> 60faf5fbfe5419e11b63469ab72ee9c3ac381a0d
+  1 _ball                                                          00001C GR
   0 _ball_sprite                                                   000AC9 GR
   2 _barrier_size                                                  000000 GR
   2 _barriers                                                      000008 GR
   0 _bkg_tiles                                                     000B09 GR
   1 _car1                                                          000000 GR
-<<<<<<< HEAD
   1 _car2                                                          00000E GR
-  0 _car_dark                                                      000429 GR
-  0 _car_light                                                     000029 GR
-  0 _check_collision                                               000DC9 GR
-  2 _enemy_goal_square                                             00000E GR
-  2 _enemy_goals                                                   000004 GR
-  2 _goal_size                                                     000000 GR
-  0 _hit_ball                                                      001EDE GR
-  0 _is_barrier                                                    001254 GR
-  0 _is_goal                                                       001153 GR
-    _joypad                                                        ****** GX
-  0 _load_ai_sprite                                                001328 GR
-  0 _load_ball_sprite                                              000000 GR
-  0 _load_car_sprite                                               0012F0 GR
-  0 _main                                                          001EFB GR
-  0 _map                                                           000829 GR
-  0 _move_ball                                                     001A6D GR
-  0 _move_car                                                      0014CD GR
-  0 _movegamecharacter                                             001362 GR
-  0 _performantdelay                                               0013E9 GR
-  2 _player_goal_square                                            000008 GR
-  2 _player_goals                                                  000002 GR
-    _puts                                                          ****** GX
-  0 _reset_car                                                     001EB5 GR
-    _set_bkg_data                                                  ****** GX
-    _set_bkg_tiles                                                 ****** GX
-    _set_sprite_data                                               ****** GX
-  0 _setup_ball                                                    0013F6 GR
-  0 _setupcar_dark                                                 00147F GR
-  0 _setupcar_light                                                001431 GR
-=======
-  1 _car2                                                          00000D GR
   0 _car_dark                                                      000429 GR
   0 _car_light                                                     000029 GR
   0 _check_collision                                               000DC9 GR
   2 _enemy_goal_square                                             000012 GR
   2 _enemy_goals                                                   000006 GR
   2 _goal_size                                                     000002 GR
-  0 _is_barrier                                                    0010B9 GR
-  0 _is_goal                                                       000FB8 GR
+  0 _hit_ball                                                      002003 GR
+  0 _is_barrier                                                    001254 GR
+  0 _is_goal                                                       001153 GR
     _joypad                                                        ****** GX
-  0 _load_ai_sprite                                                0012A6 GR
+  0 _load_ai_sprite                                                00145D GR
   0 _load_ball_sprite                                              000000 GR
-  0 _load_car_sprite                                               00126E GR
-  0 _main                                                          001A28 GR
+  0 _load_car_sprite                                               001425 GR
+  0 _main                                                          002020 GR
   0 _map                                                           000829 GR
-  0 _move_car                                                      001446 GR
-  0 _movegamecharacter                                             0012E0 GR
-  0 _performantdelay                                               001367 GR
+  0 _move_ball                                                     001B92 GR
+  0 _move_car                                                      001602 GR
+  0 _movegamecharacter                                             001497 GR
+  0 _performantdelay                                               00151E GR
   2 _player_goal_square                                            00000C GR
   2 _player_goals                                                  000004 GR
-    _printf                                                        ****** GX
-  0 _reset_car                                                     0019FF GR
+  0 _reset_car                                                     001FDA GR
     _set_bkg_data                                                  ****** GX
     _set_bkg_tiles                                                 ****** GX
     _set_sprite_data                                               ****** GX
-  0 _setup_ball                                                    001374 GR
-  0 _setupcar_dark                                                 0013F8 GR
-  0 _setupcar_light                                                0013AA GR
->>>>>>> 60faf5fbfe5419e11b63469ab72ee9c3ac381a0d
+  0 _setup_ball                                                    00152B GR
+  0 _setupcar_dark                                                 0015B4 GR
+  0 _setupcar_light                                                001566 GR
     _shadow_OAM                                                    ****** GX
-  2 _spritesize                                                    000019 GR
+  2 _spritesize                                                    00001D GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-<<<<<<< HEAD
-    _wait_vbl_done                                                 ****** GX
-  2 _windowmap                                                     000014 GR
-=======
-  2 _spritesize                                                    00001D GR
-  0 _translate_ball                                                0019E6 GR
     _wait_vbl_done                                                 ****** GX
   2 _windowmap                                                     000018 GR
-
->>>>>>> 60faf5fbfe5419e11b63469ab72ee9c3ac381a0d
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 3.
 Hexadecimal [24-Bits]
 
 Area Table
 
-<<<<<<< HEAD
-   0 _CODE                                      size   2065   flags    0
+   0 _CODE                                      size   2175   flags    0
    1 _DATA                                      size     2A   flags    0
-   2 _INITIALIZED                               size     1A   flags    0
-=======
-   0 _CODE                                      size   1BBA   flags    0
-   1 _DATA                                      size     27   flags    0
    2 _INITIALIZED                               size     1E   flags    0
->>>>>>> 60faf5fbfe5419e11b63469ab72ee9c3ac381a0d
    3 _DABS                                      size      0   flags    8
    4 _HOME                                      size      0   flags    0
    5 _GSINIT                                    size      0   flags    0
    6 _GSFINAL                                   size      0   flags    0
-<<<<<<< HEAD
-   7 _INITIALIZER                               size     1A   flags    0
-=======
    7 _INITIALIZER                               size     1E   flags    0
->>>>>>> 60faf5fbfe5419e11b63469ab72ee9c3ac381a0d
    8 _CABS                                      size      0   flags    8
 
