@@ -12,11 +12,12 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 
+int barrier_size = 2;
 int goal_size = 3;
 int player_goals = 0;
 int enemy_goals = 0;
 
-int barriers[1] = {0xF3};
+int barriers[2] = {0x00, 0x00};
 int player_goal_square[3] = {87, 119, 55};
 int enemy_goal_square[3] = {118, 21, 84};
 
@@ -95,8 +96,24 @@ UBYTE is_barrier(UINT8 newplayerx, UINT8 newplayery) {
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
-    if (bkg_tiles[tileindexTL] == barriers[0]) {
+    if (joypad() & J_A) {
+       printf("block %d\n", tileindexTL);
+    }
+
+    INT8 barriers[20] = {378, 444, 477, 509, 947, -43, 22, 407, 406, 437, 469, 468, 378, 444, 509, 8671, 346, 90, 119, 311};
+
+    if (tileindexTL >= 896 AND tileindexTL <= 914) {
         return 1;
+    } else if (512 <= tileindexTL AND tileindexTL <= 530) {
+        return 1;
+    } else if (tileindexTL % 32 == 26){
+        return 1;
+    } else {
+        for (int i = 0; i < 20; i++) {
+            if (tileindexTL == barriers[i]) {
+                return 1;
+            }
+        }
     }
     return 0;
 }
@@ -152,8 +169,8 @@ void setup_ball() {
 
 void setupcar_light(){
     car1.direction = 0;
-    car1.x = 64;
-    car1.y = 64;
+    car1.x = 40;
+    car1.y = 40;
     car1.width = 16;
     car1.height = 16;
     car1.acc = 0;
@@ -191,6 +208,9 @@ void move_car(struct GameObject* car) {
         car->acc = 0;   
     }
     car->vel += car->acc;
+    INT8 dx = car->x;
+    INT8 dy = car->y;
+
     INT8 dx = car->x;
     INT8 dy = car->y;
 
@@ -357,6 +377,7 @@ void main(){
     set_bkg_data(0, 44, bkg_tiles);
     set_bkg_tiles(0, 0, 32, 21, map);
     SHOW_BKG;
+    UBYTE translate = 0;
 
     set_sprite_data(0,4, car_light);
     setupcar_light();
@@ -380,17 +401,21 @@ void main(){
         }
 
         if (is_barrier(car1.x, car1.y + 16)) {
-            printf("BARRIER!\n");
+            reset_car();
+        }
+
+        if (translate) {
+            translate_ball();
         }
         
         //move_ball(&ball);
         //ball.x += 1;
         //movegamecharacter(&ball, ball.x, ball.y);
 
-        // if (is_goal(car1.x, car1.y)) {
-        //     //printf("This is a goal\n");
-        //     reset_car();
-        // }
+        //if (is_goal(car1.x, car1.y)) {
+             //printf("This is a goal\n");
+             //reset_car();
+        //}
         turn_count--;
         // move_ball(&ball);
 
