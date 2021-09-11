@@ -16,6 +16,7 @@ int goal_size = 3;
 int player_goals = 0;
 int enemy_goals = 0;
 
+int barriers[1] = {0xF3};
 int player_goal_square[3] = {87, 119, 55};
 int enemy_goal_square[3] = {118, 21, 84};
 
@@ -75,9 +76,18 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     return 0;
 }
 
-//UBYTE is_barrier(UINT8 newplayer x, UINT8 newplayer y) {
+UBYTE is_barrier(UINT8 newplayerx, UINT8 newplayery) {
+    UINT16 indexTLx, indexTLy, tileindexTL;
 
-//}
+    indexTLx = (newplayerx - 16) / 8;
+    indexTLy = (newplayery - 16) / 8;
+    tileindexTL = 32 * indexTLy + indexTLx;
+
+    if (bkg_tiles[tileindexTL] == barriers[0]) {
+        return 1;
+    }
+    return 0;
+}
 
 void load_car_sprite(UINT8 direction) {
     set_sprite_tile(0, 4 * direction);
@@ -279,6 +289,10 @@ void main(){
         } else if (turn_count == 0) {
             turn_count = 22/abs(car1.vel);
         }
+
+        if (is_barrier(car1.x, car1.y + 16)) {
+            printf("BARRIER!\n");
+        }
         
         //move_ball(&ball);
         //ball.x += 1;
@@ -296,7 +310,7 @@ void main(){
         // }
         
         // //player contact with ball
-          if (check_collision(&car1, &ball)) {
+        if (check_collision(&car1, &ball)) {
 
             printf("Collision detected");
         }
