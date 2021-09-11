@@ -5,6 +5,8 @@
 #include "sprites/map.c"
 #include "sprites/ball1.c"
 #include "sprites/bkg_tiles.c"
+#include "sprites/pocket_league_data.c"
+#include "sprites/pocket_league_map.c"
 #include <stdlib.h>
 
 #define AND &&
@@ -12,14 +14,15 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 
-int barrier_size = 2;
-int goal_size = 3;
-int player_goals = 0;
-int enemy_goals = 0;
+UINT8 barrier_size = 2;
+UINT8 goal_size = 3;
+UINT8 player_goals = 0;
+UINT8 enemy_goals = 0;
 
-int barriers[2] = {0x00, 0x00};
-int player_goal_square[3] = {87, 119, 55};
-int enemy_goal_square[3] = {118, 21, 84};
+
+UINT8 barriers[2] = {0x00, 0x00};
+UINT8 player_goal_square[3] = {87, 119, 55};
+UINT8 enemy_goal_square[3] = {118, 21, 84};
 
 unsigned char windowmap[] =
 {
@@ -32,6 +35,7 @@ struct GameObject ball;
 
 INT8 max_vel = 4;
 UBYTE spritesize = 8;
+UINT8 was_hitting = 0;
 
 struct GameObject {
     UINT8 direction;
@@ -76,9 +80,6 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     indexTLy = (car1.y - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
-    if(joypad() & J_A) {
-        printf("Tileindex: %d\n", indexTLx);
-    }
     //
     if (indexTLx == 8179 AND indexTLy <= 11 AND indexTLy >= 7)  {
         ball.x = 100;
@@ -109,13 +110,6 @@ UBYTE is_barrier(UINT8 newplayerx, UINT8 newplayery) {
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
-<<<<<<< HEAD
-=======
-    if (joypad() & J_A) {
-       //printf("block %d\n", tileindexTL);
-    }
-
->>>>>>> 228ca999c566cacfb4d7876bea3c10da18de6026
     INT16 barriers[20] = {378, 444, 477, 509, 947, -43, 22, 407, 406, 437, 469, 468, 378, 444, 509, 8671, 346, 90, 119, 311};
 
     if (tileindexTL >= 896 AND tileindexTL <= 914) {
@@ -185,13 +179,8 @@ void setup_ball() {
 
 void setupcar_light(){
     car1.direction = 0;
-<<<<<<< HEAD
-    car1.x = 72;
-    car1.y = 72;
-=======
     car1.x = 80;
     car1.y = 80;
->>>>>>> 228ca999c566cacfb4d7876bea3c10da18de6026
     car1.width = 16;
     car1.height = 16;
     car1.acc = 0;
@@ -403,6 +392,20 @@ void move_ball() {
     movegamecharacter(&ball, ball.index_x, ball.index_y);
 }
 
+void reflectx() {
+    if (ball.direction < 9) {
+        ball.direction = 8 - ball.direction;
+    } else {
+        ball.direction = 24 - ball.direction;
+    }
+}
+
+void reflecty() {
+    if (ball.direction != 0) {
+        ball.direction = 16 - ball.direction;
+    }
+}
+
 void reset_car() {
     car1.x = 64;
     car1.y = 64;
@@ -411,13 +414,42 @@ void reset_car() {
 }
 
 void hit_ball() {
-    ball.vel = 2*car1.vel/3;
-    //car1.vel = car1.vel;
-    //car1.acc = 0;
-    ball.direction = car1.direction;
+    if (!was_hitting) {
+        ball.vel = 2*car1.vel/3;
+        car1.acc = 0;
+        car1.vel = car1.vel / 2;
+        ball.direction = car1.direction;
+        NR10_REG = 0x16; 
+        NR11_REG = 0x40;
+        NR12_REG = 0x73;  
+        NR13_REG = 0x00;   
+        NR14_REG = 0xC3;
+    }
+    was_hitting = 1;
 }
 
 void main(){
+    set_bkg_data(0, 163, pocket_league_data);
+    set_bkg_tiles(0,0,20,18, pocket_league_map);
+    SHOW_BKG;
+
+    while(1) {
+        if (joypad() & J_START) {
+            break;
+        }
+        wait_vbl_done();
+    }
+    HIDE_BKG;
+
+    NR52_REG = 0x80; // is 1000 0000 in binary and turns on sound
+    NR50_REG = 0x77; // sets the volume for both left and right channel just set to max 0x77
+    NR51_REG = 0xFF; // is 1111 1111 in binary, select which chanels we want to use in this case all of them. One bit for the L one bit for the R of all four channels
+    NR10_REG = 0x16; 
+    NR11_REG = 0x40;
+    NR12_REG = 0x73;  
+    NR13_REG = 0x00;   
+    NR14_REG = 0xC3;
+
     // load sprites for car
     //background
     set_bkg_data(0, 44, bkg_tiles);
@@ -454,7 +486,7 @@ void main(){
         //movegamecharacter(&ball, ball.x, ball.y);
 
         if (is_goal(ball.x, ball.y)) {
-             printf("This is a goal\n");
+             //printf("This is a goal\n");
              reset_car();
         }
         turn_count--;
@@ -468,6 +500,8 @@ void main(){
         if (check_collision(&car1, &ball)) {
             //printf("collision\n");
             hit_ball();
+        } else {
+            was_hitting = 0;
         }
         //      //ball.ve = car1.vel_x;
         //      //ball.vel_y = car1.vel_y;
