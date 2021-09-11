@@ -55,16 +55,11 @@ void load_ball_sprite() {
 
 UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     UINT16 indexTLx, indexTLy, tileindexTL;
-    UBYTE result;
+    //UBYTE result;
 
     indexTLx = (newplayerx - 16) / 8;
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
-    
-    //debug tool
-    if (joypad() & J_A) {
-        //printf("titleIndexTL: %d\n", tileindexTL);
-    }
 
     for (int i = 0; i < goal_size; i++) {
         if (tileindexTL == player_goal_square[i]) {
@@ -234,6 +229,8 @@ void move_car(struct GameObject* car, struct GameObject* ball) {
     move_bkg(car->x, car->y);
     ball->x -= car->x - dx;
     ball->y -= car->y - dy;
+    //printf("cx=%d,cy=%d\n", car->x, car->y);
+    //printf("bx=%d,by=%d\n", ball->x, ball->y);
     if ((ball->x - car->x < 0.5) AND (ball->y - car->y < 0.5)) {
         printf("yes\n");   
     }
