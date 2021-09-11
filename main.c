@@ -22,10 +22,8 @@ struct GameObject {
     UBYTE spriteids[4];
     UINT8 x;
     UINT8 y;
-    INT8 vel_x;
-    INT8 vel_y;
-    INT8 acc_x;
-    INT8 acc_y;
+    INT8 vel;
+    INT8 acc;
     INT8 width;
     INT8 height;
 };
@@ -99,14 +97,12 @@ void setup_ball() {
 
 void setupcar_light(){
     car1.direction = 0;
-    car1.x = 80;
-    car1.y = 130;
+    car1.x = 64;
+    car1.y = 64;
     car1.width = 16;
     car1.height = 16;
-    car1.acc_x = 0;
-    car1.acc_y = 0;
-    car1.vel_x = 0;
-    car1.vel_y = 0;
+    car1.acc = 0;
+    car1.vel = 0;
 
     set_sprite_data(0, 64, car_light);
     load_car_sprite(car1.direction);
@@ -114,147 +110,71 @@ void setupcar_light(){
     movegamecharacter(&car1, car1.x, car1.y);
 }
 
-void accelerate (struct GameObject* car) {
-    switch (car->direction) {
-        case 0:
-            car->acc_y = 100;
-            break;
-        case 1:
-            car->acc_x = 25;
-            car->acc_y = 75;
-            break;
-        case 2:
-            car->acc_x = 50;
-            car->acc_y = 50;
-            break;
-        case 3:
-            car->acc_x = 75;
-            car->acc_y = 25;
-            break;
-        case 4:
-            car->acc_x = 100;
-            car->acc_y = 0;
-            break;
-        case 5:
-            car->acc_x = 75;
-            car->acc_y = -25;
-            break;
-        case 6:
-            car->acc_x = 50;
-            car->acc_y = -50;
-            break;
-        case 7:
-            car->acc_x = 25;
-            car->acc_y = -75;
-            break;
-        case 8:
-            car->acc_y = -100;
-            break;
-        case 9:
-            car->acc_x = -25;
-            car->acc_y = -75;
-            break;
-        case 10:
-            car->acc_x = -50;
-            car->acc_y = -50;
-            break;
-        case 11:
-            car->acc_x = -75;
-            car->acc_y = -25;
-            break;
-        case 12:
-            car->acc_x = -100;
-            car->acc_y = 0;
-            break;
-        case 13:
-            car->acc_x = -25;
-            car->acc_y = 75;
-            break;
-        case 14:
-            car->acc_x = -50;
-            car->acc_y = 50;
-            break;
-        case 15:
-            car->acc_x = -75;
-            car->acc_y = 25;
-            break;
-    }
-}
-
-void deccelerate (struct GameObject* car) {
-    switch (car->direction) {
-        case 0:
-            car->acc_y = -100;
-            break;
-        case 1:
-            car->acc_x = -25;
-            car->acc_y = -75;
-            break;
-        case 2:
-            car->acc_x = -50;
-            car->acc_y = -50;
-            break;
-        case 3:
-            car->acc_x = -75;
-            car->acc_y = -25;
-            break;
-        case 4:
-            car->acc_x = -100;
-            car->acc_y = 0;
-            break;
-        case 5:
-            car->acc_x = -75;
-            car->acc_y = 25;
-            break;
-        case 6:
-            car->acc_x = -50;
-            car->acc_y = 50;
-            break;
-        case 7:
-            car->acc_x = -25;
-            car->acc_y = 75;
-            break;
-        case 8:
-            car->acc_y = 100;
-            break;
-        case 9:
-            car->acc_x = 25;
-            car->acc_y = 75;
-            break;
-        case 10:
-            car->acc_x = 50;
-            car->acc_y = 50;
-            break;
-        case 11:
-            car->acc_x = 75;
-            car->acc_y = 25;
-            break;
-        case 12:
-            car->acc_x = 100;
-            car->acc_y = 0;
-            break;
-        case 13:
-            car->acc_x = 25;
-            car->acc_y = -75;
-            break;
-        case 14:
-            car->acc_x = 50;
-            car->acc_y = -50;
-            break;
-        case 15:
-            car->acc_x = 75;
-            car->acc_y = -25;
-            break;
-    }
-}
-
 void move_car(struct GameObject* car) {
-    //printf("x=%d, y =%d\n", car->acc_x, car->acc_y); 
-    car->vel_x += car->acc_x/100;
-    car->vel_y += car->acc_y/100;
-    car->x += car->vel_x;
-    car->y += car->vel_y;
-    movegamecharacter(car, car->x, car->y);
+    car->vel += car->acc;
+    switch (car->direction) {
+        case 0:
+            car->y -= car->vel;
+            break;
+        case 1:
+            car->x += 45*car->vel/100;
+            car->y -= 45*car->vel/50;
+            break;
+        case 2:
+            car->x += 71*car->vel/100;
+            car->y -= 71*car->vel/100;
+            break;
+        case 3:
+            car->x += 45*car->vel/50;
+            car->y -= 45*car->vel/100;
+            break;
+        case 4:
+            car->x += car->vel;
+            break;
+        case 5:
+            car->x += 45*car->vel/50;
+            car->y += 45*car->vel/100;
+            break;
+        case 6:
+            car->x += 71*car->vel/100;
+            car->y += 71*car->vel/100;
+            break;
+        case 7:
+            car->x += 45*car->vel/100;
+            car->y += 45*car->vel/50;
+            break;
+        case 8:
+            car->y += car->vel;
+            break;
+        case 9:
+            car->x -= 45*car->vel/100;
+            car->y += 45*car->vel/50;
+            break;
+        case 10:
+            car->x -= 71*car->vel/100;
+            car->y += 71*car->vel/100;
+            break;
+        case 11:
+            car->x -= 45*car->vel/50;
+            car->y += 45*car->vel/100;
+            break;
+        case 12:
+            car->x -= car->vel;
+            break;
+        case 13:
+            car->x -= 45*car->vel/50;
+            car->y -= 45*car->vel/100;
+            break;
+        case 14:
+            car->x -= 71*car->vel/100;
+            car->y -= 71*car->vel/100;
+            break;
+        case 15:
+            car->x -= 45*car->vel/100;
+            car->y -= 45*car->vel/50;
+            break;
+    }
+    move_bkg(car->x, car->y);
 }
 
 void move_ball(struct GameObject* ball) {
@@ -294,20 +214,27 @@ void main(){
         }
         
         //player contact with ball
+<<<<<<< HEAD
         if (check_collision(&car1, &ball)) {
             //printf("Collision detected");
             ball.vel_x = car1.vel_x;
             ball.vel_y = car1.vel_y;
         }
+=======
+        // if (check_collision(&car1, &ball)) {
+        //     //printf("Collision detected");
+        //     ball.vel_x = car1.vel_x;
+        //     ball.vel_y = car1.vel_y;
+        // }
+>>>>>>> fa1e8e473184aa1f242f5e36ef3f5e6d0b8511d2
 
         //controls
         if(joypad() & J_A){
-            accelerate(&car1);
+            car1.acc = 1;
         } else if (joypad() & J_B){
-            deccelerate(&car1);
+            car1.acc = -1;
         } else {
-            car1.acc_x = 0;
-            car1.acc_y = 0;
+            car1.acc = 0;
         }
         if(joypad() & J_LEFT){
             if (car1.direction == 0) {
@@ -326,6 +253,6 @@ void main(){
             load_car_sprite(car1.direction);
         }
         move_car(&car1);
-        performantdelay(15);    
+        performantdelay(10);    
     }
 }
