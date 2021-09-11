@@ -7,7 +7,7 @@
 #include "sprites/bkg_tiles.c"
 #include <stdlib.h>
 #include <gb/font.h>
-#include "windowmap.c"
+//#include "windowmap.c"
 
 #define AND &&
 #define OR ||
@@ -410,11 +410,11 @@ void hit_ball() {
 
 void main(){
 
-    font_t min_font;
+    //font_t min_font;
 
-    font_init();
-    min_font = font_load(font_min);
-    font_set(min_font);
+    //font_init();
+    //min_font = font_load(font_min);
+    //font_set(min_font);
 
     // load sprites for car
     //background
@@ -430,8 +430,8 @@ void main(){
     setup_ball();
     movegamecharacter(&ball, ball.x, ball.y);
 
-    set_win_tiles(0, 0, 5, 1, windowmap);
-    move_win(7, 120);
+    //set_win_tiles(0, 0, 5, 1, windowmap);
+    //move_win(7, 120);
 
     SHOW_SPRITES;
     DISPLAY_ON;
