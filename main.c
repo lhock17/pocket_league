@@ -46,6 +46,38 @@ void load_ball_sprite() {
     ball.spriteids[3] = 7;
 }
 
+ UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
+     return (one->x >= two->x && one->x <= two->x + two->width) && 
+     (one->y >= two->y && one->y <= two->y + two->height)
+      || (two->x >= one->x && two->x <= one->x + one->width) 
+      && (two->y >= one->y && two->y <= one->y + one->height);
+}
+
+UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
+    UINT16 indexTLx, indexTLy, tileindexTL;
+    UBYTE result;
+
+    indexTLx = (newplayerx - 16) / 8;
+    indexTLy = (newplayery - 16) / 8;
+    tileindexTL = 32 * indexTLy + indexTLx;
+    
+    //debug tool
+    if (joypad() & J_A) {
+        //printf("titleIndexTL: %d\n", tileindexTL);
+    }
+
+    for (int i = 0; i < goal_size; i++) {
+        if (tileindexTL == player_goal_square[i]) {
+            player_goals++;
+            return 1;
+        } else if (tileindexTL == enemy_goal_square[i]) {
+            enemy_goals++;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void load_car_sprite(UINT8 direction) {
     set_sprite_tile(0, 4 * direction);
     car1.spriteids[0] = 0;
@@ -202,6 +234,9 @@ void move_car(struct GameObject* car, struct GameObject* ball) {
     move_bkg(car->x, car->y);
     ball->x -= car->x - dx;
     ball->y -= car->y - dy;
+    if ((ball->x - car->x < 0.5) AND (ball->y - car->y < 0.5)) {
+        printf("yes\n");   
+    }
     movegamecharacter(ball, ball->x, ball->y);
 }
 
