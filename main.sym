@@ -36,7 +36,7 @@ Hexadecimal [24-Bits]
 
 Area Table
 
-   0 _CODE                                      size    B97   flags    0
+   0 _CODE                                      size    BCA   flags    0
    1 _DATA                                      size     12   flags    0
    2 _INITIALIZED                               size      1   flags    0
    3 _DABS                                      size      0   flags    8
