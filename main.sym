@@ -9,33 +9,15 @@ Symbol Table
     .__.H$L.                                                    =  000000 L
     _LCDC_REG                                                      ****** GX
   7 __xinit__spritesize                                            000000 R
-<<<<<<< HEAD
-  1 _ball1                                                         000009 GR
-  0 _ball_sprite                                                   0006D8 GR
-  0 _bkg_tiles                                                     000718 GR
-=======
-  1 _ball                                                          000009 GR
+  1 _ball                                                          000000 GR
   0 _ball_sprite                                                   0006C9 GR
   0 _bkg_tiles                                                     000709 GR
->>>>>>> 8f74840cbe3c4a1bf1f2ebe54ab44e88f61e34fd
-  1 _car1                                                          000000 GR
+  1 _car1                                                          000009 GR
   0 _car_light                                                     000029 GR
     _joypad                                                        ****** GX
-<<<<<<< HEAD
-  0 _load_car_sprite                                               000000 GR
-  0 _main                                                          000B0E GR
-  0 _map                                                           000438 GR
-  0 _movegamecharacter                                             0009D8 GR
-  0 _performantdelay                                               000A60 GR
-    _set_bkg_data                                                  ****** GX
-    _set_bkg_tiles                                                 ****** GX
-    _set_sprite_data                                               ****** GX
-  0 _setup_ball                                                    000A6D GR
-  0 _setupcar_light                                                000ACA GR
-=======
   0 _load_ball_sprite                                              000000 GR
   0 _load_car_sprite                                               0009C9 GR
-  0 _main                                                          000AF1 GR
+  0 _main                                                          000B06 GR
   0 _map                                                           000429 GR
   0 _movegamecharacter                                             000A01 GR
   0 _performantdelay                                               000A89 GR
@@ -43,8 +25,7 @@ Symbol Table
     _set_bkg_tiles                                                 ****** GX
     _set_sprite_data                                               ****** GX
   0 _setup_ball                                                    000A96 GR
-  0 _setupcar_light                                                000AAD GR
->>>>>>> 8f74840cbe3c4a1bf1f2ebe54ab44e88f61e34fd
+  0 _setupcar_light                                                000AC2 GR
     _shadow_OAM                                                    ****** GX
   2 _spritesize                                                    000000 GR
     _wait_vbl_done                                                 ****** GX
@@ -55,11 +36,7 @@ Hexadecimal [24-Bits]
 
 Area Table
 
-<<<<<<< HEAD
-   0 _CODE                                      size    B9F   flags    0
-=======
-   0 _CODE                                      size    B82   flags    0
->>>>>>> 8f74840cbe3c4a1bf1f2ebe54ab44e88f61e34fd
+   0 _CODE                                      size    B97   flags    0
    1 _DATA                                      size     12   flags    0
    2 _INITIALIZED                               size      1   flags    0
    3 _DABS                                      size      0   flags    8
