@@ -4,11 +4,12 @@
 #include "sprites/map.c"
 #include "sprites/ball1.c"
 #include "sprites/bkg_tiles.c"
+#include <stdlib.h>
 
 #define AND &&
 #define OR ||
 #define SCREEN_WIDTH 160
-#define SCREEN_HEIGHT 144;
+#define SCREEN_HEIGHT 144
 
 struct GameObject car1;
 struct GameObject ball;
@@ -26,6 +27,9 @@ struct GameObject {
     UINT8 width;
     UINT8 height;
 };
+
+struct GameObject ball;
+struct GameObject car1;
 
 // UBYTE check_collisions(Car* one, Car* two) {
 //     return (one->x >= two->x AND one->x <= two-> x + two->width) OR
@@ -75,7 +79,7 @@ void setup_ball() {
     ball.height = 16;   
 
     load_ball_sprite();
-    //movegamecharacter(&ball, ball.x, ball.y);
+    movegamecharacter(&ball, ball.x, ball.y);
 }
 
 void setupcar_light(){
@@ -101,7 +105,7 @@ void main(){
 
     set_sprite_data(0,4, car_light);
     setupcar_light();
-    set_sprite_data(64, 4, ball_sprite);
+    set_sprite_data(0, 4, ball_sprite);
     setup_ball();
     movegamecharacter(&ball, ball.x, ball.y);
 
