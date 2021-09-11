@@ -8,36 +8,36 @@ Symbol Table
     .__.CPU.                                                    =  000000 L
     .__.H$L.                                                    =  000000 L
     _LCDC_REG                                                      ****** GX
-  0 ___str_1                                                       0011A2 R
-  0 ___str_2                                                       0011B1 R
+  0 ___str_0                                                       000B66 R
+  0 ___str_2                                                       0011AD R
     __divsint                                                      ****** GX
   7 __xinit__spritesize                                            000000 R
-  0 _accelerate                                                    000CAF GR
+  0 _accelerate                                                    000CC9 GR
   1 _ball                                                          000000 GR
   0 _ball_sprite                                                   0006C9 GR
   0 _bkg_tiles                                                     000709 GR
   1 _car1                                                          00000D GR
   0 _car_light                                                     000029 GR
-  0 _check_collision                                               0009CA GR
-  0 _deccelerate                                                   000DB7 GR
+  0 _check_collision                                               0009CB GR
+  0 _deccelerate                                                   000DD1 GR
   0 _goal_square                                                   0009C9 GR
-  0 _is_goal                                                       000ABF GR
+  0 _is_goal                                                       000AC0 GR
     _joypad                                                        ****** GX
   0 _load_ball_sprite                                              000000 GR
-  0 _load_car_sprite                                               000B5E GR
-  0 _main                                                          001062 GR
+  0 _load_car_sprite                                               000B78 GR
+  0 _main                                                          00107C GR
   0 _map                                                           000429 GR
-  0 _move_ball                                                     000F53 GR
-  0 _move_car                                                      000EBF GR
-  0 _movegamecharacter                                             000B96 GR
-  0 _performantdelay                                               000C1E GR
+  0 _move_ball                                                     000F6D GR
+  0 _move_car                                                      000ED9 GR
+  0 _movegamecharacter                                             000BB0 GR
+  0 _performantdelay                                               000C38 GR
     _printf                                                        ****** GX
     _puts                                                          ****** GX
     _set_bkg_data                                                  ****** GX
     _set_bkg_tiles                                                 ****** GX
     _set_sprite_data                                               ****** GX
-  0 _setup_ball                                                    000C2B GR
-  0 _setupcar_light                                                000C57 GR
+  0 _setup_ball                                                    000C45 GR
+  0 _setupcar_light                                                000C71 GR
     _shadow_OAM                                                    ****** GX
   2 _spritesize                                                    000000 GR
     _wait_vbl_done                                                 ****** GX
@@ -48,7 +48,7 @@ Hexadecimal [24-Bits]
 
 Area Table
 
-   0 _CODE                                      size   11C4   flags    0
+   0 _CODE                                      size   11BC   flags    0
    1 _DATA                                      size     1A   flags    0
    2 _INITIALIZED                               size      1   flags    0
    3 _DABS                                      size      0   flags    8

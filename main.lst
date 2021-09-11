@@ -2573,1693 +2573,1691 @@
       0009C7 55                    2573 	.db #0x55	; 85	'U'
       0009C8 00                    2574 	.db #0x00	; 0
       0009C9                       2575 _goal_square:
-      0009C9 FF                    2576 	.db #0xff	; -1
-                                   2577 ;main.c:47: UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
-                                   2578 ;	---------------------------------
-                                   2579 ; Function check_collision
-                                   2580 ; ---------------------------------
-      0009CA                       2581 _check_collision::
-      0009CA E8 F9                 2582 	add	sp, #-7
-                                   2583 ;main.c:48: return (one->x >= two->x AND one->x <= two->x + two->width) OR
-      0009CC F8 09                 2584 	ldhl	sp,	#9
-      0009CE 7E                    2585 	ld	a, (hl)
-      0009CF F8 03                 2586 	ldhl	sp,	#3
-      0009D1 77                    2587 	ld	(hl), a
-      0009D2 F8 0A                 2588 	ldhl	sp,	#10
-      0009D4 7E                    2589 	ld	a, (hl)
-      0009D5 F8 04                 2590 	ldhl	sp,	#4
-      0009D7 32                    2591 	ld	(hl-), a
-      0009D8 2A                    2592 	ld	a, (hl+)
-      0009D9 5F                    2593 	ld	e, a
-      0009DA 56                    2594 	ld	d, (hl)
-      0009DB 21 05 00              2595 	ld	hl, #0x0005
-      0009DE 19                    2596 	add	hl, de
-      0009DF 4D                    2597 	ld	c, l
-      0009E0 44                    2598 	ld	b, h
-      0009E1 0A                    2599 	ld	a, (bc)
-      0009E2 F8 06                 2600 	ldhl	sp,	#6
-      0009E4 77                    2601 	ld	(hl), a
-      0009E5 F8 0B                 2602 	ldhl	sp,	#11
-      0009E7 7E                    2603 	ld	a, (hl)
-      0009E8 F8 01                 2604 	ldhl	sp,	#1
-      0009EA 77                    2605 	ld	(hl), a
-      0009EB F8 0C                 2606 	ldhl	sp,	#12
-      0009ED 7E                    2607 	ld	a, (hl)
-      0009EE F8 02                 2608 	ldhl	sp,	#2
-      0009F0 32                    2609 	ld	(hl-), a
-      0009F1 2A                    2610 	ld	a, (hl+)
-      0009F2 5F                    2611 	ld	e, a
-      0009F3 56                    2612 	ld	d, (hl)
-      0009F4 21 05 00              2613 	ld	hl, #0x0005
-      0009F7 19                    2614 	add	hl, de
-      0009F8 4D                    2615 	ld	c, l
-      0009F9 44                    2616 	ld	b, h
-      0009FA 0A                    2617 	ld	a, (bc)
-      0009FB F8 05                 2618 	ldhl	sp,	#5
-      0009FD 22                    2619 	ld	(hl+), a
-      0009FE 3A                    2620 	ld	a, (hl-)
-      0009FF 96                    2621 	sub	a, (hl)
-      000A00 38 36                 2622 	jr	C, 00108$
-      000A02 4E                    2623 	ld	c, (hl)
-      000A03 06 00                 2624 	ld	b, #0x00
-      000A05 F8 01                 2625 	ldhl	sp,#1
-      000A07 2A                    2626 	ld	a, (hl+)
-      000A08 5F                    2627 	ld	e, a
-      000A09 56                    2628 	ld	d, (hl)
-      000A0A 21 0B 00              2629 	ld	hl, #0x000b
-      000A0D 19                    2630 	add	hl, de
-      000A0E 5D                    2631 	ld	e, l
-      000A0F 54                    2632 	ld	d, h
-      000A10 1A                    2633 	ld	a, (de)
-      000A11 6F                    2634 	ld	l, a
-                                   2635 ;	spillPairReg hl
+      0009C9 00                    2576 	.db #0x00	;  0
+      0009CA FD                    2577 	.db #0xfd	; -3
+                                   2578 ;main.c:47: UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
+                                   2579 ;	---------------------------------
+                                   2580 ; Function check_collision
+                                   2581 ; ---------------------------------
+      0009CB                       2582 _check_collision::
+      0009CB E8 F9                 2583 	add	sp, #-7
+                                   2584 ;main.c:48: return (one->x >= two->x AND one->x <= two->x + two->width) OR
+      0009CD F8 09                 2585 	ldhl	sp,	#9
+      0009CF 7E                    2586 	ld	a, (hl)
+      0009D0 F8 03                 2587 	ldhl	sp,	#3
+      0009D2 77                    2588 	ld	(hl), a
+      0009D3 F8 0A                 2589 	ldhl	sp,	#10
+      0009D5 7E                    2590 	ld	a, (hl)
+      0009D6 F8 04                 2591 	ldhl	sp,	#4
+      0009D8 32                    2592 	ld	(hl-), a
+      0009D9 2A                    2593 	ld	a, (hl+)
+      0009DA 5F                    2594 	ld	e, a
+      0009DB 56                    2595 	ld	d, (hl)
+      0009DC 21 05 00              2596 	ld	hl, #0x0005
+      0009DF 19                    2597 	add	hl, de
+      0009E0 4D                    2598 	ld	c, l
+      0009E1 44                    2599 	ld	b, h
+      0009E2 0A                    2600 	ld	a, (bc)
+      0009E3 F8 06                 2601 	ldhl	sp,	#6
+      0009E5 77                    2602 	ld	(hl), a
+      0009E6 F8 0B                 2603 	ldhl	sp,	#11
+      0009E8 7E                    2604 	ld	a, (hl)
+      0009E9 F8 01                 2605 	ldhl	sp,	#1
+      0009EB 77                    2606 	ld	(hl), a
+      0009EC F8 0C                 2607 	ldhl	sp,	#12
+      0009EE 7E                    2608 	ld	a, (hl)
+      0009EF F8 02                 2609 	ldhl	sp,	#2
+      0009F1 32                    2610 	ld	(hl-), a
+      0009F2 2A                    2611 	ld	a, (hl+)
+      0009F3 5F                    2612 	ld	e, a
+      0009F4 56                    2613 	ld	d, (hl)
+      0009F5 21 05 00              2614 	ld	hl, #0x0005
+      0009F8 19                    2615 	add	hl, de
+      0009F9 4D                    2616 	ld	c, l
+      0009FA 44                    2617 	ld	b, h
+      0009FB 0A                    2618 	ld	a, (bc)
+      0009FC F8 05                 2619 	ldhl	sp,	#5
+      0009FE 22                    2620 	ld	(hl+), a
+      0009FF 3A                    2621 	ld	a, (hl-)
+      000A00 96                    2622 	sub	a, (hl)
+      000A01 38 36                 2623 	jr	C, 00108$
+      000A03 4E                    2624 	ld	c, (hl)
+      000A04 06 00                 2625 	ld	b, #0x00
+      000A06 F8 01                 2626 	ldhl	sp,#1
+      000A08 2A                    2627 	ld	a, (hl+)
+      000A09 5F                    2628 	ld	e, a
+      000A0A 56                    2629 	ld	d, (hl)
+      000A0B 21 0B 00              2630 	ld	hl, #0x000b
+      000A0E 19                    2631 	add	hl, de
+      000A0F 5D                    2632 	ld	e, l
+      000A10 54                    2633 	ld	d, h
+      000A11 1A                    2634 	ld	a, (de)
+      000A12 6F                    2635 	ld	l, a
                                    2636 ;	spillPairReg hl
-      000A12 07                    2637 	rlca
-      000A13 9F                    2638 	sbc	a, a
-      000A14 67                    2639 	ld	h, a
-                                   2640 ;	spillPairReg hl
+                                   2637 ;	spillPairReg hl
+      000A13 07                    2638 	rlca
+      000A14 9F                    2639 	sbc	a, a
+      000A15 67                    2640 	ld	h, a
                                    2641 ;	spillPairReg hl
-      000A15 09                    2642 	add	hl, bc
-      000A16 4D                    2643 	ld	c, l
-      000A17 44                    2644 	ld	b, h
-      000A18 F8 06                 2645 	ldhl	sp,	#6
-      000A1A 3A                    2646 	ld	a, (hl-)
-      000A1B 22                    2647 	ld	(hl+), a
-      000A1C AF                    2648 	xor	a, a
-      000A1D 32                    2649 	ld	(hl-), a
-      000A1E 79                    2650 	ld	a, c
-      000A1F 96                    2651 	sub	a, (hl)
-      000A20 23                    2652 	inc	hl
-      000A21 78                    2653 	ld	a, b
-      000A22 9E                    2654 	sbc	a, (hl)
-      000A23 78                    2655 	ld	a, b
-      000A24 57                    2656 	ld	d, a
-      000A25 CB 7E                 2657 	bit	7, (hl)
-      000A27 28 07                 2658 	jr	Z, 00122$
-      000A29 CB 7A                 2659 	bit	7, d
-      000A2B 20 08                 2660 	jr	NZ, 00123$
-      000A2D BF                    2661 	cp	a, a
-      000A2E 18 05                 2662 	jr	00123$
-      000A30                       2663 00122$:
-      000A30 CB 7A                 2664 	bit	7, d
-      000A32 28 01                 2665 	jr	Z, 00123$
-      000A34 37                    2666 	scf
-      000A35                       2667 00123$:
-      000A35 D2rBAr0A              2668 	jp	NC, 00104$
-      000A38                       2669 00108$:
-                                   2670 ;main.c:49: (two->y >= one->y AND two->y <= one->y + one->height);
-      000A38 F8 01                 2671 	ldhl	sp,#1
-      000A3A 2A                    2672 	ld	a, (hl+)
-      000A3B 5F                    2673 	ld	e, a
-      000A3C 56                    2674 	ld	d, (hl)
-      000A3D 21 06 00              2675 	ld	hl, #0x0006
-      000A40 19                    2676 	add	hl, de
-      000A41 4D                    2677 	ld	c, l
-      000A42 44                    2678 	ld	b, h
-      000A43 0A                    2679 	ld	a, (bc)
-      000A44 F8 00                 2680 	ldhl	sp,	#0
-      000A46 77                    2681 	ld	(hl), a
-      000A47 F8 03                 2682 	ldhl	sp,#3
-      000A49 2A                    2683 	ld	a, (hl+)
-      000A4A 5F                    2684 	ld	e, a
-      000A4B 56                    2685 	ld	d, (hl)
-      000A4C 21 06 00              2686 	ld	hl, #0x0006
-      000A4F 19                    2687 	add	hl, de
-      000A50 4D                    2688 	ld	c, l
-      000A51 44                    2689 	ld	b, h
-      000A52 0A                    2690 	ld	a, (bc)
-      000A53 4F                    2691 	ld	c, a
-      000A54 F8 00                 2692 	ldhl	sp,	#0
-      000A56 7E                    2693 	ld	a, (hl)
-      000A57 91                    2694 	sub	a, c
-      000A58 38 5C                 2695 	jr	C, 00103$
-      000A5A 23                    2696 	inc	hl
-      000A5B 79                    2697 	ld	a, c
-      000A5C 22                    2698 	ld	(hl+), a
-      000A5D AF                    2699 	xor	a, a
-      000A5E 22                    2700 	ld	(hl+), a
-      000A5F 2A                    2701 	ld	a, (hl+)
-      000A60 5F                    2702 	ld	e, a
-      000A61 56                    2703 	ld	d, (hl)
-      000A62 21 0C 00              2704 	ld	hl, #0x000c
-      000A65 19                    2705 	add	hl, de
-      000A66 E5                    2706 	push	hl
-      000A67 7D                    2707 	ld	a, l
-      000A68 F8 07                 2708 	ldhl	sp,	#7
-      000A6A 77                    2709 	ld	(hl), a
-      000A6B E1                    2710 	pop	hl
-      000A6C 7C                    2711 	ld	a, h
-      000A6D F8 06                 2712 	ldhl	sp,	#6
-      000A6F 32                    2713 	ld	(hl-), a
-      000A70 2A                    2714 	ld	a, (hl+)
-      000A71 5F                    2715 	ld	e, a
-      000A72 56                    2716 	ld	d, (hl)
-      000A73 1A                    2717 	ld	a, (de)
-      000A74 77                    2718 	ld	(hl), a
-      000A75 F8 03                 2719 	ldhl	sp,	#3
-      000A77 22                    2720 	ld	(hl+), a
-      000A78 07                    2721 	rlca
-      000A79 9F                    2722 	sbc	a, a
-      000A7A 32                    2723 	ld	(hl-), a
-      000A7B 2A                    2724 	ld	a, (hl+)
-      000A7C 5F                    2725 	ld	e, a
-      000A7D 56                    2726 	ld	d, (hl)
-      000A7E F8 01                 2727 	ldhl	sp,	#1
-      000A80 2A                    2728 	ld	a,	(hl+)
-      000A81 66                    2729 	ld	h, (hl)
-      000A82 6F                    2730 	ld	l, a
-      000A83 19                    2731 	add	hl, de
-      000A84 E5                    2732 	push	hl
-      000A85 7D                    2733 	ld	a, l
-      000A86 F8 07                 2734 	ldhl	sp,	#7
-      000A88 77                    2735 	ld	(hl), a
-      000A89 E1                    2736 	pop	hl
-      000A8A 7C                    2737 	ld	a, h
-      000A8B F8 06                 2738 	ldhl	sp,	#6
-      000A8D 77                    2739 	ld	(hl), a
-      000A8E F8 00                 2740 	ldhl	sp,	#0
-      000A90 7E                    2741 	ld	a, (hl)
-      000A91 F8 03                 2742 	ldhl	sp,	#3
-      000A93 22                    2743 	ld	(hl+), a
-      000A94 36 00                 2744 	ld	(hl), #0x00
-      000A96 F8 05                 2745 	ldhl	sp,	#5
-      000A98 5D                    2746 	ld	e, l
-      000A99 54                    2747 	ld	d, h
-      000A9A F8 03                 2748 	ldhl	sp,	#3
-      000A9C 1A                    2749 	ld	a, (de)
-      000A9D 13                    2750 	inc	de
-      000A9E 96                    2751 	sub	a, (hl)
-      000A9F 23                    2752 	inc	hl
-      000AA0 1A                    2753 	ld	a, (de)
-      000AA1 9E                    2754 	sbc	a, (hl)
-      000AA2 1A                    2755 	ld	a, (de)
-      000AA3 57                    2756 	ld	d, a
-      000AA4 CB 7E                 2757 	bit	7, (hl)
-      000AA6 28 07                 2758 	jr	Z, 00124$
-      000AA8 CB 7A                 2759 	bit	7, d
-      000AAA 20 08                 2760 	jr	NZ, 00125$
-      000AAC BF                    2761 	cp	a, a
-      000AAD 18 05                 2762 	jr	00125$
-      000AAF                       2763 00124$:
-      000AAF CB 7A                 2764 	bit	7, d
-      000AB1 28 01                 2765 	jr	Z, 00125$
-      000AB3 37                    2766 	scf
-      000AB4                       2767 00125$:
-      000AB4 30 04                 2768 	jr	NC, 00104$
-      000AB6                       2769 00103$:
-      000AB6 1E 00                 2770 	ld	e, #0x00
-      000AB8 18 02                 2771 	jr	00105$
-      000ABA                       2772 00104$:
-      000ABA 1E 01                 2773 	ld	e, #0x01
-      000ABC                       2774 00105$:
-                                   2775 ;main.c:50: }
-      000ABC E8 07                 2776 	add	sp, #7
-      000ABE C9                    2777 	ret
-                                   2778 ;main.c:52: UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
-                                   2779 ;	---------------------------------
-                                   2780 ; Function is_goal
-                                   2781 ; ---------------------------------
-      000ABF                       2782 _is_goal::
-      000ABF E8 FA                 2783 	add	sp, #-6
-                                   2784 ;main.c:56: indexTLx = (newplayerx - 16) / 8;
-      000AC1 F8 08                 2785 	ldhl	sp,	#8
-      000AC3 7E                    2786 	ld	a, (hl)
-      000AC4 F8 02                 2787 	ldhl	sp,	#2
-      000AC6 22                    2788 	ld	(hl+), a
-      000AC7 AF                    2789 	xor	a, a
-      000AC8 32                    2790 	ld	(hl-), a
-      000AC9 2A                    2791 	ld	a, (hl+)
-      000ACA 5F                    2792 	ld	e, a
-      000ACB 56                    2793 	ld	d, (hl)
-      000ACC 21 10 00              2794 	ld	hl, #0x0010
-      000ACF 7B                    2795 	ld	a, e
-      000AD0 95                    2796 	sub	a, l
-      000AD1 5F                    2797 	ld	e, a
-      000AD2 7A                    2798 	ld	a, d
-      000AD3 9C                    2799 	sbc	a, h
-      000AD4 F8 05                 2800 	ldhl	sp,	#5
-      000AD6 32                    2801 	ld	(hl-), a
-      000AD7 73                    2802 	ld	(hl), e
-      000AD8 2A                    2803 	ld	a, (hl+)
-      000AD9 4F                    2804 	ld	c, a
-      000ADA 46                    2805 	ld	b, (hl)
-      000ADB CB 7E                 2806 	bit	7, (hl)
-      000ADD 28 0C                 2807 	jr	Z, 00103$
-      000ADF 2B                    2808 	dec	hl
+                                   2642 ;	spillPairReg hl
+      000A16 09                    2643 	add	hl, bc
+      000A17 4D                    2644 	ld	c, l
+      000A18 44                    2645 	ld	b, h
+      000A19 F8 06                 2646 	ldhl	sp,	#6
+      000A1B 3A                    2647 	ld	a, (hl-)
+      000A1C 22                    2648 	ld	(hl+), a
+      000A1D AF                    2649 	xor	a, a
+      000A1E 32                    2650 	ld	(hl-), a
+      000A1F 79                    2651 	ld	a, c
+      000A20 96                    2652 	sub	a, (hl)
+      000A21 23                    2653 	inc	hl
+      000A22 78                    2654 	ld	a, b
+      000A23 9E                    2655 	sbc	a, (hl)
+      000A24 78                    2656 	ld	a, b
+      000A25 57                    2657 	ld	d, a
+      000A26 CB 7E                 2658 	bit	7, (hl)
+      000A28 28 07                 2659 	jr	Z, 00122$
+      000A2A CB 7A                 2660 	bit	7, d
+      000A2C 20 08                 2661 	jr	NZ, 00123$
+      000A2E BF                    2662 	cp	a, a
+      000A2F 18 05                 2663 	jr	00123$
+      000A31                       2664 00122$:
+      000A31 CB 7A                 2665 	bit	7, d
+      000A33 28 01                 2666 	jr	Z, 00123$
+      000A35 37                    2667 	scf
+      000A36                       2668 00123$:
+      000A36 D2rBBr0A              2669 	jp	NC, 00104$
+      000A39                       2670 00108$:
+                                   2671 ;main.c:49: (two->y >= one->y AND two->y <= one->y + one->height);
+      000A39 F8 01                 2672 	ldhl	sp,#1
+      000A3B 2A                    2673 	ld	a, (hl+)
+      000A3C 5F                    2674 	ld	e, a
+      000A3D 56                    2675 	ld	d, (hl)
+      000A3E 21 06 00              2676 	ld	hl, #0x0006
+      000A41 19                    2677 	add	hl, de
+      000A42 4D                    2678 	ld	c, l
+      000A43 44                    2679 	ld	b, h
+      000A44 0A                    2680 	ld	a, (bc)
+      000A45 F8 00                 2681 	ldhl	sp,	#0
+      000A47 77                    2682 	ld	(hl), a
+      000A48 F8 03                 2683 	ldhl	sp,#3
+      000A4A 2A                    2684 	ld	a, (hl+)
+      000A4B 5F                    2685 	ld	e, a
+      000A4C 56                    2686 	ld	d, (hl)
+      000A4D 21 06 00              2687 	ld	hl, #0x0006
+      000A50 19                    2688 	add	hl, de
+      000A51 4D                    2689 	ld	c, l
+      000A52 44                    2690 	ld	b, h
+      000A53 0A                    2691 	ld	a, (bc)
+      000A54 4F                    2692 	ld	c, a
+      000A55 F8 00                 2693 	ldhl	sp,	#0
+      000A57 7E                    2694 	ld	a, (hl)
+      000A58 91                    2695 	sub	a, c
+      000A59 38 5C                 2696 	jr	C, 00103$
+      000A5B 23                    2697 	inc	hl
+      000A5C 79                    2698 	ld	a, c
+      000A5D 22                    2699 	ld	(hl+), a
+      000A5E AF                    2700 	xor	a, a
+      000A5F 22                    2701 	ld	(hl+), a
+      000A60 2A                    2702 	ld	a, (hl+)
+      000A61 5F                    2703 	ld	e, a
+      000A62 56                    2704 	ld	d, (hl)
+      000A63 21 0C 00              2705 	ld	hl, #0x000c
+      000A66 19                    2706 	add	hl, de
+      000A67 E5                    2707 	push	hl
+      000A68 7D                    2708 	ld	a, l
+      000A69 F8 07                 2709 	ldhl	sp,	#7
+      000A6B 77                    2710 	ld	(hl), a
+      000A6C E1                    2711 	pop	hl
+      000A6D 7C                    2712 	ld	a, h
+      000A6E F8 06                 2713 	ldhl	sp,	#6
+      000A70 32                    2714 	ld	(hl-), a
+      000A71 2A                    2715 	ld	a, (hl+)
+      000A72 5F                    2716 	ld	e, a
+      000A73 56                    2717 	ld	d, (hl)
+      000A74 1A                    2718 	ld	a, (de)
+      000A75 77                    2719 	ld	(hl), a
+      000A76 F8 03                 2720 	ldhl	sp,	#3
+      000A78 22                    2721 	ld	(hl+), a
+      000A79 07                    2722 	rlca
+      000A7A 9F                    2723 	sbc	a, a
+      000A7B 32                    2724 	ld	(hl-), a
+      000A7C 2A                    2725 	ld	a, (hl+)
+      000A7D 5F                    2726 	ld	e, a
+      000A7E 56                    2727 	ld	d, (hl)
+      000A7F F8 01                 2728 	ldhl	sp,	#1
+      000A81 2A                    2729 	ld	a,	(hl+)
+      000A82 66                    2730 	ld	h, (hl)
+      000A83 6F                    2731 	ld	l, a
+      000A84 19                    2732 	add	hl, de
+      000A85 E5                    2733 	push	hl
+      000A86 7D                    2734 	ld	a, l
+      000A87 F8 07                 2735 	ldhl	sp,	#7
+      000A89 77                    2736 	ld	(hl), a
+      000A8A E1                    2737 	pop	hl
+      000A8B 7C                    2738 	ld	a, h
+      000A8C F8 06                 2739 	ldhl	sp,	#6
+      000A8E 77                    2740 	ld	(hl), a
+      000A8F F8 00                 2741 	ldhl	sp,	#0
+      000A91 7E                    2742 	ld	a, (hl)
+      000A92 F8 03                 2743 	ldhl	sp,	#3
+      000A94 22                    2744 	ld	(hl+), a
+      000A95 36 00                 2745 	ld	(hl), #0x00
+      000A97 F8 05                 2746 	ldhl	sp,	#5
+      000A99 5D                    2747 	ld	e, l
+      000A9A 54                    2748 	ld	d, h
+      000A9B F8 03                 2749 	ldhl	sp,	#3
+      000A9D 1A                    2750 	ld	a, (de)
+      000A9E 13                    2751 	inc	de
+      000A9F 96                    2752 	sub	a, (hl)
+      000AA0 23                    2753 	inc	hl
+      000AA1 1A                    2754 	ld	a, (de)
+      000AA2 9E                    2755 	sbc	a, (hl)
+      000AA3 1A                    2756 	ld	a, (de)
+      000AA4 57                    2757 	ld	d, a
+      000AA5 CB 7E                 2758 	bit	7, (hl)
+      000AA7 28 07                 2759 	jr	Z, 00124$
+      000AA9 CB 7A                 2760 	bit	7, d
+      000AAB 20 08                 2761 	jr	NZ, 00125$
+      000AAD BF                    2762 	cp	a, a
+      000AAE 18 05                 2763 	jr	00125$
+      000AB0                       2764 00124$:
+      000AB0 CB 7A                 2765 	bit	7, d
+      000AB2 28 01                 2766 	jr	Z, 00125$
+      000AB4 37                    2767 	scf
+      000AB5                       2768 00125$:
+      000AB5 30 04                 2769 	jr	NC, 00104$
+      000AB7                       2770 00103$:
+      000AB7 1E 00                 2771 	ld	e, #0x00
+      000AB9 18 02                 2772 	jr	00105$
+      000ABB                       2773 00104$:
+      000ABB 1E 01                 2774 	ld	e, #0x01
+      000ABD                       2775 00105$:
+                                   2776 ;main.c:50: }
+      000ABD E8 07                 2777 	add	sp, #7
+      000ABF C9                    2778 	ret
+                                   2779 ;main.c:52: UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
+                                   2780 ;	---------------------------------
+                                   2781 ; Function is_goal
+                                   2782 ; ---------------------------------
+      000AC0                       2783 _is_goal::
+      000AC0 E8 FA                 2784 	add	sp, #-6
+                                   2785 ;main.c:56: indexTLx = (newplayerx - 16) / 8;
+      000AC2 F8 08                 2786 	ldhl	sp,	#8
+      000AC4 7E                    2787 	ld	a, (hl)
+      000AC5 F8 02                 2788 	ldhl	sp,	#2
+      000AC7 22                    2789 	ld	(hl+), a
+      000AC8 AF                    2790 	xor	a, a
+      000AC9 32                    2791 	ld	(hl-), a
+      000ACA 2A                    2792 	ld	a, (hl+)
+      000ACB 5F                    2793 	ld	e, a
+      000ACC 56                    2794 	ld	d, (hl)
+      000ACD 21 10 00              2795 	ld	hl, #0x0010
+      000AD0 7B                    2796 	ld	a, e
+      000AD1 95                    2797 	sub	a, l
+      000AD2 5F                    2798 	ld	e, a
+      000AD3 7A                    2799 	ld	a, d
+      000AD4 9C                    2800 	sbc	a, h
+      000AD5 F8 05                 2801 	ldhl	sp,	#5
+      000AD7 32                    2802 	ld	(hl-), a
+      000AD8 73                    2803 	ld	(hl), e
+      000AD9 2A                    2804 	ld	a, (hl+)
+      000ADA 4F                    2805 	ld	c, a
+      000ADB 46                    2806 	ld	b, (hl)
+      000ADC CB 7E                 2807 	bit	7, (hl)
+      000ADE 28 0C                 2808 	jr	Z, 00103$
       000AE0 2B                    2809 	dec	hl
       000AE1 2B                    2810 	dec	hl
-      000AE2 2A                    2811 	ld	a, (hl+)
-      000AE3 5F                    2812 	ld	e, a
-      000AE4 56                    2813 	ld	d, (hl)
-      000AE5 21 F7 FF              2814 	ld	hl, #0xfff7
-      000AE8 19                    2815 	add	hl, de
-      000AE9 4D                    2816 	ld	c, l
-      000AEA 44                    2817 	ld	b, h
-      000AEB                       2818 00103$:
-      000AEB CB 38                 2819 	srl	b
-      000AED CB 19                 2820 	rr	c
-      000AEF CB 38                 2821 	srl	b
-      000AF1 CB 19                 2822 	rr	c
-      000AF3 CB 38                 2823 	srl	b
-      000AF5 CB 19                 2824 	rr	c
-                                   2825 ;main.c:57: indexTLy = (newplayery - 16) / 8;
-      000AF7 F8 09                 2826 	ldhl	sp,	#9
-      000AF9 7E                    2827 	ld	a, (hl)
-      000AFA F8 00                 2828 	ldhl	sp,	#0
-      000AFC 22                    2829 	ld	(hl+), a
-      000AFD 36 00                 2830 	ld	(hl), #0x00
-      000AFF D1                    2831 	pop	de
-      000B00 D5                    2832 	push	de
-      000B01 21 10 00              2833 	ld	hl, #0x0010
-      000B04 7B                    2834 	ld	a, e
-      000B05 95                    2835 	sub	a, l
-      000B06 5F                    2836 	ld	e, a
-      000B07 7A                    2837 	ld	a, d
-      000B08 9C                    2838 	sbc	a, h
-      000B09 F8 03                 2839 	ldhl	sp,	#3
-      000B0B 32                    2840 	ld	(hl-), a
-      000B0C 73                    2841 	ld	(hl), e
-      000B0D 2A                    2842 	ld	a, (hl+)
-      000B0E 23                    2843 	inc	hl
-      000B0F 32                    2844 	ld	(hl-), a
-      000B10 2A                    2845 	ld	a, (hl+)
-      000B11 23                    2846 	inc	hl
-      000B12 32                    2847 	ld	(hl-), a
-      000B13 2B                    2848 	dec	hl
-      000B14 CB 7E                 2849 	bit	7, (hl)
-      000B16 28 10                 2850 	jr	Z, 00104$
-      000B18 D1                    2851 	pop	de
-      000B19 D5                    2852 	push	de
-      000B1A 21 F7 FF              2853 	ld	hl, #0xfff7
-      000B1D 19                    2854 	add	hl, de
-      000B1E E5                    2855 	push	hl
-      000B1F 7D                    2856 	ld	a, l
-      000B20 F8 06                 2857 	ldhl	sp,	#6
-      000B22 77                    2858 	ld	(hl), a
-      000B23 E1                    2859 	pop	hl
-      000B24 7C                    2860 	ld	a, h
-      000B25 F8 05                 2861 	ldhl	sp,	#5
-      000B27 77                    2862 	ld	(hl), a
-      000B28                       2863 00104$:
-      000B28 F8 04                 2864 	ldhl	sp,#4
-      000B2A 2A                    2865 	ld	a, (hl+)
-      000B2B 5F                    2866 	ld	e, a
-      000B2C 56                    2867 	ld	d, (hl)
-      000B2D CB 3A                 2868 	srl	d
-      000B2F CB 1B                 2869 	rr	e
-      000B31 CB 3A                 2870 	srl	d
-      000B33 CB 1B                 2871 	rr	e
-      000B35 CB 3A                 2872 	srl	d
-      000B37 CB 1B                 2873 	rr	e
-                                   2874 ;main.c:58: tileindexTL = 32 * indexTLy + indexTLx;
-      000B39 6B                    2875 	ld	l, e
-      000B3A 62                    2876 	ld	h, d
-      000B3B 29                    2877 	add	hl, hl
+      000AE2 2B                    2811 	dec	hl
+      000AE3 2A                    2812 	ld	a, (hl+)
+      000AE4 5F                    2813 	ld	e, a
+      000AE5 56                    2814 	ld	d, (hl)
+      000AE6 21 F7 FF              2815 	ld	hl, #0xfff7
+      000AE9 19                    2816 	add	hl, de
+      000AEA 4D                    2817 	ld	c, l
+      000AEB 44                    2818 	ld	b, h
+      000AEC                       2819 00103$:
+      000AEC CB 38                 2820 	srl	b
+      000AEE CB 19                 2821 	rr	c
+      000AF0 CB 38                 2822 	srl	b
+      000AF2 CB 19                 2823 	rr	c
+      000AF4 CB 38                 2824 	srl	b
+      000AF6 CB 19                 2825 	rr	c
+                                   2826 ;main.c:57: indexTLy = (newplayery - 16) / 8;
+      000AF8 F8 09                 2827 	ldhl	sp,	#9
+      000AFA 7E                    2828 	ld	a, (hl)
+      000AFB F8 00                 2829 	ldhl	sp,	#0
+      000AFD 22                    2830 	ld	(hl+), a
+      000AFE 36 00                 2831 	ld	(hl), #0x00
+      000B00 D1                    2832 	pop	de
+      000B01 D5                    2833 	push	de
+      000B02 21 10 00              2834 	ld	hl, #0x0010
+      000B05 7B                    2835 	ld	a, e
+      000B06 95                    2836 	sub	a, l
+      000B07 5F                    2837 	ld	e, a
+      000B08 7A                    2838 	ld	a, d
+      000B09 9C                    2839 	sbc	a, h
+      000B0A F8 03                 2840 	ldhl	sp,	#3
+      000B0C 32                    2841 	ld	(hl-), a
+      000B0D 73                    2842 	ld	(hl), e
+      000B0E 2A                    2843 	ld	a, (hl+)
+      000B0F 23                    2844 	inc	hl
+      000B10 32                    2845 	ld	(hl-), a
+      000B11 2A                    2846 	ld	a, (hl+)
+      000B12 23                    2847 	inc	hl
+      000B13 32                    2848 	ld	(hl-), a
+      000B14 2B                    2849 	dec	hl
+      000B15 CB 7E                 2850 	bit	7, (hl)
+      000B17 28 10                 2851 	jr	Z, 00104$
+      000B19 D1                    2852 	pop	de
+      000B1A D5                    2853 	push	de
+      000B1B 21 F7 FF              2854 	ld	hl, #0xfff7
+      000B1E 19                    2855 	add	hl, de
+      000B1F E5                    2856 	push	hl
+      000B20 7D                    2857 	ld	a, l
+      000B21 F8 06                 2858 	ldhl	sp,	#6
+      000B23 77                    2859 	ld	(hl), a
+      000B24 E1                    2860 	pop	hl
+      000B25 7C                    2861 	ld	a, h
+      000B26 F8 05                 2862 	ldhl	sp,	#5
+      000B28 77                    2863 	ld	(hl), a
+      000B29                       2864 00104$:
+      000B29 F8 04                 2865 	ldhl	sp,#4
+      000B2B 2A                    2866 	ld	a, (hl+)
+      000B2C 5F                    2867 	ld	e, a
+      000B2D 56                    2868 	ld	d, (hl)
+      000B2E CB 3A                 2869 	srl	d
+      000B30 CB 1B                 2870 	rr	e
+      000B32 CB 3A                 2871 	srl	d
+      000B34 CB 1B                 2872 	rr	e
+      000B36 CB 3A                 2873 	srl	d
+      000B38 CB 1B                 2874 	rr	e
+                                   2875 ;main.c:58: tileindexTL = 32 * indexTLy + indexTLx;
+      000B3A 6B                    2876 	ld	l, e
+      000B3B 62                    2877 	ld	h, d
       000B3C 29                    2878 	add	hl, hl
       000B3D 29                    2879 	add	hl, hl
       000B3E 29                    2880 	add	hl, hl
       000B3F 29                    2881 	add	hl, hl
-      000B40 09                    2882 	add	hl, bc
-                                   2883 ;main.c:60: result = bkg_tiles[tileindexTL] == goal_square[0];
-      000B41 01r09r07              2884 	ld	bc,#_bkg_tiles
-      000B44 09                    2885 	add	hl,bc
-      000B45 4E                    2886 	ld	c, (hl)
-      000B46 06 00                 2887 	ld	b, #0x00
-      000B48 FArC9r09              2888 	ld	a, (#_goal_square + 0)
-      000B4B 5F                    2889 	ld	e, a
-      000B4C 07                    2890 	rlca
-      000B4D 9F                    2891 	sbc	a, a
-      000B4E 57                    2892 	ld	d, a
-      000B4F 7B                    2893 	ld	a, e
-      000B50 91                    2894 	sub	a, c
-      000B51 20 06                 2895 	jr	NZ, 00115$
-      000B53 7A                    2896 	ld	a, d
-      000B54 90                    2897 	sub	a, b
-      000B55 3E 01                 2898 	ld	a, #0x01
-      000B57 28 01                 2899 	jr	Z, 00116$
-      000B59                       2900 00115$:
-      000B59 AF                    2901 	xor	a, a
-      000B5A                       2902 00116$:
-                                   2903 ;main.c:61: return result;
-      000B5A 5F                    2904 	ld	e, a
-                                   2905 ;main.c:62: }
-      000B5B E8 06                 2906 	add	sp, #6
-      000B5D C9                    2907 	ret
-                                   2908 ;main.c:64: void load_car_sprite(UINT8 direction) {
-                                   2909 ;	---------------------------------
-                                   2910 ; Function load_car_sprite
-                                   2911 ; ---------------------------------
-      000B5E                       2912 _load_car_sprite::
-                                   2913 ;main.c:65: set_sprite_tile(0, 4 * direction);
-      000B5E F8 02                 2914 	ldhl	sp,	#2
-      000B60 4E                    2915 	ld	c, (hl)
-      000B61 79                    2916 	ld	a, c
-      000B62 87                    2917 	add	a, a
-      000B63 87                    2918 	add	a, a
-      000B64 47                    2919 	ld	b, a
-                                   2920 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
-      000B65 21r02r00              2921 	ld	hl, #(_shadow_OAM + 2)
-      000B68 70                    2922 	ld	(hl), b
-                                   2923 ;main.c:66: car1.spriteids[0] = 0;
-      000B69 21r0Er00              2924 	ld	hl, #(_car1 + 1)
-      000B6C 36 00                 2925 	ld	(hl), #0x00
-                                   2926 ;main.c:67: set_sprite_tile(1, 4 * direction + 2);
-      000B6E 79                    2927 	ld	a, c
-      000B6F 87                    2928 	add	a, a
-      000B70 87                    2929 	add	a, a
-      000B71 4F                    2930 	ld	c, a
-      000B72 41                    2931 	ld	b, c
-      000B73 04                    2932 	inc	b
-      000B74 04                    2933 	inc	b
-                                   2934 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
-      000B75 21r06r00              2935 	ld	hl, #(_shadow_OAM + 6)
-      000B78 70                    2936 	ld	(hl), b
-                                   2937 ;main.c:68: car1.spriteids[1] = 1;
-      000B79 21r0Fr00              2938 	ld	hl, #(_car1 + 2)
-      000B7C 36 01                 2939 	ld	(hl), #0x01
-                                   2940 ;main.c:69: set_sprite_tile(2, 4 * direction + 1);
-      000B7E 41                    2941 	ld	b, c
-      000B7F 04                    2942 	inc	b
-                                   2943 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
-      000B80 21r0Ar00              2944 	ld	hl, #(_shadow_OAM + 10)
-      000B83 70                    2945 	ld	(hl), b
-                                   2946 ;main.c:70: car1.spriteids[2] = 2;
-      000B84 21r10r00              2947 	ld	hl, #(_car1 + 3)
-      000B87 36 02                 2948 	ld	(hl), #0x02
-                                   2949 ;main.c:71: set_sprite_tile(3, 4 * direction + 3);
-      000B89 0C                    2950 	inc	c
-      000B8A 0C                    2951 	inc	c
-      000B8B 0C                    2952 	inc	c
-                                   2953 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
-      000B8C 21r0Er00              2954 	ld	hl, #(_shadow_OAM + 14)
-      000B8F 71                    2955 	ld	(hl), c
-                                   2956 ;main.c:72: car1.spriteids[3] = 3;
-      000B90 21r11r00              2957 	ld	hl, #(_car1 + 4)
-      000B93 36 03                 2958 	ld	(hl), #0x03
-                                   2959 ;main.c:73: }
-      000B95 C9                    2960 	ret
-                                   2961 ;main.c:75: void movegamecharacter(struct GameObject* object, UINT8 x, UINT8 y){
-                                   2962 ;	---------------------------------
-                                   2963 ; Function movegamecharacter
-                                   2964 ; ---------------------------------
-      000B96                       2965 _movegamecharacter::
-      000B96 E8 FD                 2966 	add	sp, #-3
-                                   2967 ;main.c:76: move_sprite(object->spriteids[0], x, y);
-      000B98 F8 08                 2968 	ldhl	sp,	#8
-      000B9A 7E                    2969 	ld	a, (hl)
-      000B9B F8 00                 2970 	ldhl	sp,	#0
-      000B9D 77                    2971 	ld	(hl), a
-      000B9E F8 07                 2972 	ldhl	sp,	#7
-      000BA0 7E                    2973 	ld	a, (hl)
-      000BA1 F8 01                 2974 	ldhl	sp,	#1
-      000BA3 77                    2975 	ld	(hl), a
-      000BA4 F8 05                 2976 	ldhl	sp,	#5
-      000BA6 2A                    2977 	ld	a, (hl+)
-      000BA7 5F                    2978 	ld	e, a
-      000BA8 56                    2979 	ld	d, (hl)
-      000BA9 6B                    2980 	ld	l, e
-                                   2981 ;	spillPairReg hl
-                                   2982 ;	spillPairReg hl
-      000BAA 62                    2983 	ld	h, d
-                                   2984 ;	spillPairReg hl
-                                   2985 ;	spillPairReg hl
-      000BAB 23                    2986 	inc	hl
-                                   2987 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-      000BAC 6E                    2988 	ld	l, (hl)
-                                   2989 ;	spillPairReg hl
-                                   2990 ;	spillPairReg hl
-      000BAD 26 00                 2991 	ld	h, #0x00
+      000B40 29                    2882 	add	hl, hl
+      000B41 09                    2883 	add	hl, bc
+      000B42 4D                    2884 	ld	c, l
+      000B43 44                    2885 	ld	b, h
+                                   2886 ;main.c:59: printf("titleIndexTL: %d\n", tileindexTL);
+      000B44 C5                    2887 	push	bc
+      000B45 C5                    2888 	push	bc
+      000B46 11r66r0B              2889 	ld	de, #___str_0
+      000B49 D5                    2890 	push	de
+      000B4A CDr00r00              2891 	call	_printf
+      000B4D E8 04                 2892 	add	sp, #4
+      000B4F C1                    2893 	pop	bc
+                                   2894 ;main.c:61: result = tileindexTL == goal_square[0];
+      000B50 FArC9r09              2895 	ld	a, (#_goal_square + 0)
+      000B53 5F                    2896 	ld	e, a
+      000B54 07                    2897 	rlca
+      000B55 9F                    2898 	sbc	a, a
+      000B56 57                    2899 	ld	d, a
+      000B57 7B                    2900 	ld	a, e
+      000B58 91                    2901 	sub	a, c
+      000B59 20 06                 2902 	jr	NZ, 00115$
+      000B5B 7A                    2903 	ld	a, d
+      000B5C 90                    2904 	sub	a, b
+      000B5D 3E 01                 2905 	ld	a, #0x01
+      000B5F 28 01                 2906 	jr	Z, 00116$
+      000B61                       2907 00115$:
+      000B61 AF                    2908 	xor	a, a
+      000B62                       2909 00116$:
+                                   2910 ;main.c:62: return result;
+      000B62 5F                    2911 	ld	e, a
+                                   2912 ;main.c:63: }
+      000B63 E8 06                 2913 	add	sp, #6
+      000B65 C9                    2914 	ret
+      000B66                       2915 ___str_0:
+      000B66 74 69 74 6C 65 49 6E  2916 	.ascii "titleIndexTL: %d"
+             64 65 78 54 4C 3A 20
+             25 64
+      000B76 0A                    2917 	.db 0x0a
+      000B77 00                    2918 	.db 0x00
+                                   2919 ;main.c:65: void load_car_sprite(UINT8 direction) {
+                                   2920 ;	---------------------------------
+                                   2921 ; Function load_car_sprite
+                                   2922 ; ---------------------------------
+      000B78                       2923 _load_car_sprite::
+                                   2924 ;main.c:66: set_sprite_tile(0, 4 * direction);
+      000B78 F8 02                 2925 	ldhl	sp,	#2
+      000B7A 4E                    2926 	ld	c, (hl)
+      000B7B 79                    2927 	ld	a, c
+      000B7C 87                    2928 	add	a, a
+      000B7D 87                    2929 	add	a, a
+      000B7E 47                    2930 	ld	b, a
+                                   2931 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      000B7F 21r02r00              2932 	ld	hl, #(_shadow_OAM + 2)
+      000B82 70                    2933 	ld	(hl), b
+                                   2934 ;main.c:67: car1.spriteids[0] = 0;
+      000B83 21r0Er00              2935 	ld	hl, #(_car1 + 1)
+      000B86 36 00                 2936 	ld	(hl), #0x00
+                                   2937 ;main.c:68: set_sprite_tile(1, 4 * direction + 2);
+      000B88 79                    2938 	ld	a, c
+      000B89 87                    2939 	add	a, a
+      000B8A 87                    2940 	add	a, a
+      000B8B 4F                    2941 	ld	c, a
+      000B8C 41                    2942 	ld	b, c
+      000B8D 04                    2943 	inc	b
+      000B8E 04                    2944 	inc	b
+                                   2945 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      000B8F 21r06r00              2946 	ld	hl, #(_shadow_OAM + 6)
+      000B92 70                    2947 	ld	(hl), b
+                                   2948 ;main.c:69: car1.spriteids[1] = 1;
+      000B93 21r0Fr00              2949 	ld	hl, #(_car1 + 2)
+      000B96 36 01                 2950 	ld	(hl), #0x01
+                                   2951 ;main.c:70: set_sprite_tile(2, 4 * direction + 1);
+      000B98 41                    2952 	ld	b, c
+      000B99 04                    2953 	inc	b
+                                   2954 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      000B9A 21r0Ar00              2955 	ld	hl, #(_shadow_OAM + 10)
+      000B9D 70                    2956 	ld	(hl), b
+                                   2957 ;main.c:71: car1.spriteids[2] = 2;
+      000B9E 21r10r00              2958 	ld	hl, #(_car1 + 3)
+      000BA1 36 02                 2959 	ld	(hl), #0x02
+                                   2960 ;main.c:72: set_sprite_tile(3, 4 * direction + 3);
+      000BA3 0C                    2961 	inc	c
+      000BA4 0C                    2962 	inc	c
+      000BA5 0C                    2963 	inc	c
+                                   2964 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      000BA6 21r0Er00              2965 	ld	hl, #(_shadow_OAM + 14)
+      000BA9 71                    2966 	ld	(hl), c
+                                   2967 ;main.c:73: car1.spriteids[3] = 3;
+      000BAA 21r11r00              2968 	ld	hl, #(_car1 + 4)
+      000BAD 36 03                 2969 	ld	(hl), #0x03
+                                   2970 ;main.c:74: }
+      000BAF C9                    2971 	ret
+                                   2972 ;main.c:76: void movegamecharacter(struct GameObject* object, UINT8 x, UINT8 y){
+                                   2973 ;	---------------------------------
+                                   2974 ; Function movegamecharacter
+                                   2975 ; ---------------------------------
+      000BB0                       2976 _movegamecharacter::
+      000BB0 E8 FD                 2977 	add	sp, #-3
+                                   2978 ;main.c:77: move_sprite(object->spriteids[0], x, y);
+      000BB2 F8 08                 2979 	ldhl	sp,	#8
+      000BB4 7E                    2980 	ld	a, (hl)
+      000BB5 F8 00                 2981 	ldhl	sp,	#0
+      000BB7 77                    2982 	ld	(hl), a
+      000BB8 F8 07                 2983 	ldhl	sp,	#7
+      000BBA 7E                    2984 	ld	a, (hl)
+      000BBB F8 01                 2985 	ldhl	sp,	#1
+      000BBD 77                    2986 	ld	(hl), a
+      000BBE F8 05                 2987 	ldhl	sp,	#5
+      000BC0 2A                    2988 	ld	a, (hl+)
+      000BC1 5F                    2989 	ld	e, a
+      000BC2 56                    2990 	ld	d, (hl)
+      000BC3 6B                    2991 	ld	l, e
                                    2992 ;	spillPairReg hl
                                    2993 ;	spillPairReg hl
-      000BAF 29                    2994 	add	hl, hl
-      000BB0 29                    2995 	add	hl, hl
-      000BB1 01r00r00              2996 	ld	bc, #_shadow_OAM
-      000BB4 09                    2997 	add	hl, bc
-      000BB5 4D                    2998 	ld	c, l
-      000BB6 44                    2999 	ld	b, h
-                                   3000 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-      000BB7 F8 00                 3001 	ldhl	sp,	#0
-      000BB9 2A                    3002 	ld	a, (hl+)
-      000BBA 02                    3003 	ld	(bc), a
-      000BBB 03                    3004 	inc	bc
-      000BBC 7E                    3005 	ld	a, (hl)
-      000BBD 02                    3006 	ld	(bc), a
-                                   3007 ;main.c:77: move_sprite(object->spriteids[1], x + spritesize, y);
-      000BBE 7E                    3008 	ld	a, (hl)
-                                   3009 ;setupPair	HL
-      000BBF 21r00r00              3010 	ld	hl, #_spritesize
-      000BC2 86                    3011 	add	a, (hl)
-      000BC3 6B                    3012 	ld	l, e
-                                   3013 ;	spillPairReg hl
-                                   3014 ;	spillPairReg hl
-      000BC4 62                    3015 	ld	h, d
-                                   3016 ;	spillPairReg hl
-                                   3017 ;	spillPairReg hl
-      000BC5 23                    3018 	inc	hl
-      000BC6 23                    3019 	inc	hl
-      000BC7 4E                    3020 	ld	c, (hl)
-      000BC8 F8 02                 3021 	ldhl	sp,	#2
-      000BCA 77                    3022 	ld	(hl), a
-                                   3023 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-      000BCB 69                    3024 	ld	l, c
+      000BC4 62                    2994 	ld	h, d
+                                   2995 ;	spillPairReg hl
+                                   2996 ;	spillPairReg hl
+      000BC5 23                    2997 	inc	hl
+                                   2998 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+      000BC6 6E                    2999 	ld	l, (hl)
+                                   3000 ;	spillPairReg hl
+                                   3001 ;	spillPairReg hl
+      000BC7 26 00                 3002 	ld	h, #0x00
+                                   3003 ;	spillPairReg hl
+                                   3004 ;	spillPairReg hl
+      000BC9 29                    3005 	add	hl, hl
+      000BCA 29                    3006 	add	hl, hl
+      000BCB 01r00r00              3007 	ld	bc, #_shadow_OAM
+      000BCE 09                    3008 	add	hl, bc
+      000BCF 4D                    3009 	ld	c, l
+      000BD0 44                    3010 	ld	b, h
+                                   3011 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+      000BD1 F8 00                 3012 	ldhl	sp,	#0
+      000BD3 2A                    3013 	ld	a, (hl+)
+      000BD4 02                    3014 	ld	(bc), a
+      000BD5 03                    3015 	inc	bc
+      000BD6 7E                    3016 	ld	a, (hl)
+      000BD7 02                    3017 	ld	(bc), a
+                                   3018 ;main.c:78: move_sprite(object->spriteids[1], x + spritesize, y);
+      000BD8 7E                    3019 	ld	a, (hl)
+                                   3020 ;setupPair	HL
+      000BD9 21r00r00              3021 	ld	hl, #_spritesize
+      000BDC 86                    3022 	add	a, (hl)
+      000BDD 6B                    3023 	ld	l, e
+                                   3024 ;	spillPairReg hl
                                    3025 ;	spillPairReg hl
-                                   3026 ;	spillPairReg hl
-      000BCC 26 00                 3027 	ld	h, #0x00
+      000BDE 62                    3026 	ld	h, d
+                                   3027 ;	spillPairReg hl
                                    3028 ;	spillPairReg hl
-                                   3029 ;	spillPairReg hl
-      000BCE 29                    3030 	add	hl, hl
-      000BCF 29                    3031 	add	hl, hl
-      000BD0 01r00r00              3032 	ld	bc, #_shadow_OAM
-      000BD3 09                    3033 	add	hl, bc
-      000BD4 4D                    3034 	ld	c, l
-      000BD5 44                    3035 	ld	b, h
-                                   3036 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-      000BD6 F8 00                 3037 	ldhl	sp,	#0
-      000BD8 2A                    3038 	ld	a, (hl+)
-      000BD9 23                    3039 	inc	hl
-      000BDA 02                    3040 	ld	(bc), a
-      000BDB 03                    3041 	inc	bc
-                                   3042 ;main.c:78: move_sprite(object->spriteids[2], x, y + spritesize);
-      000BDC 3A                    3043 	ld	a, (hl-)
-      000BDD 2B                    3044 	dec	hl
-      000BDE 02                    3045 	ld	(bc), a
-      000BDF 7E                    3046 	ld	a, (hl)
-                                   3047 ;setupPair	HL
-      000BE0 21r00r00              3048 	ld	hl, #_spritesize
-      000BE3 86                    3049 	add	a, (hl)
-      000BE4 4F                    3050 	ld	c, a
-      000BE5 6B                    3051 	ld	l, e
-                                   3052 ;	spillPairReg hl
-                                   3053 ;	spillPairReg hl
-      000BE6 62                    3054 	ld	h, d
-                                   3055 ;	spillPairReg hl
-                                   3056 ;	spillPairReg hl
-      000BE7 23                    3057 	inc	hl
-      000BE8 23                    3058 	inc	hl
-      000BE9 23                    3059 	inc	hl
-                                   3060 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-      000BEA 6E                    3061 	ld	l, (hl)
-                                   3062 ;	spillPairReg hl
+      000BDF 23                    3029 	inc	hl
+      000BE0 23                    3030 	inc	hl
+      000BE1 4E                    3031 	ld	c, (hl)
+      000BE2 F8 02                 3032 	ldhl	sp,	#2
+      000BE4 77                    3033 	ld	(hl), a
+                                   3034 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+      000BE5 69                    3035 	ld	l, c
+                                   3036 ;	spillPairReg hl
+                                   3037 ;	spillPairReg hl
+      000BE6 26 00                 3038 	ld	h, #0x00
+                                   3039 ;	spillPairReg hl
+                                   3040 ;	spillPairReg hl
+      000BE8 29                    3041 	add	hl, hl
+      000BE9 29                    3042 	add	hl, hl
+      000BEA 01r00r00              3043 	ld	bc, #_shadow_OAM
+      000BED 09                    3044 	add	hl, bc
+      000BEE 4D                    3045 	ld	c, l
+      000BEF 44                    3046 	ld	b, h
+                                   3047 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+      000BF0 F8 00                 3048 	ldhl	sp,	#0
+      000BF2 2A                    3049 	ld	a, (hl+)
+      000BF3 23                    3050 	inc	hl
+      000BF4 02                    3051 	ld	(bc), a
+      000BF5 03                    3052 	inc	bc
+                                   3053 ;main.c:79: move_sprite(object->spriteids[2], x, y + spritesize);
+      000BF6 3A                    3054 	ld	a, (hl-)
+      000BF7 2B                    3055 	dec	hl
+      000BF8 02                    3056 	ld	(bc), a
+      000BF9 7E                    3057 	ld	a, (hl)
+                                   3058 ;setupPair	HL
+      000BFA 21r00r00              3059 	ld	hl, #_spritesize
+      000BFD 86                    3060 	add	a, (hl)
+      000BFE 4F                    3061 	ld	c, a
+      000BFF 6B                    3062 	ld	l, e
                                    3063 ;	spillPairReg hl
-      000BEB 26 00                 3064 	ld	h, #0x00
-                                   3065 ;	spillPairReg hl
+                                   3064 ;	spillPairReg hl
+      000C00 62                    3065 	ld	h, d
                                    3066 ;	spillPairReg hl
-      000BED 29                    3067 	add	hl, hl
-      000BEE 29                    3068 	add	hl, hl
-      000BEF D5                    3069 	push	de
-      000BF0 11r00r00              3070 	ld	de, #_shadow_OAM
-      000BF3 19                    3071 	add	hl, de
-      000BF4 D1                    3072 	pop	de
-                                   3073 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-      000BF5 79                    3074 	ld	a, c
-      000BF6 22                    3075 	ld	(hl+), a
-      000BF7 4D                    3076 	ld	c, l
-      000BF8 44                    3077 	ld	b, h
-      000BF9 F8 01                 3078 	ldhl	sp,	#1
-                                   3079 ;main.c:79: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
-      000BFB 3A                    3080 	ld	a, (hl-)
-      000BFC 02                    3081 	ld	(bc), a
-      000BFD 7E                    3082 	ld	a, (hl)
-                                   3083 ;setupPair	HL
-      000BFE 21r00r00              3084 	ld	hl, #_spritesize
-      000C01 86                    3085 	add	a, (hl)
-      000C02 47                    3086 	ld	b, a
-      000C03 F8 01                 3087 	ldhl	sp,	#1
-      000C05 7E                    3088 	ld	a, (hl)
-                                   3089 ;setupPair	HL
-      000C06 21r00r00              3090 	ld	hl, #_spritesize
-      000C09 86                    3091 	add	a, (hl)
-      000C0A 4F                    3092 	ld	c, a
-      000C0B 21 04 00              3093 	ld	hl, #0x0004
-      000C0E 19                    3094 	add	hl, de
-                                   3095 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-      000C0F 6E                    3096 	ld	l, (hl)
-                                   3097 ;	spillPairReg hl
-                                   3098 ;	spillPairReg hl
-      000C10 26 00                 3099 	ld	h, #0x00
-                                   3100 ;	spillPairReg hl
-                                   3101 ;	spillPairReg hl
-      000C12 29                    3102 	add	hl, hl
-      000C13 29                    3103 	add	hl, hl
-      000C14 11r00r00              3104 	ld	de, #_shadow_OAM
-      000C17 19                    3105 	add	hl, de
-                                   3106 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-      000C18 78                    3107 	ld	a, b
-      000C19 22                    3108 	ld	(hl+), a
-      000C1A 71                    3109 	ld	(hl), c
-                                   3110 ;main.c:79: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
-                                   3111 ;main.c:80: }
-      000C1B E8 03                 3112 	add	sp, #3
-      000C1D C9                    3113 	ret
-                                   3114 ;main.c:82: void performantdelay(UINT8 numloops){
-                                   3115 ;	---------------------------------
-                                   3116 ; Function performantdelay
-                                   3117 ; ---------------------------------
-      000C1E                       3118 _performantdelay::
-                                   3119 ;main.c:84: for(i = 0; i < numloops; i++){
-      000C1E 0E 00                 3120 	ld	c, #0x00
-      000C20                       3121 00103$:
-      000C20 79                    3122 	ld	a, c
-      000C21 F8 02                 3123 	ldhl	sp,	#2
-      000C23 96                    3124 	sub	a, (hl)
-      000C24 D0                    3125 	ret	NC
-                                   3126 ;main.c:85: wait_vbl_done();
-      000C25 CDr00r00              3127 	call	_wait_vbl_done
-                                   3128 ;main.c:84: for(i = 0; i < numloops; i++){
-      000C28 0C                    3129 	inc	c
-                                   3130 ;main.c:87: }
-      000C29 18 F5                 3131 	jr	00103$
-                                   3132 ;main.c:89: void setup_ball() {
-                                   3133 ;	---------------------------------
-                                   3134 ; Function setup_ball
-                                   3135 ; ---------------------------------
-      000C2B                       3136 _setup_ball::
-                                   3137 ;main.c:90: ball.x = 100;
-      000C2B 21r05r00              3138 	ld	hl, #(_ball + 5)
-      000C2E 36 64                 3139 	ld	(hl), #0x64
-                                   3140 ;main.c:91: ball.y = 100;
-      000C30 21r06r00              3141 	ld	hl, #(_ball + 6)
-      000C33 36 64                 3142 	ld	(hl), #0x64
-                                   3143 ;main.c:92: ball.width = 16;
-      000C35 21r0Br00              3144 	ld	hl, #(_ball + 11)
-      000C38 36 10                 3145 	ld	(hl), #0x10
-                                   3146 ;main.c:93: ball.height = 16;   
-      000C3A 21r0Cr00              3147 	ld	hl, #(_ball + 12)
-      000C3D 36 10                 3148 	ld	(hl), #0x10
-                                   3149 ;main.c:95: load_ball_sprite();
-      000C3F CDr00r00              3150 	call	_load_ball_sprite
-                                   3151 ;main.c:96: movegamecharacter(&ball, ball.x, ball.y);
-      000C42 21r06r00              3152 	ld	hl, #(_ball + 6)
-      000C45 46                    3153 	ld	b, (hl)
-      000C46 FAr05r00              3154 	ld	a, (#(_ball + 5) + 0)
-      000C49 C5                    3155 	push	bc
-      000C4A 33                    3156 	inc	sp
-      000C4B F5                    3157 	push	af
-      000C4C 33                    3158 	inc	sp
-      000C4D 11r00r00              3159 	ld	de, #_ball
-      000C50 D5                    3160 	push	de
-      000C51 CDr96r0B              3161 	call	_movegamecharacter
-      000C54 E8 04                 3162 	add	sp, #4
-                                   3163 ;main.c:97: }
-      000C56 C9                    3164 	ret
-                                   3165 ;main.c:99: void setupcar_light(){
-                                   3166 ;	---------------------------------
-                                   3167 ; Function setupcar_light
-                                   3168 ; ---------------------------------
-      000C57                       3169 _setupcar_light::
-                                   3170 ;main.c:100: car1.direction = 0;
-      000C57 21r0Dr00              3171 	ld	hl, #_car1
-      000C5A 36 00                 3172 	ld	(hl), #0x00
-                                   3173 ;main.c:101: car1.x = 80;
-      000C5C 21r12r00              3174 	ld	hl, #(_car1 + 5)
-      000C5F 36 50                 3175 	ld	(hl), #0x50
-                                   3176 ;main.c:102: car1.y = 130;
-      000C61 21r13r00              3177 	ld	hl, #(_car1 + 6)
-      000C64 36 82                 3178 	ld	(hl), #0x82
-                                   3179 ;main.c:103: car1.width = 16;
-      000C66 21r18r00              3180 	ld	hl, #(_car1 + 11)
-      000C69 36 10                 3181 	ld	(hl), #0x10
-                                   3182 ;main.c:104: car1.height = 16;
-      000C6B 21r19r00              3183 	ld	hl, #(_car1 + 12)
-      000C6E 36 10                 3184 	ld	(hl), #0x10
-                                   3185 ;main.c:105: car1.acc_x = 0;
-      000C70 21r16r00              3186 	ld	hl, #(_car1 + 9)
-      000C73 36 00                 3187 	ld	(hl), #0x00
-                                   3188 ;main.c:106: car1.acc_y = 0;
-      000C75 21r17r00              3189 	ld	hl, #(_car1 + 10)
-      000C78 36 00                 3190 	ld	(hl), #0x00
-                                   3191 ;main.c:107: car1.vel_x = 0;
-      000C7A 21r14r00              3192 	ld	hl, #(_car1 + 7)
-      000C7D 36 00                 3193 	ld	(hl), #0x00
-                                   3194 ;main.c:108: car1.vel_y = 0;
-      000C7F 21r15r00              3195 	ld	hl, #(_car1 + 8)
-      000C82 36 00                 3196 	ld	(hl), #0x00
-                                   3197 ;main.c:110: set_sprite_data(0, 64, car_light);
-      000C84 11r29r00              3198 	ld	de, #_car_light
-      000C87 D5                    3199 	push	de
-      000C88 21 00 40              3200 	ld	hl, #0x4000
-      000C8B E5                    3201 	push	hl
-      000C8C CDr00r00              3202 	call	_set_sprite_data
-      000C8F E8 04                 3203 	add	sp, #4
-                                   3204 ;main.c:111: load_car_sprite(car1.direction);
-      000C91 FAr0Dr00              3205 	ld	a, (#_car1 + 0)
-      000C94 F5                    3206 	push	af
-      000C95 33                    3207 	inc	sp
-      000C96 CDr5Er0B              3208 	call	_load_car_sprite
-      000C99 33                    3209 	inc	sp
-                                   3210 ;main.c:113: movegamecharacter(&car1, car1.x, car1.y);
-      000C9A 21r13r00              3211 	ld	hl, #(_car1 + 6)
-      000C9D 46                    3212 	ld	b, (hl)
-      000C9E FAr12r00              3213 	ld	a, (#(_car1 + 5) + 0)
-      000CA1 C5                    3214 	push	bc
-      000CA2 33                    3215 	inc	sp
-      000CA3 F5                    3216 	push	af
-      000CA4 33                    3217 	inc	sp
-      000CA5 11r0Dr00              3218 	ld	de, #_car1
-      000CA8 D5                    3219 	push	de
-      000CA9 CDr96r0B              3220 	call	_movegamecharacter
-      000CAC E8 04                 3221 	add	sp, #4
-                                   3222 ;main.c:114: }
-      000CAE C9                    3223 	ret
-                                   3224 ;main.c:116: void accelerate (struct GameObject* car) {
-                                   3225 ;	---------------------------------
-                                   3226 ; Function accelerate
-                                   3227 ; ---------------------------------
-      000CAF                       3228 _accelerate::
-                                   3229 ;main.c:117: switch (car->direction) {
-      000CAF F8 02                 3230 	ldhl	sp,	#2
-      000CB1 2A                    3231 	ld	a, (hl+)
-      000CB2 4F                    3232 	ld	c, a
-      000CB3 46                    3233 	ld	b, (hl)
-      000CB4 0A                    3234 	ld	a, (bc)
-      000CB5 5F                    3235 	ld	e, a
-      000CB6 3E 0F                 3236 	ld	a, #0x0f
-      000CB8 93                    3237 	sub	a, e
-      000CB9 D8                    3238 	ret	C
-      000CBA 16 00                 3239 	ld	d, #0x00
-      000CBC 21rC3r0C              3240 	ld	hl, #00125$
-      000CBF 19                    3241 	add	hl, de
-      000CC0 19                    3242 	add	hl, de
-      000CC1 19                    3243 	add	hl, de
-      000CC2 E9                    3244 	jp	(hl)
-      000CC3                       3245 00125$:
-      000CC3 C3rF3r0C              3246 	jp	00101$
-      000CC6 C3rFAr0C              3247 	jp	00102$
-      000CC9 C3r07r0D              3248 	jp	00103$
-      000CCC C3r14r0D              3249 	jp	00104$
-      000CCF C3r21r0D              3250 	jp	00105$
-      000CD2 C3r2Er0D              3251 	jp	00106$
-      000CD5 C3r3Br0D              3252 	jp	00107$
-      000CD8 C3r48r0D              3253 	jp	00108$
-      000CDB C3r55r0D              3254 	jp	00109$
-      000CDE C3r5Cr0D              3255 	jp	00110$
-      000CE1 C3r69r0D              3256 	jp	00111$
-      000CE4 C3r76r0D              3257 	jp	00112$
-      000CE7 C3r83r0D              3258 	jp	00113$
-      000CEA C3r90r0D              3259 	jp	00114$
-      000CED C3r9Dr0D              3260 	jp	00115$
-      000CF0 C3rAAr0D              3261 	jp	00116$
-                                   3262 ;main.c:118: case 0:
-      000CF3                       3263 00101$:
-                                   3264 ;main.c:119: car->acc_y = 100;
-      000CF3 21 0A 00              3265 	ld	hl, #0x000a
-      000CF6 09                    3266 	add	hl, bc
-      000CF7 36 64                 3267 	ld	(hl), #0x64
-                                   3268 ;main.c:120: break;
-      000CF9 C9                    3269 	ret
-                                   3270 ;main.c:121: case 1:
-      000CFA                       3271 00102$:
-                                   3272 ;main.c:122: car->acc_x = 25;
-      000CFA 21 09 00              3273 	ld	hl, #0x0009
-      000CFD 09                    3274 	add	hl, bc
-      000CFE 36 19                 3275 	ld	(hl), #0x19
-                                   3276 ;main.c:123: car->acc_y = 75;
-      000D00 21 0A 00              3277 	ld	hl, #0x000a
-      000D03 09                    3278 	add	hl, bc
-      000D04 36 4B                 3279 	ld	(hl), #0x4b
-                                   3280 ;main.c:124: break;
-      000D06 C9                    3281 	ret
-                                   3282 ;main.c:125: case 2:
-      000D07                       3283 00103$:
-                                   3284 ;main.c:126: car->acc_x = 50;
-      000D07 21 09 00              3285 	ld	hl, #0x0009
-      000D0A 09                    3286 	add	hl, bc
-      000D0B 36 32                 3287 	ld	(hl), #0x32
-                                   3288 ;main.c:127: car->acc_y = 50;
-      000D0D 21 0A 00              3289 	ld	hl, #0x000a
-      000D10 09                    3290 	add	hl, bc
-      000D11 36 32                 3291 	ld	(hl), #0x32
-                                   3292 ;main.c:128: break;
-      000D13 C9                    3293 	ret
-                                   3294 ;main.c:129: case 3:
-      000D14                       3295 00104$:
-                                   3296 ;main.c:130: car->acc_x = 75;
-      000D14 21 09 00              3297 	ld	hl, #0x0009
-      000D17 09                    3298 	add	hl, bc
-      000D18 36 4B                 3299 	ld	(hl), #0x4b
-                                   3300 ;main.c:131: car->acc_y = 25;
-      000D1A 21 0A 00              3301 	ld	hl, #0x000a
-      000D1D 09                    3302 	add	hl, bc
-      000D1E 36 19                 3303 	ld	(hl), #0x19
-                                   3304 ;main.c:132: break;
-      000D20 C9                    3305 	ret
-                                   3306 ;main.c:133: case 4:
-      000D21                       3307 00105$:
-                                   3308 ;main.c:134: car->acc_x = 100;
-      000D21 21 09 00              3309 	ld	hl, #0x0009
-      000D24 09                    3310 	add	hl, bc
-      000D25 36 64                 3311 	ld	(hl), #0x64
-                                   3312 ;main.c:135: car->acc_y = 0;
-      000D27 21 0A 00              3313 	ld	hl, #0x000a
-      000D2A 09                    3314 	add	hl, bc
-      000D2B 36 00                 3315 	ld	(hl), #0x00
-                                   3316 ;main.c:136: break;
-      000D2D C9                    3317 	ret
-                                   3318 ;main.c:137: case 5:
-      000D2E                       3319 00106$:
-                                   3320 ;main.c:138: car->acc_x = 75;
-      000D2E 21 09 00              3321 	ld	hl, #0x0009
-      000D31 09                    3322 	add	hl, bc
-      000D32 36 4B                 3323 	ld	(hl), #0x4b
-                                   3324 ;main.c:139: car->acc_y = -25;
-      000D34 21 0A 00              3325 	ld	hl, #0x000a
-      000D37 09                    3326 	add	hl, bc
-      000D38 36 E7                 3327 	ld	(hl), #0xe7
-                                   3328 ;main.c:140: break;
-      000D3A C9                    3329 	ret
-                                   3330 ;main.c:141: case 6:
-      000D3B                       3331 00107$:
-                                   3332 ;main.c:142: car->acc_x = 50;
-      000D3B 21 09 00              3333 	ld	hl, #0x0009
-      000D3E 09                    3334 	add	hl, bc
-      000D3F 36 32                 3335 	ld	(hl), #0x32
-                                   3336 ;main.c:143: car->acc_y = -50;
-      000D41 21 0A 00              3337 	ld	hl, #0x000a
-      000D44 09                    3338 	add	hl, bc
-      000D45 36 CE                 3339 	ld	(hl), #0xce
-                                   3340 ;main.c:144: break;
-      000D47 C9                    3341 	ret
-                                   3342 ;main.c:145: case 7:
-      000D48                       3343 00108$:
-                                   3344 ;main.c:146: car->acc_x = 25;
-      000D48 21 09 00              3345 	ld	hl, #0x0009
-      000D4B 09                    3346 	add	hl, bc
-      000D4C 36 19                 3347 	ld	(hl), #0x19
-                                   3348 ;main.c:147: car->acc_y = -75;
-      000D4E 21 0A 00              3349 	ld	hl, #0x000a
-      000D51 09                    3350 	add	hl, bc
-      000D52 36 B5                 3351 	ld	(hl), #0xb5
-                                   3352 ;main.c:148: break;
-      000D54 C9                    3353 	ret
-                                   3354 ;main.c:149: case 8:
-      000D55                       3355 00109$:
-                                   3356 ;main.c:150: car->acc_y = -100;
-      000D55 21 0A 00              3357 	ld	hl, #0x000a
-      000D58 09                    3358 	add	hl, bc
-      000D59 36 9C                 3359 	ld	(hl), #0x9c
-                                   3360 ;main.c:151: break;
-      000D5B C9                    3361 	ret
-                                   3362 ;main.c:152: case 9:
-      000D5C                       3363 00110$:
-                                   3364 ;main.c:153: car->acc_x = -25;
-      000D5C 21 09 00              3365 	ld	hl, #0x0009
-      000D5F 09                    3366 	add	hl, bc
-      000D60 36 E7                 3367 	ld	(hl), #0xe7
-                                   3368 ;main.c:154: car->acc_y = -75;
-      000D62 21 0A 00              3369 	ld	hl, #0x000a
-      000D65 09                    3370 	add	hl, bc
-      000D66 36 B5                 3371 	ld	(hl), #0xb5
-                                   3372 ;main.c:155: break;
-      000D68 C9                    3373 	ret
-                                   3374 ;main.c:156: case 10:
-      000D69                       3375 00111$:
-                                   3376 ;main.c:157: car->acc_x = -50;
-      000D69 21 09 00              3377 	ld	hl, #0x0009
-      000D6C 09                    3378 	add	hl, bc
-      000D6D 36 CE                 3379 	ld	(hl), #0xce
-                                   3380 ;main.c:158: car->acc_y = -50;
-      000D6F 21 0A 00              3381 	ld	hl, #0x000a
-      000D72 09                    3382 	add	hl, bc
-      000D73 36 CE                 3383 	ld	(hl), #0xce
-                                   3384 ;main.c:159: break;
-      000D75 C9                    3385 	ret
-                                   3386 ;main.c:160: case 11:
-      000D76                       3387 00112$:
-                                   3388 ;main.c:161: car->acc_x = -75;
-      000D76 21 09 00              3389 	ld	hl, #0x0009
-      000D79 09                    3390 	add	hl, bc
-      000D7A 36 B5                 3391 	ld	(hl), #0xb5
-                                   3392 ;main.c:162: car->acc_y = -25;
-      000D7C 21 0A 00              3393 	ld	hl, #0x000a
-      000D7F 09                    3394 	add	hl, bc
-      000D80 36 E7                 3395 	ld	(hl), #0xe7
-                                   3396 ;main.c:163: break;
-      000D82 C9                    3397 	ret
-                                   3398 ;main.c:164: case 12:
-      000D83                       3399 00113$:
-                                   3400 ;main.c:165: car->acc_x = -100;
-      000D83 21 09 00              3401 	ld	hl, #0x0009
-      000D86 09                    3402 	add	hl, bc
-      000D87 36 9C                 3403 	ld	(hl), #0x9c
-                                   3404 ;main.c:166: car->acc_y = 0;
-      000D89 21 0A 00              3405 	ld	hl, #0x000a
-      000D8C 09                    3406 	add	hl, bc
-      000D8D 36 00                 3407 	ld	(hl), #0x00
-                                   3408 ;main.c:167: break;
-      000D8F C9                    3409 	ret
-                                   3410 ;main.c:168: case 13:
-      000D90                       3411 00114$:
-                                   3412 ;main.c:169: car->acc_x = -25;
-      000D90 21 09 00              3413 	ld	hl, #0x0009
-      000D93 09                    3414 	add	hl, bc
-      000D94 36 E7                 3415 	ld	(hl), #0xe7
-                                   3416 ;main.c:170: car->acc_y = 75;
-      000D96 21 0A 00              3417 	ld	hl, #0x000a
-      000D99 09                    3418 	add	hl, bc
-      000D9A 36 4B                 3419 	ld	(hl), #0x4b
-                                   3420 ;main.c:171: break;
-      000D9C C9                    3421 	ret
-                                   3422 ;main.c:172: case 14:
-      000D9D                       3423 00115$:
-                                   3424 ;main.c:173: car->acc_x = -50;
-      000D9D 21 09 00              3425 	ld	hl, #0x0009
-      000DA0 09                    3426 	add	hl, bc
-      000DA1 36 CE                 3427 	ld	(hl), #0xce
-                                   3428 ;main.c:174: car->acc_y = 50;
-      000DA3 21 0A 00              3429 	ld	hl, #0x000a
-      000DA6 09                    3430 	add	hl, bc
-      000DA7 36 32                 3431 	ld	(hl), #0x32
-                                   3432 ;main.c:175: break;
-      000DA9 C9                    3433 	ret
-                                   3434 ;main.c:176: case 15:
-      000DAA                       3435 00116$:
-                                   3436 ;main.c:177: car->acc_x = -75;
-      000DAA 21 09 00              3437 	ld	hl, #0x0009
-      000DAD 09                    3438 	add	hl, bc
-      000DAE 36 B5                 3439 	ld	(hl), #0xb5
-                                   3440 ;main.c:178: car->acc_y = 25;
-      000DB0 21 0A 00              3441 	ld	hl, #0x000a
-      000DB3 09                    3442 	add	hl, bc
-      000DB4 36 19                 3443 	ld	(hl), #0x19
-                                   3444 ;main.c:180: }
-                                   3445 ;main.c:181: }
-      000DB6 C9                    3446 	ret
-                                   3447 ;main.c:183: void deccelerate (struct GameObject* car) {
-                                   3448 ;	---------------------------------
-                                   3449 ; Function deccelerate
-                                   3450 ; ---------------------------------
-      000DB7                       3451 _deccelerate::
-                                   3452 ;main.c:184: switch (car->direction) {
-      000DB7 F8 02                 3453 	ldhl	sp,	#2
-      000DB9 2A                    3454 	ld	a, (hl+)
-      000DBA 4F                    3455 	ld	c, a
-      000DBB 46                    3456 	ld	b, (hl)
-      000DBC 0A                    3457 	ld	a, (bc)
-      000DBD 5F                    3458 	ld	e, a
-      000DBE 3E 0F                 3459 	ld	a, #0x0f
-      000DC0 93                    3460 	sub	a, e
-      000DC1 D8                    3461 	ret	C
-      000DC2 16 00                 3462 	ld	d, #0x00
-      000DC4 21rCBr0D              3463 	ld	hl, #00125$
-      000DC7 19                    3464 	add	hl, de
-      000DC8 19                    3465 	add	hl, de
-      000DC9 19                    3466 	add	hl, de
-      000DCA E9                    3467 	jp	(hl)
-      000DCB                       3468 00125$:
-      000DCB C3rFBr0D              3469 	jp	00101$
-      000DCE C3r02r0E              3470 	jp	00102$
-      000DD1 C3r0Fr0E              3471 	jp	00103$
-      000DD4 C3r1Cr0E              3472 	jp	00104$
-      000DD7 C3r29r0E              3473 	jp	00105$
-      000DDA C3r36r0E              3474 	jp	00106$
-      000DDD C3r43r0E              3475 	jp	00107$
-      000DE0 C3r50r0E              3476 	jp	00108$
-      000DE3 C3r5Dr0E              3477 	jp	00109$
-      000DE6 C3r64r0E              3478 	jp	00110$
-      000DE9 C3r71r0E              3479 	jp	00111$
-      000DEC C3r7Er0E              3480 	jp	00112$
-      000DEF C3r8Br0E              3481 	jp	00113$
-      000DF2 C3r98r0E              3482 	jp	00114$
-      000DF5 C3rA5r0E              3483 	jp	00115$
-      000DF8 C3rB2r0E              3484 	jp	00116$
-                                   3485 ;main.c:185: case 0:
-      000DFB                       3486 00101$:
-                                   3487 ;main.c:186: car->acc_y = -100;
-      000DFB 21 0A 00              3488 	ld	hl, #0x000a
-      000DFE 09                    3489 	add	hl, bc
-      000DFF 36 9C                 3490 	ld	(hl), #0x9c
-                                   3491 ;main.c:187: break;
-      000E01 C9                    3492 	ret
-                                   3493 ;main.c:188: case 1:
-      000E02                       3494 00102$:
-                                   3495 ;main.c:189: car->acc_x = -25;
-      000E02 21 09 00              3496 	ld	hl, #0x0009
-      000E05 09                    3497 	add	hl, bc
-      000E06 36 E7                 3498 	ld	(hl), #0xe7
-                                   3499 ;main.c:190: car->acc_y = -75;
-      000E08 21 0A 00              3500 	ld	hl, #0x000a
-      000E0B 09                    3501 	add	hl, bc
-      000E0C 36 B5                 3502 	ld	(hl), #0xb5
-                                   3503 ;main.c:191: break;
-      000E0E C9                    3504 	ret
-                                   3505 ;main.c:192: case 2:
-      000E0F                       3506 00103$:
-                                   3507 ;main.c:193: car->acc_x = -50;
-      000E0F 21 09 00              3508 	ld	hl, #0x0009
-      000E12 09                    3509 	add	hl, bc
-      000E13 36 CE                 3510 	ld	(hl), #0xce
-                                   3511 ;main.c:194: car->acc_y = -50;
-      000E15 21 0A 00              3512 	ld	hl, #0x000a
-      000E18 09                    3513 	add	hl, bc
-      000E19 36 CE                 3514 	ld	(hl), #0xce
-                                   3515 ;main.c:195: break;
-      000E1B C9                    3516 	ret
-                                   3517 ;main.c:196: case 3:
-      000E1C                       3518 00104$:
-                                   3519 ;main.c:197: car->acc_x = -75;
-      000E1C 21 09 00              3520 	ld	hl, #0x0009
-      000E1F 09                    3521 	add	hl, bc
-      000E20 36 B5                 3522 	ld	(hl), #0xb5
-                                   3523 ;main.c:198: car->acc_y = -25;
-      000E22 21 0A 00              3524 	ld	hl, #0x000a
-      000E25 09                    3525 	add	hl, bc
-      000E26 36 E7                 3526 	ld	(hl), #0xe7
-                                   3527 ;main.c:199: break;
-      000E28 C9                    3528 	ret
-                                   3529 ;main.c:200: case 4:
-      000E29                       3530 00105$:
-                                   3531 ;main.c:201: car->acc_x = -100;
-      000E29 21 09 00              3532 	ld	hl, #0x0009
-      000E2C 09                    3533 	add	hl, bc
-      000E2D 36 9C                 3534 	ld	(hl), #0x9c
-                                   3535 ;main.c:202: car->acc_y = 0;
-      000E2F 21 0A 00              3536 	ld	hl, #0x000a
-      000E32 09                    3537 	add	hl, bc
-      000E33 36 00                 3538 	ld	(hl), #0x00
-                                   3539 ;main.c:203: break;
-      000E35 C9                    3540 	ret
-                                   3541 ;main.c:204: case 5:
-      000E36                       3542 00106$:
-                                   3543 ;main.c:205: car->acc_x = -75;
-      000E36 21 09 00              3544 	ld	hl, #0x0009
-      000E39 09                    3545 	add	hl, bc
-      000E3A 36 B5                 3546 	ld	(hl), #0xb5
-                                   3547 ;main.c:206: car->acc_y = 25;
-      000E3C 21 0A 00              3548 	ld	hl, #0x000a
-      000E3F 09                    3549 	add	hl, bc
-      000E40 36 19                 3550 	ld	(hl), #0x19
-                                   3551 ;main.c:207: break;
-      000E42 C9                    3552 	ret
-                                   3553 ;main.c:208: case 6:
-      000E43                       3554 00107$:
-                                   3555 ;main.c:209: car->acc_x = -50;
-      000E43 21 09 00              3556 	ld	hl, #0x0009
-      000E46 09                    3557 	add	hl, bc
-      000E47 36 CE                 3558 	ld	(hl), #0xce
-                                   3559 ;main.c:210: car->acc_y = 50;
-      000E49 21 0A 00              3560 	ld	hl, #0x000a
-      000E4C 09                    3561 	add	hl, bc
-      000E4D 36 32                 3562 	ld	(hl), #0x32
-                                   3563 ;main.c:211: break;
-      000E4F C9                    3564 	ret
-                                   3565 ;main.c:212: case 7:
-      000E50                       3566 00108$:
-                                   3567 ;main.c:213: car->acc_x = -25;
-      000E50 21 09 00              3568 	ld	hl, #0x0009
-      000E53 09                    3569 	add	hl, bc
-      000E54 36 E7                 3570 	ld	(hl), #0xe7
-                                   3571 ;main.c:214: car->acc_y = 75;
-      000E56 21 0A 00              3572 	ld	hl, #0x000a
-      000E59 09                    3573 	add	hl, bc
-      000E5A 36 4B                 3574 	ld	(hl), #0x4b
-                                   3575 ;main.c:215: break;
-      000E5C C9                    3576 	ret
-                                   3577 ;main.c:216: case 8:
-      000E5D                       3578 00109$:
-                                   3579 ;main.c:217: car->acc_y = 100;
-      000E5D 21 0A 00              3580 	ld	hl, #0x000a
-      000E60 09                    3581 	add	hl, bc
-      000E61 36 64                 3582 	ld	(hl), #0x64
-                                   3583 ;main.c:218: break;
-      000E63 C9                    3584 	ret
-                                   3585 ;main.c:219: case 9:
-      000E64                       3586 00110$:
-                                   3587 ;main.c:220: car->acc_x = 25;
-      000E64 21 09 00              3588 	ld	hl, #0x0009
-      000E67 09                    3589 	add	hl, bc
-      000E68 36 19                 3590 	ld	(hl), #0x19
-                                   3591 ;main.c:221: car->acc_y = 75;
-      000E6A 21 0A 00              3592 	ld	hl, #0x000a
-      000E6D 09                    3593 	add	hl, bc
-      000E6E 36 4B                 3594 	ld	(hl), #0x4b
-                                   3595 ;main.c:222: break;
-      000E70 C9                    3596 	ret
-                                   3597 ;main.c:223: case 10:
-      000E71                       3598 00111$:
-                                   3599 ;main.c:224: car->acc_x = 50;
-      000E71 21 09 00              3600 	ld	hl, #0x0009
-      000E74 09                    3601 	add	hl, bc
-      000E75 36 32                 3602 	ld	(hl), #0x32
-                                   3603 ;main.c:225: car->acc_y = 50;
-      000E77 21 0A 00              3604 	ld	hl, #0x000a
-      000E7A 09                    3605 	add	hl, bc
-      000E7B 36 32                 3606 	ld	(hl), #0x32
-                                   3607 ;main.c:226: break;
-      000E7D C9                    3608 	ret
-                                   3609 ;main.c:227: case 11:
-      000E7E                       3610 00112$:
-                                   3611 ;main.c:228: car->acc_x = 75;
-      000E7E 21 09 00              3612 	ld	hl, #0x0009
-      000E81 09                    3613 	add	hl, bc
-      000E82 36 4B                 3614 	ld	(hl), #0x4b
-                                   3615 ;main.c:229: car->acc_y = 25;
-      000E84 21 0A 00              3616 	ld	hl, #0x000a
-      000E87 09                    3617 	add	hl, bc
-      000E88 36 19                 3618 	ld	(hl), #0x19
-                                   3619 ;main.c:230: break;
-      000E8A C9                    3620 	ret
-                                   3621 ;main.c:231: case 12:
-      000E8B                       3622 00113$:
-                                   3623 ;main.c:232: car->acc_x = 100;
-      000E8B 21 09 00              3624 	ld	hl, #0x0009
-      000E8E 09                    3625 	add	hl, bc
-      000E8F 36 64                 3626 	ld	(hl), #0x64
-                                   3627 ;main.c:233: car->acc_y = 0;
-      000E91 21 0A 00              3628 	ld	hl, #0x000a
-      000E94 09                    3629 	add	hl, bc
-      000E95 36 00                 3630 	ld	(hl), #0x00
-                                   3631 ;main.c:234: break;
-      000E97 C9                    3632 	ret
-                                   3633 ;main.c:235: case 13:
-      000E98                       3634 00114$:
-                                   3635 ;main.c:236: car->acc_x = 25;
-      000E98 21 09 00              3636 	ld	hl, #0x0009
-      000E9B 09                    3637 	add	hl, bc
-      000E9C 36 19                 3638 	ld	(hl), #0x19
-                                   3639 ;main.c:237: car->acc_y = -75;
-      000E9E 21 0A 00              3640 	ld	hl, #0x000a
-      000EA1 09                    3641 	add	hl, bc
-      000EA2 36 B5                 3642 	ld	(hl), #0xb5
-                                   3643 ;main.c:238: break;
-      000EA4 C9                    3644 	ret
-                                   3645 ;main.c:239: case 14:
-      000EA5                       3646 00115$:
-                                   3647 ;main.c:240: car->acc_x = 50;
-      000EA5 21 09 00              3648 	ld	hl, #0x0009
-      000EA8 09                    3649 	add	hl, bc
-      000EA9 36 32                 3650 	ld	(hl), #0x32
-                                   3651 ;main.c:241: car->acc_y = -50;
-      000EAB 21 0A 00              3652 	ld	hl, #0x000a
-      000EAE 09                    3653 	add	hl, bc
-      000EAF 36 CE                 3654 	ld	(hl), #0xce
-                                   3655 ;main.c:242: break;
-      000EB1 C9                    3656 	ret
-                                   3657 ;main.c:243: case 15:
-      000EB2                       3658 00116$:
-                                   3659 ;main.c:244: car->acc_x = 75;
-      000EB2 21 09 00              3660 	ld	hl, #0x0009
-      000EB5 09                    3661 	add	hl, bc
-      000EB6 36 4B                 3662 	ld	(hl), #0x4b
-                                   3663 ;main.c:245: car->acc_y = -25;
-      000EB8 21 0A 00              3664 	ld	hl, #0x000a
-      000EBB 09                    3665 	add	hl, bc
-      000EBC 36 E7                 3666 	ld	(hl), #0xe7
-                                   3667 ;main.c:247: }
-                                   3668 ;main.c:248: }
-      000EBE C9                    3669 	ret
-                                   3670 ;main.c:250: void move_car(struct GameObject* car) {
-                                   3671 ;	---------------------------------
-                                   3672 ; Function move_car
-                                   3673 ; ---------------------------------
-      000EBF                       3674 _move_car::
-      000EBF E8 FC                 3675 	add	sp, #-4
-                                   3676 ;main.c:252: car->vel_x += car->acc_x/100;
-      000EC1 F8 06                 3677 	ldhl	sp,	#6
-      000EC3 2A                    3678 	ld	a, (hl+)
-      000EC4 4F                    3679 	ld	c, a
-      000EC5 46                    3680 	ld	b, (hl)
-      000EC6 21 07 00              3681 	ld	hl, #0x0007
-      000EC9 09                    3682 	add	hl, bc
-      000ECA 5D                    3683 	ld	e, l
-      000ECB 54                    3684 	ld	d, h
-      000ECC 1A                    3685 	ld	a, (de)
-      000ECD F8 03                 3686 	ldhl	sp,	#3
-      000ECF 77                    3687 	ld	(hl), a
-      000ED0 21 09 00              3688 	ld	hl, #0x0009
-      000ED3 09                    3689 	add	hl, bc
-      000ED4 7E                    3690 	ld	a, (hl)
-      000ED5 6F                    3691 	ld	l, a
-                                   3692 ;	spillPairReg hl
-                                   3693 ;	spillPairReg hl
-      000ED6 07                    3694 	rlca
-      000ED7 9F                    3695 	sbc	a, a
-      000ED8 67                    3696 	ld	h, a
-                                   3697 ;	spillPairReg hl
-                                   3698 ;	spillPairReg hl
-      000ED9 C5                    3699 	push	bc
-      000EDA D5                    3700 	push	de
-      000EDB 11 64 00              3701 	ld	de, #0x64
-      000EDE D5                    3702 	push	de
-      000EDF E5                    3703 	push	hl
-      000EE0 CDr00r00              3704 	call	__divsint
-      000EE3 E8 04                 3705 	add	sp, #4
-      000EE5 6B                    3706 	ld	l, e
-                                   3707 ;	spillPairReg hl
+                                   3067 ;	spillPairReg hl
+      000C01 23                    3068 	inc	hl
+      000C02 23                    3069 	inc	hl
+      000C03 23                    3070 	inc	hl
+                                   3071 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+      000C04 6E                    3072 	ld	l, (hl)
+                                   3073 ;	spillPairReg hl
+                                   3074 ;	spillPairReg hl
+      000C05 26 00                 3075 	ld	h, #0x00
+                                   3076 ;	spillPairReg hl
+                                   3077 ;	spillPairReg hl
+      000C07 29                    3078 	add	hl, hl
+      000C08 29                    3079 	add	hl, hl
+      000C09 D5                    3080 	push	de
+      000C0A 11r00r00              3081 	ld	de, #_shadow_OAM
+      000C0D 19                    3082 	add	hl, de
+      000C0E D1                    3083 	pop	de
+                                   3084 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+      000C0F 79                    3085 	ld	a, c
+      000C10 22                    3086 	ld	(hl+), a
+      000C11 4D                    3087 	ld	c, l
+      000C12 44                    3088 	ld	b, h
+      000C13 F8 01                 3089 	ldhl	sp,	#1
+                                   3090 ;main.c:80: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
+      000C15 3A                    3091 	ld	a, (hl-)
+      000C16 02                    3092 	ld	(bc), a
+      000C17 7E                    3093 	ld	a, (hl)
+                                   3094 ;setupPair	HL
+      000C18 21r00r00              3095 	ld	hl, #_spritesize
+      000C1B 86                    3096 	add	a, (hl)
+      000C1C 47                    3097 	ld	b, a
+      000C1D F8 01                 3098 	ldhl	sp,	#1
+      000C1F 7E                    3099 	ld	a, (hl)
+                                   3100 ;setupPair	HL
+      000C20 21r00r00              3101 	ld	hl, #_spritesize
+      000C23 86                    3102 	add	a, (hl)
+      000C24 4F                    3103 	ld	c, a
+      000C25 21 04 00              3104 	ld	hl, #0x0004
+      000C28 19                    3105 	add	hl, de
+                                   3106 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+      000C29 6E                    3107 	ld	l, (hl)
+                                   3108 ;	spillPairReg hl
+                                   3109 ;	spillPairReg hl
+      000C2A 26 00                 3110 	ld	h, #0x00
+                                   3111 ;	spillPairReg hl
+                                   3112 ;	spillPairReg hl
+      000C2C 29                    3113 	add	hl, hl
+      000C2D 29                    3114 	add	hl, hl
+      000C2E 11r00r00              3115 	ld	de, #_shadow_OAM
+      000C31 19                    3116 	add	hl, de
+                                   3117 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+      000C32 78                    3118 	ld	a, b
+      000C33 22                    3119 	ld	(hl+), a
+      000C34 71                    3120 	ld	(hl), c
+                                   3121 ;main.c:80: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
+                                   3122 ;main.c:81: }
+      000C35 E8 03                 3123 	add	sp, #3
+      000C37 C9                    3124 	ret
+                                   3125 ;main.c:83: void performantdelay(UINT8 numloops){
+                                   3126 ;	---------------------------------
+                                   3127 ; Function performantdelay
+                                   3128 ; ---------------------------------
+      000C38                       3129 _performantdelay::
+                                   3130 ;main.c:85: for(i = 0; i < numloops; i++){
+      000C38 0E 00                 3131 	ld	c, #0x00
+      000C3A                       3132 00103$:
+      000C3A 79                    3133 	ld	a, c
+      000C3B F8 02                 3134 	ldhl	sp,	#2
+      000C3D 96                    3135 	sub	a, (hl)
+      000C3E D0                    3136 	ret	NC
+                                   3137 ;main.c:86: wait_vbl_done();
+      000C3F CDr00r00              3138 	call	_wait_vbl_done
+                                   3139 ;main.c:85: for(i = 0; i < numloops; i++){
+      000C42 0C                    3140 	inc	c
+                                   3141 ;main.c:88: }
+      000C43 18 F5                 3142 	jr	00103$
+                                   3143 ;main.c:90: void setup_ball() {
+                                   3144 ;	---------------------------------
+                                   3145 ; Function setup_ball
+                                   3146 ; ---------------------------------
+      000C45                       3147 _setup_ball::
+                                   3148 ;main.c:91: ball.x = 100;
+      000C45 21r05r00              3149 	ld	hl, #(_ball + 5)
+      000C48 36 64                 3150 	ld	(hl), #0x64
+                                   3151 ;main.c:92: ball.y = 100;
+      000C4A 21r06r00              3152 	ld	hl, #(_ball + 6)
+      000C4D 36 64                 3153 	ld	(hl), #0x64
+                                   3154 ;main.c:93: ball.width = 16;
+      000C4F 21r0Br00              3155 	ld	hl, #(_ball + 11)
+      000C52 36 10                 3156 	ld	(hl), #0x10
+                                   3157 ;main.c:94: ball.height = 16;   
+      000C54 21r0Cr00              3158 	ld	hl, #(_ball + 12)
+      000C57 36 10                 3159 	ld	(hl), #0x10
+                                   3160 ;main.c:96: load_ball_sprite();
+      000C59 CDr00r00              3161 	call	_load_ball_sprite
+                                   3162 ;main.c:97: movegamecharacter(&ball, ball.x, ball.y);
+      000C5C 21r06r00              3163 	ld	hl, #(_ball + 6)
+      000C5F 46                    3164 	ld	b, (hl)
+      000C60 FAr05r00              3165 	ld	a, (#(_ball + 5) + 0)
+      000C63 C5                    3166 	push	bc
+      000C64 33                    3167 	inc	sp
+      000C65 F5                    3168 	push	af
+      000C66 33                    3169 	inc	sp
+      000C67 11r00r00              3170 	ld	de, #_ball
+      000C6A D5                    3171 	push	de
+      000C6B CDrB0r0B              3172 	call	_movegamecharacter
+      000C6E E8 04                 3173 	add	sp, #4
+                                   3174 ;main.c:98: }
+      000C70 C9                    3175 	ret
+                                   3176 ;main.c:100: void setupcar_light(){
+                                   3177 ;	---------------------------------
+                                   3178 ; Function setupcar_light
+                                   3179 ; ---------------------------------
+      000C71                       3180 _setupcar_light::
+                                   3181 ;main.c:101: car1.direction = 0;
+      000C71 21r0Dr00              3182 	ld	hl, #_car1
+      000C74 36 00                 3183 	ld	(hl), #0x00
+                                   3184 ;main.c:102: car1.x = 80;
+      000C76 21r12r00              3185 	ld	hl, #(_car1 + 5)
+      000C79 36 50                 3186 	ld	(hl), #0x50
+                                   3187 ;main.c:103: car1.y = 130;
+      000C7B 21r13r00              3188 	ld	hl, #(_car1 + 6)
+      000C7E 36 82                 3189 	ld	(hl), #0x82
+                                   3190 ;main.c:104: car1.width = 16;
+      000C80 21r18r00              3191 	ld	hl, #(_car1 + 11)
+      000C83 36 10                 3192 	ld	(hl), #0x10
+                                   3193 ;main.c:105: car1.height = 16;
+      000C85 21r19r00              3194 	ld	hl, #(_car1 + 12)
+      000C88 36 10                 3195 	ld	(hl), #0x10
+                                   3196 ;main.c:106: car1.acc_x = 0;
+      000C8A 21r16r00              3197 	ld	hl, #(_car1 + 9)
+      000C8D 36 00                 3198 	ld	(hl), #0x00
+                                   3199 ;main.c:107: car1.acc_y = 0;
+      000C8F 21r17r00              3200 	ld	hl, #(_car1 + 10)
+      000C92 36 00                 3201 	ld	(hl), #0x00
+                                   3202 ;main.c:108: car1.vel_x = 0;
+      000C94 21r14r00              3203 	ld	hl, #(_car1 + 7)
+      000C97 36 00                 3204 	ld	(hl), #0x00
+                                   3205 ;main.c:109: car1.vel_y = 0;
+      000C99 21r15r00              3206 	ld	hl, #(_car1 + 8)
+      000C9C 36 00                 3207 	ld	(hl), #0x00
+                                   3208 ;main.c:111: set_sprite_data(0, 64, car_light);
+      000C9E 11r29r00              3209 	ld	de, #_car_light
+      000CA1 D5                    3210 	push	de
+      000CA2 21 00 40              3211 	ld	hl, #0x4000
+      000CA5 E5                    3212 	push	hl
+      000CA6 CDr00r00              3213 	call	_set_sprite_data
+      000CA9 E8 04                 3214 	add	sp, #4
+                                   3215 ;main.c:112: load_car_sprite(car1.direction);
+      000CAB FAr0Dr00              3216 	ld	a, (#_car1 + 0)
+      000CAE F5                    3217 	push	af
+      000CAF 33                    3218 	inc	sp
+      000CB0 CDr78r0B              3219 	call	_load_car_sprite
+      000CB3 33                    3220 	inc	sp
+                                   3221 ;main.c:114: movegamecharacter(&car1, car1.x, car1.y);
+      000CB4 21r13r00              3222 	ld	hl, #(_car1 + 6)
+      000CB7 46                    3223 	ld	b, (hl)
+      000CB8 FAr12r00              3224 	ld	a, (#(_car1 + 5) + 0)
+      000CBB C5                    3225 	push	bc
+      000CBC 33                    3226 	inc	sp
+      000CBD F5                    3227 	push	af
+      000CBE 33                    3228 	inc	sp
+      000CBF 11r0Dr00              3229 	ld	de, #_car1
+      000CC2 D5                    3230 	push	de
+      000CC3 CDrB0r0B              3231 	call	_movegamecharacter
+      000CC6 E8 04                 3232 	add	sp, #4
+                                   3233 ;main.c:115: }
+      000CC8 C9                    3234 	ret
+                                   3235 ;main.c:117: void accelerate (struct GameObject* car) {
+                                   3236 ;	---------------------------------
+                                   3237 ; Function accelerate
+                                   3238 ; ---------------------------------
+      000CC9                       3239 _accelerate::
+                                   3240 ;main.c:118: switch (car->direction) {
+      000CC9 F8 02                 3241 	ldhl	sp,	#2
+      000CCB 2A                    3242 	ld	a, (hl+)
+      000CCC 4F                    3243 	ld	c, a
+      000CCD 46                    3244 	ld	b, (hl)
+      000CCE 0A                    3245 	ld	a, (bc)
+      000CCF 5F                    3246 	ld	e, a
+      000CD0 3E 0F                 3247 	ld	a, #0x0f
+      000CD2 93                    3248 	sub	a, e
+      000CD3 D8                    3249 	ret	C
+      000CD4 16 00                 3250 	ld	d, #0x00
+      000CD6 21rDDr0C              3251 	ld	hl, #00125$
+      000CD9 19                    3252 	add	hl, de
+      000CDA 19                    3253 	add	hl, de
+      000CDB 19                    3254 	add	hl, de
+      000CDC E9                    3255 	jp	(hl)
+      000CDD                       3256 00125$:
+      000CDD C3r0Dr0D              3257 	jp	00101$
+      000CE0 C3r14r0D              3258 	jp	00102$
+      000CE3 C3r21r0D              3259 	jp	00103$
+      000CE6 C3r2Er0D              3260 	jp	00104$
+      000CE9 C3r3Br0D              3261 	jp	00105$
+      000CEC C3r48r0D              3262 	jp	00106$
+      000CEF C3r55r0D              3263 	jp	00107$
+      000CF2 C3r62r0D              3264 	jp	00108$
+      000CF5 C3r6Fr0D              3265 	jp	00109$
+      000CF8 C3r76r0D              3266 	jp	00110$
+      000CFB C3r83r0D              3267 	jp	00111$
+      000CFE C3r90r0D              3268 	jp	00112$
+      000D01 C3r9Dr0D              3269 	jp	00113$
+      000D04 C3rAAr0D              3270 	jp	00114$
+      000D07 C3rB7r0D              3271 	jp	00115$
+      000D0A C3rC4r0D              3272 	jp	00116$
+                                   3273 ;main.c:119: case 0:
+      000D0D                       3274 00101$:
+                                   3275 ;main.c:120: car->acc_y = 100;
+      000D0D 21 0A 00              3276 	ld	hl, #0x000a
+      000D10 09                    3277 	add	hl, bc
+      000D11 36 64                 3278 	ld	(hl), #0x64
+                                   3279 ;main.c:121: break;
+      000D13 C9                    3280 	ret
+                                   3281 ;main.c:122: case 1:
+      000D14                       3282 00102$:
+                                   3283 ;main.c:123: car->acc_x = 25;
+      000D14 21 09 00              3284 	ld	hl, #0x0009
+      000D17 09                    3285 	add	hl, bc
+      000D18 36 19                 3286 	ld	(hl), #0x19
+                                   3287 ;main.c:124: car->acc_y = 75;
+      000D1A 21 0A 00              3288 	ld	hl, #0x000a
+      000D1D 09                    3289 	add	hl, bc
+      000D1E 36 4B                 3290 	ld	(hl), #0x4b
+                                   3291 ;main.c:125: break;
+      000D20 C9                    3292 	ret
+                                   3293 ;main.c:126: case 2:
+      000D21                       3294 00103$:
+                                   3295 ;main.c:127: car->acc_x = 50;
+      000D21 21 09 00              3296 	ld	hl, #0x0009
+      000D24 09                    3297 	add	hl, bc
+      000D25 36 32                 3298 	ld	(hl), #0x32
+                                   3299 ;main.c:128: car->acc_y = 50;
+      000D27 21 0A 00              3300 	ld	hl, #0x000a
+      000D2A 09                    3301 	add	hl, bc
+      000D2B 36 32                 3302 	ld	(hl), #0x32
+                                   3303 ;main.c:129: break;
+      000D2D C9                    3304 	ret
+                                   3305 ;main.c:130: case 3:
+      000D2E                       3306 00104$:
+                                   3307 ;main.c:131: car->acc_x = 75;
+      000D2E 21 09 00              3308 	ld	hl, #0x0009
+      000D31 09                    3309 	add	hl, bc
+      000D32 36 4B                 3310 	ld	(hl), #0x4b
+                                   3311 ;main.c:132: car->acc_y = 25;
+      000D34 21 0A 00              3312 	ld	hl, #0x000a
+      000D37 09                    3313 	add	hl, bc
+      000D38 36 19                 3314 	ld	(hl), #0x19
+                                   3315 ;main.c:133: break;
+      000D3A C9                    3316 	ret
+                                   3317 ;main.c:134: case 4:
+      000D3B                       3318 00105$:
+                                   3319 ;main.c:135: car->acc_x = 100;
+      000D3B 21 09 00              3320 	ld	hl, #0x0009
+      000D3E 09                    3321 	add	hl, bc
+      000D3F 36 64                 3322 	ld	(hl), #0x64
+                                   3323 ;main.c:136: car->acc_y = 0;
+      000D41 21 0A 00              3324 	ld	hl, #0x000a
+      000D44 09                    3325 	add	hl, bc
+      000D45 36 00                 3326 	ld	(hl), #0x00
+                                   3327 ;main.c:137: break;
+      000D47 C9                    3328 	ret
+                                   3329 ;main.c:138: case 5:
+      000D48                       3330 00106$:
+                                   3331 ;main.c:139: car->acc_x = 75;
+      000D48 21 09 00              3332 	ld	hl, #0x0009
+      000D4B 09                    3333 	add	hl, bc
+      000D4C 36 4B                 3334 	ld	(hl), #0x4b
+                                   3335 ;main.c:140: car->acc_y = -25;
+      000D4E 21 0A 00              3336 	ld	hl, #0x000a
+      000D51 09                    3337 	add	hl, bc
+      000D52 36 E7                 3338 	ld	(hl), #0xe7
+                                   3339 ;main.c:141: break;
+      000D54 C9                    3340 	ret
+                                   3341 ;main.c:142: case 6:
+      000D55                       3342 00107$:
+                                   3343 ;main.c:143: car->acc_x = 50;
+      000D55 21 09 00              3344 	ld	hl, #0x0009
+      000D58 09                    3345 	add	hl, bc
+      000D59 36 32                 3346 	ld	(hl), #0x32
+                                   3347 ;main.c:144: car->acc_y = -50;
+      000D5B 21 0A 00              3348 	ld	hl, #0x000a
+      000D5E 09                    3349 	add	hl, bc
+      000D5F 36 CE                 3350 	ld	(hl), #0xce
+                                   3351 ;main.c:145: break;
+      000D61 C9                    3352 	ret
+                                   3353 ;main.c:146: case 7:
+      000D62                       3354 00108$:
+                                   3355 ;main.c:147: car->acc_x = 25;
+      000D62 21 09 00              3356 	ld	hl, #0x0009
+      000D65 09                    3357 	add	hl, bc
+      000D66 36 19                 3358 	ld	(hl), #0x19
+                                   3359 ;main.c:148: car->acc_y = -75;
+      000D68 21 0A 00              3360 	ld	hl, #0x000a
+      000D6B 09                    3361 	add	hl, bc
+      000D6C 36 B5                 3362 	ld	(hl), #0xb5
+                                   3363 ;main.c:149: break;
+      000D6E C9                    3364 	ret
+                                   3365 ;main.c:150: case 8:
+      000D6F                       3366 00109$:
+                                   3367 ;main.c:151: car->acc_y = -100;
+      000D6F 21 0A 00              3368 	ld	hl, #0x000a
+      000D72 09                    3369 	add	hl, bc
+      000D73 36 9C                 3370 	ld	(hl), #0x9c
+                                   3371 ;main.c:152: break;
+      000D75 C9                    3372 	ret
+                                   3373 ;main.c:153: case 9:
+      000D76                       3374 00110$:
+                                   3375 ;main.c:154: car->acc_x = -25;
+      000D76 21 09 00              3376 	ld	hl, #0x0009
+      000D79 09                    3377 	add	hl, bc
+      000D7A 36 E7                 3378 	ld	(hl), #0xe7
+                                   3379 ;main.c:155: car->acc_y = -75;
+      000D7C 21 0A 00              3380 	ld	hl, #0x000a
+      000D7F 09                    3381 	add	hl, bc
+      000D80 36 B5                 3382 	ld	(hl), #0xb5
+                                   3383 ;main.c:156: break;
+      000D82 C9                    3384 	ret
+                                   3385 ;main.c:157: case 10:
+      000D83                       3386 00111$:
+                                   3387 ;main.c:158: car->acc_x = -50;
+      000D83 21 09 00              3388 	ld	hl, #0x0009
+      000D86 09                    3389 	add	hl, bc
+      000D87 36 CE                 3390 	ld	(hl), #0xce
+                                   3391 ;main.c:159: car->acc_y = -50;
+      000D89 21 0A 00              3392 	ld	hl, #0x000a
+      000D8C 09                    3393 	add	hl, bc
+      000D8D 36 CE                 3394 	ld	(hl), #0xce
+                                   3395 ;main.c:160: break;
+      000D8F C9                    3396 	ret
+                                   3397 ;main.c:161: case 11:
+      000D90                       3398 00112$:
+                                   3399 ;main.c:162: car->acc_x = -75;
+      000D90 21 09 00              3400 	ld	hl, #0x0009
+      000D93 09                    3401 	add	hl, bc
+      000D94 36 B5                 3402 	ld	(hl), #0xb5
+                                   3403 ;main.c:163: car->acc_y = -25;
+      000D96 21 0A 00              3404 	ld	hl, #0x000a
+      000D99 09                    3405 	add	hl, bc
+      000D9A 36 E7                 3406 	ld	(hl), #0xe7
+                                   3407 ;main.c:164: break;
+      000D9C C9                    3408 	ret
+                                   3409 ;main.c:165: case 12:
+      000D9D                       3410 00113$:
+                                   3411 ;main.c:166: car->acc_x = -100;
+      000D9D 21 09 00              3412 	ld	hl, #0x0009
+      000DA0 09                    3413 	add	hl, bc
+      000DA1 36 9C                 3414 	ld	(hl), #0x9c
+                                   3415 ;main.c:167: car->acc_y = 0;
+      000DA3 21 0A 00              3416 	ld	hl, #0x000a
+      000DA6 09                    3417 	add	hl, bc
+      000DA7 36 00                 3418 	ld	(hl), #0x00
+                                   3419 ;main.c:168: break;
+      000DA9 C9                    3420 	ret
+                                   3421 ;main.c:169: case 13:
+      000DAA                       3422 00114$:
+                                   3423 ;main.c:170: car->acc_x = -25;
+      000DAA 21 09 00              3424 	ld	hl, #0x0009
+      000DAD 09                    3425 	add	hl, bc
+      000DAE 36 E7                 3426 	ld	(hl), #0xe7
+                                   3427 ;main.c:171: car->acc_y = 75;
+      000DB0 21 0A 00              3428 	ld	hl, #0x000a
+      000DB3 09                    3429 	add	hl, bc
+      000DB4 36 4B                 3430 	ld	(hl), #0x4b
+                                   3431 ;main.c:172: break;
+      000DB6 C9                    3432 	ret
+                                   3433 ;main.c:173: case 14:
+      000DB7                       3434 00115$:
+                                   3435 ;main.c:174: car->acc_x = -50;
+      000DB7 21 09 00              3436 	ld	hl, #0x0009
+      000DBA 09                    3437 	add	hl, bc
+      000DBB 36 CE                 3438 	ld	(hl), #0xce
+                                   3439 ;main.c:175: car->acc_y = 50;
+      000DBD 21 0A 00              3440 	ld	hl, #0x000a
+      000DC0 09                    3441 	add	hl, bc
+      000DC1 36 32                 3442 	ld	(hl), #0x32
+                                   3443 ;main.c:176: break;
+      000DC3 C9                    3444 	ret
+                                   3445 ;main.c:177: case 15:
+      000DC4                       3446 00116$:
+                                   3447 ;main.c:178: car->acc_x = -75;
+      000DC4 21 09 00              3448 	ld	hl, #0x0009
+      000DC7 09                    3449 	add	hl, bc
+      000DC8 36 B5                 3450 	ld	(hl), #0xb5
+                                   3451 ;main.c:179: car->acc_y = 25;
+      000DCA 21 0A 00              3452 	ld	hl, #0x000a
+      000DCD 09                    3453 	add	hl, bc
+      000DCE 36 19                 3454 	ld	(hl), #0x19
+                                   3455 ;main.c:181: }
+                                   3456 ;main.c:182: }
+      000DD0 C9                    3457 	ret
+                                   3458 ;main.c:184: void deccelerate (struct GameObject* car) {
+                                   3459 ;	---------------------------------
+                                   3460 ; Function deccelerate
+                                   3461 ; ---------------------------------
+      000DD1                       3462 _deccelerate::
+                                   3463 ;main.c:185: switch (car->direction) {
+      000DD1 F8 02                 3464 	ldhl	sp,	#2
+      000DD3 2A                    3465 	ld	a, (hl+)
+      000DD4 4F                    3466 	ld	c, a
+      000DD5 46                    3467 	ld	b, (hl)
+      000DD6 0A                    3468 	ld	a, (bc)
+      000DD7 5F                    3469 	ld	e, a
+      000DD8 3E 0F                 3470 	ld	a, #0x0f
+      000DDA 93                    3471 	sub	a, e
+      000DDB D8                    3472 	ret	C
+      000DDC 16 00                 3473 	ld	d, #0x00
+      000DDE 21rE5r0D              3474 	ld	hl, #00125$
+      000DE1 19                    3475 	add	hl, de
+      000DE2 19                    3476 	add	hl, de
+      000DE3 19                    3477 	add	hl, de
+      000DE4 E9                    3478 	jp	(hl)
+      000DE5                       3479 00125$:
+      000DE5 C3r15r0E              3480 	jp	00101$
+      000DE8 C3r1Cr0E              3481 	jp	00102$
+      000DEB C3r29r0E              3482 	jp	00103$
+      000DEE C3r36r0E              3483 	jp	00104$
+      000DF1 C3r43r0E              3484 	jp	00105$
+      000DF4 C3r50r0E              3485 	jp	00106$
+      000DF7 C3r5Dr0E              3486 	jp	00107$
+      000DFA C3r6Ar0E              3487 	jp	00108$
+      000DFD C3r77r0E              3488 	jp	00109$
+      000E00 C3r7Er0E              3489 	jp	00110$
+      000E03 C3r8Br0E              3490 	jp	00111$
+      000E06 C3r98r0E              3491 	jp	00112$
+      000E09 C3rA5r0E              3492 	jp	00113$
+      000E0C C3rB2r0E              3493 	jp	00114$
+      000E0F C3rBFr0E              3494 	jp	00115$
+      000E12 C3rCCr0E              3495 	jp	00116$
+                                   3496 ;main.c:186: case 0:
+      000E15                       3497 00101$:
+                                   3498 ;main.c:187: car->acc_y = -100;
+      000E15 21 0A 00              3499 	ld	hl, #0x000a
+      000E18 09                    3500 	add	hl, bc
+      000E19 36 9C                 3501 	ld	(hl), #0x9c
+                                   3502 ;main.c:188: break;
+      000E1B C9                    3503 	ret
+                                   3504 ;main.c:189: case 1:
+      000E1C                       3505 00102$:
+                                   3506 ;main.c:190: car->acc_x = -25;
+      000E1C 21 09 00              3507 	ld	hl, #0x0009
+      000E1F 09                    3508 	add	hl, bc
+      000E20 36 E7                 3509 	ld	(hl), #0xe7
+                                   3510 ;main.c:191: car->acc_y = -75;
+      000E22 21 0A 00              3511 	ld	hl, #0x000a
+      000E25 09                    3512 	add	hl, bc
+      000E26 36 B5                 3513 	ld	(hl), #0xb5
+                                   3514 ;main.c:192: break;
+      000E28 C9                    3515 	ret
+                                   3516 ;main.c:193: case 2:
+      000E29                       3517 00103$:
+                                   3518 ;main.c:194: car->acc_x = -50;
+      000E29 21 09 00              3519 	ld	hl, #0x0009
+      000E2C 09                    3520 	add	hl, bc
+      000E2D 36 CE                 3521 	ld	(hl), #0xce
+                                   3522 ;main.c:195: car->acc_y = -50;
+      000E2F 21 0A 00              3523 	ld	hl, #0x000a
+      000E32 09                    3524 	add	hl, bc
+      000E33 36 CE                 3525 	ld	(hl), #0xce
+                                   3526 ;main.c:196: break;
+      000E35 C9                    3527 	ret
+                                   3528 ;main.c:197: case 3:
+      000E36                       3529 00104$:
+                                   3530 ;main.c:198: car->acc_x = -75;
+      000E36 21 09 00              3531 	ld	hl, #0x0009
+      000E39 09                    3532 	add	hl, bc
+      000E3A 36 B5                 3533 	ld	(hl), #0xb5
+                                   3534 ;main.c:199: car->acc_y = -25;
+      000E3C 21 0A 00              3535 	ld	hl, #0x000a
+      000E3F 09                    3536 	add	hl, bc
+      000E40 36 E7                 3537 	ld	(hl), #0xe7
+                                   3538 ;main.c:200: break;
+      000E42 C9                    3539 	ret
+                                   3540 ;main.c:201: case 4:
+      000E43                       3541 00105$:
+                                   3542 ;main.c:202: car->acc_x = -100;
+      000E43 21 09 00              3543 	ld	hl, #0x0009
+      000E46 09                    3544 	add	hl, bc
+      000E47 36 9C                 3545 	ld	(hl), #0x9c
+                                   3546 ;main.c:203: car->acc_y = 0;
+      000E49 21 0A 00              3547 	ld	hl, #0x000a
+      000E4C 09                    3548 	add	hl, bc
+      000E4D 36 00                 3549 	ld	(hl), #0x00
+                                   3550 ;main.c:204: break;
+      000E4F C9                    3551 	ret
+                                   3552 ;main.c:205: case 5:
+      000E50                       3553 00106$:
+                                   3554 ;main.c:206: car->acc_x = -75;
+      000E50 21 09 00              3555 	ld	hl, #0x0009
+      000E53 09                    3556 	add	hl, bc
+      000E54 36 B5                 3557 	ld	(hl), #0xb5
+                                   3558 ;main.c:207: car->acc_y = 25;
+      000E56 21 0A 00              3559 	ld	hl, #0x000a
+      000E59 09                    3560 	add	hl, bc
+      000E5A 36 19                 3561 	ld	(hl), #0x19
+                                   3562 ;main.c:208: break;
+      000E5C C9                    3563 	ret
+                                   3564 ;main.c:209: case 6:
+      000E5D                       3565 00107$:
+                                   3566 ;main.c:210: car->acc_x = -50;
+      000E5D 21 09 00              3567 	ld	hl, #0x0009
+      000E60 09                    3568 	add	hl, bc
+      000E61 36 CE                 3569 	ld	(hl), #0xce
+                                   3570 ;main.c:211: car->acc_y = 50;
+      000E63 21 0A 00              3571 	ld	hl, #0x000a
+      000E66 09                    3572 	add	hl, bc
+      000E67 36 32                 3573 	ld	(hl), #0x32
+                                   3574 ;main.c:212: break;
+      000E69 C9                    3575 	ret
+                                   3576 ;main.c:213: case 7:
+      000E6A                       3577 00108$:
+                                   3578 ;main.c:214: car->acc_x = -25;
+      000E6A 21 09 00              3579 	ld	hl, #0x0009
+      000E6D 09                    3580 	add	hl, bc
+      000E6E 36 E7                 3581 	ld	(hl), #0xe7
+                                   3582 ;main.c:215: car->acc_y = 75;
+      000E70 21 0A 00              3583 	ld	hl, #0x000a
+      000E73 09                    3584 	add	hl, bc
+      000E74 36 4B                 3585 	ld	(hl), #0x4b
+                                   3586 ;main.c:216: break;
+      000E76 C9                    3587 	ret
+                                   3588 ;main.c:217: case 8:
+      000E77                       3589 00109$:
+                                   3590 ;main.c:218: car->acc_y = 100;
+      000E77 21 0A 00              3591 	ld	hl, #0x000a
+      000E7A 09                    3592 	add	hl, bc
+      000E7B 36 64                 3593 	ld	(hl), #0x64
+                                   3594 ;main.c:219: break;
+      000E7D C9                    3595 	ret
+                                   3596 ;main.c:220: case 9:
+      000E7E                       3597 00110$:
+                                   3598 ;main.c:221: car->acc_x = 25;
+      000E7E 21 09 00              3599 	ld	hl, #0x0009
+      000E81 09                    3600 	add	hl, bc
+      000E82 36 19                 3601 	ld	(hl), #0x19
+                                   3602 ;main.c:222: car->acc_y = 75;
+      000E84 21 0A 00              3603 	ld	hl, #0x000a
+      000E87 09                    3604 	add	hl, bc
+      000E88 36 4B                 3605 	ld	(hl), #0x4b
+                                   3606 ;main.c:223: break;
+      000E8A C9                    3607 	ret
+                                   3608 ;main.c:224: case 10:
+      000E8B                       3609 00111$:
+                                   3610 ;main.c:225: car->acc_x = 50;
+      000E8B 21 09 00              3611 	ld	hl, #0x0009
+      000E8E 09                    3612 	add	hl, bc
+      000E8F 36 32                 3613 	ld	(hl), #0x32
+                                   3614 ;main.c:226: car->acc_y = 50;
+      000E91 21 0A 00              3615 	ld	hl, #0x000a
+      000E94 09                    3616 	add	hl, bc
+      000E95 36 32                 3617 	ld	(hl), #0x32
+                                   3618 ;main.c:227: break;
+      000E97 C9                    3619 	ret
+                                   3620 ;main.c:228: case 11:
+      000E98                       3621 00112$:
+                                   3622 ;main.c:229: car->acc_x = 75;
+      000E98 21 09 00              3623 	ld	hl, #0x0009
+      000E9B 09                    3624 	add	hl, bc
+      000E9C 36 4B                 3625 	ld	(hl), #0x4b
+                                   3626 ;main.c:230: car->acc_y = 25;
+      000E9E 21 0A 00              3627 	ld	hl, #0x000a
+      000EA1 09                    3628 	add	hl, bc
+      000EA2 36 19                 3629 	ld	(hl), #0x19
+                                   3630 ;main.c:231: break;
+      000EA4 C9                    3631 	ret
+                                   3632 ;main.c:232: case 12:
+      000EA5                       3633 00113$:
+                                   3634 ;main.c:233: car->acc_x = 100;
+      000EA5 21 09 00              3635 	ld	hl, #0x0009
+      000EA8 09                    3636 	add	hl, bc
+      000EA9 36 64                 3637 	ld	(hl), #0x64
+                                   3638 ;main.c:234: car->acc_y = 0;
+      000EAB 21 0A 00              3639 	ld	hl, #0x000a
+      000EAE 09                    3640 	add	hl, bc
+      000EAF 36 00                 3641 	ld	(hl), #0x00
+                                   3642 ;main.c:235: break;
+      000EB1 C9                    3643 	ret
+                                   3644 ;main.c:236: case 13:
+      000EB2                       3645 00114$:
+                                   3646 ;main.c:237: car->acc_x = 25;
+      000EB2 21 09 00              3647 	ld	hl, #0x0009
+      000EB5 09                    3648 	add	hl, bc
+      000EB6 36 19                 3649 	ld	(hl), #0x19
+                                   3650 ;main.c:238: car->acc_y = -75;
+      000EB8 21 0A 00              3651 	ld	hl, #0x000a
+      000EBB 09                    3652 	add	hl, bc
+      000EBC 36 B5                 3653 	ld	(hl), #0xb5
+                                   3654 ;main.c:239: break;
+      000EBE C9                    3655 	ret
+                                   3656 ;main.c:240: case 14:
+      000EBF                       3657 00115$:
+                                   3658 ;main.c:241: car->acc_x = 50;
+      000EBF 21 09 00              3659 	ld	hl, #0x0009
+      000EC2 09                    3660 	add	hl, bc
+      000EC3 36 32                 3661 	ld	(hl), #0x32
+                                   3662 ;main.c:242: car->acc_y = -50;
+      000EC5 21 0A 00              3663 	ld	hl, #0x000a
+      000EC8 09                    3664 	add	hl, bc
+      000EC9 36 CE                 3665 	ld	(hl), #0xce
+                                   3666 ;main.c:243: break;
+      000ECB C9                    3667 	ret
+                                   3668 ;main.c:244: case 15:
+      000ECC                       3669 00116$:
+                                   3670 ;main.c:245: car->acc_x = 75;
+      000ECC 21 09 00              3671 	ld	hl, #0x0009
+      000ECF 09                    3672 	add	hl, bc
+      000ED0 36 4B                 3673 	ld	(hl), #0x4b
+                                   3674 ;main.c:246: car->acc_y = -25;
+      000ED2 21 0A 00              3675 	ld	hl, #0x000a
+      000ED5 09                    3676 	add	hl, bc
+      000ED6 36 E7                 3677 	ld	(hl), #0xe7
+                                   3678 ;main.c:248: }
+                                   3679 ;main.c:249: }
+      000ED8 C9                    3680 	ret
+                                   3681 ;main.c:251: void move_car(struct GameObject* car) {
+                                   3682 ;	---------------------------------
+                                   3683 ; Function move_car
+                                   3684 ; ---------------------------------
+      000ED9                       3685 _move_car::
+      000ED9 E8 FC                 3686 	add	sp, #-4
+                                   3687 ;main.c:253: car->vel_x += car->acc_x/100;
+      000EDB F8 06                 3688 	ldhl	sp,	#6
+      000EDD 2A                    3689 	ld	a, (hl+)
+      000EDE 4F                    3690 	ld	c, a
+      000EDF 46                    3691 	ld	b, (hl)
+      000EE0 21 07 00              3692 	ld	hl, #0x0007
+      000EE3 09                    3693 	add	hl, bc
+      000EE4 5D                    3694 	ld	e, l
+      000EE5 54                    3695 	ld	d, h
+      000EE6 1A                    3696 	ld	a, (de)
+      000EE7 F8 03                 3697 	ldhl	sp,	#3
+      000EE9 77                    3698 	ld	(hl), a
+      000EEA 21 09 00              3699 	ld	hl, #0x0009
+      000EED 09                    3700 	add	hl, bc
+      000EEE 7E                    3701 	ld	a, (hl)
+      000EEF 6F                    3702 	ld	l, a
+                                   3703 ;	spillPairReg hl
+                                   3704 ;	spillPairReg hl
+      000EF0 07                    3705 	rlca
+      000EF1 9F                    3706 	sbc	a, a
+      000EF2 67                    3707 	ld	h, a
                                    3708 ;	spillPairReg hl
                                    3709 ;	spillPairReg hl
-                                   3710 ;	spillPairReg hl
-      000EE6 D1                    3711 	pop	de
-      000EE7 C1                    3712 	pop	bc
-      000EE8 7D                    3713 	ld	a, l
-      000EE9 F8 03                 3714 	ldhl	sp,	#3
-      000EEB 86                    3715 	add	a, (hl)
-      000EEC F8 00                 3716 	ldhl	sp,	#0
-      000EEE 77                    3717 	ld	(hl), a
-      000EEF 12                    3718 	ld	(de), a
-                                   3719 ;main.c:253: car->vel_y += car->acc_y/100;
-      000EF0 21 08 00              3720 	ld	hl, #0x0008
-      000EF3 09                    3721 	add	hl, bc
-      000EF4 5D                    3722 	ld	e, l
-      000EF5 54                    3723 	ld	d, h
-      000EF6 1A                    3724 	ld	a, (de)
-      000EF7 F8 03                 3725 	ldhl	sp,	#3
-      000EF9 77                    3726 	ld	(hl), a
-      000EFA 21 0A 00              3727 	ld	hl, #0x000a
-      000EFD 09                    3728 	add	hl, bc
-      000EFE 7E                    3729 	ld	a, (hl)
-      000EFF 6F                    3730 	ld	l, a
-                                   3731 ;	spillPairReg hl
-                                   3732 ;	spillPairReg hl
-      000F00 07                    3733 	rlca
-      000F01 9F                    3734 	sbc	a, a
-      000F02 67                    3735 	ld	h, a
-                                   3736 ;	spillPairReg hl
-                                   3737 ;	spillPairReg hl
-      000F03 C5                    3738 	push	bc
-      000F04 D5                    3739 	push	de
-      000F05 11 64 00              3740 	ld	de, #0x64
-      000F08 D5                    3741 	push	de
-      000F09 E5                    3742 	push	hl
-      000F0A CDr00r00              3743 	call	__divsint
-      000F0D E8 04                 3744 	add	sp, #4
-      000F0F 6B                    3745 	ld	l, e
-                                   3746 ;	spillPairReg hl
+      000EF3 C5                    3710 	push	bc
+      000EF4 D5                    3711 	push	de
+      000EF5 11 64 00              3712 	ld	de, #0x64
+      000EF8 D5                    3713 	push	de
+      000EF9 E5                    3714 	push	hl
+      000EFA CDr00r00              3715 	call	__divsint
+      000EFD E8 04                 3716 	add	sp, #4
+      000EFF 6B                    3717 	ld	l, e
+                                   3718 ;	spillPairReg hl
+                                   3719 ;	spillPairReg hl
+                                   3720 ;	spillPairReg hl
+                                   3721 ;	spillPairReg hl
+      000F00 D1                    3722 	pop	de
+      000F01 C1                    3723 	pop	bc
+      000F02 7D                    3724 	ld	a, l
+      000F03 F8 03                 3725 	ldhl	sp,	#3
+      000F05 86                    3726 	add	a, (hl)
+      000F06 F8 00                 3727 	ldhl	sp,	#0
+      000F08 77                    3728 	ld	(hl), a
+      000F09 12                    3729 	ld	(de), a
+                                   3730 ;main.c:254: car->vel_y += car->acc_y/100;
+      000F0A 21 08 00              3731 	ld	hl, #0x0008
+      000F0D 09                    3732 	add	hl, bc
+      000F0E 5D                    3733 	ld	e, l
+      000F0F 54                    3734 	ld	d, h
+      000F10 1A                    3735 	ld	a, (de)
+      000F11 F8 03                 3736 	ldhl	sp,	#3
+      000F13 77                    3737 	ld	(hl), a
+      000F14 21 0A 00              3738 	ld	hl, #0x000a
+      000F17 09                    3739 	add	hl, bc
+      000F18 7E                    3740 	ld	a, (hl)
+      000F19 6F                    3741 	ld	l, a
+                                   3742 ;	spillPairReg hl
+                                   3743 ;	spillPairReg hl
+      000F1A 07                    3744 	rlca
+      000F1B 9F                    3745 	sbc	a, a
+      000F1C 67                    3746 	ld	h, a
                                    3747 ;	spillPairReg hl
                                    3748 ;	spillPairReg hl
-                                   3749 ;	spillPairReg hl
-      000F10 D1                    3750 	pop	de
-      000F11 C1                    3751 	pop	bc
-      000F12 7D                    3752 	ld	a, l
-      000F13 F8 03                 3753 	ldhl	sp,	#3
-      000F15 86                    3754 	add	a, (hl)
-      000F16 2B                    3755 	dec	hl
-      000F17 2B                    3756 	dec	hl
-      000F18 77                    3757 	ld	(hl), a
-      000F19 12                    3758 	ld	(de), a
-                                   3759 ;main.c:254: car->x += car->vel_x;
-      000F1A 21 05 00              3760 	ld	hl, #0x0005
-      000F1D 09                    3761 	add	hl, bc
-      000F1E E5                    3762 	push	hl
-      000F1F 7D                    3763 	ld	a, l
-      000F20 F8 04                 3764 	ldhl	sp,	#4
-      000F22 77                    3765 	ld	(hl), a
-      000F23 E1                    3766 	pop	hl
-      000F24 7C                    3767 	ld	a, h
-      000F25 F8 03                 3768 	ldhl	sp,	#3
-      000F27 32                    3769 	ld	(hl-), a
-      000F28 2A                    3770 	ld	a, (hl+)
-      000F29 5F                    3771 	ld	e, a
-      000F2A 56                    3772 	ld	d, (hl)
-      000F2B 1A                    3773 	ld	a, (de)
-      000F2C F8 00                 3774 	ldhl	sp,	#0
-      000F2E 86                    3775 	add	a, (hl)
-      000F2F 23                    3776 	inc	hl
-      000F30 23                    3777 	inc	hl
-      000F31 F5                    3778 	push	af
-      000F32 2A                    3779 	ld	a,	(hl+)
-      000F33 66                    3780 	ld	h, (hl)
-      000F34 6F                    3781 	ld	l, a
-      000F35 F1                    3782 	pop	af
-      000F36 77                    3783 	ld	(hl), a
-                                   3784 ;main.c:255: car->y += car->vel_y;
-      000F37 21 06 00              3785 	ld	hl, #0x0006
-      000F3A 09                    3786 	add	hl, bc
-      000F3B 5D                    3787 	ld	e, l
-      000F3C 54                    3788 	ld	d, h
-      000F3D 1A                    3789 	ld	a, (de)
-      000F3E F8 01                 3790 	ldhl	sp,	#1
-      000F40 86                    3791 	add	a, (hl)
-                                   3792 ;main.c:256: movegamecharacter(car, car->x, car->y);
-      000F41 23                    3793 	inc	hl
-      000F42 12                    3794 	ld	(de), a
-      000F43 5E                    3795 	ld	e, (hl)
-      000F44 23                    3796 	inc	hl
-      000F45 56                    3797 	ld	d, (hl)
-      000F46 F5                    3798 	push	af
-      000F47 1A                    3799 	ld	a, (de)
-      000F48 67                    3800 	ld	h, a
-                                   3801 ;	spillPairReg hl
-                                   3802 ;	spillPairReg hl
-      000F49 33                    3803 	inc	sp
-      000F4A E5                    3804 	push	hl
-      000F4B 33                    3805 	inc	sp
-      000F4C C5                    3806 	push	bc
-      000F4D CDr96r0B              3807 	call	_movegamecharacter
-                                   3808 ;main.c:257: }
-      000F50 E8 08                 3809 	add	sp, #8
-      000F52 C9                    3810 	ret
-                                   3811 ;main.c:259: void move_ball(struct GameObject* ball) {
-                                   3812 ;	---------------------------------
-                                   3813 ; Function move_ball
-                                   3814 ; ---------------------------------
-      000F53                       3815 _move_ball::
-      000F53 E8 F9                 3816 	add	sp, #-7
-                                   3817 ;main.c:260: if (ball->vel_x > 0) {
-      000F55 F8 09                 3818 	ldhl	sp,	#9
-      000F57 7E                    3819 	ld	a, (hl)
-      000F58 F8 00                 3820 	ldhl	sp,	#0
-      000F5A 77                    3821 	ld	(hl), a
-      000F5B F8 0A                 3822 	ldhl	sp,	#10
-      000F5D 7E                    3823 	ld	a, (hl)
-      000F5E F8 01                 3824 	ldhl	sp,	#1
-      000F60 77                    3825 	ld	(hl), a
-      000F61 D1                    3826 	pop	de
-      000F62 D5                    3827 	push	de
-      000F63 21 07 00              3828 	ld	hl, #0x0007
-      000F66 19                    3829 	add	hl, de
-      000F67 4D                    3830 	ld	c, l
-      000F68 44                    3831 	ld	b, h
-      000F69 0A                    3832 	ld	a, (bc)
-      000F6A F8 06                 3833 	ldhl	sp,	#6
-      000F6C 77                    3834 	ld	(hl), a
-                                   3835 ;main.c:262: ball->x += ball->vel_x/100;
-      000F6D D1                    3836 	pop	de
-      000F6E D5                    3837 	push	de
-      000F6F 21 05 00              3838 	ld	hl, #0x0005
-      000F72 19                    3839 	add	hl, de
-      000F73 E5                    3840 	push	hl
-      000F74 7D                    3841 	ld	a, l
-      000F75 F8 04                 3842 	ldhl	sp,	#4
-      000F77 77                    3843 	ld	(hl), a
-      000F78 E1                    3844 	pop	hl
-      000F79 7C                    3845 	ld	a, h
-      000F7A F8 03                 3846 	ldhl	sp,	#3
-      000F7C 77                    3847 	ld	(hl), a
-                                   3848 ;main.c:260: if (ball->vel_x > 0) {
-      000F7D F8 06                 3849 	ldhl	sp,	#6
-      000F7F 5E                    3850 	ld	e, (hl)
-      000F80 AF                    3851 	xor	a, a
-      000F81 57                    3852 	ld	d, a
-      000F82 96                    3853 	sub	a, (hl)
-      000F83 CB 7B                 3854 	bit	7, e
-      000F85 28 07                 3855 	jr	Z, 00117$
-      000F87 CB 7A                 3856 	bit	7, d
-      000F89 20 08                 3857 	jr	NZ, 00118$
-      000F8B BF                    3858 	cp	a, a
-      000F8C 18 05                 3859 	jr	00118$
-      000F8E                       3860 00117$:
-      000F8E CB 7A                 3861 	bit	7, d
-      000F90 28 01                 3862 	jr	Z, 00118$
-      000F92 37                    3863 	scf
-      000F93                       3864 00118$:
-      000F93 30 40                 3865 	jr	NC, 00102$
-                                   3866 ;main.c:261: ball->vel_x -= ball->acc_x/100;
-      000F95 D1                    3867 	pop	de
-      000F96 D5                    3868 	push	de
-      000F97 21 09 00              3869 	ld	hl, #0x0009
-      000F9A 19                    3870 	add	hl, de
-      000F9B 5D                    3871 	ld	e, l
-      000F9C 54                    3872 	ld	d, h
-      000F9D 1A                    3873 	ld	a, (de)
-      000F9E 5F                    3874 	ld	e, a
-      000F9F 07                    3875 	rlca
-      000FA0 9F                    3876 	sbc	a, a
-      000FA1 C5                    3877 	push	bc
-      000FA2 21 64 00              3878 	ld	hl, #0x0064
-      000FA5 E5                    3879 	push	hl
-      000FA6 57                    3880 	ld	d, a
-      000FA7 D5                    3881 	push	de
-      000FA8 CDr00r00              3882 	call	__divsint
-      000FAB E8 04                 3883 	add	sp, #4
-      000FAD C1                    3884 	pop	bc
-      000FAE F8 06                 3885 	ldhl	sp,	#6
-      000FB0 7E                    3886 	ld	a, (hl)
-      000FB1 93                    3887 	sub	a, e
-      000FB2 02                    3888 	ld	(bc), a
-                                   3889 ;main.c:262: ball->x += ball->vel_x/100;
-      000FB3 F8 02                 3890 	ldhl	sp,#2
-      000FB5 5E                    3891 	ld	e, (hl)
-      000FB6 23                    3892 	inc	hl
-      000FB7 56                    3893 	ld	d, (hl)
-      000FB8 F5                    3894 	push	af
-      000FB9 1A                    3895 	ld	a, (de)
-      000FBA 4F                    3896 	ld	c, a
-      000FBB F1                    3897 	pop	af
-      000FBC 5F                    3898 	ld	e, a
-      000FBD 07                    3899 	rlca
-      000FBE 9F                    3900 	sbc	a, a
-      000FBF C5                    3901 	push	bc
-      000FC0 21 64 00              3902 	ld	hl, #0x0064
-      000FC3 E5                    3903 	push	hl
-      000FC4 57                    3904 	ld	d, a
-      000FC5 D5                    3905 	push	de
-      000FC6 CDr00r00              3906 	call	__divsint
-      000FC9 E8 04                 3907 	add	sp, #4
-      000FCB C1                    3908 	pop	bc
-      000FCC 7B                    3909 	ld	a, e
-      000FCD 81                    3910 	add	a, c
-      000FCE 4F                    3911 	ld	c, a
-      000FCF F8 02                 3912 	ldhl	sp,	#2
-      000FD1 2A                    3913 	ld	a,	(hl+)
-      000FD2 66                    3914 	ld	h, (hl)
-      000FD3 6F                    3915 	ld	l, a
-      000FD4 71                    3916 	ld	(hl), c
-      000FD5                       3917 00102$:
-                                   3918 ;main.c:264: if (ball->vel_y > 0) {
-      000FD5 D1                    3919 	pop	de
-      000FD6 D5                    3920 	push	de
-      000FD7 21 08 00              3921 	ld	hl, #0x0008
-      000FDA 19                    3922 	add	hl, de
-      000FDB E5                    3923 	push	hl
-      000FDC 7D                    3924 	ld	a, l
-      000FDD F8 06                 3925 	ldhl	sp,	#6
-      000FDF 77                    3926 	ld	(hl), a
-      000FE0 E1                    3927 	pop	hl
-      000FE1 7C                    3928 	ld	a, h
-      000FE2 F8 05                 3929 	ldhl	sp,	#5
-      000FE4 32                    3930 	ld	(hl-), a
-      000FE5 2A                    3931 	ld	a, (hl+)
-      000FE6 5F                    3932 	ld	e, a
-      000FE7 2A                    3933 	ld	a, (hl+)
-      000FE8 57                    3934 	ld	d, a
-      000FE9 1A                    3935 	ld	a, (de)
-      000FEA 77                    3936 	ld	(hl), a
-                                   3937 ;main.c:266: ball->y += ball->vel_y/100;
-      000FEB D1                    3938 	pop	de
-      000FEC D5                    3939 	push	de
-      000FED 21 06 00              3940 	ld	hl, #0x0006
-      000FF0 19                    3941 	add	hl, de
-      000FF1 4D                    3942 	ld	c, l
-      000FF2 44                    3943 	ld	b, h
-                                   3944 ;main.c:264: if (ball->vel_y > 0) {
-      000FF3 F8 06                 3945 	ldhl	sp,	#6
-      000FF5 5E                    3946 	ld	e, (hl)
-      000FF6 AF                    3947 	xor	a, a
-      000FF7 57                    3948 	ld	d, a
-      000FF8 96                    3949 	sub	a, (hl)
-      000FF9 CB 7B                 3950 	bit	7, e
-      000FFB 28 07                 3951 	jr	Z, 00119$
-      000FFD CB 7A                 3952 	bit	7, d
-      000FFF 20 08                 3953 	jr	NZ, 00120$
-      001001 BF                    3954 	cp	a, a
-      001002 18 05                 3955 	jr	00120$
-      001004                       3956 00119$:
-      001004 CB 7A                 3957 	bit	7, d
-      001006 28 01                 3958 	jr	Z, 00120$
-      001008 37                    3959 	scf
-      001009                       3960 00120$:
-      001009 30 3F                 3961 	jr	NC, 00104$
-                                   3962 ;main.c:265: ball->vel_y -= ball->acc_y/100;
-      00100B D1                    3963 	pop	de
-      00100C D5                    3964 	push	de
-      00100D 21 0A 00              3965 	ld	hl, #0x000a
-      001010 19                    3966 	add	hl, de
-      001011 5D                    3967 	ld	e, l
-      001012 54                    3968 	ld	d, h
-      001013 1A                    3969 	ld	a, (de)
-      001014 5F                    3970 	ld	e, a
-      001015 07                    3971 	rlca
-      001016 9F                    3972 	sbc	a, a
-      001017 C5                    3973 	push	bc
-      001018 21 64 00              3974 	ld	hl, #0x0064
-      00101B E5                    3975 	push	hl
-      00101C 57                    3976 	ld	d, a
-      00101D D5                    3977 	push	de
-      00101E CDr00r00              3978 	call	__divsint
-      001021 E8 04                 3979 	add	sp, #4
-      001023 C1                    3980 	pop	bc
-      001024 F8 06                 3981 	ldhl	sp,	#6
-      001026 3A                    3982 	ld	a, (hl-)
-      001027 2B                    3983 	dec	hl
-      001028 93                    3984 	sub	a, e
-      001029 F5                    3985 	push	af
-      00102A 2A                    3986 	ld	a,	(hl+)
-      00102B 66                    3987 	ld	h, (hl)
-      00102C 6F                    3988 	ld	l, a
-      00102D F1                    3989 	pop	af
-      00102E 77                    3990 	ld	(hl), a
-                                   3991 ;main.c:266: ball->y += ball->vel_y/100;
-      00102F F5                    3992 	push	af
-      001030 0A                    3993 	ld	a, (bc)
-      001031 F8 08                 3994 	ldhl	sp,	#8
-      001033 77                    3995 	ld	(hl), a
-      001034 F1                    3996 	pop	af
-      001035 5F                    3997 	ld	e, a
-      001036 07                    3998 	rlca
-      001037 9F                    3999 	sbc	a, a
-      001038 C5                    4000 	push	bc
-      001039 21 64 00              4001 	ld	hl, #0x0064
-      00103C E5                    4002 	push	hl
-      00103D 57                    4003 	ld	d, a
-      00103E D5                    4004 	push	de
-      00103F CDr00r00              4005 	call	__divsint
-      001042 E8 04                 4006 	add	sp, #4
-      001044 C1                    4007 	pop	bc
-      001045 F8 06                 4008 	ldhl	sp,	#6
-      001047 7E                    4009 	ld	a, (hl)
-      001048 83                    4010 	add	a, e
-      001049 02                    4011 	ld	(bc), a
-      00104A                       4012 00104$:
-                                   4013 ;main.c:268: movegamecharacter(ball, ball->x, ball->y);
-      00104A 0A                    4014 	ld	a, (bc)
-      00104B 47                    4015 	ld	b, a
-      00104C F8 02                 4016 	ldhl	sp,#2
-      00104E 2A                    4017 	ld	a, (hl+)
-      00104F 5F                    4018 	ld	e, a
-      001050 56                    4019 	ld	d, (hl)
-      001051 1A                    4020 	ld	a, (de)
-      001052 C5                    4021 	push	bc
-      001053 33                    4022 	inc	sp
-      001054 F5                    4023 	push	af
-      001055 33                    4024 	inc	sp
-      001056 F8 02                 4025 	ldhl	sp,	#2
-      001058 2A                    4026 	ld	a, (hl+)
-      001059 5F                    4027 	ld	e, a
-      00105A 56                    4028 	ld	d, (hl)
-      00105B D5                    4029 	push	de
-      00105C CDr96r0B              4030 	call	_movegamecharacter
-                                   4031 ;main.c:269: }
-      00105F E8 0B                 4032 	add	sp, #11
-      001061 C9                    4033 	ret
-                                   4034 ;main.c:271: void main(){
-                                   4035 ;	---------------------------------
-                                   4036 ; Function main
-                                   4037 ; ---------------------------------
-      001062                       4038 _main::
-      001062 3B                    4039 	dec	sp
-                                   4040 ;main.c:274: set_bkg_data(0, 44, bkg_tiles);
-      001063 11r09r07              4041 	ld	de, #_bkg_tiles
-      001066 D5                    4042 	push	de
-      001067 21 00 2C              4043 	ld	hl, #0x2c00
-      00106A E5                    4044 	push	hl
-      00106B CDr00r00              4045 	call	_set_bkg_data
-      00106E E8 04                 4046 	add	sp, #4
-                                   4047 ;main.c:275: set_bkg_tiles(0, 0, 32, 21, map);
-      001070 11r29r04              4048 	ld	de, #_map
-      001073 D5                    4049 	push	de
-      001074 21 20 15              4050 	ld	hl, #0x1520
-      001077 E5                    4051 	push	hl
-      001078 AF                    4052 	xor	a, a
-      001079 0F                    4053 	rrca
-      00107A F5                    4054 	push	af
-      00107B CDr00r00              4055 	call	_set_bkg_tiles
-      00107E E8 06                 4056 	add	sp, #6
-                                   4057 ;main.c:276: SHOW_BKG;
-      001080 F0r00                 4058 	ldh	a, (_LCDC_REG + 0)
-      001082 F6 01                 4059 	or	a, #0x01
-      001084 E0r00                 4060 	ldh	(_LCDC_REG + 0), a
-                                   4061 ;main.c:278: set_sprite_data(0,4, car_light);
-      001086 11r29r00              4062 	ld	de, #_car_light
-      001089 D5                    4063 	push	de
-      00108A 21 00 04              4064 	ld	hl, #0x400
-      00108D E5                    4065 	push	hl
-      00108E CDr00r00              4066 	call	_set_sprite_data
-      001091 E8 04                 4067 	add	sp, #4
-                                   4068 ;main.c:279: setupcar_light();
-      001093 CDr57r0C              4069 	call	_setupcar_light
-                                   4070 ;main.c:280: set_sprite_data(64, 4, ball_sprite);
-      001096 11rC9r06              4071 	ld	de, #_ball_sprite
-      001099 D5                    4072 	push	de
-      00109A 21 40 04              4073 	ld	hl, #0x440
-      00109D E5                    4074 	push	hl
-      00109E CDr00r00              4075 	call	_set_sprite_data
-      0010A1 E8 04                 4076 	add	sp, #4
-                                   4077 ;main.c:281: setup_ball();
-      0010A3 CDr2Br0C              4078 	call	_setup_ball
-                                   4079 ;main.c:282: movegamecharacter(&ball, ball.x, ball.y);
-      0010A6 21r06r00              4080 	ld	hl, #(_ball + 6)
-      0010A9 46                    4081 	ld	b, (hl)
-      0010AA FAr05r00              4082 	ld	a, (#(_ball + 5) + 0)
-      0010AD C5                    4083 	push	bc
-      0010AE 33                    4084 	inc	sp
-      0010AF F5                    4085 	push	af
-      0010B0 33                    4086 	inc	sp
-      0010B1 11r00r00              4087 	ld	de, #_ball
-      0010B4 D5                    4088 	push	de
-      0010B5 CDr96r0B              4089 	call	_movegamecharacter
-      0010B8 E8 04                 4090 	add	sp, #4
-                                   4091 ;main.c:284: SHOW_SPRITES;
-      0010BA F0r00                 4092 	ldh	a, (_LCDC_REG + 0)
-      0010BC F6 02                 4093 	or	a, #0x02
-      0010BE E0r00                 4094 	ldh	(_LCDC_REG + 0), a
-                                   4095 ;main.c:285: DISPLAY_ON;
-      0010C0 F0r00                 4096 	ldh	a, (_LCDC_REG + 0)
-      0010C2 F6 80                 4097 	or	a, #0x80
-      0010C4 E0r00                 4098 	ldh	(_LCDC_REG + 0), a
-                                   4099 ;main.c:287: while(1){
-      0010C6                       4100 00122$:
-                                   4101 ;main.c:289: move_ball(&ball);
-      0010C6 11r00r00              4102 	ld	de, #_ball
-      0010C9 D5                    4103 	push	de
-      0010CA CDr53r0F              4104 	call	_move_ball
-      0010CD E1                    4105 	pop	hl
-                                   4106 ;main.c:291: if (is_goal(ball.x, ball.y)) {
-      0010CE 21r06r00              4107 	ld	hl, #(_ball + 6)
-      0010D1 46                    4108 	ld	b, (hl)
-      0010D2 FAr05r00              4109 	ld	a, (#(_ball + 5) + 0)
-      0010D5 C5                    4110 	push	bc
-      0010D6 33                    4111 	inc	sp
-      0010D7 F5                    4112 	push	af
-      0010D8 33                    4113 	inc	sp
-      0010D9 CDrBFr0A              4114 	call	_is_goal
-      0010DC E1                    4115 	pop	hl
-      0010DD 7B                    4116 	ld	a, e
-      0010DE B7                    4117 	or	a, a
-      0010DF 28 08                 4118 	jr	Z, 00102$
-                                   4119 ;main.c:292: printf("This is a goal\n");
-      0010E1 11rA2r11              4120 	ld	de, #___str_1
-      0010E4 D5                    4121 	push	de
-      0010E5 CDr00r00              4122 	call	_puts
-      0010E8 E1                    4123 	pop	hl
-      0010E9                       4124 00102$:
-                                   4125 ;main.c:296: if (check_collision(&car1, &ball)) {
-      0010E9 11r00r00              4126 	ld	de, #_ball
-      0010EC D5                    4127 	push	de
-      0010ED 11r0Dr00              4128 	ld	de, #_car1
-      0010F0 D5                    4129 	push	de
-      0010F1 CDrCAr09              4130 	call	_check_collision
-      0010F4 E8 04                 4131 	add	sp, #4
-      0010F6 7B                    4132 	ld	a, e
-      0010F7 B7                    4133 	or	a, a
-      0010F8 28 16                 4134 	jr	Z, 00104$
-                                   4135 ;main.c:297: printf("Collision detected");
-      0010FA 11rB1r11              4136 	ld	de, #___str_2
-      0010FD D5                    4137 	push	de
-      0010FE CDr00r00              4138 	call	_printf
-      001101 E1                    4139 	pop	hl
-                                   4140 ;main.c:298: ball.vel_x = car1.vel_x;
-      001102 01r07r00              4141 	ld	bc, #_ball + 7
-      001105 FAr14r00              4142 	ld	a, (#(_car1 + 7) + 0)
-      001108 02                    4143 	ld	(bc), a
-                                   4144 ;main.c:299: ball.vel_y = car1.vel_y;
-      001109 01r08r00              4145 	ld	bc, #_ball + 8
-      00110C FAr15r00              4146 	ld	a, (#(_car1 + 8) + 0)
-      00110F 02                    4147 	ld	(bc), a
-      001110                       4148 00104$:
-                                   4149 ;main.c:303: if(joypad() & J_A){
-      001110 CDr00r00              4150 	call	_joypad
-      001113 CB 63                 4151 	bit	4, e
-      001115 28 0A                 4152 	jr	Z, 00109$
-                                   4153 ;main.c:304: accelerate(&car1);
-      001117 11r0Dr00              4154 	ld	de, #_car1
-      00111A D5                    4155 	push	de
-      00111B CDrAFr0C              4156 	call	_accelerate
-      00111E E1                    4157 	pop	hl
-      00111F 18 1B                 4158 	jr	00110$
-      001121                       4159 00109$:
-                                   4160 ;main.c:305: } else if (joypad() & J_B){
-      001121 CDr00r00              4161 	call	_joypad
-      001124 CB 6B                 4162 	bit	5, e
-      001126 28 0A                 4163 	jr	Z, 00106$
-                                   4164 ;main.c:306: deccelerate(&car1);
-      001128 11r0Dr00              4165 	ld	de, #_car1
-      00112B D5                    4166 	push	de
-      00112C CDrB7r0D              4167 	call	_deccelerate
-      00112F E1                    4168 	pop	hl
-      001130 18 0A                 4169 	jr	00110$
-      001132                       4170 00106$:
-                                   4171 ;main.c:308: car1.acc_x = 0;
-      001132 21r16r00              4172 	ld	hl, #(_car1 + 9)
-      001135 36 00                 4173 	ld	(hl), #0x00
-                                   4174 ;main.c:309: car1.acc_y = 0;
-      001137 21r17r00              4175 	ld	hl, #(_car1 + 10)
-      00113A 36 00                 4176 	ld	(hl), #0x00
-      00113C                       4177 00110$:
-                                   4178 ;main.c:311: if(joypad() & J_LEFT){
-      00113C CDr00r00              4179 	call	_joypad
-      00113F CB 4B                 4180 	bit	1, e
-      001141 28 21                 4181 	jr	Z, 00115$
-                                   4182 ;main.c:312: if (car1.direction == 0) {
-      001143 FAr0Dr00              4183 	ld	a, (#_car1 + 0)
-      001146 F8 00                 4184 	ldhl	sp,#0
-      001148 77                    4185 	ld	(hl), a
-      001149 7E                    4186 	ld	a, (hl)
-      00114A B7                    4187 	or	a, a
-      00114B 20 07                 4188 	jr	NZ, 00112$
-                                   4189 ;main.c:313: car1.direction = 15;
-      00114D 21r0Dr00              4190 	ld	hl, #_car1
-      001150 36 0F                 4191 	ld	(hl), #0x0f
-      001152 18 07                 4192 	jr	00113$
-      001154                       4193 00112$:
-                                   4194 ;main.c:315: car1.direction -= 1;
-      001154 F8 00                 4195 	ldhl	sp,	#0
-      001156 7E                    4196 	ld	a, (hl)
-      001157 3D                    4197 	dec	a
-      001158 EAr0Dr00              4198 	ld	(#_car1),a
-      00115B                       4199 00113$:
-                                   4200 ;main.c:317: load_car_sprite(car1.direction);
-      00115B FAr0Dr00              4201 	ld	a, (#_car1 + 0)
-      00115E F5                    4202 	push	af
-      00115F 33                    4203 	inc	sp
-      001160 CDr5Er0B              4204 	call	_load_car_sprite
-      001163 33                    4205 	inc	sp
-      001164                       4206 00115$:
-                                   4207 ;main.c:319: if(joypad() & J_RIGHT){
-      001164 CDr00r00              4208 	call	_joypad
-      001167 7B                    4209 	ld	a, e
-      001168 0F                    4210 	rrca
-      001169 30 22                 4211 	jr	NC, 00120$
-                                   4212 ;main.c:320: if (car1.direction == 15) {
-      00116B FAr0Dr00              4213 	ld	a, (#_car1 + 0)
-      00116E F8 00                 4214 	ldhl	sp,#0
-      001170 77                    4215 	ld	(hl), a
-      001171 7E                    4216 	ld	a, (hl)
-      001172 D6 0F                 4217 	sub	a, #0x0f
-      001174 20 07                 4218 	jr	NZ, 00117$
-                                   4219 ;main.c:321: car1.direction = 0;
-      001176 21r0Dr00              4220 	ld	hl, #_car1
-      001179 36 00                 4221 	ld	(hl), #0x00
-      00117B 18 07                 4222 	jr	00118$
-      00117D                       4223 00117$:
-                                   4224 ;main.c:323: car1.direction += 1;
-      00117D F8 00                 4225 	ldhl	sp,	#0
-      00117F 7E                    4226 	ld	a, (hl)
-      001180 3C                    4227 	inc	a
-      001181 EAr0Dr00              4228 	ld	(#_car1),a
-      001184                       4229 00118$:
-                                   4230 ;main.c:325: load_car_sprite(car1.direction);
-      001184 FAr0Dr00              4231 	ld	a, (#_car1 + 0)
-      001187 F5                    4232 	push	af
-      001188 33                    4233 	inc	sp
-      001189 CDr5Er0B              4234 	call	_load_car_sprite
-      00118C 33                    4235 	inc	sp
-      00118D                       4236 00120$:
-                                   4237 ;main.c:327: move_car(&car1);
-      00118D 11r0Dr00              4238 	ld	de, #_car1
-      001190 D5                    4239 	push	de
-      001191 CDrBFr0E              4240 	call	_move_car
-      001194 E1                    4241 	pop	hl
-                                   4242 ;main.c:328: performantdelay(15);    
-      001195 3E 0F                 4243 	ld	a, #0x0f
-      001197 F5                    4244 	push	af
-      001198 33                    4245 	inc	sp
-      001199 CDr1Er0C              4246 	call	_performantdelay
-      00119C 33                    4247 	inc	sp
-      00119D C3rC6r10              4248 	jp	00122$
-                                   4249 ;main.c:330: }
-      0011A0 33                    4250 	inc	sp
-      0011A1 C9                    4251 	ret
-      0011A2                       4252 ___str_1:
-      0011A2 54 68 69 73 20 69 73  4253 	.ascii "This is a goal"
+      000F1D C5                    3749 	push	bc
+      000F1E D5                    3750 	push	de
+      000F1F 11 64 00              3751 	ld	de, #0x64
+      000F22 D5                    3752 	push	de
+      000F23 E5                    3753 	push	hl
+      000F24 CDr00r00              3754 	call	__divsint
+      000F27 E8 04                 3755 	add	sp, #4
+      000F29 6B                    3756 	ld	l, e
+                                   3757 ;	spillPairReg hl
+                                   3758 ;	spillPairReg hl
+                                   3759 ;	spillPairReg hl
+                                   3760 ;	spillPairReg hl
+      000F2A D1                    3761 	pop	de
+      000F2B C1                    3762 	pop	bc
+      000F2C 7D                    3763 	ld	a, l
+      000F2D F8 03                 3764 	ldhl	sp,	#3
+      000F2F 86                    3765 	add	a, (hl)
+      000F30 2B                    3766 	dec	hl
+      000F31 2B                    3767 	dec	hl
+      000F32 77                    3768 	ld	(hl), a
+      000F33 12                    3769 	ld	(de), a
+                                   3770 ;main.c:255: car->x += car->vel_x;
+      000F34 21 05 00              3771 	ld	hl, #0x0005
+      000F37 09                    3772 	add	hl, bc
+      000F38 E5                    3773 	push	hl
+      000F39 7D                    3774 	ld	a, l
+      000F3A F8 04                 3775 	ldhl	sp,	#4
+      000F3C 77                    3776 	ld	(hl), a
+      000F3D E1                    3777 	pop	hl
+      000F3E 7C                    3778 	ld	a, h
+      000F3F F8 03                 3779 	ldhl	sp,	#3
+      000F41 32                    3780 	ld	(hl-), a
+      000F42 2A                    3781 	ld	a, (hl+)
+      000F43 5F                    3782 	ld	e, a
+      000F44 56                    3783 	ld	d, (hl)
+      000F45 1A                    3784 	ld	a, (de)
+      000F46 F8 00                 3785 	ldhl	sp,	#0
+      000F48 86                    3786 	add	a, (hl)
+      000F49 23                    3787 	inc	hl
+      000F4A 23                    3788 	inc	hl
+      000F4B F5                    3789 	push	af
+      000F4C 2A                    3790 	ld	a,	(hl+)
+      000F4D 66                    3791 	ld	h, (hl)
+      000F4E 6F                    3792 	ld	l, a
+      000F4F F1                    3793 	pop	af
+      000F50 77                    3794 	ld	(hl), a
+                                   3795 ;main.c:256: car->y += car->vel_y;
+      000F51 21 06 00              3796 	ld	hl, #0x0006
+      000F54 09                    3797 	add	hl, bc
+      000F55 5D                    3798 	ld	e, l
+      000F56 54                    3799 	ld	d, h
+      000F57 1A                    3800 	ld	a, (de)
+      000F58 F8 01                 3801 	ldhl	sp,	#1
+      000F5A 86                    3802 	add	a, (hl)
+                                   3803 ;main.c:257: movegamecharacter(car, car->x, car->y);
+      000F5B 23                    3804 	inc	hl
+      000F5C 12                    3805 	ld	(de), a
+      000F5D 5E                    3806 	ld	e, (hl)
+      000F5E 23                    3807 	inc	hl
+      000F5F 56                    3808 	ld	d, (hl)
+      000F60 F5                    3809 	push	af
+      000F61 1A                    3810 	ld	a, (de)
+      000F62 67                    3811 	ld	h, a
+                                   3812 ;	spillPairReg hl
+                                   3813 ;	spillPairReg hl
+      000F63 33                    3814 	inc	sp
+      000F64 E5                    3815 	push	hl
+      000F65 33                    3816 	inc	sp
+      000F66 C5                    3817 	push	bc
+      000F67 CDrB0r0B              3818 	call	_movegamecharacter
+                                   3819 ;main.c:258: }
+      000F6A E8 08                 3820 	add	sp, #8
+      000F6C C9                    3821 	ret
+                                   3822 ;main.c:260: void move_ball(struct GameObject* ball) {
+                                   3823 ;	---------------------------------
+                                   3824 ; Function move_ball
+                                   3825 ; ---------------------------------
+      000F6D                       3826 _move_ball::
+      000F6D E8 F9                 3827 	add	sp, #-7
+                                   3828 ;main.c:261: if (ball->vel_x > 0) {
+      000F6F F8 09                 3829 	ldhl	sp,	#9
+      000F71 7E                    3830 	ld	a, (hl)
+      000F72 F8 00                 3831 	ldhl	sp,	#0
+      000F74 77                    3832 	ld	(hl), a
+      000F75 F8 0A                 3833 	ldhl	sp,	#10
+      000F77 7E                    3834 	ld	a, (hl)
+      000F78 F8 01                 3835 	ldhl	sp,	#1
+      000F7A 77                    3836 	ld	(hl), a
+      000F7B D1                    3837 	pop	de
+      000F7C D5                    3838 	push	de
+      000F7D 21 07 00              3839 	ld	hl, #0x0007
+      000F80 19                    3840 	add	hl, de
+      000F81 4D                    3841 	ld	c, l
+      000F82 44                    3842 	ld	b, h
+      000F83 0A                    3843 	ld	a, (bc)
+      000F84 F8 06                 3844 	ldhl	sp,	#6
+      000F86 77                    3845 	ld	(hl), a
+                                   3846 ;main.c:263: ball->x += ball->vel_x/100;
+      000F87 D1                    3847 	pop	de
+      000F88 D5                    3848 	push	de
+      000F89 21 05 00              3849 	ld	hl, #0x0005
+      000F8C 19                    3850 	add	hl, de
+      000F8D E5                    3851 	push	hl
+      000F8E 7D                    3852 	ld	a, l
+      000F8F F8 04                 3853 	ldhl	sp,	#4
+      000F91 77                    3854 	ld	(hl), a
+      000F92 E1                    3855 	pop	hl
+      000F93 7C                    3856 	ld	a, h
+      000F94 F8 03                 3857 	ldhl	sp,	#3
+      000F96 77                    3858 	ld	(hl), a
+                                   3859 ;main.c:261: if (ball->vel_x > 0) {
+      000F97 F8 06                 3860 	ldhl	sp,	#6
+      000F99 5E                    3861 	ld	e, (hl)
+      000F9A AF                    3862 	xor	a, a
+      000F9B 57                    3863 	ld	d, a
+      000F9C 96                    3864 	sub	a, (hl)
+      000F9D CB 7B                 3865 	bit	7, e
+      000F9F 28 07                 3866 	jr	Z, 00117$
+      000FA1 CB 7A                 3867 	bit	7, d
+      000FA3 20 08                 3868 	jr	NZ, 00118$
+      000FA5 BF                    3869 	cp	a, a
+      000FA6 18 05                 3870 	jr	00118$
+      000FA8                       3871 00117$:
+      000FA8 CB 7A                 3872 	bit	7, d
+      000FAA 28 01                 3873 	jr	Z, 00118$
+      000FAC 37                    3874 	scf
+      000FAD                       3875 00118$:
+      000FAD 30 40                 3876 	jr	NC, 00102$
+                                   3877 ;main.c:262: ball->vel_x -= ball->acc_x/100;
+      000FAF D1                    3878 	pop	de
+      000FB0 D5                    3879 	push	de
+      000FB1 21 09 00              3880 	ld	hl, #0x0009
+      000FB4 19                    3881 	add	hl, de
+      000FB5 5D                    3882 	ld	e, l
+      000FB6 54                    3883 	ld	d, h
+      000FB7 1A                    3884 	ld	a, (de)
+      000FB8 5F                    3885 	ld	e, a
+      000FB9 07                    3886 	rlca
+      000FBA 9F                    3887 	sbc	a, a
+      000FBB C5                    3888 	push	bc
+      000FBC 21 64 00              3889 	ld	hl, #0x0064
+      000FBF E5                    3890 	push	hl
+      000FC0 57                    3891 	ld	d, a
+      000FC1 D5                    3892 	push	de
+      000FC2 CDr00r00              3893 	call	__divsint
+      000FC5 E8 04                 3894 	add	sp, #4
+      000FC7 C1                    3895 	pop	bc
+      000FC8 F8 06                 3896 	ldhl	sp,	#6
+      000FCA 7E                    3897 	ld	a, (hl)
+      000FCB 93                    3898 	sub	a, e
+      000FCC 02                    3899 	ld	(bc), a
+                                   3900 ;main.c:263: ball->x += ball->vel_x/100;
+      000FCD F8 02                 3901 	ldhl	sp,#2
+      000FCF 5E                    3902 	ld	e, (hl)
+      000FD0 23                    3903 	inc	hl
+      000FD1 56                    3904 	ld	d, (hl)
+      000FD2 F5                    3905 	push	af
+      000FD3 1A                    3906 	ld	a, (de)
+      000FD4 4F                    3907 	ld	c, a
+      000FD5 F1                    3908 	pop	af
+      000FD6 5F                    3909 	ld	e, a
+      000FD7 07                    3910 	rlca
+      000FD8 9F                    3911 	sbc	a, a
+      000FD9 C5                    3912 	push	bc
+      000FDA 21 64 00              3913 	ld	hl, #0x0064
+      000FDD E5                    3914 	push	hl
+      000FDE 57                    3915 	ld	d, a
+      000FDF D5                    3916 	push	de
+      000FE0 CDr00r00              3917 	call	__divsint
+      000FE3 E8 04                 3918 	add	sp, #4
+      000FE5 C1                    3919 	pop	bc
+      000FE6 7B                    3920 	ld	a, e
+      000FE7 81                    3921 	add	a, c
+      000FE8 4F                    3922 	ld	c, a
+      000FE9 F8 02                 3923 	ldhl	sp,	#2
+      000FEB 2A                    3924 	ld	a,	(hl+)
+      000FEC 66                    3925 	ld	h, (hl)
+      000FED 6F                    3926 	ld	l, a
+      000FEE 71                    3927 	ld	(hl), c
+      000FEF                       3928 00102$:
+                                   3929 ;main.c:265: if (ball->vel_y > 0) {
+      000FEF D1                    3930 	pop	de
+      000FF0 D5                    3931 	push	de
+      000FF1 21 08 00              3932 	ld	hl, #0x0008
+      000FF4 19                    3933 	add	hl, de
+      000FF5 E5                    3934 	push	hl
+      000FF6 7D                    3935 	ld	a, l
+      000FF7 F8 06                 3936 	ldhl	sp,	#6
+      000FF9 77                    3937 	ld	(hl), a
+      000FFA E1                    3938 	pop	hl
+      000FFB 7C                    3939 	ld	a, h
+      000FFC F8 05                 3940 	ldhl	sp,	#5
+      000FFE 32                    3941 	ld	(hl-), a
+      000FFF 2A                    3942 	ld	a, (hl+)
+      001000 5F                    3943 	ld	e, a
+      001001 2A                    3944 	ld	a, (hl+)
+      001002 57                    3945 	ld	d, a
+      001003 1A                    3946 	ld	a, (de)
+      001004 77                    3947 	ld	(hl), a
+                                   3948 ;main.c:267: ball->y += ball->vel_y/100;
+      001005 D1                    3949 	pop	de
+      001006 D5                    3950 	push	de
+      001007 21 06 00              3951 	ld	hl, #0x0006
+      00100A 19                    3952 	add	hl, de
+      00100B 4D                    3953 	ld	c, l
+      00100C 44                    3954 	ld	b, h
+                                   3955 ;main.c:265: if (ball->vel_y > 0) {
+      00100D F8 06                 3956 	ldhl	sp,	#6
+      00100F 5E                    3957 	ld	e, (hl)
+      001010 AF                    3958 	xor	a, a
+      001011 57                    3959 	ld	d, a
+      001012 96                    3960 	sub	a, (hl)
+      001013 CB 7B                 3961 	bit	7, e
+      001015 28 07                 3962 	jr	Z, 00119$
+      001017 CB 7A                 3963 	bit	7, d
+      001019 20 08                 3964 	jr	NZ, 00120$
+      00101B BF                    3965 	cp	a, a
+      00101C 18 05                 3966 	jr	00120$
+      00101E                       3967 00119$:
+      00101E CB 7A                 3968 	bit	7, d
+      001020 28 01                 3969 	jr	Z, 00120$
+      001022 37                    3970 	scf
+      001023                       3971 00120$:
+      001023 30 3F                 3972 	jr	NC, 00104$
+                                   3973 ;main.c:266: ball->vel_y -= ball->acc_y/100;
+      001025 D1                    3974 	pop	de
+      001026 D5                    3975 	push	de
+      001027 21 0A 00              3976 	ld	hl, #0x000a
+      00102A 19                    3977 	add	hl, de
+      00102B 5D                    3978 	ld	e, l
+      00102C 54                    3979 	ld	d, h
+      00102D 1A                    3980 	ld	a, (de)
+      00102E 5F                    3981 	ld	e, a
+      00102F 07                    3982 	rlca
+      001030 9F                    3983 	sbc	a, a
+      001031 C5                    3984 	push	bc
+      001032 21 64 00              3985 	ld	hl, #0x0064
+      001035 E5                    3986 	push	hl
+      001036 57                    3987 	ld	d, a
+      001037 D5                    3988 	push	de
+      001038 CDr00r00              3989 	call	__divsint
+      00103B E8 04                 3990 	add	sp, #4
+      00103D C1                    3991 	pop	bc
+      00103E F8 06                 3992 	ldhl	sp,	#6
+      001040 3A                    3993 	ld	a, (hl-)
+      001041 2B                    3994 	dec	hl
+      001042 93                    3995 	sub	a, e
+      001043 F5                    3996 	push	af
+      001044 2A                    3997 	ld	a,	(hl+)
+      001045 66                    3998 	ld	h, (hl)
+      001046 6F                    3999 	ld	l, a
+      001047 F1                    4000 	pop	af
+      001048 77                    4001 	ld	(hl), a
+                                   4002 ;main.c:267: ball->y += ball->vel_y/100;
+      001049 F5                    4003 	push	af
+      00104A 0A                    4004 	ld	a, (bc)
+      00104B F8 08                 4005 	ldhl	sp,	#8
+      00104D 77                    4006 	ld	(hl), a
+      00104E F1                    4007 	pop	af
+      00104F 5F                    4008 	ld	e, a
+      001050 07                    4009 	rlca
+      001051 9F                    4010 	sbc	a, a
+      001052 C5                    4011 	push	bc
+      001053 21 64 00              4012 	ld	hl, #0x0064
+      001056 E5                    4013 	push	hl
+      001057 57                    4014 	ld	d, a
+      001058 D5                    4015 	push	de
+      001059 CDr00r00              4016 	call	__divsint
+      00105C E8 04                 4017 	add	sp, #4
+      00105E C1                    4018 	pop	bc
+      00105F F8 06                 4019 	ldhl	sp,	#6
+      001061 7E                    4020 	ld	a, (hl)
+      001062 83                    4021 	add	a, e
+      001063 02                    4022 	ld	(bc), a
+      001064                       4023 00104$:
+                                   4024 ;main.c:269: movegamecharacter(ball, ball->x, ball->y);
+      001064 0A                    4025 	ld	a, (bc)
+      001065 47                    4026 	ld	b, a
+      001066 F8 02                 4027 	ldhl	sp,#2
+      001068 2A                    4028 	ld	a, (hl+)
+      001069 5F                    4029 	ld	e, a
+      00106A 56                    4030 	ld	d, (hl)
+      00106B 1A                    4031 	ld	a, (de)
+      00106C C5                    4032 	push	bc
+      00106D 33                    4033 	inc	sp
+      00106E F5                    4034 	push	af
+      00106F 33                    4035 	inc	sp
+      001070 F8 02                 4036 	ldhl	sp,	#2
+      001072 2A                    4037 	ld	a, (hl+)
+      001073 5F                    4038 	ld	e, a
+      001074 56                    4039 	ld	d, (hl)
+      001075 D5                    4040 	push	de
+      001076 CDrB0r0B              4041 	call	_movegamecharacter
+                                   4042 ;main.c:270: }
+      001079 E8 0B                 4043 	add	sp, #11
+      00107B C9                    4044 	ret
+                                   4045 ;main.c:272: void main(){
+                                   4046 ;	---------------------------------
+                                   4047 ; Function main
+                                   4048 ; ---------------------------------
+      00107C                       4049 _main::
+      00107C 3B                    4050 	dec	sp
+                                   4051 ;main.c:275: set_bkg_data(0, 44, bkg_tiles);
+      00107D 11r09r07              4052 	ld	de, #_bkg_tiles
+      001080 D5                    4053 	push	de
+      001081 21 00 2C              4054 	ld	hl, #0x2c00
+      001084 E5                    4055 	push	hl
+      001085 CDr00r00              4056 	call	_set_bkg_data
+      001088 E8 04                 4057 	add	sp, #4
+                                   4058 ;main.c:276: set_bkg_tiles(0, 0, 32, 21, map);
+      00108A 11r29r04              4059 	ld	de, #_map
+      00108D D5                    4060 	push	de
+      00108E 21 20 15              4061 	ld	hl, #0x1520
+      001091 E5                    4062 	push	hl
+      001092 AF                    4063 	xor	a, a
+      001093 0F                    4064 	rrca
+      001094 F5                    4065 	push	af
+      001095 CDr00r00              4066 	call	_set_bkg_tiles
+      001098 E8 06                 4067 	add	sp, #6
+                                   4068 ;main.c:277: SHOW_BKG;
+      00109A F0r00                 4069 	ldh	a, (_LCDC_REG + 0)
+      00109C F6 01                 4070 	or	a, #0x01
+      00109E E0r00                 4071 	ldh	(_LCDC_REG + 0), a
+                                   4072 ;main.c:279: set_sprite_data(0,4, car_light);
+      0010A0 11r29r00              4073 	ld	de, #_car_light
+      0010A3 D5                    4074 	push	de
+      0010A4 21 00 04              4075 	ld	hl, #0x400
+      0010A7 E5                    4076 	push	hl
+      0010A8 CDr00r00              4077 	call	_set_sprite_data
+      0010AB E8 04                 4078 	add	sp, #4
+                                   4079 ;main.c:280: setupcar_light();
+      0010AD CDr71r0C              4080 	call	_setupcar_light
+                                   4081 ;main.c:281: set_sprite_data(64, 4, ball_sprite);
+      0010B0 11rC9r06              4082 	ld	de, #_ball_sprite
+      0010B3 D5                    4083 	push	de
+      0010B4 21 40 04              4084 	ld	hl, #0x440
+      0010B7 E5                    4085 	push	hl
+      0010B8 CDr00r00              4086 	call	_set_sprite_data
+      0010BB E8 04                 4087 	add	sp, #4
+                                   4088 ;main.c:282: setup_ball();
+      0010BD CDr45r0C              4089 	call	_setup_ball
+                                   4090 ;main.c:283: movegamecharacter(&ball, ball.x, ball.y);
+      0010C0 21r06r00              4091 	ld	hl, #_ball + 6
+      0010C3 46                    4092 	ld	b, (hl)
+      0010C4 FAr05r00              4093 	ld	a, (#(_ball + 5) + 0)
+      0010C7 C5                    4094 	push	bc
+      0010C8 33                    4095 	inc	sp
+      0010C9 F5                    4096 	push	af
+      0010CA 33                    4097 	inc	sp
+      0010CB 11r00r00              4098 	ld	de, #_ball
+      0010CE D5                    4099 	push	de
+      0010CF CDrB0r0B              4100 	call	_movegamecharacter
+      0010D2 E8 04                 4101 	add	sp, #4
+                                   4102 ;main.c:285: SHOW_SPRITES;
+      0010D4 F0r00                 4103 	ldh	a, (_LCDC_REG + 0)
+      0010D6 F6 02                 4104 	or	a, #0x02
+      0010D8 E0r00                 4105 	ldh	(_LCDC_REG + 0), a
+                                   4106 ;main.c:286: DISPLAY_ON;
+      0010DA F0r00                 4107 	ldh	a, (_LCDC_REG + 0)
+      0010DC F6 80                 4108 	or	a, #0x80
+      0010DE E0r00                 4109 	ldh	(_LCDC_REG + 0), a
+                                   4110 ;main.c:288: while(1){
+      0010E0                       4111 00122$:
+                                   4112 ;main.c:290: move_ball(&ball);
+      0010E0 11r00r00              4113 	ld	de, #_ball
+      0010E3 D5                    4114 	push	de
+      0010E4 CDr6Dr0F              4115 	call	_move_ball
+      0010E7 E1                    4116 	pop	hl
+                                   4117 ;main.c:292: if (is_goal(car1.x, car1.y)) {
+      0010E8 21r13r00              4118 	ld	hl, #_car1 + 6
+      0010EB 46                    4119 	ld	b, (hl)
+      0010EC FAr12r00              4120 	ld	a, (#(_car1 + 5) + 0)
+      0010EF C5                    4121 	push	bc
+      0010F0 33                    4122 	inc	sp
+      0010F1 F5                    4123 	push	af
+      0010F2 33                    4124 	inc	sp
+      0010F3 CDrC0r0A              4125 	call	_is_goal
+      0010F6 E1                    4126 	pop	hl
+      0010F7 7B                    4127 	ld	a, e
+      0010F8 B7                    4128 	or	a, a
+      0010F9 28 08                 4129 	jr	Z, 00102$
+                                   4130 ;main.c:293: printf("This is a goal\n");
+      0010FB 11rADr11              4131 	ld	de, #___str_2
+      0010FE D5                    4132 	push	de
+      0010FF CDr00r00              4133 	call	_puts
+      001102 E1                    4134 	pop	hl
+      001103                       4135 00102$:
+                                   4136 ;main.c:297: if (check_collision(&car1, &ball)) {
+      001103 11r00r00              4137 	ld	de, #_ball
+      001106 D5                    4138 	push	de
+      001107 11r0Dr00              4139 	ld	de, #_car1
+      00110A D5                    4140 	push	de
+      00110B CDrCBr09              4141 	call	_check_collision
+      00110E E8 04                 4142 	add	sp, #4
+      001110 7B                    4143 	ld	a, e
+      001111 B7                    4144 	or	a, a
+      001112 28 0E                 4145 	jr	Z, 00104$
+                                   4146 ;main.c:299: ball.vel_x = car1.vel_x;
+      001114 01r07r00              4147 	ld	bc, #_ball + 7
+      001117 FAr14r00              4148 	ld	a, (#(_car1 + 7) + 0)
+      00111A 02                    4149 	ld	(bc), a
+                                   4150 ;main.c:300: ball.vel_y = car1.vel_y;
+      00111B 01r08r00              4151 	ld	bc, #_ball + 8
+      00111E FAr15r00              4152 	ld	a, (#(_car1 + 8) + 0)
+      001121 02                    4153 	ld	(bc), a
+      001122                       4154 00104$:
+                                   4155 ;main.c:304: if(joypad() & J_A){
+      001122 CDr00r00              4156 	call	_joypad
+      001125 CB 63                 4157 	bit	4, e
+      001127 28 0A                 4158 	jr	Z, 00109$
+                                   4159 ;main.c:305: accelerate(&car1);
+      001129 11r0Dr00              4160 	ld	de, #_car1
+      00112C D5                    4161 	push	de
+      00112D CDrC9r0C              4162 	call	_accelerate
+      001130 E1                    4163 	pop	hl
+      001131 18 1B                 4164 	jr	00110$
+      001133                       4165 00109$:
+                                   4166 ;main.c:306: } else if (joypad() & J_B){
+      001133 CDr00r00              4167 	call	_joypad
+      001136 CB 6B                 4168 	bit	5, e
+      001138 28 0A                 4169 	jr	Z, 00106$
+                                   4170 ;main.c:307: deccelerate(&car1);
+      00113A 11r0Dr00              4171 	ld	de, #_car1
+      00113D D5                    4172 	push	de
+      00113E CDrD1r0D              4173 	call	_deccelerate
+      001141 E1                    4174 	pop	hl
+      001142 18 0A                 4175 	jr	00110$
+      001144                       4176 00106$:
+                                   4177 ;main.c:309: car1.acc_x = 0;
+      001144 21r16r00              4178 	ld	hl, #(_car1 + 9)
+      001147 36 00                 4179 	ld	(hl), #0x00
+                                   4180 ;main.c:310: car1.acc_y = 0;
+      001149 21r17r00              4181 	ld	hl, #(_car1 + 10)
+      00114C 36 00                 4182 	ld	(hl), #0x00
+      00114E                       4183 00110$:
+                                   4184 ;main.c:312: if(joypad() & J_LEFT){
+      00114E CDr00r00              4185 	call	_joypad
+      001151 CB 4B                 4186 	bit	1, e
+      001153 28 1A                 4187 	jr	Z, 00115$
+                                   4188 ;main.c:313: if (car1.direction == 0) {
+      001155 FAr0Dr00              4189 	ld	a, (#_car1 + 0)
+      001158 B7                    4190 	or	a, a
+      001159 20 07                 4191 	jr	NZ, 00112$
+                                   4192 ;main.c:314: car1.direction = 15;
+      00115B 21r0Dr00              4193 	ld	hl, #_car1
+      00115E 36 0F                 4194 	ld	(hl), #0x0f
+      001160 18 04                 4195 	jr	00113$
+      001162                       4196 00112$:
+                                   4197 ;main.c:316: car1.direction -= 1;
+      001162 3D                    4198 	dec	a
+      001163 EAr0Dr00              4199 	ld	(#_car1),a
+      001166                       4200 00113$:
+                                   4201 ;main.c:318: load_car_sprite(car1.direction);
+      001166 FAr0Dr00              4202 	ld	a, (#_car1 + 0)
+      001169 F5                    4203 	push	af
+      00116A 33                    4204 	inc	sp
+      00116B CDr78r0B              4205 	call	_load_car_sprite
+      00116E 33                    4206 	inc	sp
+      00116F                       4207 00115$:
+                                   4208 ;main.c:320: if(joypad() & J_RIGHT){
+      00116F CDr00r00              4209 	call	_joypad
+      001172 7B                    4210 	ld	a, e
+      001173 0F                    4211 	rrca
+      001174 30 22                 4212 	jr	NC, 00120$
+                                   4213 ;main.c:321: if (car1.direction == 15) {
+      001176 FAr0Dr00              4214 	ld	a, (#_car1 + 0)
+      001179 F8 00                 4215 	ldhl	sp,#0
+      00117B 77                    4216 	ld	(hl), a
+      00117C 7E                    4217 	ld	a, (hl)
+      00117D D6 0F                 4218 	sub	a, #0x0f
+      00117F 20 07                 4219 	jr	NZ, 00117$
+                                   4220 ;main.c:322: car1.direction = 0;
+      001181 21r0Dr00              4221 	ld	hl, #_car1
+      001184 36 00                 4222 	ld	(hl), #0x00
+      001186 18 07                 4223 	jr	00118$
+      001188                       4224 00117$:
+                                   4225 ;main.c:324: car1.direction += 1;
+      001188 F8 00                 4226 	ldhl	sp,	#0
+      00118A 7E                    4227 	ld	a, (hl)
+      00118B 3C                    4228 	inc	a
+      00118C EAr0Dr00              4229 	ld	(#_car1),a
+      00118F                       4230 00118$:
+                                   4231 ;main.c:326: load_car_sprite(car1.direction);
+      00118F FAr0Dr00              4232 	ld	a, (#_car1 + 0)
+      001192 F5                    4233 	push	af
+      001193 33                    4234 	inc	sp
+      001194 CDr78r0B              4235 	call	_load_car_sprite
+      001197 33                    4236 	inc	sp
+      001198                       4237 00120$:
+                                   4238 ;main.c:328: move_car(&car1);
+      001198 11r0Dr00              4239 	ld	de, #_car1
+      00119B D5                    4240 	push	de
+      00119C CDrD9r0E              4241 	call	_move_car
+      00119F E1                    4242 	pop	hl
+                                   4243 ;main.c:329: performantdelay(15);    
+      0011A0 3E 0F                 4244 	ld	a, #0x0f
+      0011A2 F5                    4245 	push	af
+      0011A3 33                    4246 	inc	sp
+      0011A4 CDr38r0C              4247 	call	_performantdelay
+      0011A7 33                    4248 	inc	sp
+      0011A8 C3rE0r10              4249 	jp	00122$
+                                   4250 ;main.c:331: }
+      0011AB 33                    4251 	inc	sp
+      0011AC C9                    4252 	ret
+      0011AD                       4253 ___str_2:
+      0011AD 54 68 69 73 20 69 73  4254 	.ascii "This is a goal"
              20 61 20 67 6F 61 6C
-      0011B0 00                    4254 	.db 0x00
-      0011B1                       4255 ___str_2:
-      0011B1 43 6F 6C 6C 69 73 69  4256 	.ascii "Collision detected"
-             6F 6E 20 64 65 74 65
-             63 74 65 64
-      0011C3 00                    4257 	.db 0x00
-                                   4258 	.area _CODE
-                                   4259 	.area _INITIALIZER
-      000000                       4260 __xinit__spritesize:
-      000000 08                    4261 	.db #0x08	; 8
-                                   4262 	.area _CABS (ABS)
+      0011BB 00                    4255 	.db 0x00
+                                   4256 	.area _CODE
+                                   4257 	.area _INITIALIZER
+      000000                       4258 __xinit__spritesize:
+      000000 08                    4259 	.db #0x08	; 8
+                                   4260 	.area _CABS (ABS)

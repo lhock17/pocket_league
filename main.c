@@ -11,7 +11,7 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 
-const char goal_square[1] = {0xFF};
+const char goal_square[2] = {256, 253};
 
 struct GameObject car1;
 struct GameObject ball;
@@ -56,8 +56,9 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     indexTLx = (newplayerx - 16) / 8;
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
+    printf("titleIndexTL: %d\n", tileindexTL);
 
-    result = bkg_tiles[tileindexTL] == goal_square[0];
+    result = tileindexTL == goal_square[0];
     return result;
 }
 
@@ -288,13 +289,13 @@ void main(){
 
         move_ball(&ball);
 
-        if (is_goal(ball.x, ball.y)) {
+        if (is_goal(car1.x, car1.y)) {
             printf("This is a goal\n");
         }
         
         //player contact with ball
         if (check_collision(&car1, &ball)) {
-            printf("Collision detected");
+            //printf("Collision detected");
             ball.vel_x = car1.vel_x;
             ball.vel_y = car1.vel_y;
         }
