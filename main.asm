@@ -1,6 +1,10 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
+<<<<<<< HEAD
+; Version 4.1.6 #12439 (Mac OS X x86_64)
+=======
 ; Version 4.1.6 #12439 (MINGW32)
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mgbz80
@@ -20,7 +24,15 @@
 	.globl _set_bkg_data
 	.globl _wait_vbl_done
 	.globl _joypad
+<<<<<<< HEAD
 	.globl _spritesize
+=======
+<<<<<<< HEAD
+	.globl _spritesize
+	.globl _ball
+=======
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	.globl _car1
 	.globl _ball
 	.globl _bkg_tiles
@@ -34,10 +46,20 @@
 ; ram data
 ;--------------------------------------------------------
 	.area _DATA
+<<<<<<< HEAD
 _ball::
 	.ds 9
 _car1::
 	.ds 9
+=======
+<<<<<<< HEAD
+_car1::
+	.ds 9
+_ball::
+	.ds 9
+=======
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 ;--------------------------------------------------------
 ; ram data
 ;--------------------------------------------------------
@@ -64,7 +86,15 @@ _spritesize::
 ; code
 ;--------------------------------------------------------
 	.area _CODE
+<<<<<<< HEAD
 ;main.c:35: void load_ball_sprite() {
+=======
+<<<<<<< HEAD
+;main.c:31: void load_ball_sprite() {
+=======
+;main.c:33: void load_ball_sprite() {
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 ;	---------------------------------
 ; Function load_ball_sprite
 ; ---------------------------------
@@ -72,7 +102,35 @@ _load_ball_sprite::
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 18)
 	ld	(hl), #0x40
+<<<<<<< HEAD
 ;main.c:37: ball.spriteids[0] = 4;
+=======
+<<<<<<< HEAD
+;main.c:33: ball.spriteids[0] = 4;
+	ld	hl, #(_ball + 1)
+	ld	(hl), #0x04
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+	ld	hl, #(_shadow_OAM + 22)
+	ld	(hl), #0x41
+;main.c:35: ball.spriteids[1] = 6;
+	ld	hl, #(_ball + 2)
+	ld	(hl), #0x06
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+	ld	hl, #(_shadow_OAM + 26)
+	ld	(hl), #0x42
+;main.c:37: ball.spriteids[2] = 5;
+	ld	hl, #(_ball + 3)
+	ld	(hl), #0x05
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+	ld	hl, #(_shadow_OAM + 30)
+	ld	(hl), #0x43
+;main.c:39: ball.spriteids[3] = 7;
+	ld	hl, #(_ball + 4)
+	ld	(hl), #0x07
+;main.c:40: }
+=======
+;main.c:35: ball.spriteids[0] = 0;
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	hl, #(_ball + 1)
 	ld	(hl), #0x04
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
@@ -92,8 +150,14 @@ _load_ball_sprite::
 	ld	(hl), #0x43
 ;main.c:43: ball.spriteids[3] = 7;
 	ld	hl, #(_ball + 4)
+<<<<<<< HEAD
 	ld	(hl), #0x07
 ;main.c:44: }
+=======
+	ld	(hl), #0x03
+;main.c:42: }
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ret
 _car_light:
 	.db #0x0f	; 15
@@ -2563,7 +2627,15 @@ _bkg_tiles:
 	.db #0x00	; 0
 	.db #0x55	; 85	'U'
 	.db #0x00	; 0
+<<<<<<< HEAD
 ;main.c:46: void load_car_sprite(UINT8 direction) {
+=======
+<<<<<<< HEAD
+;main.c:42: void load_car_sprite(UINT8 direction) {
+=======
+;main.c:44: void load_car_sprite(UINT8 direction) {
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 ;	---------------------------------
 ; Function load_car_sprite
 ; ---------------------------------
@@ -2616,13 +2688,29 @@ _load_car_sprite::
 	ld	(hl), #0x03
 ;main.c:55: }
 	ret
+<<<<<<< HEAD
 ;main.c:57: void movegamecharacter(struct GameObject* object, UINT8 x, UINT8 y){
+=======
+<<<<<<< HEAD
+;main.c:53: void movegamecharacter(struct GameObject* object, UINT8 x, UINT8 y){
+=======
+;main.c:55: void movegamecharacter(struct GameObject* object, UINT8 x, UINT8 y){
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 ;	---------------------------------
 ; Function movegamecharacter
 ; ---------------------------------
 _movegamecharacter::
 	add	sp, #-3
+<<<<<<< HEAD
 ;main.c:58: move_sprite(object->spriteids[0], x, y);
+=======
+<<<<<<< HEAD
+;main.c:54: move_sprite(object->spriteids[0], x, y);
+=======
+;main.c:56: move_sprite(object->spriteids[0], x, y);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ldhl	sp,	#8
 	ld	a, (hl)
 	ldhl	sp,	#0
@@ -2642,7 +2730,11 @@ _movegamecharacter::
 ;	spillPairReg hl
 ;	spillPairReg hl
 	inc	hl
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2655,14 +2747,26 @@ _movegamecharacter::
 	add	hl, bc
 	ld	c, l
 	ld	b, h
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
 	ldhl	sp,	#0
 	ld	a, (hl+)
 	ld	(bc), a
 	inc	bc
 	ld	a, (hl)
 	ld	(bc), a
+<<<<<<< HEAD
 ;main.c:59: move_sprite(object->spriteids[1], x + spritesize, y);
+=======
+<<<<<<< HEAD
+;main.c:55: move_sprite(object->spriteids[1], x + spritesize, y);
+=======
+;main.c:57: move_sprite(object->spriteids[1], x + spritesize, y);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	a, (hl)
 ;setupPair	HL
 	ld	hl, #_spritesize
@@ -2678,7 +2782,11 @@ _movegamecharacter::
 	ld	c, (hl)
 	ldhl	sp,	#2
 	ld	(hl), a
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
 	ld	l, c
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2691,13 +2799,25 @@ _movegamecharacter::
 	add	hl, bc
 	ld	c, l
 	ld	b, h
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
 	ldhl	sp,	#0
 	ld	a, (hl+)
 	inc	hl
 	ld	(bc), a
 	inc	bc
+<<<<<<< HEAD
 ;main.c:60: move_sprite(object->spriteids[2], x, y + spritesize);
+=======
+<<<<<<< HEAD
+;main.c:56: move_sprite(object->spriteids[2], x, y + spritesize);
+=======
+;main.c:58: move_sprite(object->spriteids[2], x, y + spritesize);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	a, (hl-)
 	dec	hl
 	ld	(bc), a
@@ -2715,7 +2835,11 @@ _movegamecharacter::
 	inc	hl
 	inc	hl
 	inc	hl
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2728,13 +2852,25 @@ _movegamecharacter::
 	ld	de, #_shadow_OAM
 	add	hl, de
 	pop	de
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
 	ld	a, c
 	ld	(hl+), a
 	ld	c, l
 	ld	b, h
 	ldhl	sp,	#1
+<<<<<<< HEAD
 ;main.c:61: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
+=======
+<<<<<<< HEAD
+;main.c:57: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
+=======
+;main.c:59: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	a, (hl-)
 	ld	(bc), a
 	ld	a, (hl)
@@ -2750,7 +2886,11 @@ _movegamecharacter::
 	ld	c, a
 	ld	hl, #0x0004
 	add	hl, de
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2761,6 +2901,17 @@ _movegamecharacter::
 	add	hl, hl
 	ld	de, #_shadow_OAM
 	add	hl, de
+<<<<<<< HEAD
+;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
+	ld	a, b
+	ld	(hl+), a
+	ld	(hl), c
+;main.c:57: move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
+;main.c:58: }
+	add	sp, #3
+	ret
+;main.c:60: void performantdelay(UINT8 numloops){
+=======
 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
 	ld	a, b
 	ld	(hl+), a
@@ -2769,30 +2920,81 @@ _movegamecharacter::
 ;main.c:62: }
 	add	sp, #3
 	ret
+<<<<<<< HEAD
 ;main.c:64: void performantdelay(UINT8 numloops){
+=======
+;main.c:62: void performantdelay(UINT8 numloops){
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 ;	---------------------------------
 ; Function performantdelay
 ; ---------------------------------
 _performantdelay::
+<<<<<<< HEAD
 ;main.c:66: for(i = 0; i < numloops; i++){
+=======
+<<<<<<< HEAD
+;main.c:62: for(i = 0; i < numloops; i++){
+=======
+;main.c:64: for(i = 0; i < numloops; i++){
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	c, #0x00
 00103$:
 	ld	a, c
 	ldhl	sp,	#2
 	sub	a, (hl)
 	ret	NC
+<<<<<<< HEAD
 ;main.c:67: wait_vbl_done();
+=======
+<<<<<<< HEAD
+;main.c:63: wait_vbl_done();
+=======
+;main.c:65: wait_vbl_done();
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	call	_wait_vbl_done
 ;main.c:66: for(i = 0; i < numloops; i++){
 	inc	c
 ;main.c:69: }
 	jr	00103$
+<<<<<<< HEAD
 ;main.c:71: void setup_ball() {
+=======
+<<<<<<< HEAD
+;main.c:67: void setup_ball() {
+=======
+;main.c:69: void setup_ball() {
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 ;	---------------------------------
 ; Function setup_ball
 ; ---------------------------------
 _setup_ball::
+<<<<<<< HEAD
 ;main.c:72: ball.x = 100;
+=======
+<<<<<<< HEAD
+;main.c:68: ball.x = 100;
+	ld	hl, #(_ball + 5)
+	ld	(hl), #0x64
+;main.c:69: ball.y = 100;
+	ld	hl, #(_ball + 6)
+	ld	(hl), #0x64
+;main.c:70: ball.width = 16;
+	ld	hl, #(_ball + 7)
+	ld	(hl), #0x10
+;main.c:71: ball.height = 16;   
+	ld	hl, #(_ball + 8)
+	ld	(hl), #0x10
+;main.c:73: load_ball_sprite();
+;main.c:75: }
+	jp	_load_ball_sprite
+;main.c:77: void setupcar_light(){
+=======
+;main.c:70: ball.x = 100;
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	hl, #(_ball + 5)
 	ld	(hl), #0x64
 ;main.c:73: ball.y = 100;
@@ -2820,12 +3022,25 @@ _setup_ball::
 	add	sp, #4
 ;main.c:79: }
 	ret
+<<<<<<< HEAD
 ;main.c:81: void setupcar_light(){
+=======
+;main.c:79: void setupcar_light(){
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 ;	---------------------------------
 ; Function setupcar_light
 ; ---------------------------------
 _setupcar_light::
+<<<<<<< HEAD
 ;main.c:82: car1.direction = 0;
+=======
+<<<<<<< HEAD
+;main.c:78: car1.direction = 0;
+=======
+;main.c:80: car1.direction = 0;
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	hl, #_car1
 	ld	(hl), #0x00
 ;main.c:83: car1.x = 80;
@@ -2840,20 +3055,44 @@ _setupcar_light::
 ;main.c:86: car1.height = 16;
 	ld	hl, #(_car1 + 8)
 	ld	(hl), #0x10
+<<<<<<< HEAD
 ;main.c:88: set_sprite_data(0, 64, car_light);
+=======
+<<<<<<< HEAD
+;main.c:84: set_sprite_data(0, 64, car_light);
+=======
+;main.c:86: set_sprite_data(0, 64, car_light);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	de, #_car_light
 	push	de
 	ld	hl, #0x4000
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
+<<<<<<< HEAD
 ;main.c:89: load_car_sprite(car1.direction);
+=======
+<<<<<<< HEAD
+;main.c:85: load_car_sprite(car1.direction);
+=======
+;main.c:87: load_car_sprite(car1.direction);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	a, (#_car1 + 0)
 	push	af
 	inc	sp
 	call	_load_car_sprite
 	inc	sp
+<<<<<<< HEAD
 ;main.c:91: movegamecharacter(&car1, car1.x, car1.y);
+=======
+<<<<<<< HEAD
+;main.c:87: movegamecharacter(&car1, car1.x, car1.y);
+=======
+;main.c:89: movegamecharacter(&car1, car1.x, car1.y);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	hl, #(_car1 + 6)
 	ld	b, (hl)
 	ld	a, (#(_car1 + 5) + 0)
@@ -2865,21 +3104,49 @@ _setupcar_light::
 	push	de
 	call	_movegamecharacter
 	add	sp, #4
+<<<<<<< HEAD
 ;main.c:92: }
 	ret
 ;main.c:94: void main(){
+=======
+<<<<<<< HEAD
+;main.c:88: }
+	ret
+;main.c:90: void main(){
+=======
+;main.c:90: }
+	ret
+;main.c:92: void main(){
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
+<<<<<<< HEAD
 ;main.c:98: set_bkg_data(0, 44, bkg_tiles);
+=======
+<<<<<<< HEAD
+;main.c:94: set_bkg_data(0, 44, bkg_tiles);
+=======
+;main.c:96: set_bkg_data(0, 44, bkg_tiles);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	de, #_bkg_tiles
 	push	de
 	ld	hl, #0x2c00
 	push	hl
 	call	_set_bkg_data
 	add	sp, #4
+<<<<<<< HEAD
 ;main.c:99: set_bkg_tiles(0, 0, 32, 21, map);
+=======
+<<<<<<< HEAD
+;main.c:95: set_bkg_tiles(0, 0, 32, 21, map);
+=======
+;main.c:97: set_bkg_tiles(0, 0, 32, 21, map);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	de, #_map
 	push	de
 	ld	hl, #0x1520
@@ -2889,29 +3156,63 @@ _main::
 	push	af
 	call	_set_bkg_tiles
 	add	sp, #6
+<<<<<<< HEAD
 ;main.c:100: SHOW_BKG;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x01
 	ldh	(_LCDC_REG + 0), a
 ;main.c:102: set_sprite_data(0,4, car_light);
+=======
+<<<<<<< HEAD
+;main.c:96: SHOW_BKG;
+	ldh	a, (_LCDC_REG + 0)
+	or	a, #0x01
+	ldh	(_LCDC_REG + 0), a
+;main.c:98: set_sprite_data(0,4, car_light);
+=======
+;main.c:98: SHOW_BKG;
+	ldh	a, (_LCDC_REG + 0)
+	or	a, #0x01
+	ldh	(_LCDC_REG + 0), a
+;main.c:100: set_sprite_data(0,4, car_light);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	de, #_car_light
 	push	de
 	ld	hl, #0x400
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
+<<<<<<< HEAD
 ;main.c:103: setupcar_light();
+=======
+<<<<<<< HEAD
+;main.c:99: setupcar_light();
+	call	_setupcar_light
+;main.c:100: set_sprite_data(64, 4, ball_sprite);
+	ld	de, #_ball_sprite
+	push	de
+	ld	hl, #0x440
+=======
+;main.c:101: setupcar_light();
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	call	_setupcar_light
 ;main.c:104: set_sprite_data(0, 4, ball_sprite);
 	ld	de, #_ball_sprite
 	push	de
 	ld	hl, #0x400
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
 ;main.c:105: setup_ball();
 	call	_setup_ball
+<<<<<<< HEAD
 ;main.c:106: movegamecharacter(&ball, ball.x, ball.y);
+=======
+<<<<<<< HEAD
+;main.c:102: movegamecharacter(&ball, ball.x, ball.y);
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	hl, #_ball + 6
 	ld	b, (hl)
 	ld	a, (#(_ball + 5) + 0)
@@ -2923,7 +3224,60 @@ _main::
 	push	de
 	call	_movegamecharacter
 	add	sp, #4
+<<<<<<< HEAD
 ;main.c:108: SHOW_SPRITES;
+=======
+;main.c:104: SHOW_SPRITES;
+	ldh	a, (_LCDC_REG + 0)
+	or	a, #0x02
+	ldh	(_LCDC_REG + 0), a
+;main.c:105: DISPLAY_ON;
+	ldh	a, (_LCDC_REG + 0)
+	or	a, #0x80
+	ldh	(_LCDC_REG + 0), a
+;main.c:107: while(1){
+00114$:
+;main.c:108: if(joypad() & J_A){
+	call	_joypad
+	bit	4, e
+	jr	Z, 00102$
+;main.c:109: movegamecharacter(&car1, car1.x+3, car1.y+3);
+	ld	a, (#(_car1 + 6) + 0)
+	add	a, #0x03
+	ld	b, a
+	ld	a, (#(_car1 + 5) + 0)
+	add	a, #0x03
+	push	bc
+	inc	sp
+	push	af
+	inc	sp
+	ld	de, #_car1
+	push	de
+	call	_movegamecharacter
+	add	sp, #4
+00102$:
+;main.c:112: if(joypad() & J_LEFT){
+	call	_joypad
+	bit	1, e
+	jr	Z, 00107$
+;main.c:113: if (car1.direction == 0) {
+	ld	bc, #_car1+0
+	ld	a, (bc)
+	or	a, a
+	jr	NZ, 00104$
+;main.c:114: car1.direction = 15;
+	ld	a, #0x0f
+	ld	(bc), a
+	jr	00105$
+00104$:
+;main.c:116: car1.direction -= 1;
+	dec	a
+	ld	(bc), a
+00105$:
+;main.c:118: load_car_sprite(car1.direction);
+=======
+;main.c:105: SHOW_SPRITES;
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x02
 	ldh	(_LCDC_REG + 0), a
@@ -2969,15 +3323,49 @@ _main::
 ;main.c:120: car1.direction -= 1;
 	dec	a
 	ld	(bc), a
+<<<<<<< HEAD
 00105$:
 ;main.c:122: load_car_sprite(car1.direction);
+=======
+00103$:
+;main.c:115: load_car_sprite(car1.direction);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	a, (bc)
 	push	af
 	inc	sp
 	call	_load_car_sprite
 	inc	sp
+<<<<<<< HEAD
 00107$:
 ;main.c:124: if(joypad() & J_RIGHT){
+=======
+<<<<<<< HEAD
+00107$:
+;main.c:120: if(joypad() & J_RIGHT){
+	call	_joypad
+	ld	a, e
+	rrca
+	jr	NC, 00112$
+;main.c:121: if (car1.direction == 15) {
+	ld	bc, #_car1+0
+	ld	a, (bc)
+	cp	a, #0x0f
+	jr	NZ, 00109$
+;main.c:122: car1.direction = 0;
+	xor	a, a
+	ld	(bc), a
+	jr	00110$
+00109$:
+;main.c:124: car1.direction += 1;
+	inc	a
+	ld	(bc), a
+00110$:
+;main.c:126: load_car_sprite(car1.direction);
+=======
+00105$:
+;main.c:117: if(joypad() & J_RIGHT){
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	call	_joypad
 	ld	a, e
 	rrca
@@ -2995,22 +3383,48 @@ _main::
 ;main.c:128: car1.direction += 1;
 	inc	a
 	ld	(bc), a
+<<<<<<< HEAD
 00110$:
 ;main.c:130: load_car_sprite(car1.direction);
+=======
+00108$:
+;main.c:123: load_car_sprite(car1.direction);
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	a, (bc)
 	push	af
 	inc	sp
 	call	_load_car_sprite
 	inc	sp
+<<<<<<< HEAD
 00112$:
 ;main.c:132: performantdelay(5);    
+=======
+<<<<<<< HEAD
+00112$:
+;main.c:128: performantdelay(5);    
+=======
+00110$:
+;main.c:125: performantdelay(5);    
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	ld	a, #0x05
 	push	af
 	inc	sp
 	call	_performantdelay
 	inc	sp
+<<<<<<< HEAD
 ;main.c:134: }
 	jr	00114$
+=======
+<<<<<<< HEAD
+;main.c:130: }
+	jr	00114$
+=======
+;main.c:127: }
+	jr	00112$
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
 	.area _CODE
 	.area _INITIALIZER
 __xinit__spritesize:

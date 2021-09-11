@@ -1,6 +1,10 @@
                                       1 ;--------------------------------------------------------
                                       2 ; File Created by SDCC : free open source ANSI-C Compiler
+<<<<<<< HEAD
+                                      3 ; Version 4.1.6 #12439 (Mac OS X x86_64)
+=======
                                       3 ; Version 4.1.6 #12439 (MINGW32)
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
                                       4 ;--------------------------------------------------------
                                       5 	.module main
                                       6 	.optsdcc -mgbz80
@@ -72,7 +76,35 @@
                                      72 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
       000000 21r12r00                73 	ld	hl, #(_shadow_OAM + 18)
       000003 36 40                   74 	ld	(hl), #0x40
+<<<<<<< HEAD
                                      75 ;main.c:37: ball.spriteids[0] = 4;
+=======
+<<<<<<< HEAD
+                                     75 ;main.c:33: ball.spriteids[0] = 4;
+      000005 21r0Ar00                76 	ld	hl, #(_ball + 1)
+      000008 36 04                   77 	ld	(hl), #0x04
+                                     78 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      00000A 21r16r00                79 	ld	hl, #(_shadow_OAM + 22)
+      00000D 36 41                   80 	ld	(hl), #0x41
+                                     81 ;main.c:35: ball.spriteids[1] = 6;
+      00000F 21r0Br00                82 	ld	hl, #(_ball + 2)
+      000012 36 06                   83 	ld	(hl), #0x06
+                                     84 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      000014 21r1Ar00                85 	ld	hl, #(_shadow_OAM + 26)
+      000017 36 42                   86 	ld	(hl), #0x42
+                                     87 ;main.c:37: ball.spriteids[2] = 5;
+      000019 21r0Cr00                88 	ld	hl, #(_ball + 3)
+      00001C 36 05                   89 	ld	(hl), #0x05
+                                     90 ;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+      00001E 21r1Er00                91 	ld	hl, #(_shadow_OAM + 30)
+      000021 36 43                   92 	ld	(hl), #0x43
+                                     93 ;main.c:39: ball.spriteids[3] = 7;
+      000023 21r0Dr00                94 	ld	hl, #(_ball + 4)
+      000026 36 07                   95 	ld	(hl), #0x07
+                                     96 ;main.c:40: }
+=======
+                                     75 ;main.c:35: ball.spriteids[0] = 0;
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
       000005 21r01r00                76 	ld	hl, #(_ball + 1)
       000008 36 04                   77 	ld	(hl), #0x04
                                      78 ;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
@@ -92,8 +124,14 @@
       000021 36 43                   92 	ld	(hl), #0x43
                                      93 ;main.c:43: ball.spriteids[3] = 7;
       000023 21r04r00                94 	ld	hl, #(_ball + 4)
+<<<<<<< HEAD
       000026 36 07                   95 	ld	(hl), #0x07
                                      96 ;main.c:44: }
+=======
+      000026 36 03                   95 	ld	(hl), #0x03
+                                     96 ;main.c:42: }
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
       000028 C9                      97 	ret
       000029                         98 _car_light:
       000029 0F                      99 	.db #0x0f	; 15
@@ -2804,7 +2842,212 @@
                                    2804 ;main.c:75: ball.height = 16;   
       000AA5 21r08r00              2805 	ld	hl, #(_ball + 8)
       000AA8 36 10                 2806 	ld	(hl), #0x10
+<<<<<<< HEAD
                                    2807 ;main.c:77: load_ball_sprite();
+=======
+<<<<<<< HEAD
+                                   2807 ;main.c:73: load_ball_sprite();
+                                   2808 ;main.c:75: }
+      000AAA C3r00r00              2809 	jp	_load_ball_sprite
+                                   2810 ;main.c:77: void setupcar_light(){
+                                   2811 ;	---------------------------------
+                                   2812 ; Function setupcar_light
+                                   2813 ; ---------------------------------
+      000AAD                       2814 _setupcar_light::
+                                   2815 ;main.c:78: car1.direction = 0;
+      000AAD 21r00r00              2816 	ld	hl, #_car1
+      000AB0 36 00                 2817 	ld	(hl), #0x00
+                                   2818 ;main.c:79: car1.x = 80;
+      000AB2 21r05r00              2819 	ld	hl, #(_car1 + 5)
+      000AB5 36 50                 2820 	ld	(hl), #0x50
+                                   2821 ;main.c:80: car1.y = 130;
+      000AB7 21r06r00              2822 	ld	hl, #(_car1 + 6)
+      000ABA 36 82                 2823 	ld	(hl), #0x82
+                                   2824 ;main.c:81: car1.width = 16;
+      000ABC 21r07r00              2825 	ld	hl, #(_car1 + 7)
+      000ABF 36 10                 2826 	ld	(hl), #0x10
+                                   2827 ;main.c:82: car1.height = 16;
+      000AC1 21r08r00              2828 	ld	hl, #(_car1 + 8)
+      000AC4 36 10                 2829 	ld	(hl), #0x10
+                                   2830 ;main.c:84: set_sprite_data(0, 64, car_light);
+      000AC6 11r29r00              2831 	ld	de, #_car_light
+      000AC9 D5                    2832 	push	de
+      000ACA 21 00 40              2833 	ld	hl, #0x4000
+      000ACD E5                    2834 	push	hl
+      000ACE CDr00r00              2835 	call	_set_sprite_data
+      000AD1 E8 04                 2836 	add	sp, #4
+                                   2837 ;main.c:85: load_car_sprite(car1.direction);
+      000AD3 FAr00r00              2838 	ld	a, (#_car1 + 0)
+      000AD6 F5                    2839 	push	af
+      000AD7 33                    2840 	inc	sp
+      000AD8 CDrC9r09              2841 	call	_load_car_sprite
+      000ADB 33                    2842 	inc	sp
+                                   2843 ;main.c:87: movegamecharacter(&car1, car1.x, car1.y);
+      000ADC 21r06r00              2844 	ld	hl, #(_car1 + 6)
+      000ADF 46                    2845 	ld	b, (hl)
+      000AE0 FAr05r00              2846 	ld	a, (#(_car1 + 5) + 0)
+      000AE3 C5                    2847 	push	bc
+      000AE4 33                    2848 	inc	sp
+      000AE5 F5                    2849 	push	af
+      000AE6 33                    2850 	inc	sp
+      000AE7 11r00r00              2851 	ld	de, #_car1
+      000AEA D5                    2852 	push	de
+      000AEB CDr01r0A              2853 	call	_movegamecharacter
+      000AEE E8 04                 2854 	add	sp, #4
+                                   2855 ;main.c:88: }
+      000AF0 C9                    2856 	ret
+                                   2857 ;main.c:90: void main(){
+                                   2858 ;	---------------------------------
+                                   2859 ; Function main
+                                   2860 ; ---------------------------------
+      000AF1                       2861 _main::
+                                   2862 ;main.c:94: set_bkg_data(0, 44, bkg_tiles);
+      000AF1 11r09r07              2863 	ld	de, #_bkg_tiles
+      000AF4 D5                    2864 	push	de
+      000AF5 21 00 2C              2865 	ld	hl, #0x2c00
+      000AF8 E5                    2866 	push	hl
+      000AF9 CDr00r00              2867 	call	_set_bkg_data
+      000AFC E8 04                 2868 	add	sp, #4
+                                   2869 ;main.c:95: set_bkg_tiles(0, 0, 32, 21, map);
+      000AFE 11r29r04              2870 	ld	de, #_map
+      000B01 D5                    2871 	push	de
+      000B02 21 20 15              2872 	ld	hl, #0x1520
+      000B05 E5                    2873 	push	hl
+      000B06 AF                    2874 	xor	a, a
+      000B07 0F                    2875 	rrca
+      000B08 F5                    2876 	push	af
+      000B09 CDr00r00              2877 	call	_set_bkg_tiles
+      000B0C E8 06                 2878 	add	sp, #6
+                                   2879 ;main.c:96: SHOW_BKG;
+      000B0E F0r00                 2880 	ldh	a, (_LCDC_REG + 0)
+      000B10 F6 01                 2881 	or	a, #0x01
+      000B12 E0r00                 2882 	ldh	(_LCDC_REG + 0), a
+                                   2883 ;main.c:98: set_sprite_data(0,4, car_light);
+      000B14 11r29r00              2884 	ld	de, #_car_light
+      000B17 D5                    2885 	push	de
+      000B18 21 00 04              2886 	ld	hl, #0x400
+      000B1B E5                    2887 	push	hl
+      000B1C CDr00r00              2888 	call	_set_sprite_data
+      000B1F E8 04                 2889 	add	sp, #4
+                                   2890 ;main.c:99: setupcar_light();
+      000B21 CDrADr0A              2891 	call	_setupcar_light
+                                   2892 ;main.c:100: set_sprite_data(64, 4, ball_sprite);
+      000B24 11rC9r06              2893 	ld	de, #_ball_sprite
+      000B27 D5                    2894 	push	de
+      000B28 21 40 04              2895 	ld	hl, #0x440
+      000B2B E5                    2896 	push	hl
+      000B2C CDr00r00              2897 	call	_set_sprite_data
+      000B2F E8 04                 2898 	add	sp, #4
+                                   2899 ;main.c:101: setup_ball();
+      000B31 CDr96r0A              2900 	call	_setup_ball
+                                   2901 ;main.c:102: movegamecharacter(&ball, ball.x, ball.y);
+      000B34 21r0Fr00              2902 	ld	hl, #_ball + 6
+      000B37 46                    2903 	ld	b, (hl)
+      000B38 FAr0Er00              2904 	ld	a, (#(_ball + 5) + 0)
+      000B3B C5                    2905 	push	bc
+      000B3C 33                    2906 	inc	sp
+      000B3D F5                    2907 	push	af
+      000B3E 33                    2908 	inc	sp
+      000B3F 11r09r00              2909 	ld	de, #_ball
+      000B42 D5                    2910 	push	de
+      000B43 CDr01r0A              2911 	call	_movegamecharacter
+      000B46 E8 04                 2912 	add	sp, #4
+                                   2913 ;main.c:104: SHOW_SPRITES;
+      000B48 F0r00                 2914 	ldh	a, (_LCDC_REG + 0)
+      000B4A F6 02                 2915 	or	a, #0x02
+      000B4C E0r00                 2916 	ldh	(_LCDC_REG + 0), a
+                                   2917 ;main.c:105: DISPLAY_ON;
+      000B4E F0r00                 2918 	ldh	a, (_LCDC_REG + 0)
+      000B50 F6 80                 2919 	or	a, #0x80
+      000B52 E0r00                 2920 	ldh	(_LCDC_REG + 0), a
+                                   2921 ;main.c:107: while(1){
+      000B54                       2922 00114$:
+                                   2923 ;main.c:108: if(joypad() & J_A){
+      000B54 CDr00r00              2924 	call	_joypad
+      000B57 CB 63                 2925 	bit	4, e
+      000B59 28 18                 2926 	jr	Z, 00102$
+                                   2927 ;main.c:109: movegamecharacter(&car1, car1.x+3, car1.y+3);
+      000B5B FAr06r00              2928 	ld	a, (#(_car1 + 6) + 0)
+      000B5E C6 03                 2929 	add	a, #0x03
+      000B60 47                    2930 	ld	b, a
+      000B61 FAr05r00              2931 	ld	a, (#(_car1 + 5) + 0)
+      000B64 C6 03                 2932 	add	a, #0x03
+      000B66 C5                    2933 	push	bc
+      000B67 33                    2934 	inc	sp
+      000B68 F5                    2935 	push	af
+      000B69 33                    2936 	inc	sp
+      000B6A 11r00r00              2937 	ld	de, #_car1
+      000B6D D5                    2938 	push	de
+      000B6E CDr01r0A              2939 	call	_movegamecharacter
+      000B71 E8 04                 2940 	add	sp, #4
+      000B73                       2941 00102$:
+                                   2942 ;main.c:112: if(joypad() & J_LEFT){
+      000B73 CDr00r00              2943 	call	_joypad
+      000B76 CB 4B                 2944 	bit	1, e
+      000B78 28 15                 2945 	jr	Z, 00107$
+                                   2946 ;main.c:113: if (car1.direction == 0) {
+      000B7A 01r00r00              2947 	ld	bc, #_car1+0
+      000B7D 0A                    2948 	ld	a, (bc)
+      000B7E B7                    2949 	or	a, a
+      000B7F 20 05                 2950 	jr	NZ, 00104$
+                                   2951 ;main.c:114: car1.direction = 15;
+      000B81 3E 0F                 2952 	ld	a, #0x0f
+      000B83 02                    2953 	ld	(bc), a
+      000B84 18 02                 2954 	jr	00105$
+      000B86                       2955 00104$:
+                                   2956 ;main.c:116: car1.direction -= 1;
+      000B86 3D                    2957 	dec	a
+      000B87 02                    2958 	ld	(bc), a
+      000B88                       2959 00105$:
+                                   2960 ;main.c:118: load_car_sprite(car1.direction);
+      000B88 0A                    2961 	ld	a, (bc)
+      000B89 F5                    2962 	push	af
+      000B8A 33                    2963 	inc	sp
+      000B8B CDrC9r09              2964 	call	_load_car_sprite
+      000B8E 33                    2965 	inc	sp
+      000B8F                       2966 00107$:
+                                   2967 ;main.c:120: if(joypad() & J_RIGHT){
+      000B8F CDr00r00              2968 	call	_joypad
+      000B92 7B                    2969 	ld	a, e
+      000B93 0F                    2970 	rrca
+      000B94 30 15                 2971 	jr	NC, 00112$
+                                   2972 ;main.c:121: if (car1.direction == 15) {
+      000B96 01r00r00              2973 	ld	bc, #_car1+0
+      000B99 0A                    2974 	ld	a, (bc)
+      000B9A FE 0F                 2975 	cp	a, #0x0f
+      000B9C 20 04                 2976 	jr	NZ, 00109$
+                                   2977 ;main.c:122: car1.direction = 0;
+      000B9E AF                    2978 	xor	a, a
+      000B9F 02                    2979 	ld	(bc), a
+      000BA0 18 02                 2980 	jr	00110$
+      000BA2                       2981 00109$:
+                                   2982 ;main.c:124: car1.direction += 1;
+      000BA2 3C                    2983 	inc	a
+      000BA3 02                    2984 	ld	(bc), a
+      000BA4                       2985 00110$:
+                                   2986 ;main.c:126: load_car_sprite(car1.direction);
+      000BA4 0A                    2987 	ld	a, (bc)
+      000BA5 F5                    2988 	push	af
+      000BA6 33                    2989 	inc	sp
+      000BA7 CDrC9r09              2990 	call	_load_car_sprite
+      000BAA 33                    2991 	inc	sp
+      000BAB                       2992 00112$:
+                                   2993 ;main.c:128: performantdelay(5);    
+      000BAB 3E 05                 2994 	ld	a, #0x05
+      000BAD F5                    2995 	push	af
+      000BAE 33                    2996 	inc	sp
+      000BAF CDr89r0A              2997 	call	_performantdelay
+      000BB2 33                    2998 	inc	sp
+                                   2999 ;main.c:130: }
+      000BB3 18 9F                 3000 	jr	00114$
+                                   3001 	.area _CODE
+                                   3002 	.area _INITIALIZER
+      000000                       3003 __xinit__spritesize:
+      000000 08                    3004 	.db #0x08	; 8
+                                   3005 	.area _CABS (ABS)
+=======
+                                   2807 ;main.c:75: load_ball_sprite();
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
       000AAA CDr00r00              2808 	call	_load_ball_sprite
                                    2809 ;main.c:78: movegamecharacter(&ball, ball.x, ball.y);
       000AAD 21r06r00              2810 	ld	hl, #(_ball + 6)
@@ -2911,6 +3154,7 @@
       000B44 E8 04                 2911 	add	sp, #4
                                    2912 ;main.c:105: setup_ball();
       000B46 CDr96r0A              2913 	call	_setup_ball
+<<<<<<< HEAD
                                    2914 ;main.c:106: movegamecharacter(&ball, ball.x, ball.y);
       000B49 21r06r00              2915 	ld	hl, #_ball + 6
       000B4C 46                    2916 	ld	b, (hl)
@@ -3016,3 +3260,80 @@
       000000                       3016 __xinit__spritesize:
       000000 08                    3017 	.db #0x08	; 8
                                    3018 	.area _CABS (ABS)
+=======
+                                   2914 ;main.c:105: SHOW_SPRITES;
+      000B49 F0r00                 2915 	ldh	a, (_LCDC_REG + 0)
+      000B4B F6 02                 2916 	or	a, #0x02
+      000B4D E0r00                 2917 	ldh	(_LCDC_REG + 0), a
+                                   2918 ;main.c:106: DISPLAY_ON;
+      000B4F F0r00                 2919 	ldh	a, (_LCDC_REG + 0)
+      000B51 F6 80                 2920 	or	a, #0x80
+      000B53 E0r00                 2921 	ldh	(_LCDC_REG + 0), a
+                                   2922 ;main.c:108: while(1){
+      000B55                       2923 00112$:
+                                   2924 ;main.c:109: if(joypad() & J_LEFT){
+      000B55 CDr00r00              2925 	call	_joypad
+      000B58 CB 4B                 2926 	bit	1, e
+      000B5A 28 15                 2927 	jr	Z, 00105$
+                                   2928 ;main.c:110: if (car1.direction == 0) {
+      000B5C 01r09r00              2929 	ld	bc, #_car1+0
+      000B5F 0A                    2930 	ld	a, (bc)
+      000B60 B7                    2931 	or	a, a
+      000B61 20 05                 2932 	jr	NZ, 00102$
+                                   2933 ;main.c:111: car1.direction = 15;
+      000B63 3E 0F                 2934 	ld	a, #0x0f
+      000B65 02                    2935 	ld	(bc), a
+      000B66 18 02                 2936 	jr	00103$
+      000B68                       2937 00102$:
+                                   2938 ;main.c:113: car1.direction -= 1;
+      000B68 3D                    2939 	dec	a
+      000B69 02                    2940 	ld	(bc), a
+      000B6A                       2941 00103$:
+                                   2942 ;main.c:115: load_car_sprite(car1.direction);
+      000B6A 0A                    2943 	ld	a, (bc)
+      000B6B F5                    2944 	push	af
+      000B6C 33                    2945 	inc	sp
+      000B6D CDrC9r09              2946 	call	_load_car_sprite
+      000B70 33                    2947 	inc	sp
+      000B71                       2948 00105$:
+                                   2949 ;main.c:117: if(joypad() & J_RIGHT){
+      000B71 CDr00r00              2950 	call	_joypad
+      000B74 7B                    2951 	ld	a, e
+      000B75 0F                    2952 	rrca
+      000B76 30 15                 2953 	jr	NC, 00110$
+                                   2954 ;main.c:118: if (car1.direction == 15) {
+      000B78 01r09r00              2955 	ld	bc, #_car1+0
+      000B7B 0A                    2956 	ld	a, (bc)
+      000B7C FE 0F                 2957 	cp	a, #0x0f
+      000B7E 20 04                 2958 	jr	NZ, 00107$
+                                   2959 ;main.c:119: car1.direction = 0;
+      000B80 AF                    2960 	xor	a, a
+      000B81 02                    2961 	ld	(bc), a
+      000B82 18 02                 2962 	jr	00108$
+      000B84                       2963 00107$:
+                                   2964 ;main.c:121: car1.direction += 1;
+      000B84 3C                    2965 	inc	a
+      000B85 02                    2966 	ld	(bc), a
+      000B86                       2967 00108$:
+                                   2968 ;main.c:123: load_car_sprite(car1.direction);
+      000B86 0A                    2969 	ld	a, (bc)
+      000B87 F5                    2970 	push	af
+      000B88 33                    2971 	inc	sp
+      000B89 CDrC9r09              2972 	call	_load_car_sprite
+      000B8C 33                    2973 	inc	sp
+      000B8D                       2974 00110$:
+                                   2975 ;main.c:125: performantdelay(5);    
+      000B8D 3E 05                 2976 	ld	a, #0x05
+      000B8F F5                    2977 	push	af
+      000B90 33                    2978 	inc	sp
+      000B91 CDr89r0A              2979 	call	_performantdelay
+      000B94 33                    2980 	inc	sp
+                                   2981 ;main.c:127: }
+      000B95 18 BE                 2982 	jr	00112$
+                                   2983 	.area _CODE
+                                   2984 	.area _INITIALIZER
+      000000                       2985 __xinit__spritesize:
+      000000 08                    2986 	.db #0x08	; 8
+                                   2987 	.area _CABS (ABS)
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6

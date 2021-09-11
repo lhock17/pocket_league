@@ -20,6 +20,10 @@ struct GameObject {
     UBYTE spriteids[4];
     UINT8 x;
     UINT8 y;
+    UINT8 vel_x;
+    UINT8 vel_y;
+    UINT8 acc_x;
+    UINT8 acc_y;
     UINT8 width;
     UINT8 height;
 };
@@ -110,7 +114,7 @@ void main(){
 
     while(1){
         if(joypad() & J_A){
-            movegamecharacter(&car1, car1.x+3, car1.y+3);
+            
         }
 
         if(joypad() & J_LEFT){

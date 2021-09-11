@@ -9,10 +9,17 @@ Symbol Table
     .__.H$L.                                                    =  000000 L
     _LCDC_REG                                                      ****** GX
   7 __xinit__spritesize                                            000000 R
+<<<<<<< HEAD
+  1 _ball                                                          000009 GR
+  0 _ball_sprite                                                   0006C9 GR
+  0 _bkg_tiles                                                     000709 GR
+  1 _car1                                                          000000 GR
+=======
   1 _ball                                                          000000 GR
   0 _ball_sprite                                                   0006C9 GR
   0 _bkg_tiles                                                     000709 GR
   1 _car1                                                          000009 GR
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
   0 _car_light                                                     000029 GR
     _joypad                                                        ****** GX
   0 _load_ball_sprite                                              000000 GR
@@ -25,7 +32,11 @@ Symbol Table
     _set_bkg_tiles                                                 ****** GX
     _set_sprite_data                                               ****** GX
   0 _setup_ball                                                    000A96 GR
+<<<<<<< HEAD
+  0 _setupcar_light                                                000AAD GR
+=======
   0 _setupcar_light                                                000AC2 GR
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
     _shadow_OAM                                                    ****** GX
   2 _spritesize                                                    000000 GR
     _wait_vbl_done                                                 ****** GX
@@ -36,7 +47,15 @@ Hexadecimal [24-Bits]
 
 Area Table
 
+<<<<<<< HEAD
    0 _CODE                                      size    BCA   flags    0
+=======
+<<<<<<< HEAD
+   0 _CODE                                      size    BB5   flags    0
+=======
+   0 _CODE                                      size    B97   flags    0
+>>>>>>> 4576db3b6b09e39131ad875229532adcc4f1a9d8
+>>>>>>> 4cbe4162f37a97bdfa07668125c53cc37443d0c6
    1 _DATA                                      size     12   flags    0
    2 _INITIALIZED                               size      1   flags    0
    3 _DABS                                      size      0   flags    8
