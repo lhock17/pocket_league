@@ -98,7 +98,6 @@ void setupcar_light(){
 void hit_ball(struct GameObject* car1, struct GameObject* ball) {
     ball->vel_x = car1->vel_x;
     ball->vel_y = car1->vel_y;
-    //movegamecharacter(&ball, ball.x + ball.vel_x, ball.y + ball.vel_y);
 }
 
 void main(){
