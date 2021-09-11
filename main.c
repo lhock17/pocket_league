@@ -19,6 +19,11 @@ int enemy_goals = 0;
 int player_goal_square[3] = {87, 119, 55};
 int enemy_goal_square[3] = {118, 21, 84};
 
+unsigned char windowmap[] =
+{
+  0x13,0x10,0x17,0x17,0x1A
+};
+
 struct GameObject car1;
 struct GameObject car2;
 struct GameObject ball;
@@ -85,14 +90,14 @@ void load_car_sprite(UINT8 direction) {
 }
 
 void load_ai_sprite(UINT8 direction) {
-    set_sprite_tile(8, 4 * direction);
-    car2.spriteids[0] = 0;
-    set_sprite_tile(9, 4 * direction + 2);
-    car2.spriteids[1] = 1;
-    set_sprite_tile(10, 4 * direction + 1);
-    car2.spriteids[2] = 2;
-    set_sprite_tile(11, 4 * direction + 3);
-    car2.spriteids[3] = 3;
+    set_sprite_tile(8, 68 + 4 * direction);
+    car2.spriteids[0] = 8;
+    set_sprite_tile(9, 68 + 4 * direction + 2);
+    car2.spriteids[1] = 9;
+    set_sprite_tile(10, 68 + 4 * direction + 1);
+    car2.spriteids[2] = 10;
+    set_sprite_tile(11, 68 + 4 * direction + 3);
+    car2.spriteids[3] = 11;
 }
 
 void movegamecharacter(struct GameObject* object, INT8 x, INT8 y){
@@ -136,20 +141,20 @@ void setupcar_light(){
 
 void setupcar_dark(){
     car2.direction = 0;
-    car2.x = 64;
-    car2.y = 64;
+    car2.x = 40;
+    car2.y = 40;
     car2.width = 16;
     car2.height = 16;
     car2.acc = 0;
     car2.vel = 0;
 
     set_sprite_data(68, 64, car_dark);
-    load_car_sprite(car2.direction);
+    load_ai_sprite(car2.direction);
     
     movegamecharacter(&car2, car2.x, car2.y);
 }
 
-void move_car(struct GameObject* car, struct GameObject* ball) {
+void move_car(struct GameObject* car) {
     if (car->acc == 0 AND car->vel > 0) {
         car->vel -= 1;
     }
@@ -160,8 +165,6 @@ void move_car(struct GameObject* car, struct GameObject* ball) {
         car->acc = 0;   
     }
     car->vel += car->acc;
-    INT8 dx = car->x;
-    INT8 dy = car->y;
 
     switch (car->direction) {
         case 0:
@@ -225,16 +228,11 @@ void move_car(struct GameObject* car, struct GameObject* ball) {
             car->y -= 45*car->vel/50;
             break;
     }
-
     move_bkg(car->x, car->y);
-    ball->x -= car->x - dx;
-    ball->y -= car->y - dy;
-    //printf("cx=%d,cy=%d\n", car->x, car->y);
-    //printf("bx=%d,by=%d\n", ball->x, ball->y);
-    if ((ball->x - car->x < 0.5) AND (ball->y - car->y < 0.5)) {
-        printf("yes\n");   
-    }
-    movegamecharacter(ball, ball->x, ball->y);
+}
+
+void move_ball {
+
 }
 
 void reset_car() {
@@ -263,7 +261,7 @@ void main(){
     DISPLAY_ON;
 
     UINT8 turn_count = 0;
-    UINT8 move_count = 0;
+    UINT8 move_count = 0;  
 
     while(1){
         if (car1.vel == 0) {
