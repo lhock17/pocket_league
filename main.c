@@ -19,9 +19,15 @@ int goal_size = 3;
 int player_goals = 0;
 int enemy_goals = 0;
 
-int barriers[2] = {0x00, 0x00};
-int player_goal_square[3] = {53, 21, 21};
-int enemy_goal_square[3] = {19, 18, 4};
+
+UINT8 barriers[2] = {0x00, 0x00};
+UINT8 player_goal_square[3] = {87, 119, 55};
+UINT8 enemy_goal_square[3] = {118, 21, 84};
+
+unsigned char windowmap[] =
+{
+  0x13,0x10,0x17,0x17,0x1A
+};
 
 struct GameObject car1;
 struct GameObject car2;
@@ -73,10 +79,6 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
-    if(joypad() & J_A) {
-        printf("Tileindex: %d\n", tileindexTL);
-    }
-    //
     for (int i = 0; i < goal_size; i++) {
         if (tileindexTL == enemy_goal_square[i])  {
             player_goals++;
@@ -391,6 +393,25 @@ void reset1() {
     ball.x = 50;
     ball.y = 20;
     ball.vel = 0;
+}
+
+void reflectx() {
+    if (ball.direction < 9) {
+        ball.direction = 8 - ball.direction;
+    } else {
+        ball.direction = 24 - ball.direction;
+    }
+}
+
+void reflecty() {
+    if (ball.direction != 0) {
+        ball.direction = 16 - ball.direction;
+    }
+}
+
+void reset_car() {
+    car1.x = 64;
+    car1.y = 64;
     movegamecharacter(&car1, car1.x, car1.y);
     movegamecharacter(&ball, ball.index_x, ball.index_y);
     move_bkg(car1.x, car1.y);
@@ -410,6 +431,26 @@ void main(){
     //font_init();
     //min_font = font_load(font_min);
     //font_set(min_font);
+    set_bkg_data(0, 163, pocket_league_data);
+    set_bkg_tiles(0,0,20,18, pocket_league_map);
+    SHOW_BKG;
+
+    while(1) {
+        if (joypad() & J_START) {
+            break;
+        }
+        wait_vbl_done();
+    }
+    HIDE_BKG;
+
+    NR52_REG = 0x80; // is 1000 0000 in binary and turns on sound
+    NR50_REG = 0x77; // sets the volume for both left and right channel just set to max 0x77
+    NR51_REG = 0xFF; // is 1111 1111 in binary, select which chanels we want to use in this case all of them. One bit for the L one bit for the R of all four channels
+    NR10_REG = 0x16; 
+    NR11_REG = 0x40;
+    NR12_REG = 0x73;  
+    NR13_REG = 0x00;   
+    NR14_REG = 0xC3;
 
     // load sprites for car
     //background
@@ -452,6 +493,7 @@ void main(){
         if (is_goal(ball.x, ball.y)) {
              //printf("This is a goal\n");
              reset1();
+             //reset_car();
         }
         turn_count--;
         // move_ball(&ball);
