@@ -234,8 +234,8 @@ void move_car(struct GameObject* car, struct GameObject* ball) {
     move_bkg(car->x, car->y);
     ball->x -= car->x - dx;
     ball->y -= car->y - dy;
-    if ((ball->x - car->x < 0.5) AND (ball->y - car->y < 0.5)) {
-        printf("yes\n");   
+    if (abs(ball->x - car->x) < 1 AND abs(ball->y - car->y) < 1) {
+        printf("yes\n"); 
     }
     movegamecharacter(ball, ball->x, ball->y);
 }
@@ -256,8 +256,6 @@ void main(){
 
     set_sprite_data(0,4, car_light);
     setupcar_light();
-    set_sprite_data(68,4, car_dark);
-    setupcar_dark();
     set_sprite_data(64, 4, ball_sprite);
     setup_ball();
     movegamecharacter(&ball, ball.x, ball.y);
