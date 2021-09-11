@@ -122,7 +122,7 @@ void setupcar_dark(){
     movegamecharacter(&car2, car2.x, car2.y);
 }
 
-void move_car(struct GameObject* car) {
+void move_car(struct GameObject* car, struct GameObject* ball) {
     if (car->acc == 0 AND car->vel > 0) {
         car->vel -= 1;
     }
@@ -132,7 +132,6 @@ void move_car(struct GameObject* car) {
     if (car->vel > 5 OR car->vel < -5) {
         car->acc = 0;   
     }
-void move_car(struct GameObject* car, struct GameObject* ball) {
     car->vel += car->acc;
     INT8 dx = car->x;
     INT8 dy = car->y;
@@ -239,16 +238,16 @@ void main(){
             turn_count = 2;
         } else if (turn_count == 0) {
             turn_count = 22/abs(car1.vel);
-    while(1){
+        }
         
         //move_ball(&ball);
         //ball.x += 1;
         //movegamecharacter(&ball, ball.x, ball.y);
 
-        if (is_goal(car1.x, car1.y)) {
-            //printf("This is a goal\n");
-            reset_car();
-        }
+        // if (is_goal(car1.x, car1.y)) {
+        //     //printf("This is a goal\n");
+        //     reset_car();
+        // }
         turn_count--;
         // move_ball(&ball);
 
@@ -256,13 +255,13 @@ void main(){
         //     printf("This is a goal\n");
         // }
         
-        //player contact with ball
-         if (check_collision(&car1, &ball)) {
-             printf("%d:%d\n", car1.x, car1.y);
-             printf("%d:%d\n", ball.x, ball.y);
-             //ball.ve = car1.vel_x;
-             //ball.vel_y = car1.vel_y;
-         }
+        // //player contact with ball
+        //  if (!move_count AND check_collision(&car1, &ball)) {
+        //      printf("%d:%d\n", car1.x, car1.y);
+        //      printf("%d:%d\n", ball.x, ball.y);
+        //      //ball.ve = car1.vel_x;
+        //      //ball.vel_y = car1.vel_y;
+        //  }
 
         //controls
         if(joypad() & J_B){
@@ -289,7 +288,7 @@ void main(){
             load_car_sprite(car1.direction);
         }
         if (move_count == 0) {
-            move_car(&car1);
+            move_car(&car1, &ball);
             move_count = 2;
         }
         move_count--;
