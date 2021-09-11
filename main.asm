@@ -1,10 +1,6 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-<<<<<<< HEAD
 ; Version 4.1.6 #12439 (Mac OS X x86_64)
-=======
-; Version 4.1.6 #12439 (MINGW32)
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mgbz80
@@ -13,10 +9,6 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _main
-<<<<<<< HEAD
-=======
-	.globl _move_ball
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 	.globl _move_car
 	.globl _deccelerate
 	.globl _accelerate
@@ -27,7 +19,6 @@
 	.globl _load_car_sprite
 	.globl _check_collision
 	.globl _load_ball_sprite
-	.globl _printf
 	.globl _set_sprite_data
 	.globl _set_bkg_tiles
 	.globl _set_bkg_data
@@ -82,7 +73,7 @@ _spritesize::
 ; Function load_ball_sprite
 ; ---------------------------------
 _load_ball_sprite::
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 18)
 	ld	(hl), #0x40
 ;main.c:36: ball.spriteids[0] = 4;
@@ -2789,7 +2780,7 @@ _load_car_sprite::
 	add	a, a
 	add	a, a
 	ld	b, a
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 2)
 	ld	(hl), b
 ;main.c:52: car1.spriteids[0] = 0;
@@ -2803,7 +2794,7 @@ _load_car_sprite::
 	ld	b, c
 	inc	b
 	inc	b
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 6)
 	ld	(hl), b
 ;main.c:54: car1.spriteids[1] = 1;
@@ -2812,7 +2803,7 @@ _load_car_sprite::
 ;main.c:55: set_sprite_tile(2, 4 * direction + 1);
 	ld	b, c
 	inc	b
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 10)
 	ld	(hl), b
 ;main.c:56: car1.spriteids[2] = 2;
@@ -2822,7 +2813,7 @@ _load_car_sprite::
 	inc	c
 	inc	c
 	inc	c
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
+;../../gbdk/include/gb/gb.h:1174: shadow_OAM[nb].tile=tile;
 	ld	hl, #(_shadow_OAM + 14)
 	ld	(hl), c
 ;main.c:58: car1.spriteids[3] = 3;
@@ -2856,11 +2847,7 @@ _movegamecharacter::
 ;	spillPairReg hl
 ;	spillPairReg hl
 	inc	hl
-<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-=======
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2873,11 +2860,7 @@ _movegamecharacter::
 	add	hl, bc
 	ld	c, l
 	ld	b, h
-<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-=======
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 	ldhl	sp,	#0
 	ld	a, (hl+)
 	ld	(bc), a
@@ -2900,11 +2883,7 @@ _movegamecharacter::
 	ld	c, (hl)
 	ldhl	sp,	#2
 	ld	(hl), a
-<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-=======
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 	ld	l, c
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2917,11 +2896,7 @@ _movegamecharacter::
 	add	hl, bc
 	ld	c, l
 	ld	b, h
-<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-=======
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 	ldhl	sp,	#0
 	ld	a, (hl+)
 	inc	hl
@@ -2945,11 +2920,7 @@ _movegamecharacter::
 	inc	hl
 	inc	hl
 	inc	hl
-<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-=======
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2962,11 +2933,7 @@ _movegamecharacter::
 	ld	de, #_shadow_OAM
 	add	hl, de
 	pop	de
-<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-=======
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 	ld	a, c
 	ld	(hl+), a
 	ld	c, l
@@ -2988,11 +2955,7 @@ _movegamecharacter::
 	ld	c, a
 	ld	hl, #0x0004
 	add	hl, de
-<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
-=======
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1247: OAM_item_t * itm = &shadow_OAM[nb];
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 	ld	l, (hl)
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -3003,11 +2966,7 @@ _movegamecharacter::
 	add	hl, hl
 	ld	de, #_shadow_OAM
 	add	hl, de
-<<<<<<< HEAD
 ;../../gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
-=======
-;C:/Users/campb/Documents/gbdk/include/gb/gb.h:1248: itm->y=y, itm->x=x;
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 	ld	a, b
 	ld	(hl+), a
 	ld	(hl), c
@@ -3125,47 +3084,26 @@ _setupcar_light::
 	add	sp, #4
 ;main.c:100: }
 	ret
-<<<<<<< HEAD
 ;main.c:102: void accelerate (struct GameObject* car) {
-=======
-;main.c:98: void accelerate (struct GameObject* car) {
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 ;	---------------------------------
 ; Function accelerate
 ; ---------------------------------
 _accelerate::
-	dec	sp
 ;main.c:103: switch (car->direction) {
-	ldhl	sp,	#3
+	ldhl	sp,	#2
 	ld	a, (hl+)
 	ld	c, a
 	ld	b, (hl)
 	ld	a, (bc)
-	ldhl	sp,	#0
-	ld	(hl), a
+	ld	e, a
 	ld	a, #0x0f
-	sub	a, (hl)
-	jp	C, 00118$
-;main.c:105: car->acc_y = 100;
-	ld	hl, #0x000a
-	add	hl, bc
-	ld	e, l
-	ld	d, h
-;main.c:107: car->acc_x = 25;
-	ld	hl, #0x0009
-	add	hl, bc
-	ld	c, l
-	ld	b, h
-;main.c:103: switch (car->direction) {
-	push	de
-	ldhl	sp,	#2
-	ld	e, (hl)
+	sub	a, e
+	ret	C
 	ld	d, #0x00
 	ld	hl, #00125$
 	add	hl, de
 	add	hl, de
 	add	hl, de
-	pop	de
 	jp	(hl)
 00125$:
 	jp	00101$
@@ -3187,165 +3125,208 @@ _accelerate::
 ;main.c:104: case 0:
 00101$:
 ;main.c:105: car->acc_y = 100;
-	ld	a, #0x64
-	ld	(de), a
-;main.c:106: case 1:
-00102$:
-;main.c:107: car->acc_x = 25;
-	ld	a, #0x19
-	ld	(bc), a
-;main.c:108: car->acc_y = 75;
-	ld	a, #0x4b
-	ld	(de), a
-;main.c:109: case 2:
-00103$:
-;main.c:110: car->acc_x = 50;
-;main.c:111: car->acc_y = 50;
-	ld	a,#0x32
-	ld	(bc),a
-	ld	(de), a
-;main.c:112: case 3:
-00104$:
-;main.c:113: car->acc_x = 75;
-	ld	a, #0x4b
-	ld	(bc), a
-;main.c:114: car->acc_y = 25;
-	ld	a, #0x19
-	ld	(de), a
-;main.c:115: case 4:
-00105$:
-;main.c:116: car->acc_x = 100;
-	ld	a, #0x64
-	ld	(bc), a
-;main.c:117: car->acc_y = 0;
-	xor	a, a
-	ld	(de), a
-;main.c:118: case 5:
-00106$:
-;main.c:119: car->acc_x = 75;
-	ld	a, #0x4b
-	ld	(bc), a
-;main.c:120: car->acc_y = -25;
-	ld	a, #0xe7
-	ld	(de), a
-;main.c:121: case 6:
-00107$:
-;main.c:122: car->acc_x = 50;
-	ld	a, #0x32
-	ld	(bc), a
-;main.c:123: car->acc_y = -50;
-	ld	a, #0xce
-	ld	(de), a
-;main.c:124: case 7:
-00108$:
-;main.c:125: car->acc_x = 25;
-	ld	a, #0x19
-	ld	(bc), a
-;main.c:126: car->acc_y = -75;
-	ld	a, #0xb5
-	ld	(de), a
-;main.c:127: case 8:
-00109$:
-;main.c:128: car->acc_y = -100;
-	ld	a, #0x9c
-	ld	(de), a
-;main.c:129: case 9:
-00110$:
-;main.c:130: car->acc_x = -25;
-	ld	a, #0xe7
-	ld	(bc), a
-;main.c:131: car->acc_y = -75;
-	ld	a, #0xb5
-	ld	(de), a
-;main.c:132: case 10:
-00111$:
-;main.c:133: car->acc_x = -50;
-;main.c:134: car->acc_y = -50;
-	ld	a,#0xce
-	ld	(bc),a
-	ld	(de), a
-;main.c:135: case 11:
-00112$:
-;main.c:136: car->acc_x = -75;
-	ld	a, #0xb5
-	ld	(bc), a
-;main.c:137: car->acc_y = -25;
-	ld	a, #0xe7
-	ld	(de), a
-;main.c:138: case 12:
-00113$:
-;main.c:139: car->acc_x = -100;
-	ld	a, #0x9c
-	ld	(bc), a
-;main.c:140: car->acc_y = 0;
-	xor	a, a
-	ld	(de), a
-;main.c:141: case 13:
-00114$:
-;main.c:142: car->acc_x = -25;
-	ld	a, #0xe7
-	ld	(bc), a
-;main.c:143: car->acc_y = 75;
-	ld	a, #0x4b
-	ld	(de), a
-;main.c:144: case 14:
-00115$:
-;main.c:145: car->acc_x = -50;
-	ld	a, #0xce
-	ld	(bc), a
-;main.c:146: car->acc_y = 50;
-	ld	a, #0x32
-	ld	(de), a
-;main.c:147: case 15:
-00116$:
-;main.c:148: car->acc_x = -75;
-	ld	a, #0xb5
-	ld	(bc), a
-;main.c:149: car->acc_y = 25;
-	ld	a, #0x19
-	ld	(de), a
-;main.c:150: }
-00118$:
-;main.c:151: }
-	inc	sp
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x64
+;main.c:106: break;
 	ret
-;main.c:153: void deccelerate (struct GameObject* car) {
+;main.c:107: case 1:
+00102$:
+;main.c:108: car->acc_x = 25;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x19
+;main.c:109: car->acc_y = 75;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x4b
+;main.c:110: break;
+	ret
+;main.c:111: case 2:
+00103$:
+;main.c:112: car->acc_x = 50;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x32
+;main.c:113: car->acc_y = 50;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x32
+;main.c:114: break;
+	ret
+;main.c:115: case 3:
+00104$:
+;main.c:116: car->acc_x = 75;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x4b
+;main.c:117: car->acc_y = 25;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x19
+;main.c:118: break;
+	ret
+;main.c:119: case 4:
+00105$:
+;main.c:120: car->acc_x = 100;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x64
+;main.c:121: car->acc_y = 0;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x00
+;main.c:122: break;
+	ret
+;main.c:123: case 5:
+00106$:
+;main.c:124: car->acc_x = 75;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x4b
+;main.c:125: car->acc_y = -25;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xe7
+;main.c:126: break;
+	ret
+;main.c:127: case 6:
+00107$:
+;main.c:128: car->acc_x = 50;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x32
+;main.c:129: car->acc_y = -50;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xce
+;main.c:130: break;
+	ret
+;main.c:131: case 7:
+00108$:
+;main.c:132: car->acc_x = 25;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x19
+;main.c:133: car->acc_y = -75;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xb5
+;main.c:134: break;
+	ret
+;main.c:135: case 8:
+00109$:
+;main.c:136: car->acc_y = -100;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x9c
+;main.c:137: break;
+	ret
+;main.c:138: case 9:
+00110$:
+;main.c:139: car->acc_x = -25;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xe7
+;main.c:140: car->acc_y = -75;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xb5
+;main.c:141: break;
+	ret
+;main.c:142: case 10:
+00111$:
+;main.c:143: car->acc_x = -50;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xce
+;main.c:144: car->acc_y = -50;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xce
+;main.c:145: break;
+	ret
+;main.c:146: case 11:
+00112$:
+;main.c:147: car->acc_x = -75;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xb5
+;main.c:148: car->acc_y = -25;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xe7
+;main.c:149: break;
+	ret
+;main.c:150: case 12:
+00113$:
+;main.c:151: car->acc_x = -100;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x9c
+;main.c:152: car->acc_y = 0;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x00
+;main.c:153: break;
+	ret
+;main.c:154: case 13:
+00114$:
+;main.c:155: car->acc_x = -25;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xe7
+;main.c:156: car->acc_y = 75;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x4b
+;main.c:157: break;
+	ret
+;main.c:158: case 14:
+00115$:
+;main.c:159: car->acc_x = -50;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xce
+;main.c:160: car->acc_y = 50;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x32
+;main.c:161: break;
+	ret
+;main.c:162: case 15:
+00116$:
+;main.c:163: car->acc_x = -75;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xb5
+;main.c:164: car->acc_y = 25;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x19
+;main.c:166: }
+;main.c:167: }
+	ret
+;main.c:169: void deccelerate (struct GameObject* car) {
 ;	---------------------------------
 ; Function deccelerate
 ; ---------------------------------
 _deccelerate::
-	dec	sp
-;main.c:154: switch (car->direction) {
-	ldhl	sp,	#3
+;main.c:170: switch (car->direction) {
+	ldhl	sp,	#2
 	ld	a, (hl+)
 	ld	c, a
 	ld	b, (hl)
 	ld	a, (bc)
-	ldhl	sp,	#0
-	ld	(hl), a
+	ld	e, a
 	ld	a, #0x0f
-	sub	a, (hl)
-	jp	C, 00118$
-;main.c:156: car->acc_y = -100;
-	ld	hl, #0x000a
-	add	hl, bc
-	ld	e, l
-	ld	d, h
-;main.c:158: car->acc_x = -25;
-	ld	hl, #0x0009
-	add	hl, bc
-	ld	c, l
-	ld	b, h
-;main.c:154: switch (car->direction) {
-	push	de
-	ldhl	sp,	#2
-	ld	e, (hl)
+	sub	a, e
+	ret	C
 	ld	d, #0x00
 	ld	hl, #00125$
 	add	hl, de
 	add	hl, de
 	add	hl, de
-	pop	de
 	jp	(hl)
 00125$:
 	jp	00101$
@@ -3364,138 +3345,198 @@ _deccelerate::
 	jp	00114$
 	jp	00115$
 	jp	00116$
-;main.c:155: case 0:
+;main.c:171: case 0:
 00101$:
-;main.c:156: car->acc_y = -100;
-	ld	a, #0x9c
-	ld	(de), a
-;main.c:157: case 1:
-00102$:
-;main.c:158: car->acc_x = -25;
-	ld	a, #0xe7
-	ld	(bc), a
-;main.c:159: car->acc_y = -75;
-	ld	a, #0xb5
-	ld	(de), a
-;main.c:160: case 2:
-00103$:
-;main.c:161: car->acc_x = -50;
-;main.c:162: car->acc_y = -50;
-	ld	a,#0xce
-	ld	(bc),a
-	ld	(de), a
-;main.c:163: case 3:
-00104$:
-;main.c:164: car->acc_x = -75;
-	ld	a, #0xb5
-	ld	(bc), a
-;main.c:165: car->acc_y = -25;
-	ld	a, #0xe7
-	ld	(de), a
-;main.c:166: case 4:
-00105$:
-;main.c:167: car->acc_x = -100;
-	ld	a, #0x9c
-	ld	(bc), a
-;main.c:168: car->acc_y = 0;
-	xor	a, a
-	ld	(de), a
-;main.c:169: case 5:
-00106$:
-;main.c:170: car->acc_x = -75;
-	ld	a, #0xb5
-	ld	(bc), a
-;main.c:171: car->acc_y = 25;
-	ld	a, #0x19
-	ld	(de), a
-;main.c:172: case 6:
-00107$:
-;main.c:173: car->acc_x = -50;
-	ld	a, #0xce
-	ld	(bc), a
-;main.c:174: car->acc_y = 50;
-	ld	a, #0x32
-	ld	(de), a
-;main.c:175: case 7:
-00108$:
-;main.c:176: car->acc_x = -25;
-	ld	a, #0xe7
-	ld	(bc), a
-;main.c:177: car->acc_y = 75;
-	ld	a, #0x4b
-	ld	(de), a
-;main.c:178: case 8:
-00109$:
-;main.c:179: car->acc_y = 100;
-	ld	a, #0x64
-	ld	(de), a
-;main.c:180: case 9:
-00110$:
-;main.c:181: car->acc_x = 25;
-	ld	a, #0x19
-	ld	(bc), a
-;main.c:182: car->acc_y = 75;
-	ld	a, #0x4b
-	ld	(de), a
-;main.c:183: case 10:
-00111$:
-;main.c:184: car->acc_x = 50;
-;main.c:185: car->acc_y = 50;
-	ld	a,#0x32
-	ld	(bc),a
-	ld	(de), a
-;main.c:186: case 11:
-00112$:
-;main.c:187: car->acc_x = 75;
-	ld	a, #0x4b
-	ld	(bc), a
-;main.c:188: car->acc_y = 25;
-	ld	a, #0x19
-	ld	(de), a
-;main.c:189: case 12:
-00113$:
-;main.c:190: car->acc_x = 100;
-	ld	a, #0x64
-	ld	(bc), a
-;main.c:191: car->acc_y = 0;
-	xor	a, a
-	ld	(de), a
-;main.c:192: case 13:
-00114$:
-;main.c:193: car->acc_x = 25;
-	ld	a, #0x19
-	ld	(bc), a
-;main.c:194: car->acc_y = -75;
-	ld	a, #0xb5
-	ld	(de), a
-;main.c:195: case 14:
-00115$:
-;main.c:196: car->acc_x = 50;
-	ld	a, #0x32
-	ld	(bc), a
-;main.c:197: car->acc_y = -50;
-	ld	a, #0xce
-	ld	(de), a
-;main.c:198: case 15:
-00116$:
-;main.c:199: car->acc_x = 75;
-	ld	a, #0x4b
-	ld	(bc), a
-;main.c:200: car->acc_y = -25;
-	ld	a, #0xe7
-	ld	(de), a
-;main.c:201: }
-00118$:
-;main.c:202: }
-	inc	sp
+;main.c:172: car->acc_y = -100;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x9c
+;main.c:173: break;
 	ret
-;main.c:204: void move_car(struct GameObject* car) {
+;main.c:174: case 1:
+00102$:
+;main.c:175: car->acc_x = -25;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xe7
+;main.c:176: car->acc_y = -75;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xb5
+;main.c:177: break;
+	ret
+;main.c:178: case 2:
+00103$:
+;main.c:179: car->acc_x = -50;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xce
+;main.c:180: car->acc_y = -50;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xce
+;main.c:181: break;
+	ret
+;main.c:182: case 3:
+00104$:
+;main.c:183: car->acc_x = -75;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xb5
+;main.c:184: car->acc_y = -25;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xe7
+;main.c:185: break;
+	ret
+;main.c:186: case 4:
+00105$:
+;main.c:187: car->acc_x = -100;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x9c
+;main.c:188: car->acc_y = 0;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x00
+;main.c:189: break;
+	ret
+;main.c:190: case 5:
+00106$:
+;main.c:191: car->acc_x = -75;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xb5
+;main.c:192: car->acc_y = 25;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x19
+;main.c:193: break;
+	ret
+;main.c:194: case 6:
+00107$:
+;main.c:195: car->acc_x = -50;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xce
+;main.c:196: car->acc_y = 50;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x32
+;main.c:197: break;
+	ret
+;main.c:198: case 7:
+00108$:
+;main.c:199: car->acc_x = -25;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0xe7
+;main.c:200: car->acc_y = 75;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x4b
+;main.c:201: break;
+	ret
+;main.c:202: case 8:
+00109$:
+;main.c:203: car->acc_y = 100;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x64
+;main.c:204: break;
+	ret
+;main.c:205: case 9:
+00110$:
+;main.c:206: car->acc_x = 25;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x19
+;main.c:207: car->acc_y = 75;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x4b
+;main.c:208: break;
+	ret
+;main.c:209: case 10:
+00111$:
+;main.c:210: car->acc_x = 50;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x32
+;main.c:211: car->acc_y = 50;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x32
+;main.c:212: break;
+	ret
+;main.c:213: case 11:
+00112$:
+;main.c:214: car->acc_x = 75;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x4b
+;main.c:215: car->acc_y = 25;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x19
+;main.c:216: break;
+	ret
+;main.c:217: case 12:
+00113$:
+;main.c:218: car->acc_x = 100;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x64
+;main.c:219: car->acc_y = 0;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0x00
+;main.c:220: break;
+	ret
+;main.c:221: case 13:
+00114$:
+;main.c:222: car->acc_x = 25;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x19
+;main.c:223: car->acc_y = -75;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xb5
+;main.c:224: break;
+	ret
+;main.c:225: case 14:
+00115$:
+;main.c:226: car->acc_x = 50;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x32
+;main.c:227: car->acc_y = -50;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xce
+;main.c:228: break;
+	ret
+;main.c:229: case 15:
+00116$:
+;main.c:230: car->acc_x = 75;
+	ld	hl, #0x0009
+	add	hl, bc
+	ld	(hl), #0x4b
+;main.c:231: car->acc_y = -25;
+	ld	hl, #0x000a
+	add	hl, bc
+	ld	(hl), #0xe7
+;main.c:233: }
+;main.c:234: }
+	ret
+;main.c:236: void move_car(struct GameObject* car) {
 ;	---------------------------------
 ; Function move_car
 ; ---------------------------------
 _move_car::
 	add	sp, #-4
-;main.c:206: car->vel_x += car->acc_x/100;
+;main.c:238: car->vel_x += car->acc_x/100;
 	ldhl	sp,	#6
 	ld	a, (hl+)
 	ld	c, a
@@ -3538,7 +3579,7 @@ _move_car::
 	ldhl	sp,	#0
 	ld	(hl), a
 	ld	(de), a
-;main.c:207: car->vel_y += car->acc_y/100;
+;main.c:239: car->vel_y += car->acc_y/100;
 	ld	hl, #0x0008
 	add	hl, bc
 	ld	e, l
@@ -3578,7 +3619,7 @@ _move_car::
 	dec	hl
 	ld	(hl), a
 	ld	(de), a
-;main.c:208: car->x += car->vel_x;
+;main.c:240: car->x += car->vel_x;
 	ld	hl, #0x0005
 	add	hl, bc
 	push	hl
@@ -3603,7 +3644,7 @@ _move_car::
 	ld	l, a
 	pop	af
 	ld	(hl), a
-;main.c:209: car->y += car->vel_y;
+;main.c:241: car->y += car->vel_y;
 	ld	hl, #0x0006
 	add	hl, bc
 	ld	e, l
@@ -3611,7 +3652,7 @@ _move_car::
 	ld	a, (de)
 	ldhl	sp,	#1
 	add	a, (hl)
-;main.c:210: movegamecharacter(car, car->x, car->y);
+;main.c:242: movegamecharacter(car, car->x, car->y);
 	inc	hl
 	ld	(de), a
 	ld	e, (hl)
@@ -3627,258 +3668,22 @@ _move_car::
 	inc	sp
 	push	bc
 	call	_movegamecharacter
-;main.c:211: }
+;main.c:243: }
 	add	sp, #8
 	ret
-<<<<<<< HEAD
-;main.c:213: void main(){
-=======
-;main.c:208: void move_ball(struct GameObject* ball) {
-;	---------------------------------
-; Function move_ball
-; ---------------------------------
-_move_ball::
-	add	sp, #-7
-;main.c:209: if (ball->vel_x > 0) {
-	ldhl	sp,	#9
-	ld	a, (hl)
-	ldhl	sp,	#0
-	ld	(hl), a
-	ldhl	sp,	#10
-	ld	a, (hl)
-	ldhl	sp,	#1
-	ld	(hl), a
-	pop	de
-	push	de
-	ld	hl, #0x0007
-	add	hl, de
-	ld	c, l
-	ld	b, h
-	ld	a, (bc)
-	ldhl	sp,	#6
-	ld	(hl), a
-;main.c:211: ball->x += ball->vel_x/100;
-	pop	de
-	push	de
-	ld	hl, #0x0005
-	add	hl, de
-	push	hl
-	ld	a, l
-	ldhl	sp,	#4
-	ld	(hl), a
-	pop	hl
-	ld	a, h
-	ldhl	sp,	#3
-	ld	(hl), a
-;main.c:209: if (ball->vel_x > 0) {
-	ldhl	sp,	#6
-	ld	e, (hl)
-	xor	a, a
-	ld	d, a
-	sub	a, (hl)
-	bit	7, e
-	jr	Z, 00117$
-	bit	7, d
-	jr	NZ, 00118$
-	cp	a, a
-	jr	00118$
-00117$:
-	bit	7, d
-	jr	Z, 00118$
-	scf
-00118$:
-	jr	NC, 00102$
-;main.c:210: ball->vel_x -= ball->acc_x/100;
-	pop	de
-	push	de
-	ld	hl, #0x0009
-	add	hl, de
-	ld	e, l
-	ld	d, h
-	ld	a, (de)
-	ld	e, a
-	rlca
-	sbc	a, a
-	push	bc
-	ld	hl, #0x0064
-	push	hl
-	ld	d, a
-	push	de
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ldhl	sp,	#6
-	ld	a, (hl)
-	sub	a, e
-	ld	(bc), a
-;main.c:211: ball->x += ball->vel_x/100;
-	ldhl	sp,#2
-	ld	e, (hl)
-	inc	hl
-	ld	d, (hl)
-	push	af
-	ld	a, (de)
-	ld	c, a
-	pop	af
-	ld	e, a
-	rlca
-	sbc	a, a
-	push	bc
-	ld	hl, #0x0064
-	push	hl
-	ld	d, a
-	push	de
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ld	a, e
-	add	a, c
-	ld	c, a
-	ldhl	sp,	#2
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	ld	(hl), c
-00102$:
-;main.c:213: if (ball->vel_y > 0) {
-	pop	de
-	push	de
-	ld	hl, #0x0008
-	add	hl, de
-	push	hl
-	ld	a, l
-	ldhl	sp,	#6
-	ld	(hl), a
-	pop	hl
-	ld	a, h
-	ldhl	sp,	#5
-	ld	(hl-), a
-	ld	a, (hl+)
-	ld	e, a
-	ld	a, (hl+)
-	ld	d, a
-	ld	a, (de)
-	ld	(hl), a
-;main.c:215: ball->y += ball->vel_y/100;
-	pop	de
-	push	de
-	ld	hl, #0x0006
-	add	hl, de
-	ld	c, l
-	ld	b, h
-;main.c:213: if (ball->vel_y > 0) {
-	ldhl	sp,	#6
-	ld	e, (hl)
-	xor	a, a
-	ld	d, a
-	sub	a, (hl)
-	bit	7, e
-	jr	Z, 00119$
-	bit	7, d
-	jr	NZ, 00120$
-	cp	a, a
-	jr	00120$
-00119$:
-	bit	7, d
-	jr	Z, 00120$
-	scf
-00120$:
-	jr	NC, 00104$
-;main.c:214: ball->vel_y -= ball->acc_y/100;
-	pop	de
-	push	de
-	ld	hl, #0x000a
-	add	hl, de
-	ld	e, l
-	ld	d, h
-	ld	a, (de)
-	ld	e, a
-	rlca
-	sbc	a, a
-	push	bc
-	ld	hl, #0x0064
-	push	hl
-	ld	d, a
-	push	de
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ldhl	sp,	#6
-	ld	a, (hl-)
-	dec	hl
-	sub	a, e
-	push	af
-	ld	a,	(hl+)
-	ld	h, (hl)
-	ld	l, a
-	pop	af
-	ld	(hl), a
-;main.c:215: ball->y += ball->vel_y/100;
-	push	af
-	ld	a, (bc)
-	ldhl	sp,	#8
-	ld	(hl), a
-	pop	af
-	ld	e, a
-	rlca
-	sbc	a, a
-	push	bc
-	ld	hl, #0x0064
-	push	hl
-	ld	d, a
-	push	de
-	call	__divsint
-	add	sp, #4
-	pop	bc
-	ldhl	sp,	#6
-	ld	a, (hl)
-	add	a, e
-	ld	(bc), a
-00104$:
-;main.c:217: movegamecharacter(ball, ball->x, ball->y);
-	ld	a, (bc)
-	ld	b, a
-	ldhl	sp,#2
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	ld	a, (de)
-	push	bc
-	inc	sp
-	push	af
-	inc	sp
-	ldhl	sp,	#2
-	ld	a, (hl+)
-	ld	e, a
-	ld	d, (hl)
-	push	de
-	call	_movegamecharacter
-;main.c:218: }
-	add	sp, #11
-	ret
-;main.c:220: void main(){
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
+;main.c:245: void main(){
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-<<<<<<< HEAD
-;main.c:216: set_bkg_data(0, 44, bkg_tiles);
-=======
-	dec	sp
-;main.c:223: set_bkg_data(0, 44, bkg_tiles);
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
+;main.c:248: set_bkg_data(0, 44, bkg_tiles);
 	ld	de, #_bkg_tiles
 	push	de
 	ld	hl, #0x2c00
 	push	hl
 	call	_set_bkg_data
 	add	sp, #4
-<<<<<<< HEAD
-;main.c:217: set_bkg_tiles(0, 0, 32, 21, map);
-=======
-;main.c:224: set_bkg_tiles(0, 0, 32, 21, map);
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
+;main.c:249: set_bkg_tiles(0, 0, 32, 21, map);
 	ld	de, #_map
 	push	de
 	ld	hl, #0x1520
@@ -3888,49 +3693,29 @@ _main::
 	push	af
 	call	_set_bkg_tiles
 	add	sp, #6
-<<<<<<< HEAD
-;main.c:218: SHOW_BKG;
+;main.c:250: SHOW_BKG;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x01
 	ldh	(_LCDC_REG + 0), a
-;main.c:220: set_sprite_data(0,4, car_light);
-=======
-;main.c:225: SHOW_BKG;
-	ldh	a, (_LCDC_REG + 0)
-	or	a, #0x01
-	ldh	(_LCDC_REG + 0), a
-;main.c:227: set_sprite_data(0,4, car_light);
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
+;main.c:252: set_sprite_data(0,4, car_light);
 	ld	de, #_car_light
 	push	de
 	ld	hl, #0x400
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-<<<<<<< HEAD
-;main.c:221: setupcar_light();
+;main.c:253: setupcar_light();
 	call	_setupcar_light
-;main.c:222: set_sprite_data(64, 4, ball_sprite);
-=======
-;main.c:228: setupcar_light();
-	call	_setupcar_light
-;main.c:229: set_sprite_data(64, 4, ball_sprite);
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
+;main.c:254: set_sprite_data(64, 4, ball_sprite);
 	ld	de, #_ball_sprite
 	push	de
 	ld	hl, #0x440
 	push	hl
 	call	_set_sprite_data
 	add	sp, #4
-<<<<<<< HEAD
-;main.c:223: setup_ball();
+;main.c:255: setup_ball();
 	call	_setup_ball
-;main.c:224: movegamecharacter(&ball, ball.x, ball.y);
-=======
-;main.c:230: setup_ball();
-	call	_setup_ball
-;main.c:231: movegamecharacter(&ball, ball.x, ball.y);
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
+;main.c:256: movegamecharacter(&ball, ball.x, ball.y);
 	ld	hl, #_ball + 6
 	ld	b, (hl)
 	ld	a, (#(_ball + 5) + 0)
@@ -3942,254 +3727,137 @@ _main::
 	push	de
 	call	_movegamecharacter
 	add	sp, #4
-<<<<<<< HEAD
-;main.c:226: SHOW_SPRITES;
+;main.c:258: SHOW_SPRITES;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x02
 	ldh	(_LCDC_REG + 0), a
-;main.c:227: DISPLAY_ON;
+;main.c:259: DISPLAY_ON;
 	ldh	a, (_LCDC_REG + 0)
 	or	a, #0x80
 	ldh	(_LCDC_REG + 0), a
-;main.c:229: while(1){
-00118$:
-;main.c:237: printf("direction:%s\n", car1.direction);
+;main.c:261: while(1){
+00120$:
+;main.c:266: if (check_collision(&car1, &ball)) {
 	ld	bc, #_car1+0
-	ld	a, (bc)
-	ld	e, a
-	ld	d, #0x00
+	ld	e, c
+	ld	d, b
 	push	bc
-	push	de
-	ld	de, #___str_0
-	push	de
-	call	_printf
-	add	sp, #4
-	pop	bc
-;main.c:238: if(joypad() & J_A){
-	call	_joypad
-	bit	4, e
-	jr	Z, 00105$
-;main.c:239: accelerate(&car1);
-	push	bc
-=======
-;main.c:233: SHOW_SPRITES;
-	ldh	a, (_LCDC_REG + 0)
-	or	a, #0x02
-	ldh	(_LCDC_REG + 0), a
-;main.c:234: DISPLAY_ON;
-	ldh	a, (_LCDC_REG + 0)
-	or	a, #0x80
-	ldh	(_LCDC_REG + 0), a
-;main.c:236: while(1){
-00118$:
-;main.c:238: move_ball(&ball);
-	ld	de, #_ball
-	push	de
-	call	_move_ball
-	pop	hl
-;main.c:241: if (check_collision(&car1, &ball)) {
-	ld	de, #_ball
-	push	de
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
-	ld	de, #_car1
+	ld	hl, #_ball
+	push	hl
 	push	de
 	call	_check_collision
 	add	sp, #4
-	ldhl	sp,#0
-	ld	(hl), e
-	ld	a, (hl)
+	ld	a, e
+	pop	bc
 	or	a, a
 	jr	Z, 00102$
-;main.c:242: printf("Collision detected");
-	ld	de, #___str_0
-	push	de
-	call	_printf
-	pop	hl
-<<<<<<< HEAD
-	pop	bc
-	jr	00106$
-00105$:
-;main.c:240: } else if (joypad() & J_B){
-	call	_joypad
-	bit	5, e
-	jr	Z, 00102$
-;main.c:241: deccelerate(&car1);
-	push	bc
-=======
-;main.c:243: ball.vel_x = car1.vel_x;
+;main.c:268: ball.vel_x = car1.vel_x;
 	ld	a, (#(_car1 + 7) + 0)
 	ld	(#(_ball + 7)),a
-;main.c:244: ball.vel_y = car1.vel_y;
+;main.c:269: ball.vel_y = car1.vel_y;
 	ld	a, (#(_car1 + 8) + 0)
 	ld	(#(_ball + 8)),a
 00102$:
-;main.c:248: if(joypad() & J_A){
+;main.c:273: if(joypad() & J_A){
 	call	_joypad
 	bit	4, e
-	jr	Z, 00104$
-;main.c:249: accelerate(&car1);
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
-	ld	de, #_car1
+	jr	Z, 00107$
+;main.c:274: accelerate(&car1);
+	ld	e, c
+	ld	d, b
+	push	bc
 	push	de
 	call	_accelerate
 	pop	hl
-<<<<<<< HEAD
 	pop	bc
-	jr	00106$
-00102$:
-;main.c:243: car1.acc_x = 0;
-	ld	hl, #(_car1 + 9)
-	ld	(hl), #0x00
-;main.c:244: car1.acc_y = 0;
-	ld	hl, #(_car1 + 10)
-	ld	(hl), #0x00
-00106$:
-;main.c:246: if(joypad() & J_LEFT){
-	call	_joypad
-	bit	1, e
-	jr	Z, 00111$
-;main.c:247: if (car1.direction == 0) {
-	ld	a, (bc)
-	or	a, a
-	jr	NZ, 00108$
-;main.c:248: car1.direction = 15;
-	ld	a, #0x0f
-	ld	(bc), a
-	jr	00109$
-00108$:
-;main.c:250: car1.direction -= 1;
-	dec	a
-	ld	(bc), a
-00109$:
-;main.c:252: load_car_sprite(car1.direction);
-	ld	a, (bc)
-	push	bc
-=======
-00104$:
-;main.c:251: if(joypad() & J_B){
+	jr	00108$
+00107$:
+;main.c:275: } else if (joypad() & J_B){
 	call	_joypad
 	bit	5, e
-	jr	Z, 00106$
-;main.c:252: deccelerate(&car1);
-	ld	de, #_car1
+	jr	Z, 00104$
+;main.c:276: deccelerate(&car1);
+	ld	e, c
+	ld	d, b
+	push	bc
 	push	de
 	call	_deccelerate
 	pop	hl
-00106$:
-;main.c:254: if(joypad() & J_LEFT){
+	pop	bc
+	jr	00108$
+00104$:
+;main.c:278: car1.acc_x = 0;
+	ld	hl, #(_car1 + 9)
+	ld	(hl), #0x00
+;main.c:279: car1.acc_y = 0;
+	ld	hl, #(_car1 + 10)
+	ld	(hl), #0x00
+00108$:
+;main.c:281: if(joypad() & J_LEFT){
 	call	_joypad
 	bit	1, e
-	jr	Z, 00111$
-;main.c:255: if (car1.direction == 0) {
-	ld	a, (#_car1 + 0)
+	jr	Z, 00113$
+;main.c:282: if (car1.direction == 0) {
+	ld	a, (bc)
 	or	a, a
-	jr	NZ, 00108$
-;main.c:256: car1.direction = 15;
-	ld	hl, #_car1
-	ld	(hl), #0x0f
-	jr	00109$
-00108$:
-;main.c:258: car1.direction -= 1;
+	jr	NZ, 00110$
+;main.c:283: car1.direction = 15;
+	ld	a, #0x0f
+	ld	(bc), a
+	jr	00111$
+00110$:
+;main.c:285: car1.direction -= 1;
 	dec	a
-	ld	(#_car1),a
-00109$:
-;main.c:260: load_car_sprite(car1.direction);
-	ld	a, (#_car1 + 0)
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
+	ld	(bc), a
+00111$:
+;main.c:287: load_car_sprite(car1.direction);
+	ld	a, (bc)
+	push	bc
 	push	af
 	inc	sp
 	call	_load_car_sprite
 	inc	sp
-<<<<<<< HEAD
 	pop	bc
-00111$:
-;main.c:254: if(joypad() & J_RIGHT){
-=======
-00111$:
-;main.c:262: if(joypad() & J_RIGHT){
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
+00113$:
+;main.c:289: if(joypad() & J_RIGHT){
 	call	_joypad
 	ld	a, e
 	rrca
-	jr	NC, 00116$
-<<<<<<< HEAD
-;main.c:255: if (car1.direction == 15) {
+	jr	NC, 00118$
+;main.c:290: if (car1.direction == 15) {
 	ld	a, (bc)
 	cp	a, #0x0f
-	jr	NZ, 00113$
-;main.c:256: car1.direction = 0;
+	jr	NZ, 00115$
+;main.c:291: car1.direction = 0;
 	xor	a, a
 	ld	(bc), a
-	jr	00114$
-00113$:
-;main.c:258: car1.direction += 1;
+	jr	00116$
+00115$:
+;main.c:293: car1.direction += 1;
 	inc	a
 	ld	(bc), a
-00114$:
-;main.c:260: load_car_sprite(car1.direction);
+00116$:
+;main.c:295: load_car_sprite(car1.direction);
 	ld	a, (bc)
-=======
-;main.c:263: if (car1.direction == 15) {
-	ld	a, (#_car1 + 0)
-	ldhl	sp,#0
-	ld	(hl), a
-	ld	a, (hl)
-	sub	a, #0x0f
-	jr	NZ, 00113$
-;main.c:264: car1.direction = 0;
-	ld	hl, #_car1
-	ld	(hl), #0x00
-	jr	00114$
-00113$:
-;main.c:266: car1.direction += 1;
-	ldhl	sp,	#0
-	ld	a, (hl)
-	inc	a
-	ld	(#_car1),a
-00114$:
-;main.c:268: load_car_sprite(car1.direction);
-	ld	a, (#_car1 + 0)
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
+	push	bc
 	push	af
 	inc	sp
 	call	_load_car_sprite
 	inc	sp
-00116$:
-<<<<<<< HEAD
-;main.c:262: move_car(&car1);
-=======
-;main.c:270: move_car(&car1);
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
-	ld	de, #_car1
-	push	de
+	pop	bc
+00118$:
+;main.c:297: move_car(&car1);
+	push	bc
 	call	_move_car
 	pop	hl
-<<<<<<< HEAD
-;main.c:263: performantdelay(15);    
+;main.c:298: performantdelay(15);    
 	ld	a, #0x0f
-=======
-;main.c:271: performantdelay(5);    
-	ld	a, #0x05
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 	push	af
 	inc	sp
 	call	_performantdelay
 	inc	sp
-<<<<<<< HEAD
-;main.c:265: }
-	jp	00118$
-___str_0:
-	.ascii "direction:%s"
-	.db 0x0a
-=======
-	jp	00118$
-;main.c:273: }
-	inc	sp
-	ret
-___str_0:
-	.ascii "Collision detected"
->>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
-	.db 0x00
+;main.c:300: }
+	jp	00120$
 	.area _CODE
 	.area _INITIALIZER
 __xinit__spritesize:

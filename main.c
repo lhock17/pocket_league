@@ -103,50 +103,66 @@ void accelerate (struct GameObject* car) {
     switch (car->direction) {
         case 0:
             car->acc_y = 100;
+            break;
         case 1:
             car->acc_x = 25;
             car->acc_y = 75;
+            break;
         case 2:
             car->acc_x = 50;
             car->acc_y = 50;
+            break;
         case 3:
             car->acc_x = 75;
             car->acc_y = 25;
+            break;
         case 4:
             car->acc_x = 100;
             car->acc_y = 0;
+            break;
         case 5:
             car->acc_x = 75;
             car->acc_y = -25;
+            break;
         case 6:
             car->acc_x = 50;
             car->acc_y = -50;
+            break;
         case 7:
             car->acc_x = 25;
             car->acc_y = -75;
+            break;
         case 8:
             car->acc_y = -100;
+            break;
         case 9:
             car->acc_x = -25;
             car->acc_y = -75;
+            break;
         case 10:
             car->acc_x = -50;
             car->acc_y = -50;
+            break;
         case 11:
             car->acc_x = -75;
             car->acc_y = -25;
+            break;
         case 12:
             car->acc_x = -100;
             car->acc_y = 0;
+            break;
         case 13:
             car->acc_x = -25;
             car->acc_y = 75;
+            break;
         case 14:
             car->acc_x = -50;
             car->acc_y = 50;
+            break;
         case 15:
             car->acc_x = -75;
             car->acc_y = 25;
+            break;
     }
 }
 
@@ -154,50 +170,66 @@ void deccelerate (struct GameObject* car) {
     switch (car->direction) {
         case 0:
             car->acc_y = -100;
+            break;
         case 1:
             car->acc_x = -25;
             car->acc_y = -75;
+            break;
         case 2:
             car->acc_x = -50;
             car->acc_y = -50;
+            break;
         case 3:
             car->acc_x = -75;
             car->acc_y = -25;
+            break;
         case 4:
             car->acc_x = -100;
             car->acc_y = 0;
+            break;
         case 5:
             car->acc_x = -75;
             car->acc_y = 25;
+            break;
         case 6:
             car->acc_x = -50;
             car->acc_y = 50;
+            break;
         case 7:
             car->acc_x = -25;
             car->acc_y = 75;
+            break;
         case 8:
             car->acc_y = 100;
+            break;
         case 9:
             car->acc_x = 25;
             car->acc_y = 75;
+            break;
         case 10:
             car->acc_x = 50;
             car->acc_y = 50;
+            break;
         case 11:
             car->acc_x = 75;
             car->acc_y = 25;
+            break;
         case 12:
             car->acc_x = 100;
             car->acc_y = 0;
+            break;
         case 13:
             car->acc_x = 25;
             car->acc_y = -75;
+            break;
         case 14:
             car->acc_x = 50;
             car->acc_y = -50;
+            break;
         case 15:
             car->acc_x = 75;
             car->acc_y = -25;
+            break;
     }
 }
 
@@ -232,13 +264,12 @@ void main(){
 
         //player contact with ball
         if (check_collision(&car1, &ball)) {
-            printf("Collision detected");
+            //printf("Collision detected");
             ball.vel_x = car1.vel_x;
             ball.vel_y = car1.vel_y;
         }
 
         //controls
-        printf("direction:%d\n", car1.direction);
         if(joypad() & J_A){
             accelerate(&car1);
         } else if (joypad() & J_B){
