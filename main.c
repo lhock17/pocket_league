@@ -11,7 +11,7 @@
 #define SCREEN_HEIGHT 144;
 
 struct GameObject car1;
-struct GameObject ball1;
+struct GameObject ball;
 UBYTE spritesize = 8;
 
 struct GameObject {
@@ -30,13 +30,13 @@ struct GameObject {
 
 void load_ball_sprite() {
     set_sprite_tile(4, 64);
-    ball.spriteids[0] = 0;
+    ball.spriteids[0] = 4;
     set_sprite_tile(5, 65);
-    ball.spriteids[1] = 1;
+    ball.spriteids[1] = 6;
     set_sprite_tile(6, 66);
-    ball.spriteids[2] = 2;
+    ball.spriteids[2] = 5;
     set_sprite_tile(7, 67);
-    ball.spriteids[3] = 3;
+    ball.spriteids[3] = 7;
 }
 
 void load_car_sprite(UINT8 direction) {
@@ -99,27 +99,32 @@ void main(){
     setupcar_light();
     set_sprite_data(64, 4, ball_sprite);
     setup_ball();
+    movegamecharacter(&ball, ball.x, ball.y);
 
     SHOW_SPRITES;
     DISPLAY_ON;
 
     while(1){
-       if(joypad() & J_LEFT){
-           if (car1.direction == 0) {
-               car1.direction = 15;
-           } else {
-               car1.direction -= 1;
-           }
-           load_car_sprite(car1.direction);
-       }
-       if(joypad() & J_RIGHT){
-           if (car1.direction == 15) {
-               car1.direction = 0;
-           } else {
-               car1.direction += 1;
-           }
-           load_car_sprite(car1.direction);
-       }
-       performantdelay(5);    
+        if(joypad() & J_A){
+            movegamecharacter(&car1, car1.x+3, car1.y+3);
+        }
+
+        if(joypad() & J_LEFT){
+            if (car1.direction == 0) {
+                car1.direction = 15;
+            } else {
+                car1.direction -= 1;
+            }
+            load_car_sprite(car1.direction);
+        }
+        if(joypad() & J_RIGHT){
+            if (car1.direction == 15) {
+                car1.direction = 0;
+            } else {
+                car1.direction += 1;
+            }
+            load_car_sprite(car1.direction);
+        }
+        performantdelay(5);    
     }
 }
