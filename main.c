@@ -20,7 +20,6 @@ struct GameObject {
     UBYTE spriteids[4];
     UINT8 x;
     UINT8 y;
-<<<<<<< HEAD
     INT8 vel_x;
     INT8 vel_y;
     INT8 acc_x;
@@ -28,15 +27,6 @@ struct GameObject {
     INT8 width;
     INT8 height;
 };
-=======
-    UINT8 vel_x;
-    UINT8 vel_y;
-    UINT8 acc_x;
-    UINT8 acc_y;
-    UINT8 width;
-    UINT8 height;
-} GameObject;
->>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 
 struct GameObject ball;
 struct GameObject car1;
@@ -98,6 +88,10 @@ void setupcar_light(){
     car1.y = 130;
     car1.width = 16;
     car1.height = 16;
+    car1.acc_x = 0;
+    car1.acc_y = 0;
+    car1.vel_x = 0;
+    car1.vel_y = 0;
 
     set_sprite_data(0, 64, car_light);
     load_car_sprite(car1.direction);
@@ -105,7 +99,6 @@ void setupcar_light(){
     movegamecharacter(&car1, car1.x, car1.y);
 }
 
-<<<<<<< HEAD
 void accelerate (struct GameObject* car) {
     switch (car->direction) {
         case 0:
@@ -209,21 +202,13 @@ void deccelerate (struct GameObject* car) {
 }
 
 void move_car(struct GameObject* car) {
+    //printf("x=%d, y =%d\n", car->acc_x, car->acc_y); 
     car->vel_x += car->acc_x/100;
     car->vel_y += car->acc_y/100;
-    car->x += car->vel_x/100;
-    car->y += car->vel_y/100;
+    car->x += car->vel_x;
+    car->y += car->vel_y;
     movegamecharacter(car, car->x, car->y);
 }
-
-void main(){
-=======
-void hit_ball(struct GameObject* car1, struct GameObject* ball) {
-    ball->vel_x = car1->vel_x;
-    ball->vel_y = car1->vel_y;
-    //movegamecharacter(&ball, ball.x + ball.vel_x, ball.y + ball.vel_y);
-}
->>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 
 void main(){
     // load sprites for car
@@ -244,16 +229,19 @@ void main(){
     while(1){
 
         //contact with ball
-        if (check_collision(&car1, &ball)) {
-            hit_ball(&car1, &ball);
-        }
+        // if (check_collision(&car1, &ball)) {
+        //     hit_ball(&car1, &ball);
+        // }
 
         //controls
+        printf("direction:%s\n", car1.direction);
         if(joypad() & J_A){
             accelerate(&car1);
-        }
-        if(joypad() & J_B){
+        } else if (joypad() & J_B){
             deccelerate(&car1);
+        } else {
+            car1.acc_x = 0;
+            car1.acc_y = 0;
         }
         if(joypad() & J_LEFT){
             if (car1.direction == 0) {
@@ -272,6 +260,6 @@ void main(){
             load_car_sprite(car1.direction);
         }
         move_car(&car1);
-        performantdelay(5);    
+        performantdelay(15);    
     }
 }
