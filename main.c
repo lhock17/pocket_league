@@ -26,15 +26,10 @@ struct GameObject {
     UINT8 acc_y;
     UINT8 width;
     UINT8 height;
-};
+} GameObject;
 
 struct GameObject ball;
 struct GameObject car1;
-
-// UBYTE check_collisions(Car* one, Car* two) {
-//     return (one->x >= two->x AND one->x <= two-> x + two->width) OR
-//         (two->y >= one->y AND two->y <= one->y + one->height);
-// }
 
 void load_ball_sprite() {
     set_sprite_tile(4, 64);
@@ -45,6 +40,11 @@ void load_ball_sprite() {
     ball.spriteids[2] = 5;
     set_sprite_tile(7, 67);
     ball.spriteids[3] = 7;
+}
+
+ UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
+     return (one->x >= two->x AND one->x <= two->x + two->width) OR
+         (two->y >= one->y AND two->y <= one->y + one->height);
 }
 
 void load_car_sprite(UINT8 direction) {
@@ -95,8 +95,13 @@ void setupcar_light(){
     movegamecharacter(&car1, car1.x, car1.y);
 }
 
-void main(){
+void hit_ball(struct GameObject* car1, struct GameObject* ball) {
+    ball->vel_x = car1->vel_x;
+    ball->vel_y = car1->vel_y;
+    //movegamecharacter(&ball, ball.x + ball.vel_x, ball.y + ball.vel_y);
+}
 
+void main(){
     // load sprites for car
     //background
     set_bkg_data(0, 44, bkg_tiles);
@@ -105,7 +110,7 @@ void main(){
 
     set_sprite_data(0,4, car_light);
     setupcar_light();
-    set_sprite_data(0, 4, ball_sprite);
+    set_sprite_data(64, 4, ball_sprite);
     setup_ball();
     movegamecharacter(&ball, ball.x, ball.y);
 
@@ -113,6 +118,13 @@ void main(){
     DISPLAY_ON;
 
     while(1){
+
+        //contact with ball
+        if (check_collision(&car1, &ball)) {
+            hit_ball(&car1, &ball);
+        }
+
+        //controls
         if(joypad() & J_A){
             
         }
