@@ -7,5 +7,8 @@
             "binaryPath": "c:\\Users\\campb\\Documents\\pocket_league\\pocket_league\\main.gb",
             "binaryArgs": []
         }
-    ]
+    ],
+    "files.associations": {
+        "stdlib.h": "c"
+    }
 }
