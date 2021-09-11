@@ -6,6 +6,8 @@
 #include "sprites/ball1.c"
 #include "sprites/bkg_tiles.c"
 #include <stdlib.h>
+#include <gb/font.h>
+#include "windowmap.c"
 
 #define AND &&
 #define OR ||
@@ -18,8 +20,8 @@ int player_goals = 0;
 int enemy_goals = 0;
 
 int barriers[2] = {0x00, 0x00};
-int player_goal_square[3] = {87, 119, 55};
-int enemy_goal_square[3] = {118, 21, 84};
+int player_goal_square[3] = {53, 21, 21};
+int enemy_goal_square[3] = {19, 18, 4};
 
 unsigned char windowmap[] =
 {
@@ -72,33 +74,24 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     UINT16 indexTLx, indexTLy, tileindexTL;
     //UBYTE result;
 
-    indexTLx = (car1.x - 16) / 8;
-    indexTLy = (car1.y - 16) / 8;
+    indexTLx = (newplayerx - 16) / 8;
+    indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
     if(joypad() & J_A) {
-        printf("Tileindex: %d\n", indexTLx);
+        printf("Tileindex: %d\n", tileindexTL);
     }
     //
-    if (indexTLx == 8179 AND indexTLy <= 11 AND indexTLy >= 7)  {
-        ball.x = 100;
-        ball.y = 100;
-        ball.index_x = 100;
-        ball.index_y = 100;
-        ball.vel = 0;
-        movegamecharacter(&ball, ball.x, ball.y);
-        return 1;
+    for (int i = 0; i < goal_size; i++) {
+        if (tileindexTL == enemy_goal_square[i])  {
+            player_goals++;
+            return 1;
+        }
+        if (tileindexTL == player_goal_square[i]) {
+            enemy_goals++;
+            return 1;
+        }
     } 
-    //tileindexTL <= 280 AND tileindexTL >= 184
-    if (tileindexTL % 32 == 21) {
-        ball.x = 100;
-        ball.y = 100;
-        ball.index_x = 100;
-        ball.index_y = 100;
-        ball.vel = 0;
-        movegamecharacter(&ball, ball.x, ball.y);
-        return 1;
-    }
     return 0;
 }
 
@@ -168,12 +161,12 @@ void performantdelay(UINT8 numloops){
 }
 
 void setup_ball() {
-    ball.x = 100;
-    ball.y = 100;
+    ball.x = 50;
+    ball.y = 20;
     ball.width = 16;
     ball.height = 16;   
-    ball.index_x = 100;
-    ball.index_y = 100;
+    ball.index_x = 50;
+    ball.index_y = 20;
     ball.id = 1;
 
     load_ball_sprite();
@@ -395,10 +388,16 @@ void move_ball() {
     movegamecharacter(&ball, ball.index_x, ball.index_y);
 }
 
-void reset_car() {
-    car1.x = 64;
-    car1.y = 64;
+void reset1() {
+    car1.x = 80;
+    car1.y = 80;
+    ball.index_x = 50;
+    ball.index_y = 20;
+    ball.x = 50;
+    ball.y = 20;
+    ball.vel = 0;
     movegamecharacter(&car1, car1.x, car1.y);
+    movegamecharacter(&ball, ball.index_x, ball.index_y);
     move_bkg(car1.x, car1.y);
 }
 
@@ -410,9 +409,16 @@ void hit_ball() {
 }
 
 void main(){
+
+    font_t min_font;
+
+    font_init();
+    min_font = font_load(font_min);
+    font_set(min_font);
+
     // load sprites for car
     //background
-    set_bkg_data(0, 44, bkg_tiles);
+    set_bkg_data(37, 44, bkg_tiles);
     set_bkg_tiles(0, 0, 32, 21, map);
     SHOW_BKG;
 
@@ -423,6 +429,9 @@ void main(){
     set_sprite_data(64, 4, ball_sprite);
     setup_ball();
     movegamecharacter(&ball, ball.x, ball.y);
+
+    set_win_tiles(0, 0, 5, 1, windowmap);
+    move_win(7, 120);
 
     SHOW_SPRITES;
     DISPLAY_ON;
@@ -446,8 +455,8 @@ void main(){
         //movegamecharacter(&ball, ball.x, ball.y);
 
         if (is_goal(ball.x, ball.y)) {
-             printf("This is a goal\n");
-             reset_car();
+             //printf("This is a goal\n");
+             reset1();
         }
         turn_count--;
         // move_ball(&ball);
