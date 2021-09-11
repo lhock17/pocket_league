@@ -5,8 +5,6 @@
 #include "sprites/map.c"
 #include "sprites/ball1.c"
 #include "sprites/bkg_tiles.c"
-#include "sprites/pocket_league_data.c"
-#include "sprites/pocket_league_map.c"
 #include <stdlib.h>
 #include <gb/font.h>
 //#include "windowmap.c"
@@ -16,26 +14,14 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 
-UINT8 barrier_size = 2;
-UINT8 goal_size = 3;
-UINT8 player_goals = 0;
-UINT8 enemy_goals = 0;
+int barrier_size = 2;
+int goal_size = 3;
+int player_goals = 0;
+int enemy_goals = 0;
 
-<<<<<<< HEAD
 int barriers[2] = {0x00, 0x00};
 int player_goal_square[3] = {53, 21, 21};
 int enemy_goal_square[3] = {19, 18, 4};
-=======
-
-UINT8 barriers[2] = {0x00, 0x00};
-UINT8 player_goal_square[3] = {87, 119, 55};
-UINT8 enemy_goal_square[3] = {118, 21, 84};
->>>>>>> 755f5f8de59b597ece101e05ec11f00a5de57f2d
-
-unsigned char windowmap[] =
-{
-  0x13,0x10,0x17,0x17,0x1A
-};
 
 struct GameObject car1;
 struct GameObject car2;
@@ -43,7 +29,6 @@ struct GameObject ball;
 
 INT8 max_vel = 4;
 UBYTE spritesize = 8;
-UINT8 was_hitting = 0;
 
 struct GameObject {
     UINT8 direction;
@@ -88,12 +73,9 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
-<<<<<<< HEAD
     if(joypad() & J_A) {
         printf("Tileindex: %d\n", tileindexTL);
     }
-=======
->>>>>>> 755f5f8de59b597ece101e05ec11f00a5de57f2d
     //
     for (int i = 0; i < goal_size; i++) {
         if (tileindexTL == enemy_goal_square[i])  {
@@ -114,6 +96,10 @@ UBYTE is_barrier(UINT8 newplayerx, UINT8 newplayery) {
     indexTLx = (newplayerx - 16) / 8;
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
+
+    if (joypad() & J_A) {
+       //printf("block %d\n", tileindexTL);
+    }
 
     INT16 barriers[20] = {378, 444, 477, 509, 947, -43, 22, 407, 406, 437, 469, 468, 378, 444, 509, 8671, 346, 90, 119, 311};
 
@@ -294,7 +280,7 @@ void move_car(struct GameObject* car) {
     move_bkg(car->x, car->y);
     ball.index_x = ball.index_x + dx;
     ball.index_y = ball.index_y + dy;
-    //movegamecharacter(&ball, ball.index_x + dx, ball.index_y + dy);
+    movegamecharacter(&ball, ball.index_x + dx, ball.index_y + dy);
 }
 
 void move_ball() {
@@ -397,7 +383,6 @@ void move_ball() {
     movegamecharacter(&ball, ball.index_x, ball.index_y);
 }
 
-<<<<<<< HEAD
 void reset1() {
     car1.x = 80;
     car1.y = 80;
@@ -406,79 +391,29 @@ void reset1() {
     ball.x = 50;
     ball.y = 20;
     ball.vel = 0;
-=======
-void reflectx() {
-    if (ball.direction < 9) {
-        ball.direction = 8 - ball.direction;
-    } else {
-        ball.direction = 24 - ball.direction;
-    }
-}
-
-void reflecty() {
-    if (ball.direction != 0) {
-        ball.direction = 16 - ball.direction;
-    }
-}
-
-void reset_car() {
-    car1.x = 64;
-    car1.y = 64;
->>>>>>> 755f5f8de59b597ece101e05ec11f00a5de57f2d
     movegamecharacter(&car1, car1.x, car1.y);
     movegamecharacter(&ball, ball.index_x, ball.index_y);
     move_bkg(car1.x, car1.y);
 }
 
 void hit_ball() {
-    if (!was_hitting) {
-        ball.vel = 2*car1.vel/3;
-        car1.acc = 0;
-        car1.vel = car1.vel / 2;
-        ball.direction = car1.direction;
-        NR10_REG = 0x16; 
-        NR11_REG = 0x40;
-        NR12_REG = 0x73;  
-        NR13_REG = 0x00;   
-        NR14_REG = 0xC3;
-    }
-    was_hitting = 1;
+    ball.vel = 2*car1.vel/3;
+    //car1.vel = car1.vel;
+    //car1.acc = 0;
+    ball.direction = car1.direction;
 }
 
 void main(){
-<<<<<<< HEAD
 
     //font_t min_font;
 
     //font_init();
     //min_font = font_load(font_min);
     //font_set(min_font);
-=======
-    set_bkg_data(0, 163, pocket_league_data);
-    set_bkg_tiles(0,0,20,18, pocket_league_map);
-    SHOW_BKG;
-
-    while(1) {
-        if (joypad() & J_START) {
-            break;
-        }
-        wait_vbl_done();
-    }
-    HIDE_BKG;
-
-    NR52_REG = 0x80; // is 1000 0000 in binary and turns on sound
-    NR50_REG = 0x77; // sets the volume for both left and right channel just set to max 0x77
-    NR51_REG = 0xFF; // is 1111 1111 in binary, select which chanels we want to use in this case all of them. One bit for the L one bit for the R of all four channels
-    NR10_REG = 0x16; 
-    NR11_REG = 0x40;
-    NR12_REG = 0x73;  
-    NR13_REG = 0x00;   
-    NR14_REG = 0xC3;
->>>>>>> 755f5f8de59b597ece101e05ec11f00a5de57f2d
 
     // load sprites for car
     //background
-    set_bkg_data(37, 44, bkg_tiles);
+    set_bkg_data(0, 44, bkg_tiles);
     set_bkg_tiles(0, 0, 32, 21, map);
     SHOW_BKG;
 
@@ -516,11 +451,7 @@ void main(){
 
         if (is_goal(ball.x, ball.y)) {
              //printf("This is a goal\n");
-<<<<<<< HEAD
              reset1();
-=======
-             reset_car();
->>>>>>> 755f5f8de59b597ece101e05ec11f00a5de57f2d
         }
         turn_count--;
         // move_ball(&ball);
@@ -533,8 +464,6 @@ void main(){
         if (check_collision(&car1, &ball)) {
             //printf("collision\n");
             hit_ball();
-        } else {
-            was_hitting = 0;
         }
         //      //ball.ve = car1.vel_x;
         //      //ball.vel_y = car1.vel_y;
