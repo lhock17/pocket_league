@@ -174,6 +174,7 @@ DEF l__HEADER6 0x30
 DEF l__GSINIT 0x3A
 DEF l__BSS 0x43
 DEF l__HEADER10 0x83
+<<<<<<< HEAD
 DEF l__HOME 0xA8
 DEF s__CODE 0x200
 DEF l__BASE 0x7CA
@@ -185,6 +186,19 @@ DEF s__INITIALIZER 0x1F80
 DEF s__LIT 0x1F80
 DEF s__GSINIT 0x1F81
 DEF s__GSFINAL 0x1FBB
+=======
+DEF l__HOME 0xA4
+DEF s__CODE 0x200
+DEF l__BASE 0x7CA
+DEF l__CODE 0x1687
+DEF s__HOME 0x1887
+DEF s__BASE 0x192B
+DEF s__CODE_0 0x20F5
+DEF s__INITIALIZER 0x20F5
+DEF s__LIT 0x20F5
+DEF s__GSINIT 0x20F6
+DEF s__GSFINAL 0x2130
+>>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 DEF _shadow_OAM 0xC000
 DEF s__DATA 0xC0A0
 DEF s__BSS 0xC0BA
@@ -203,6 +217,7 @@ DEF _movegamecharacter 0xCF6
 DEF _performantdelay 0xD7E
 DEF _setup_ball 0xD8B
 DEF _setupcar_light 0xDB7
+<<<<<<< HEAD
 DEF _accelerate 0xE0F
 DEF _deccelerate 0xEBF
 DEF _move_car 0xF6F
@@ -237,6 +252,43 @@ DEF _utoa 0x1668
 DEF _itoa 0x1677
 DEF .itoa 0x1686
 DEF .utoa 0x169A
+=======
+DEF _accelerate 0xDFB
+DEF _deccelerate 0xEAB
+DEF _move_car 0xF5B
+DEF _move_ball 0x1012
+DEF _main 0x1121
+DEF __divsuchar 0x1245
+DEF __modsuchar 0x1252
+DEF __divuschar 0x125C
+DEF __moduschar 0x126E
+DEF __divschar 0x127E
+DEF __modschar 0x128A
+DEF __divsint 0x1294
+DEF __modsint 0x12A5
+DEF __divuchar 0x12B4
+DEF __moduchar 0x12C0
+DEF __divuint 0x12CA
+DEF __moduint 0x12DB
+DEF .div8 0x12EA
+DEF .mod8 0x12EA
+DEF .div16 0x12F2
+DEF .mod16 0x12F2
+DEF .divu8 0x1328
+DEF .modu8 0x1328
+DEF .divu16 0x132B
+DEF .modu16 0x132B
+DEF _putchar 0x136C
+DEF _setchar 0x1375
+DEF _gotoxy 0x137E
+DEF _posx 0x1389
+DEF _posy 0x139A
+DEF ___printf 0x1453
+DEF _utoa 0x17E1
+DEF _itoa 0x17F0
+DEF .itoa 0x17FF
+DEF .utoa 0x1813
+>>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 DEF .call_hl 0x20
 DEF .MemsetSmall 0x28
 DEF .MemcpySmall 0x30
@@ -250,6 +302,7 @@ DEF _exit 0x1B4
 DEF _enable_interrupts 0x1B8
 DEF _disable_interrupts 0x1BA
 DEF _set_interrupts 0x1BC
+<<<<<<< HEAD
 DEF .remove_VBL 0x170E
 DEF .remove_int 0x1711
 DEF .add_VBL 0x172E
@@ -304,6 +357,62 @@ DEF .set_xy_btt 0x1F32
 DEF .set_xy_tt 0x1F41
 DEF ___sdcc_call_hl 0x1F7F
 DEF gsinit 0x1F81
+=======
+DEF .remove_VBL 0x1887
+DEF .remove_int 0x188A
+DEF .add_VBL 0x18A7
+DEF .add_int 0x18AA
+DEF .wait_vbl_done 0x18B5
+DEF _wait_vbl_done 0x18B5
+DEF .display_off 0x18C4
+DEF _display_off 0x18C4
+DEF _remove_VBL 0x18DB
+DEF _add_VBL 0x18E6
+DEF _printf 0x18F1
+DEF _sprintf 0x190A
+DEF _set_tile_data 0x192B
+DEF _set_bkg_data 0x1930
+DEF _set_win_data 0x1930
+DEF _set_sprite_data 0x1938
+DEF .padup 0x1968
+DEF _waitpadup 0x1968
+DEF .jpad 0x1978
+DEF _joypad 0x1978
+DEF _waitpad 0x19A0
+DEF .wait_pad 0x19A3
+DEF _set_bkg_tiles 0x19AA
+DEF _font_load_ibm 0x19BE
+DEF font_copy_uncompressed 0x19C5
+DEF font_copy_compressed 0x19FB
+DEF font_load 0x1A4A
+DEF font_copy_current 0x1A92
+DEF font_set 0x1ADA
+DEF .put_char 0x1AE7
+DEF .out_char 0x1AFF
+DEF .del_char 0x1B05
+DEF _font_load 0x1B5B
+DEF _font_set 0x1B69
+DEF _font_init 0x1B78
+DEF .cls 0x1B98
+DEF _cls 0x1B98
+DEF .cr_curs 0x1BCA
+DEF .adv_curs 0x1BDF
+DEF .tmode 0x1C3B
+DEF .tmode_out 0x1C64
+DEF _color 0x1C74
+DEF .drawing_vbl 0x1C83
+DEF .drawing_lcd 0x1C8E
+DEF _add_LCD 0x1CCA
+DEF .add_LCD 0x1CD5
+DEF _remove_LCD 0x1CDB
+DEF .remove_LCD 0x1CE6
+DEF _font_ibm 0x1CEC
+DEF .set_xy_wtt 0x209E
+DEF .set_xy_btt 0x20A7
+DEF .set_xy_tt 0x20B6
+DEF ___sdcc_call_hl 0x20F4
+DEF gsinit 0x20F6
+>>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 DEF _ball 0xC0A0
 DEF _car1 0xC0AD
 DEF __cpu 0xC0BA

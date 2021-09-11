@@ -210,6 +210,21 @@ void move_car(struct GameObject* car) {
     movegamecharacter(car, car->x, car->y);
 }
 
+<<<<<<< HEAD
+=======
+void move_ball(struct GameObject* ball) {
+    if (ball->vel_x > 0) {
+        ball->vel_x -= ball->acc_x/100;
+        ball->x += ball->vel_x/100;
+    }
+    if (ball->vel_y > 0) {
+        ball->vel_y -= ball->acc_y/100;
+        ball->y += ball->vel_y/100;
+    }
+    movegamecharacter(ball, ball->x, ball->y);
+}
+
+>>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 void main(){
     // load sprites for car
     //background
@@ -228,10 +243,21 @@ void main(){
 
     while(1){
 
+<<<<<<< HEAD
         //contact with ball
         // if (check_collision(&car1, &ball)) {
         //     hit_ball(&car1, &ball);
         // }
+=======
+        move_ball(&ball);
+
+        //player contact with ball
+        if (check_collision(&car1, &ball)) {
+            printf("Collision detected");
+            ball.vel_x = car1.vel_x;
+            ball.vel_y = car1.vel_y;
+        }
+>>>>>>> 0145c97d0b0edb1a4cd728aaa4a5ba5dd05b6fbe
 
         //controls
         printf("direction:%s\n", car1.direction);
