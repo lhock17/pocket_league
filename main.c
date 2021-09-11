@@ -33,6 +33,8 @@ struct GameObject {
     INT8 acc;
     INT8 width;
     INT8 height;
+    INT8 index_x;
+    INT8 index_y;
 };
 
 void load_ball_sprite() {
@@ -48,9 +50,9 @@ void load_ball_sprite() {
 
  UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
      return (one->x >= two->x && one->x <= two->x + two->width) && 
-     (one->y >= two->y && one->y <= two->y + two->height)
-      || (two->x >= one->x && two->x <= one->x + one->width) 
-      && (two->y >= one->y && two->y <= one->y + one->height);
+     (one->y >= two->y && one->y <= two->y + two->height) || 
+     (two->x >= one->x && two->x <= one->x + one->width) && 
+     (two->y >= one->y && two->y <= one->y + one->height);
 }
 
 UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
@@ -72,6 +74,10 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     }
     return 0;
 }
+
+//UBYTE is_barrier(UINT8 newplayer x, UINT8 newplayer y) {
+
+//}
 
 void load_car_sprite(UINT8 direction) {
     set_sprite_tile(0, 4 * direction);
@@ -114,6 +120,8 @@ void setup_ball() {
     ball.y = 100;
     ball.width = 16;
     ball.height = 16;   
+    ball.index_x = 100;
+    ball.index_y = 100;
 
     load_ball_sprite();
     movegamecharacter(&ball, ball.x, ball.y);
@@ -225,21 +233,18 @@ void move_car(struct GameObject* car, struct GameObject* ball) {
             car->y -= 45*car->vel/50;
             break;
     }
+    dx -= car->x;
+    dy -= car->y;
 
     move_bkg(car->x, car->y);
-    ball->x -= car->x - dx;
-    ball->y -= car->y - dy;
-<<<<<<< HEAD
-    if (abs(ball->x - car->x) < 1 AND abs(ball->y - car->y) < 1) {
-        printf("yes\n"); 
-=======
+    ball->index_x = ball->index_x + dx;
+    ball->index_y = ball->index_y + dy;
     //printf("cx=%d,cy=%d\n", car->x, car->y);
     //printf("bx=%d,by=%d\n", ball->x, ball->y);
-    if ((ball->x - car->x < 0.5) AND (ball->y - car->y < 0.5)) {
-        printf("yes\n");   
->>>>>>> 9c717d98b42e8c946a64b240a27d14a3eb983ab5
-    }
-    movegamecharacter(ball, ball->x, ball->y);
+    //if ((ball->x - car->x < 0.5) AND (ball->y - car->y < 0.5)) {
+        //printf("yes\n");   
+    //}
+    movegamecharacter(ball, ball->index_x + dx, ball->index_y + dy);
 }
 
 void reset_car() {
@@ -291,9 +296,10 @@ void main(){
         // }
         
         // //player contact with ball
-        //  if (!move_count AND check_collision(&car1, &ball)) {
-        //      printf("%d:%d\n", car1.x, car1.y);
-        //      printf("%d:%d\n", ball.x, ball.y);
+          if (check_collision(&car1, &ball)) {
+
+            printf("Collision detected");
+        }
         //      //ball.ve = car1.vel_x;
         //      //ball.vel_y = car1.vel_y;
         //  }
@@ -303,6 +309,8 @@ void main(){
             car1.acc = -1;
         } else if (joypad() & J_A){
             car1.acc = 1;
+            printf("car: %d:%d\n", car1.x, car1.y);
+            printf("ball: %d:%d\n", ball.x, ball.y);
         } else {
             car1.acc = 0;
         }
