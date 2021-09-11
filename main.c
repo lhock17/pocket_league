@@ -20,7 +20,6 @@ struct GameObject {
     UBYTE spriteids[4];
     UINT8 x;
     UINT8 y;
-<<<<<<< HEAD
     INT8 vel_x;
     INT8 vel_y;
     INT8 acc_x;
@@ -28,15 +27,6 @@ struct GameObject {
     INT8 width;
     INT8 height;
 };
-=======
-    UINT8 vel_x;
-    UINT8 vel_y;
-    UINT8 acc_x;
-    UINT8 acc_y;
-    UINT8 width;
-    UINT8 height;
-} GameObject;
->>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 
 struct GameObject ball;
 struct GameObject car1;
@@ -105,7 +95,6 @@ void setupcar_light(){
     movegamecharacter(&car1, car1.x, car1.y);
 }
 
-<<<<<<< HEAD
 void accelerate (struct GameObject* car) {
     switch (car->direction) {
         case 0:
@@ -216,13 +205,17 @@ void move_car(struct GameObject* car) {
     movegamecharacter(car, car->x, car->y);
 }
 
-void main(){
-=======
-void hit_ball(struct GameObject* car1, struct GameObject* ball) {
-    ball->vel_x = car1->vel_x;
-    ball->vel_y = car1->vel_y;
+void move_ball(struct GameObject* ball) {
+    if (ball->vel_x > 0) {
+        ball->vel_x -= ball->acc_x/100;
+        ball->x += ball->vel_x/100;
+    }
+    if (ball->vel_y > 0) {
+        ball->vel_y -= ball->acc_y/100;
+        ball->y += ball->vel_y/100;
+    }
+    movegamecharacter(ball, ball->x, ball->y);
 }
->>>>>>> f5fe88872ab4d5d02b998f7222ff7b4cc8b0d64f
 
 void main(){
     // load sprites for car
@@ -242,9 +235,13 @@ void main(){
 
     while(1){
 
-        //contact with ball
+        move_ball(&ball);
+
+        //player contact with ball
         if (check_collision(&car1, &ball)) {
-            hit_ball(&car1, &ball);
+            printf("Collision detected");
+            ball.vel_x = car1.vel_x;
+            ball.vel_y = car1.vel_y;
         }
 
         //controls
