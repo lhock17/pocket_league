@@ -407,12 +407,14 @@ void reflectx() {
     } else {
         ball.direction = 24 - ball.direction;
     }
+    ball.vel = -ball.vel;
 }
 
 void reflecty() {
     ball.vel = -ball.vel;
     if (ball.direction != 0) {
         ball.direction = 16 - ball.direction;
+        ball.vel = -ball.vel;
     }
 }
 
@@ -505,10 +507,10 @@ void main(){
     while(1){
         if (ball.vel > 0 AND ball_slow_frames == 0) {
             ball_slow_frames = 5;
-            ball.vel -= 1;
+            //ball.vel -= 1;
         } else if (ball.vel < 0 AND ball_slow_frames == 0) {
             ball_slow_frames = 5;
-            ball.vel += 1;
+            //ball.vel += 1;
         }
         ball_slow_frames--;
         if (car1.vel == 0) {
@@ -516,10 +518,6 @@ void main(){
         } else if (turn_count == 0) {
             turn_count = 22/abs(car1.vel);
         }
-        
-        //move_ball(&ball);
-        //ball.x += 1;
-        //movegamecharacter(&ball, ball.x, ball.y);
 
         if (is_goal(ball.x, ball.y)) {
              //printf("This is a goal\n");
@@ -528,12 +526,16 @@ void main(){
              //reset_car();
         }
         turn_count--;
-        // move_ball(&ball);
 
-        // if (is_goal(ball.x, ball.y)) {
-        //     printf("This is a goal\n");
-        // }
-        
+        if (x_barrier(ball.x)) {
+            //printf("barrier!\n");
+            reflectx();
+        }
+        if (y_barrier(ball.y)) {
+            //printf("barrier y!\n");
+            reflecty();
+        }
+
         // //player contact with ball
         if (check_collision(&car1, &ball)) {
                 hit_ball();
