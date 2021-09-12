@@ -11,8 +11,6 @@
 #include "sprites/goal_screen_game_map.c"
 #include <stdlib.h>
 #include <gb/font.h>
-#include "sprites/pocket_league_data.c"
-#include "sprites/pocket_league_map.c"
 //#include "windowmap.c"
 
 #define AND &&
@@ -124,19 +122,6 @@ void goal() {
     set_bkg_tiles(0, 0, 32, 21, map);
     SHOW_BKG;
 }
-
-UBYTE is_barrier(UINT8 newplayerx, UINT8 newplayery) {
-    UINT16 indexTLx, indexTLy, tileindexTL;
-
-    indexTLx = (newplayerx - 16) / 8;
-    indexTLy = (newplayery - 16) / 8;
-    tileindexTL = 32 * indexTLy + indexTLx;
-
-    if (joypad() & J_A) {
-       //printf("block %d\n", tileindexTL);
-    }
-
-    INT16 barriers[20] = {378, 444, 477, 509, 947, -43, 22, 407, 406, 437, 469, 468, 378, 444, 509, 8671, 346, 90, 119, 311};
 
 UBYTE x_barrier(UINT8 newplayerx) {
     UINT16 indexTLx = (newplayerx - 16) / 8;
@@ -419,11 +404,13 @@ void reflectx() {
     } else {
         ball.direction = 24 - ball.direction;
     }
+    ball.vel = -ball.vel;
 }
 
 void reflecty() {
     if (ball.direction != 0) {
         ball.direction = 16 - ball.direction;
+        ball.vel = -ball.vel;
     }
 }
 
@@ -505,10 +492,10 @@ void main(){
     while(1){
         if (ball.vel > 0 AND ball_slow_frames == 0) {
             ball_slow_frames = 5;
-            ball.vel -= 1;
+            //ball.vel -= 1;
         } else if (ball.vel < 0 AND ball_slow_frames == 0) {
             ball_slow_frames = 5;
-            ball.vel += 1;
+            //ball.vel += 1;
         }
         ball_slow_frames--;
         if (car1.vel == 0) {
@@ -516,10 +503,6 @@ void main(){
         } else if (turn_count == 0) {
             turn_count = 22/abs(car1.vel);
         }
-        
-        //move_ball(&ball);
-        //ball.x += 1;
-        //movegamecharacter(&ball, ball.x, ball.y);
 
         if (is_goal(ball.x, ball.y)) {
              //printf("This is a goal\n");
@@ -528,12 +511,16 @@ void main(){
              //reset_car();
         }
         turn_count--;
-        // move_ball(&ball);
 
-        // if (is_goal(ball.x, ball.y)) {
-        //     printf("This is a goal\n");
-        // }
-        
+        if (x_barrier(ball.x)) {
+            //printf("barrier!\n");
+            reflectx();
+        }
+        if (y_barrier(ball.y)) {
+            //printf("barrier y!\n");
+            reflecty();
+        }
+
         // //player contact with ball
         if (check_collision(&car1, &ball)) {
             hit_ball();
@@ -568,7 +555,7 @@ void main(){
             }
             load_car_sprite(car1.direction);
         }
-        if (move_count == 0) {
+        if (1) {
             move_car(&car1);
             move_ball();
             move_count = 2;
