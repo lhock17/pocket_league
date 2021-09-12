@@ -32,51 +32,54 @@ Symbol Table
   7 __xinit__windowmap                                             00000D R
     _abs                                                           ****** GX
   1 _ball                                                          00001C GR
-  0 _ball_sprite                                                   000AC9 GR
+  0 _ball_sprite                                                   000AAD GR
   2 _barrier_size                                                  000000 GR
   2 _barriers                                                      000004 GR
-  0 _bkg_tiles                                                     000B09 GR
+  0 _bkg_tiles                                                     000AED GR
   1 _car1                                                          000000 GR
   1 _car2                                                          00000E GR
-  0 _car_dark                                                      000429 GR
-  0 _car_light                                                     000029 GR
-  0 _check_collision                                               001961 GR
+  0 _car_dark                                                      00040D GR
+  0 _car_light                                                     00000D GR
+  0 _check_collision                                               0025D6 GR
   2 _enemy_goal_square                                             000009 GR
   2 _enemy_goals                                                   000003 GR
+  0 _goal                                                          0028AE GR
+  0 _goal_screen_game_data                                         001945 GR
+  0 _goal_screen_game_map                                          002445 GR
   2 _goal_size                                                     000001 GR
-  0 _hit_ball                                                      002E57 GR
-  0 _is_barrier                                                    001C39 GR
-  0 _is_goal                                                       001B50 GR
+  0 _hit_ball                                                      003B20 GR
+  0 _is_barrier                                                    00290F GR
+  0 _is_goal                                                       0027C5 GR
     _joypad                                                        ****** GX
-  0 _load_ai_sprite                                                001E45 GR
-  0 _load_ball_sprite                                              000000 GR
-  0 _load_car_sprite                                               001E0D GR
-  0 _main                                                          002EAF GR
-  0 _map                                                           000829 GR
+  0 _load_ai_sprite                                                002B1B GR
+  0 _load_ball_sprite                                              0025AD GR
+  0 _load_car_sprite                                               002AE3 GR
+  0 _main                                                          003B66 GR
+  0 _map                                                           00080D GR
   2 _max_vel                                                       000012 GR
-  0 _move_ball                                                     0025D8 GR
-  0 _move_car                                                      001FEA GR
-  0 _movegamecharacter                                             001E7F GR
-  0 _performantdelay                                               001F06 GR
+  0 _move_ball                                                     0032A1 GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
+  0 _move_car                                                      002CB3 GR
+  0 _movegamecharacter                                             002B55 GR
+  0 _performantdelay                                               000000 GR
   2 _player_goal_square                                            000006 GR
   2 _player_goals                                                  000002 GR
-  0 _pocket_league_data                                            000DC9 GR
-  0 _pocket_league_map                                             0017F9 GR
-  0 _reflectx                                                      002DFD GR
-  0 _reflecty                                                      002E10 GR
-  0 _reset1                                                        002DD9 GR
-  0 _reset_car                                                     002E1C GR
+  0 _pocket_league_data                                            000DAD GR
+  0 _pocket_league_map                                             0017DD GR
+  0 _reflectx                                                      003AC6 GR
+  0 _reflecty                                                      003AD9 GR
+  0 _reset1                                                        003AA2 GR
+  0 _reset_car                                                     003AE5 GR
     _set_bkg_data                                                  ****** GX
     _set_bkg_tiles                                                 ****** GX
     _set_sprite_data                                               ****** GX
-  0 _setup_ball                                                    001F13 GR
-  0 _setupcar_dark                                                 001F9C GR
-  0 _setupcar_light                                                001F4E GR
+  0 _setup_ball                                                    002BDC GR
+  0 _setupcar_dark                                                 002C65 GR
+  0 _setupcar_light                                                002C17 GR
     _shadow_OAM                                                    ****** GX
   2 _spritesize                                                    000013 GR
     _wait_vbl_done                                                 ****** GX
@@ -89,7 +92,7 @@ Hexadecimal [24-Bits]
 
 Area Table
 
-   0 _CODE                                      size   3075   flags    0
+   0 _CODE                                      size   3D6F   flags    0
    1 _DATA                                      size     2A   flags    0
    2 _INITIALIZED                               size     14   flags    0
    3 _DABS                                      size      0   flags    8

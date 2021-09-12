@@ -7,6 +7,8 @@
 #include "sprites/bkg_tiles.c"
 #include "sprites/pocket_league_data.c"
 #include "sprites/pocket_league_map.c"
+#include "sprites/goal_screen_game_data.c"
+#include "sprites/goal_screen_game_map.c"
 #include <stdlib.h>
 #include <gb/font.h>
 //#include "windowmap.c"
@@ -52,6 +54,13 @@ struct GameObject {
     INT8 id;
 };
 
+void performantdelay(UINT8 numloops){
+    UINT8 i;
+    for(i = 0; i < numloops; i++){
+        wait_vbl_done();
+    }     
+}
+
 void movegamecharacter(struct GameObject*, INT8, INT8);
 
 void load_ball_sprite() {
@@ -92,6 +101,19 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
         }
     } 
     return 0;
+}
+
+void goal() {
+    move_bkg(0,0);
+    HIDE_BKG;
+    set_bkg_data(0, 176, goal_screen_game_data);
+    set_bkg_tiles(0, 0, 20, 18, goal_screen_game_map);
+    SHOW_BKG;
+    performantdelay(120);
+    HIDE_BKG;
+    set_bkg_data(0, 44, bkg_tiles);
+    set_bkg_tiles(0, 0, 32, 21, map);
+    SHOW_BKG;
 }
 
 UBYTE is_barrier(UINT8 newplayerx, UINT8 newplayery) {
@@ -150,13 +172,6 @@ void movegamecharacter(struct GameObject* object, INT8 x, INT8 y){
     move_sprite(object->spriteids[1], x + spritesize, y);
     move_sprite(object->spriteids[2], x, y + spritesize);
     move_sprite(object->spriteids[3], x + spritesize, y + spritesize);
-}
-
-void performantdelay(UINT8 numloops){
-    UINT8 i;
-    for(i = 0; i < numloops; i++){
-        wait_vbl_done();
-    }     
 }
 
 void setup_ball() {
@@ -484,8 +499,17 @@ void main(){
 
     UINT8 turn_count = 0;
     UINT8 move_count = 0;  
+    UINT8 ball_slow_frames = 5;
 
     while(1){
+        if (ball.vel > 0 AND ball_slow_frames == 0) {
+            ball_slow_frames = 5;
+            ball.vel -= 1;
+        } else if (ball.vel < 0 AND ball_slow_frames == 0) {
+            ball_slow_frames = 5;
+            ball.vel += 1;
+        }
+        ball_slow_frames--;
         if (car1.vel == 0) {
             turn_count = 2;
         } else if (turn_count == 0) {
@@ -502,6 +526,7 @@ void main(){
 
         if (is_goal(ball.x, ball.y)) {
              //printf("This is a goal\n");
+             goal();
              reset1();
              //reset_car();
         }
