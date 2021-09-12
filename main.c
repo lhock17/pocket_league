@@ -11,8 +11,6 @@
 #include "sprites/goal_screen_game_map.c"
 #include <stdlib.h>
 #include <gb/font.h>
-#include "sprites/pocket_league_data.c"
-#include "sprites/pocket_league_map.c"
 //#include "windowmap.c"
 
 #define AND &&
@@ -117,32 +115,21 @@ void goal() {
     HIDE_BKG;
     set_bkg_data(0, 176, goal_screen_game_data);
     set_bkg_tiles(0, 0, 20, 18, goal_screen_game_map);
+    HIDE_SPRITES;
     SHOW_BKG;
     performantdelay(120);
     HIDE_BKG;
     set_bkg_data(0, 44, bkg_tiles);
     set_bkg_tiles(0, 0, 32, 21, map);
     SHOW_BKG;
+    SHOW_SPRITES;
 }
-
-UBYTE is_barrier(UINT8 newplayerx, UINT8 newplayery) {
-    UINT16 indexTLx, indexTLy, tileindexTL;
-
-    indexTLx = (newplayerx - 16) / 8;
-    indexTLy = (newplayery - 16) / 8;
-    tileindexTL = 32 * indexTLy + indexTLx;
-
-    if (joypad() & J_A) {
-       //printf("block %d\n", tileindexTL);
-    }
-
-    INT16 barriers[20] = {378, 444, 477, 509, 947, -43, 22, 407, 406, 437, 469, 468, 378, 444, 509, 8671, 346, 90, 119, 311};
 
 UBYTE x_barrier(UINT8 newplayerx) {
     UINT16 indexTLx = (newplayerx - 16) / 8;
     if (indexTLx == 17 || indexTLx == 21) {
-            return 1;
-        }
+        return 1;
+    }
     return 0;
 }
 
@@ -414,6 +401,7 @@ void reset1() {
 }
 
 void reflectx() {
+    ball.vel = -ball.vel;
     if (ball.direction < 9) {
         ball.direction = 8 - ball.direction;
     } else {
@@ -422,6 +410,7 @@ void reflectx() {
 }
 
 void reflecty() {
+    ball.vel = -ball.vel;
     if (ball.direction != 0) {
         ball.direction = 16 - ball.direction;
     }
@@ -437,10 +426,21 @@ void reset_car() {
 
 void hit_ball() {
     if (!was_hitting) {
-        ball.vel = 2*car1.vel/3;
-        car1.acc = 0;
-        car1.vel = car1.vel / 2;
-        ball.direction = car1.direction;
+        if (car1.vel > 0) {
+            ball.vel = car1.vel;
+            ball.direction = car1.direction;
+            car1.vel -= 1;
+            car1.acc = 0;
+        } else if (car1.vel < 0) {
+            ball.vel = car1.vel;
+            ball.direction = car1.direction;
+            car1.vel += 1;
+            car1.acc = 0;
+        } else if (ball.direction > 1 AND ball.direction < 7 OR ball.direction > 9 AND ball.direction < 10) {
+            reflectx();
+        } else {
+            reflecty();
+        }
         NR10_REG = 0x16; 
         NR11_REG = 0x40;
         NR12_REG = 0x73;  
@@ -536,10 +536,17 @@ void main(){
         
         // //player contact with ball
         if (check_collision(&car1, &ball)) {
-            hit_ball();
-        } else {
-            was_hitting = 0;
-        }
+                hit_ball();
+            } else {
+                was_hitting = 0;
+            }
+            if (x_barrier(ball.x)) {
+                reflectx;
+            }
+            if (y_barrier(ball.y)) {
+                reflecty;
+            }
+        
         //      //ball.ve = car1.vel_x;
         //      //ball.vel_y = car1.vel_y;
         //  }
@@ -568,7 +575,7 @@ void main(){
             }
             load_car_sprite(car1.direction);
         }
-        if (move_count == 0) {
+        if (1) {
             move_car(&car1);
             move_ball();
             move_count = 2;
