@@ -401,7 +401,6 @@ void reset1() {
 }
 
 void reflectx() {
-    ball.vel = -ball.vel;
     if (ball.direction < 9) {
         ball.direction = 8 - ball.direction;
     } else {
@@ -411,7 +410,6 @@ void reflectx() {
 }
 
 void reflecty() {
-    ball.vel = -ball.vel;
     if (ball.direction != 0) {
         ball.direction = 16 - ball.direction;
         ball.vel = -ball.vel;
@@ -507,16 +505,16 @@ void main(){
     while(1){
         if (ball.vel > 0 AND ball_slow_frames == 0) {
             ball_slow_frames = 5;
-            //ball.vel -= 1;
+            ball.vel -= 1;
         } else if (ball.vel < 0 AND ball_slow_frames == 0) {
             ball_slow_frames = 5;
-            //ball.vel += 1;
+            ball.vel += 1;
         }
         ball_slow_frames--;
         if (car1.vel == 0) {
             turn_count = 2;
         } else if (turn_count == 0) {
-            turn_count = 22/abs(car1.vel);
+            turn_count = 11/abs(car1.vel);
         }
 
         if (is_goal(ball.x, ball.y)) {
@@ -538,16 +536,10 @@ void main(){
 
         // //player contact with ball
         if (check_collision(&car1, &ball)) {
-                hit_ball();
-            } else {
-                was_hitting = 0;
-            }
-            if (x_barrier(ball.x)) {
-                reflectx;
-            }
-            if (y_barrier(ball.y)) {
-                reflecty;
-            }
+            hit_ball();
+        } else {
+            was_hitting = 0;
+        }
         
         //      //ball.ve = car1.vel_x;
         //      //ball.vel_y = car1.vel_y;
@@ -583,6 +575,6 @@ void main(){
             move_count = 2;
         }
         move_count--;
-        performantdelay(1); 
+        performantdelay(2); 
     }
 }
