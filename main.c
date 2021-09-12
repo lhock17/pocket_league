@@ -115,19 +115,21 @@ void goal() {
     HIDE_BKG;
     set_bkg_data(0, 176, goal_screen_game_data);
     set_bkg_tiles(0, 0, 20, 18, goal_screen_game_map);
+    HIDE_SPRITES;
     SHOW_BKG;
     performantdelay(120);
     HIDE_BKG;
     set_bkg_data(0, 44, bkg_tiles);
     set_bkg_tiles(0, 0, 32, 21, map);
     SHOW_BKG;
+    SHOW_SPRITES;
 }
 
 UBYTE x_barrier(UINT8 newplayerx) {
     UINT16 indexTLx = (newplayerx - 16) / 8;
     if (indexTLx == 17 || indexTLx == 21) {
-            return 1;
-        }
+        return 1;
+    }
     return 0;
 }
 
@@ -424,10 +426,21 @@ void reset_car() {
 
 void hit_ball() {
     if (!was_hitting) {
-        ball.vel = 2*car1.vel/3;
-        car1.acc = 0;
-        car1.vel = car1.vel / 2;
-        ball.direction = car1.direction;
+        if (car1.vel > 0) {
+            ball.vel = car1.vel;
+            ball.direction = car1.direction;
+            car1.vel -= 1;
+            car1.acc = 0;
+        } else if (car1.vel < 0) {
+            ball.vel = car1.vel;
+            ball.direction = car1.direction;
+            car1.vel += 1;
+            car1.acc = 0;
+        } else if (ball.direction > 1 AND ball.direction < 7 OR ball.direction > 9 AND ball.direction < 10) {
+            reflectx();
+        } else {
+            reflecty();
+        }
         NR10_REG = 0x16; 
         NR11_REG = 0x40;
         NR12_REG = 0x73;  
@@ -492,16 +505,16 @@ void main(){
     while(1){
         if (ball.vel > 0 AND ball_slow_frames == 0) {
             ball_slow_frames = 5;
-            //ball.vel -= 1;
+            ball.vel -= 1;
         } else if (ball.vel < 0 AND ball_slow_frames == 0) {
             ball_slow_frames = 5;
-            //ball.vel += 1;
+            ball.vel += 1;
         }
         ball_slow_frames--;
         if (car1.vel == 0) {
             turn_count = 2;
         } else if (turn_count == 0) {
-            turn_count = 22/abs(car1.vel);
+            turn_count = 11/abs(car1.vel);
         }
 
         if (is_goal(ball.x, ball.y)) {
@@ -527,6 +540,7 @@ void main(){
         } else {
             was_hitting = 0;
         }
+        
         //      //ball.ve = car1.vel_x;
         //      //ball.vel_y = car1.vel_y;
         //  }

@@ -47,44 +47,44 @@ Symbol Table
   0 _goal_screen_game_data                                         001945 GR
   0 _goal_screen_game_map                                          002445 GR
   2 _goal_size                                                     000001 GR
-  0 _hit_ball                                                      0039ED GR
+  0 _hit_ball                                                      0039F9 GR
   0 _is_goal                                                       0027C5 GR
     _joypad                                                        ****** GX
-  0 _load_ai_sprite                                                0029D7 GR
+  0 _load_ai_sprite                                                0029E3 GR
   0 _load_ball_sprite                                              0025AD GR
-  0 _load_car_sprite                                               00299F GR
-  0 _main                                                          003A45 GR
+  0 _load_car_sprite                                               0029AB GR
+  0 _main                                                          003A87 GR
   0 _map                                                           00080D GR
   2 _max_vel                                                       000012 GR
-  0 _move_ball                                                     00315D GR
-  0 _move_car                                                      002B6F GR
+  0 _move_ball                                                     003169 GR
+  0 _move_car                                                      002B7B GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-  0 _movegamecharacter                                             002A11 GR
+  0 _movegamecharacter                                             002A1D GR
   0 _performantdelay                                               000000 GR
   2 _player_goal_square                                            000006 GR
   2 _player_goals                                                  000002 GR
   0 _pocket_league_data                                            000DAD GR
   0 _pocket_league_map                                             0017DD GR
-  0 _reflectx                                                      003982 GR
-  0 _reflecty                                                      00399E GR
-  0 _reset1                                                        00395E GR
-  0 _reset_car                                                     0039B2 GR
+  0 _reflectx                                                      00398E GR
+  0 _reflecty                                                      0039AA GR
+  0 _reset1                                                        00396A GR
+  0 _reset_car                                                     0039BE GR
     _set_bkg_data                                                  ****** GX
     _set_bkg_tiles                                                 ****** GX
     _set_sprite_data                                               ****** GX
-  0 _setup_ball                                                    002A98 GR
-  0 _setupcar_dark                                                 002B21 GR
-  0 _setupcar_light                                                002AD3 GR
+  0 _setup_ball                                                    002AA4 GR
+  0 _setupcar_dark                                                 002B2D GR
+  0 _setupcar_light                                                002ADF GR
     _shadow_OAM                                                    ****** GX
   2 _spritesize                                                    000013 GR
     _wait_vbl_done                                                 ****** GX
   2 _was_hitting                                                   00000C GR
   2 _windowmap                                                     00000D GR
-  0 _x_barrier                                                     002957 GR
+  0 _x_barrier                                                     002963 GR
   0 _y_barrier                                                     0028AE GR
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 3.
@@ -92,7 +92,7 @@ Hexadecimal [24-Bits]
 
 Area Table
 
-   0 _CODE                                      size   3C44   flags    0
+   0 _CODE                                      size   3C90   flags    0
    1 _DATA                                      size     2A   flags    0
    2 _INITIALIZED                               size     14   flags    0
    3 _DABS                                      size      0   flags    8
