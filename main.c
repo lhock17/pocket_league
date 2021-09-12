@@ -68,13 +68,13 @@ void movegamecharacter(struct GameObject*, INT8, INT8);
 
 void load_ball_sprite() {
     if (ball.animation) {
-        set_sprite_tile(4, 132);
+        set_sprite_tile(4, 176);
         ball.spriteids[0] = 4;
-        set_sprite_tile(5, 133);
+        set_sprite_tile(5, 177);
         ball.spriteids[1] = 6;
-        set_sprite_tile(6, 134);
+        set_sprite_tile(6, 178);
         ball.spriteids[2] = 5;
-        set_sprite_tile(7, 135);
+        set_sprite_tile(7, 179);
         ball.spriteids[3] = 7;
     } else {
         set_sprite_tile(4, 64);
@@ -104,19 +104,13 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
-    if(joypad() & J_A) {
-        printf("index y: %d\n", tileindexTL);
-    }
-
     for (int i = 0; i < goal_size; i++) {
          if (tileindexTL == enemy_goal_square[i])  {
              player_goals++;
-             printf("goal\n");
              return 1;
          }
          if (tileindexTL == player_goal_square[i]) {
              enemy_goals++;
-             printf("goal\n");
              return 1;
          }
      } 
@@ -666,7 +660,7 @@ void main(){
     set_sprite_data(68,4, car_dark);
     setupcar_dark();
     set_sprite_data(64, 4, ball_sprite);
-    set_sprite_data(132, 4, ball_sprite2);
+    set_sprite_data(176, 4, ball_sprite2);
     setup_ball();
     movegamecharacter(&ball, ball.x, ball.y);
 
@@ -679,12 +673,11 @@ void main(){
     UINT8 turn_count = 0;
     UINT8 move_count = 0;  
     UINT8 ball_slow_frames = 5;
-    UINT8 goal_wait = 11;
     UINT8 ball_wait = 5;
 
     while(1){
         if (ball_wait == 0) {
-            if (ball.vel < 2) {
+            if (ball.vel > 1) {
                 if (ball.animation) {
                     ball.animation = 0;
                 } else {
@@ -696,9 +689,6 @@ void main(){
         ball_wait--;
         
         load_ball_sprite();
-        if (goal_wait < 11 AND goal_wait != 0) {
-            goal_wait--;
-        } 
         if (ball.vel > 0 AND ball_slow_frames == 0) {
             ball_slow_frames = 5;
             ball.vel -= 1;
@@ -714,14 +704,7 @@ void main(){
         }
 
         if (is_goal(ball.x, ball.y)) {
-             //printf("This is a goal\n");
-             if (goal_wait == 11) {
-                goal_wait = 10;
-             }
-             if (goal_wait == 0) {
-                goal();
-                goal_wait = 11;
-             }
+            goal();
              reset1();
         }
         turn_count--;

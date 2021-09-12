@@ -18,30 +18,19 @@ Symbol Table
     _NR52_REG                                                      ****** GX
     _SCX_REG                                                       ****** GX
     _SCY_REG                                                       ****** GX
-  0 ___str_0                                                       0028E5 R
-  0 ___str_2                                                       0028F2 R
     __divsint                                                      ****** GX
   7 __xinit__barrier_size                                          000000 R
   7 __xinit__barriers                                              000004 R
   7 __xinit__enemy_goal_square                                     00000C R
   7 __xinit__enemy_goals                                           000003 R
   7 __xinit__goal_size                                             000001 R
-<<<<<<< HEAD
-  7 __xinit__max_vel                                               000013 R
+  7 __xinit__max_vel                                               000019 R
   7 __xinit__player_goal_square                                    000006 R
   7 __xinit__player_goals                                          000002 R
-  7 __xinit__spritesize                                            000014 R
-  7 __xinit__was_hitting                                           00000C R
-  7 __xinit__was_hitting_ai                                        00000D R
-  7 __xinit__windowmap                                             00000E R
-=======
-  7 __xinit__max_vel                                               000018 R
-  7 __xinit__player_goal_square                                    000006 R
-  7 __xinit__player_goals                                          000002 R
-  7 __xinit__spritesize                                            000019 R
+  7 __xinit__spritesize                                            00001A R
   7 __xinit__was_hitting                                           000012 R
-  7 __xinit__windowmap                                             000013 R
->>>>>>> dc2ac61b7c1c75ab802f4844d834f0a46d4dc1ac
+  7 __xinit__was_hitting_ai                                        000013 R
+  7 __xinit__windowmap                                             000014 R
     _abs                                                           ****** GX
   1 _ball                                                          00001E GR
   0 _ball_sprite                                                   000AAD GR
@@ -53,102 +42,55 @@ Symbol Table
   1 _car2                                                          00000F GR
   0 _car_dark                                                      00040D GR
   0 _car_light                                                     00000D GR
-<<<<<<< HEAD
   0 _check_collision                                               002705 GR
-  0 _control_ai                                                    0042E4 GR
-  2 _enemy_goal_square                                             000009 GR
-  2 _enemy_goals                                                   000003 GR
-  0 _goal                                                          002A25 GR
-  0 _goal_screen_game_data                                         001945 GR
-  0 _goal_screen_game_map                                          002445 GR
-  2 _goal_size                                                     000001 GR
-  0 _hit_ball                                                      00442A GR
-  0 _hit_ball_ai                                                   0044B8 GR
-  0 _is_goal                                                       0028F4 GR
-    _joypad                                                        ****** GX
-  0 _load_ai_sprite                                                002B12 GR
-  0 _load_ball_sprite                                              0026AD GR
-  0 _load_car_sprite                                               002ADA GR
-  0 _main                                                          004546 GR
-=======
-  0 _check_collision                                               0025D6 GR
+  0 _control_ai                                                    0042F3 GR
   2 _enemy_goal_square                                             00000C GR
   2 _enemy_goals                                                   000003 GR
-  0 _goal                                                          00293F GR
+  0 _goal                                                          002A34 GR
   0 _goal_screen_game_data                                         001945 GR
   0 _goal_screen_game_map                                          002445 GR
   2 _goal_size                                                     000001 GR
-  0 _hit_ball                                                      003A42 GR
-  0 _is_goal                                                       0027C5 GR
+  0 _hit_ball                                                      004439 GR
+  0 _hit_ball_ai                                                   0044C7 GR
+  0 _is_goal                                                       0028F4 GR
     _joypad                                                        ****** GX
-  0 _load_ai_sprite                                                002A2C GR
-  0 _load_ball_sprite                                              0025AD GR
-  0 _load_car_sprite                                               0029F4 GR
-  0 _main                                                          003AD0 GR
-  0 _map                                                           00080D GR
-  2 _max_vel                                                       000018 GR
->>>>>>> dc2ac61b7c1c75ab802f4844d834f0a46d4dc1ac
+  0 _load_ai_sprite                                                002B21 GR
+  0 _load_ball_sprite                                              0026AD GR
+  0 _load_car_sprite                                               002AE9 GR
+  0 _main                                                          004555 GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-<<<<<<< HEAD
   0 _map                                                           00080D GR
-  2 _max_vel                                                       000013 GR
-  0 _move_ai                                                       003ADA GR
-  0 _move_ball                                                     0032D9 GR
-  0 _move_car                                                      002CC2 GR
-  0 _movegamecharacter                                             002B4C GR
-=======
-  0 _move_ball                                                     0031B2 GR
-  0 _move_car                                                      002BC4 GR
-  0 _movegamecharacter                                             002A66 GR
->>>>>>> dc2ac61b7c1c75ab802f4844d834f0a46d4dc1ac
+  2 _max_vel                                                       000019 GR
+  0 _move_ai                                                       003AE9 GR
+  0 _move_ball                                                     0032E8 GR
+  0 _move_car                                                      002CD1 GR
+  0 _movegamecharacter                                             002B5B GR
   0 _performantdelay                                               000000 GR
   2 _player_goal_square                                            000006 GR
   2 _player_goals                                                  000002 GR
   0 _pocket_league_data                                            000DAD GR
   0 _pocket_league_map                                             0017DD GR
-<<<<<<< HEAD
-  0 _reflectx                                                      0043FA GR
-  0 _reflecty                                                      004416 GR
-  0 _reset1                                                        0043BD GR
+  0 _reflectx                                                      004409 GR
+  0 _reflecty                                                      004425 GR
+  0 _reset1                                                        0043CC GR
     _set_bkg_data                                                  ****** GX
     _set_bkg_tiles                                                 ****** GX
     _set_sprite_data                                               ****** GX
-  0 _setup_ball                                                    002BD3 GR
-  0 _setupcar_dark                                                 002C6A GR
-  0 _setupcar_light                                                002C1C GR
+  0 _setup_ball                                                    002BE2 GR
+  0 _setupcar_dark                                                 002C79 GR
+  0 _setupcar_light                                                002C2B GR
     _shadow_OAM                                                    ****** GX
-  2 _spritesize                                                    000014 GR
-    _wait_vbl_done                                                 ****** GX
-  2 _was_hitting                                                   00000C GR
-  2 _was_hitting_ai                                                00000D GR
-  2 _windowmap                                                     00000E GR
-  0 _x_barrier                                                     002A92 GR
-  0 _y_barrier                                                     0029DD GR
-=======
-    _printf                                                        ****** GX
-    _puts                                                          ****** GX
-  0 _reflectx                                                      0039D7 GR
-  0 _reflecty                                                      0039F3 GR
-  0 _reset1                                                        0039B3 GR
-  0 _reset_car                                                     003A07 GR
-    _set_bkg_data                                                  ****** GX
-    _set_bkg_tiles                                                 ****** GX
-    _set_sprite_data                                               ****** GX
-  0 _setup_ball                                                    002AED GR
-  0 _setupcar_dark                                                 002B76 GR
-  0 _setupcar_light                                                002B28 GR
-    _shadow_OAM                                                    ****** GX
-  2 _spritesize                                                    000019 GR
+  2 _spritesize                                                    00001A GR
     _wait_vbl_done                                                 ****** GX
   2 _was_hitting                                                   000012 GR
-  2 _windowmap                                                     000013 GR
-  0 _x_barrier                                                     0029AC GR
-  0 _y_barrier                                                     0028F7 GR
->>>>>>> dc2ac61b7c1c75ab802f4844d834f0a46d4dc1ac
+  2 _was_hitting_ai                                                000013 GR
+  2 _windowmap                                                     000014 GR
+  0 _x_barrier                                                     002AA1 GR
+  0 _y_barrier                                                     0029EC GR
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 3.
@@ -156,23 +98,13 @@ Hexadecimal [24-Bits]
 
 Area Table
 
-<<<<<<< HEAD
-   0 _CODE                                      size   47DD   flags    0
+   0 _CODE                                      size   47EE   flags    0
    1 _DATA                                      size     2D   flags    0
-   2 _INITIALIZED                               size     15   flags    0
-=======
-   0 _CODE                                      size   3CD9   flags    0
-   1 _DATA                                      size     2A   flags    0
-   2 _INITIALIZED                               size     1A   flags    0
->>>>>>> dc2ac61b7c1c75ab802f4844d834f0a46d4dc1ac
+   2 _INITIALIZED                               size     1B   flags    0
    3 _DABS                                      size      0   flags    8
    4 _HOME                                      size      0   flags    0
    5 _GSINIT                                    size      0   flags    0
    6 _GSFINAL                                   size      0   flags    0
-<<<<<<< HEAD
-   7 _INITIALIZER                               size     15   flags    0
-=======
-   7 _INITIALIZER                               size     1A   flags    0
->>>>>>> dc2ac61b7c1c75ab802f4844d834f0a46d4dc1ac
+   7 _INITIALIZER                               size     1B   flags    0
    8 _CABS                                      size      0   flags    8
 
