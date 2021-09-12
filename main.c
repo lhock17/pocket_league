@@ -5,6 +5,8 @@
 #include "sprites/map.c"
 #include "sprites/ball1.c"
 #include "sprites/bkg_tiles.c"
+#include "sprites/pocket_league_data.c"
+#include "sprites/pocket_league_map.c"
 #include <stdlib.h>
 #include <gb/font.h>
 #include "sprites/pocket_league_data.c"
@@ -16,15 +18,15 @@
 #define SCREEN_WIDTH 160
 #define SCREEN_HEIGHT 144
 
-int barrier_size = 2;
-int goal_size = 3;
-int player_goals = 0;
-int enemy_goals = 0;
-
+UINT8 barrier_size = 2;
+UINT8 goal_size = 3;
+UINT8 player_goals = 0;
+UINT8 enemy_goals = 0;
 
 UINT8 barriers[2] = {0x00, 0x00};
 UINT8 player_goal_square[3] = {87, 119, 55};
 UINT8 enemy_goal_square[3] = {118, 21, 84};
+UINT8 was_hitting = 0;
 
 unsigned char windowmap[] =
 {
@@ -407,10 +409,18 @@ void reset_car() {
 }
 
 void hit_ball() {
-    ball.vel = 2*car1.vel/3;
-    //car1.vel = car1.vel;
-    //car1.acc = 0;
-    ball.direction = car1.direction;
+    if (!was_hitting) {
+        ball.vel = 2*car1.vel/3;
+        car1.acc = 0;
+        car1.vel = car1.vel / 2;
+        ball.direction = car1.direction;
+        NR10_REG = 0x16; 
+        NR11_REG = 0x40;
+        NR12_REG = 0x73;  
+        NR13_REG = 0x00;   
+        NR14_REG = 0xC3;
+    }
+    was_hitting = 1;
 }
 
 void main(){
@@ -489,8 +499,9 @@ void main(){
         
         // //player contact with ball
         if (check_collision(&car1, &ball)) {
-            //printf("collision\n");
             hit_ball();
+        } else {
+            was_hitting = 0;
         }
         //      //ball.ve = car1.vel_x;
         //      //ball.vel_y = car1.vel_y;
