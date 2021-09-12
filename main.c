@@ -9,6 +9,7 @@
 #include "sprites/pocket_league_map.c"
 #include "sprites/goal_screen_game_data.c"
 #include "sprites/goal_screen_game_map.c"
+#include "sprites/ball2.c"
 #include <stdlib.h>
 #include <gb/font.h>
 //#include "windowmap.c"
@@ -27,6 +28,7 @@ UINT8 barriers[2] = {0x00, 0x00};
 UINT8 player_goal_square[3] = {87, 119, 55};
 UINT8 enemy_goal_square[3] = {118, 21, 84};
 UINT8 was_hitting = 0;
+UINT8 was_hitting_ai = 0;
 
 unsigned char windowmap[] =
 {
@@ -52,6 +54,7 @@ struct GameObject {
     INT8 index_x;
     INT8 index_y;
     INT8 id;
+    UINT8 animation;
 };
 
 void performantdelay(UINT8 numloops){
@@ -64,14 +67,25 @@ void performantdelay(UINT8 numloops){
 void movegamecharacter(struct GameObject*, INT8, INT8);
 
 void load_ball_sprite() {
-    set_sprite_tile(4, 64);
-    ball.spriteids[0] = 4;
-    set_sprite_tile(5, 65);
-    ball.spriteids[1] = 6;
-    set_sprite_tile(6, 66);
-    ball.spriteids[2] = 5;
-    set_sprite_tile(7, 67);
-    ball.spriteids[3] = 7;
+    if (ball.animation) {
+        set_sprite_tile(4, 132);
+        ball.spriteids[0] = 4;
+        set_sprite_tile(5, 133);
+        ball.spriteids[1] = 6;
+        set_sprite_tile(6, 134);
+        ball.spriteids[2] = 5;
+        set_sprite_tile(7, 135);
+        ball.spriteids[3] = 7;
+    } else {
+        set_sprite_tile(4, 64);
+        ball.spriteids[0] = 4;
+        set_sprite_tile(5, 65);
+        ball.spriteids[1] = 6;
+        set_sprite_tile(6, 66);
+        ball.spriteids[2] = 5;
+        set_sprite_tile(7, 67);
+        ball.spriteids[3] = 7;
+    }
 }
 
 UBYTE check_collision(struct GameObject* one, struct GameObject* two) {
@@ -110,6 +124,7 @@ UBYTE y_barrier(UINT8 newplayery) {
         }
         return 0;
 }
+
 void goal() {
     move_bkg(0,0);
     HIDE_BKG;
@@ -170,6 +185,9 @@ void setup_ball() {
     ball.index_x = 50;
     ball.index_y = 20;
     ball.id = 1;
+    ball.direction = 0;
+    ball.vel = 0;
+    ball.animation = 0;
 
     load_ball_sprite();
     movegamecharacter(&ball, ball.x, ball.y);
@@ -192,8 +210,10 @@ void setupcar_light(){
 
 void setupcar_dark(){
     car2.direction = 0;
+    car2.index_x = 40;
+    car2.index_y = 80;
     car2.x = 40;
-    car2.y = 40;
+    car2.y = 80;
     car2.width = 16;
     car2.height = 16;
     car2.acc = 0;
@@ -286,8 +306,11 @@ void move_car(struct GameObject* car) {
 
     move_bkg(car->x, car->y);
     ball.index_x = ball.index_x + dx;
+    car2.index_x = car2.index_x + dx;
     ball.index_y = ball.index_y + dy;
+    car2.index_y = car2.index_y + dy;
     movegamecharacter(&ball, ball.index_x + dx, ball.index_y + dy);
+    movegamecharacter(&car2, car2.index_x + dx, car2.index_y + dy);
 }
 
 void move_ball() {
@@ -390,6 +413,130 @@ void move_ball() {
     movegamecharacter(&ball, ball.index_x, ball.index_y);
 }
 
+void move_ai() {
+    load_ai_sprite(car2.direction);
+    switch (car2.direction) {
+        case 0:
+            car2.index_y -= car2.vel;
+            car2.y -= car2.vel;
+            break;
+        case 1:
+            car2.index_x += 45*car2.vel/100;
+            car2.index_y -= 45*car2.vel/50;
+            car2.x += 45*car2.vel/100;
+            car2.y -= 45*car2.vel/50;
+            break;
+        case 2:
+            car2.index_x += 71*car2.vel/100;
+            car2.index_y -= 71*car2.vel/100;
+            car2.x += 71*car2.vel/100;
+            car2.y -= 71*car2.vel/100;
+            break;
+        case 3:
+            car2.index_x += 45*car2.vel/50;
+            car2.index_y -= 45*car2.vel/100;
+            car2.x += 45*car2.vel/50;
+            car2.y -= 45*car2.vel/100;
+            break;
+        case 4:
+            car2.index_x += car2.vel;
+            car2.x += car2.vel;
+            break;
+        case 5:
+            car2.index_x += 45*car2.vel/50;
+            car2.index_y += 45*car2.vel/100;
+            car2.x += 45*car2.vel/50;
+            car2.y += 45*car2.vel/100;
+            break;
+        case 6:
+            car2.index_x += 71*car2.vel/100;
+            car2.index_y += 71*car2.vel/100;
+            car2.x += 71*car2.vel/100;
+            car2.y += 71*car2.vel/100;
+            break;
+        case 7:
+            car2.index_x += 45*car2.vel/100;
+            car2.index_y += 45*car2.vel/50;
+            car2.x += 45*car2.vel/100;
+            car2.y += 45*car2.vel/50;
+            break;
+        case 8:
+            car2.index_y += car2.vel;
+            car2.y += car2.vel;
+            break;
+        case 9:
+            car2.index_x -= 45*car2.vel/100;
+            car2.index_y += 45*car2.vel/50;
+            car2.x -= 45*car2.vel/100;
+            car2.y += 45*car2.vel/50;
+            break;
+        case 10:
+            car2.index_x -= 71*car2.vel/100;
+            car2.index_y += 71*car2.vel/100;
+            car2.x -= 71*car2.vel/100;
+            car2.y += 71*car2.vel/100;
+            break;
+        case 11:
+            car2.index_x -= 45*car2.vel/50;
+            car2.index_y += 45*car2.vel/100;
+            car2.x -= 45*car2.vel/50;
+            car2.y += 45*car2.vel/100;
+            break;
+        case 12:
+            car2.index_x -= car2.vel;
+            car2.x -= car2.vel;
+            break;
+        case 13:
+            car2.index_x -= 45*car2.vel/50;
+            car2.index_y -= 45*car2.vel/100;
+            car2.x -= 45*car2.vel/50;
+            car2.y -= 45*car2.vel/100;
+            break;
+        case 14:
+            car2.index_x -= 71*car2.vel/100;
+            car2.index_y -= 71*car2.vel/100;
+            car2.x -= 71*car2.vel/100;
+            car2.y -= 71*car2.vel/100;
+            break;
+        case 15:
+            car2.index_x -= 45*car2.vel/100;
+            car2.index_y -= 45*car2.vel/50;
+            car2.x -= 45*car2.vel/100;
+            car2.y -= 45*car2.vel/50;
+            break;
+    }
+    movegamecharacter(&car2, car2.index_x, car2.index_y);
+}
+
+void control_ai() {
+    car2.vel = 2;
+    if (car2.x > ball.x) {
+        if (car2.y > ball.y) {
+            car2.direction = 14;
+        } else if (car2.y < ball.y) {
+            car2.direction = 10;
+        } else {
+            car2.direction = 12;
+        }
+    } else if (car2.x < ball.x) {
+        if (car2.y > ball.y) {
+            car2.direction = 2;
+        } else if (car2.y > ball.y) {
+            car2.direction = 6;
+        } else {
+            car2.direction = 4;
+        }
+    } else {
+        if (car2.y < ball.y) {
+            car2.direction = 8;
+        } else if (car2.y > ball.y) {
+            car2.direction = 0;
+        } else {
+            car2.vel = 0;
+        }
+    }
+}
+
 void reset1() {
     car1.x = 80;
     car1.y = 80;
@@ -397,7 +544,12 @@ void reset1() {
     ball.index_y = 20;
     ball.x = 50;
     ball.y = 20;
+    car2.index_x = 40;
+    car2.index_y = 80;
+    car2.x = 40;
+    car2.y = 80;
     ball.vel = 0;
+    car2.vel = 0;
 }
 
 void reflectx() {
@@ -414,14 +566,6 @@ void reflecty() {
         ball.direction = 16 - ball.direction;
         ball.vel = -ball.vel;
     }
-}
-
-void reset_car() {
-    car1.x = 64;
-    car1.y = 64;
-    movegamecharacter(&car1, car1.x, car1.y);
-    movegamecharacter(&ball, ball.index_x, ball.index_y);
-    move_bkg(car1.x, car1.y);
 }
 
 void hit_ball() {
@@ -448,6 +592,32 @@ void hit_ball() {
         NR14_REG = 0xC3;
     }
     was_hitting = 1;
+}
+
+void hit_ball_ai() {
+    if (!was_hitting_ai) {
+        if (car2.vel > 0) {
+            ball.vel = car2.vel;
+            ball.direction = car2.direction;
+            car2.vel -= 1;
+            car2.acc = 0;
+        } else if (car2.vel < 0) {
+            ball.vel = car2.vel;
+            ball.direction = car2.direction;
+            car2.vel += 1;
+            car2.acc = 0;
+        } else if (ball.direction > 1 AND ball.direction < 7 OR ball.direction > 9 AND ball.direction < 10) {
+            reflectx();
+        } else {
+            reflecty();
+        }
+        NR10_REG = 0x16; 
+        NR11_REG = 0x40;
+        NR12_REG = 0x73;  
+        NR13_REG = 0x00;   
+        NR14_REG = 0xC3;
+    }
+    was_hitting_ai = 1;
 }
 
 void main(){
@@ -486,9 +656,10 @@ void main(){
 
     set_sprite_data(0,4, car_light);
     setupcar_light();
-    //set_sprite_data(68,4, car_dark);
-    //setupcar_dark();
+    set_sprite_data(68,4, car_dark);
+    setupcar_dark();
     set_sprite_data(64, 4, ball_sprite);
+    set_sprite_data(132, 4, ball_sprite2);
     setup_ball();
     movegamecharacter(&ball, ball.x, ball.y);
 
@@ -501,8 +672,26 @@ void main(){
     UINT8 turn_count = 0;
     UINT8 move_count = 0;  
     UINT8 ball_slow_frames = 5;
+    UINT8 goal_wait = 11;
+    UINT8 ball_wait = 5;
 
     while(1){
+        if (ball_wait == 0) {
+            if (ball.vel < 2) {
+                if (ball.animation) {
+                    ball.animation = 0;
+                } else {
+                    ball.animation = 1;
+                }
+            }
+            ball_wait = 5;
+        }
+        ball_wait--;
+        
+        load_ball_sprite();
+        if (goal_wait < 11 AND goal_wait != 0) {
+            goal_wait--;
+        } 
         if (ball.vel > 0 AND ball_slow_frames == 0) {
             ball_slow_frames = 5;
             ball.vel -= 1;
@@ -519,9 +708,14 @@ void main(){
 
         if (is_goal(ball.x, ball.y)) {
              //printf("This is a goal\n");
-             goal();
+             if (goal_wait == 11) {
+                goal_wait = 10;
+             }
+             if (goal_wait == 0) {
+                goal();
+                goal_wait = 11;
+             }
              reset1();
-             //reset_car();
         }
         turn_count--;
 
@@ -537,8 +731,12 @@ void main(){
         // //player contact with ball
         if (check_collision(&car1, &ball)) {
             hit_ball();
+        } else if (check_collision(&car2, &ball)) {
+            hit_ball_ai();
+            was_hitting = 0;
         } else {
             was_hitting = 0;
+            was_hitting_ai = 0;
         }
         
         //      //ball.ve = car1.vel_x;
@@ -571,6 +769,8 @@ void main(){
         }
         if (1) {
             move_car(&car1);
+            control_ai();
+            move_ai();
             move_ball();
             move_count = 2;
         }
