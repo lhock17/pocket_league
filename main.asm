@@ -14685,8 +14685,8 @@ _main::
 	pop	hl
 ;main.c:560: move_ball();
 	call	_move_ball
-;main.c:564: performantdelay(1); 
-	ld	a, #0x01
+;main.c:564: performantdelay(2); 
+	ld	a, #0x02
 	push	af
 	inc	sp
 	call	_performantdelay

@@ -561,6 +561,6 @@ void main(){
             move_count = 2;
         }
         move_count--;
-        performantdelay(1); 
+        performantdelay(2); 
     }
 }

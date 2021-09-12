@@ -14685,8 +14685,8 @@
       003C32 E1                   14685 	pop	hl
                                   14686 ;main.c:560: move_ball();
       003C33 CDr5Dr31             14687 	call	_move_ball
-                                  14688 ;main.c:564: performantdelay(1); 
-      003C36 3E 01                14689 	ld	a, #0x01
+                                  14688 ;main.c:564: performantdelay(2); 
+      003C36 3E 02                14689 	ld	a, #0x02
       003C38 F5                   14690 	push	af
       003C39 33                   14691 	inc	sp
       003C3A CDr00r00             14692 	call	_performantdelay
