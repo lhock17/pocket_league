@@ -24,8 +24,8 @@ UINT8 player_goals = 0;
 UINT8 enemy_goals = 0;
 
 UINT8 barriers[2] = {0x00, 0x00};
-UINT8 player_goal_square[3] = {87, 119, 55};
-UINT8 enemy_goal_square[3] = {118, 21, 84};
+INT16 player_goal_square[3] = {55, 55, 55};
+INT16 enemy_goal_square[3] = {18, 21, -46};
 UINT8 was_hitting = 0;
 
 unsigned char windowmap[] =
@@ -90,26 +90,34 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     indexTLy = (newplayery - 16) / 8;
     tileindexTL = 32 * indexTLy + indexTLx;
 
+    if(joypad() & J_A) {
+        printf("index y: %d\n", tileindexTL);
+    }
+
     for (int i = 0; i < goal_size; i++) {
-        if (tileindexTL == enemy_goal_square[i])  {
-            player_goals++;
-            return 1;
-        }
-        if (tileindexTL == player_goal_square[i]) {
-            enemy_goals++;
-            return 1;
-        }
-    } 
+         if (tileindexTL == enemy_goal_square[i])  {
+             player_goals++;
+             printf("goal\n");
+             return 1;
+         }
+         if (tileindexTL == player_goal_square[i]) {
+             enemy_goals++;
+             printf("goal\n");
+             return 1;
+         }
+     } 
     return 0;
 }
 
 UBYTE y_barrier(UINT8 newplayery) {
     UINT16 indexTLy = (newplayery - 16) / 8;
-    if (indexTLy == 11 || indexTLy == 23) {
+
+    if (indexTLy == 9 || indexTLy == 22) {
             return 1;
         }
         return 0;
 }
+
 void goal() {
     move_bkg(0,0);
     HIDE_BKG;
@@ -127,7 +135,7 @@ void goal() {
 
 UBYTE x_barrier(UINT8 newplayerx) {
     UINT16 indexTLx = (newplayerx - 16) / 8;
-    if (indexTLx == 17 || indexTLx == 21) {
+    if (indexTLx == 18 || indexTLx == 21) {
         return 1;
     }
     return 0;
