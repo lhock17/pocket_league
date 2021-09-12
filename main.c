@@ -7,6 +7,8 @@
 #include "sprites/bkg_tiles.c"
 #include <stdlib.h>
 #include <gb/font.h>
+#include "sprites/pocket_league_data.c"
+#include "sprites/pocket_league_map.c"
 //#include "windowmap.c"
 
 #define AND &&
@@ -92,32 +94,19 @@ UBYTE is_goal(UINT8 newplayerx, UINT8 newplayery){
     return 0;
 }
 
-UBYTE is_barrier(UINT8 newplayerx, UINT8 newplayery) {
-    UINT16 indexTLx, indexTLy, tileindexTL;
-
-    indexTLx = (newplayerx - 16) / 8;
-    indexTLy = (newplayery - 16) / 8;
-    tileindexTL = 32 * indexTLy + indexTLx;
-
-    if (joypad() & J_A) {
-       //printf("block %d\n", tileindexTL);
-    }
-
-    INT16 barriers[20] = {378, 444, 477, 509, 947, -43, 22, 407, 406, 437, 469, 468, 378, 444, 509, 8671, 346, 90, 119, 311};
-
-    if (tileindexTL >= 896 AND tileindexTL <= 914) {
-        return 1;
-    } else if (512 <= tileindexTL AND tileindexTL <= 530) {
-        return 1;
-    } else if (tileindexTL % 32 == 26){
-        return 1;
-    } else {
-        for (int i = 0; i < 20; i++) {
-            if (tileindexTL == barriers[i]) {
-                return 1;
-            }
+UBYTE y_barrier(UINT8 newplayery) {
+    UINT16 indexTLy = (newplayery - 16) / 8;
+    if (indexTLy == 11 || indexTLy == 23) {
+            return 1;
         }
-    }
+        return 0;
+}
+
+UBYTE x_barrier(UINT8 newplayerx) {
+    UINT16 indexTLx = (newplayerx - 16) / 8;
+    if (indexTLx == 17 || indexTLx == 21) {
+            return 1;
+        }
     return 0;
 }
 
@@ -480,10 +469,6 @@ void main(){
             turn_count = 2;
         } else if (turn_count == 0) {
             turn_count = 22/abs(car1.vel);
-        }
-
-        if (is_barrier(car1.x, car1.y + 16)) {
-            //reset_car();
         }
         
         //move_ball(&ball);
