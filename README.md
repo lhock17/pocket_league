@@ -1,6 +1,8 @@
 # pocket_league
 A demake of Rocket League for the Gameboy using GBDK 2020.
 
+Created by Levi Hockey and Campbell McFadden.
+
 The compiled roms are available here to run in any gameboy emulator:
 https://drive.google.com/drive/folders/1PicbL_Xw0N3X50iuIwSfBDvWQYr2oEPH?usp=sharing
 
